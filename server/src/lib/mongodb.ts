@@ -1,0 +1,20 @@
+import mongoose from "mongoose";
+
+const { MONGODB_DB_URI } = process.env;
+if (!MONGODB_DB_URI) {
+    throw new Error("MONGODB_DB_URI is required");
+}
+const conncetDb = async () => {
+    try {
+        const { connection } = await mongoose.connect(MONGODB_DB_URI);
+        if (connection?.readyState === 1) {
+            // console.log("DB connection is established/ON.")
+            return Promise?.resolve(true);
+        }
+    } catch (error) {
+        Promise?.resolve(error);
+        console.log("error from conncetDb:", error);
+    }
+};
+
+export default conncetDb;
