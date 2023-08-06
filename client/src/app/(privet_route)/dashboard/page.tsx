@@ -10,7 +10,7 @@ interface pageProps {
 }
 
 const Dashboard = ({ }) => {
-    
+
     const reduxStore = useSelector((state: RootState) => state);
     const router = useRouter()
 

@@ -4,7 +4,7 @@
 
 import JobDetails from '@/workArea/components/JobDetails';
 import { useJobByIdQuery } from '@/workArea/redux/features/job/jobApi';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation';
 import { FC } from 'react'
 
 interface pageProps {
@@ -13,8 +13,7 @@ interface pageProps {
 
 const page: FC<pageProps> = ({ }) => {
 
-    const router = useRouter();
-    const pathname = usePathname() ?? '';
+    const pathname = usePathname() || "";
     const pathNameTotalArray = pathname.split("/")
     const id = pathNameTotalArray[pathNameTotalArray.length - 1];
     const { data, isLoading, isError } = useJobByIdQuery(id);

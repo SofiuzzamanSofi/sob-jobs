@@ -9,11 +9,7 @@ interface jobsProps {
 }
 
 const Jobs: FC<jobsProps> = ({ }) => {
-
     const { isLoading, data } = useGetJobsQuery();
-    console.log("data", data);
-
-
     return <div>
         <div>
             <h1 className="text-center">
@@ -29,9 +25,6 @@ const Jobs: FC<jobsProps> = ({ }) => {
                     <JobCard key={index} jobData={jobData} />
                 ))
             }
-        </div>
-        <div>
-
         </div>
     </div>
 }

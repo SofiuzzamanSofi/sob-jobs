@@ -37,9 +37,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     applicants
   } = jobData || {};
 
-  console.log(applicants);
   const isAppliedAlready = applicants?.find(applicant => applicant?.userEmail === reduxStore?.auth?.user?.email);
-  console.log(isAppliedAlready)
 
   const handleApply = () => {
     if (reduxStore?.auth?.user?.role === "Employer") {

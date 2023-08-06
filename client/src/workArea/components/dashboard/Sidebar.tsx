@@ -5,10 +5,17 @@ import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "@/workArea/redux/store";
+import { usePathname } from 'next/navigation';
 
 const Sidebar = () => {
 
     const reduxStore = useSelector((state: RootState) => state);
+    const pathname = usePathname() || "";
+    // const pathNameTotalArray = usePathname()?.split("/") || [];
+    // const id = pathNameTotalArray[pathNameTotalArray.length - 1];
+    // console.log("pathname:", pathname);
+    // console.log("id:", id);
+    // const isPathnameIncludes = pathname.includes
 
     const employerRoutes = [
         {
@@ -42,13 +49,22 @@ const Sidebar = () => {
                         </Link>
                     </h1>
                 </div>
+                <li>
+                    <Link
+                        //   style={"pointer-events: none"}
+                        href='/dashboard/all-jobs'
+                        className={`hover:bg-primary ${pathname.includes("/dashboard/jobs") ? "hover:bg-primary " : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
+                    >
+                        All Jobs
+                    </Link>
+                </li>
                 {
                     reduxStore.auth.user?.role === "Employer" &&
                     employerRoutes.map(({ name, path }, index) => (
                         <li key={index}>
                             <Link
                                 href={path}
-                                className='hover:bg-primary hover:text-white bg-primary/10 transition-all w-full block py-2 px-3 rounded-md'
+                                className={`hover:bg-primary ${pathname.includes(path) ? "hover:bg-primary " : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
                             >
                                 {name}
                             </Link>
@@ -61,7 +77,7 @@ const Sidebar = () => {
                         <li key={index}>
                             <Link
                                 href={path}
-                                className='hover:bg-primary hover:text-white bg-primary/10 transition-all w-full block py-2 px-3 rounded-md'
+                                className={`hover:bg-primary ${pathname.includes(path) ? "hover:bg-primary " : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
                             >
                                 {name}
                             </Link>
@@ -72,7 +88,7 @@ const Sidebar = () => {
                     <Link
                         //   style={"pointer-events: none"}
                         href='/dashboard/add-job'
-                        className='pointer-events-none hover:bg-primary hover:text-white bg-primary/10 transition-all w-full block py-2 px-3 rounded-md'
+                        className={`pointer-events-none hover:bg-primary ${pathname.includes("/dashboard/add-job") ? "hover:bg-primary " : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
                     >
                         Others
                     </Link>
