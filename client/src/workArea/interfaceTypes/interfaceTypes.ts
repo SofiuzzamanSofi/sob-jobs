@@ -37,19 +37,19 @@ export interface RegisterTypes {
     __v?: string | number;
 };
 
-export interface JobDataTypes {
-    position?: string;
-    companyName?: string | undefined;
-    experience?: string;
-    workLevel?: string;
-    employmentType?: string;
-    location?: string;
-    overview?: string;
-    requirements?: string[];
-    responsibilities?: string[];
-    salaryRange?: string;
-    skills?: string[];
-}
+// export interface JobDataTypes {
+//     position?: string;
+//     companyName?: string | undefined;
+//     experience?: string;
+//     workLevel?: string;
+//     employmentType?: string;
+//     location?: string;
+//     overview?: string;
+//     requirements?: string[];
+//     responsibilities?: string[];
+//     salaryRange?: string;
+//     skills?: string[];
+// }
 
 export interface CandidateFormDataTypes {
     firstName?: string;
@@ -76,6 +76,12 @@ export interface EmployerFormDataTypes {
     term?: boolean;
 };
 
+export interface JobQueryArray {
+    id?: string;
+    email: string;
+    question?: string;
+    reply: string[];
+}
 export interface JobDataTypes {
     position?: string;
     companyName?: string | undefined;
@@ -90,9 +96,15 @@ export interface JobDataTypes {
     skills?: string[];
     _id?: string;
     __v?: string;
+    queries?: JobQueryArray[];
 };
-export interface JobDataResTypes {
+export interface getJobsResTypes {
     success: boolean;
     message: string;
     data: JobDataTypes[];
+};
+export interface jobByIdResTypes {
+    success: boolean;
+    message: string;
+    data: JobDataTypes;
 };

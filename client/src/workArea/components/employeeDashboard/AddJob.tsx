@@ -1,17 +1,21 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { FiTrash } from "react-icons/fi";
+import { FiTrash, FiPlusCircle } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { RootState } from '@/workArea/redux/store';
 import { JobDataTypes } from "@/workArea/interfaceTypes/interfaceTypes";
 import { usePostJobMutation } from "@/workArea/redux/features/job/jobApi";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 
 const AddJob = () => {
+
+  const router = useRouter();
   const reduxStore = useSelector((state: RootState) => state);
-  const [postJob, { isLoading, isSuccess, isError }] = usePostJobMutation()
+  const [postJob, { isLoading, isSuccess, isError }] = usePostJobMutation();
   const { handleSubmit, register, control } = useForm();
   const {
     fields: skillFields,
@@ -34,6 +38,17 @@ const AddJob = () => {
     postJob(data);
     console.log(data);
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading("Please wait...", { id: "post-job" });
+    }
+    else if (isSuccess) {
+      toast.success("Post Job Success", { id: "post-job" });
+      router.push("/dashboard");
+    }
+  }, [isLoading, isSuccess]);
+
 
   return (
     <div className='flex justify-center items-center overflow-auto p-10'>
@@ -137,9 +152,12 @@ const AddJob = () => {
               <button
                 type='button'
                 onClick={() => skillAppend("")}
-                className='btn-outline text-xs border'
+                className='grid place-items-center rounded-full flex-shrink-0 bg-green-500/20 border border-green-500 h-11 w-11 group transition-all hover:bg-green-500'
               >
-                Add Skill
+                <FiPlusCircle
+                  className='text-green-500 group-hover:text-white transition-all'
+                  size='20'
+                />
               </button>
             </div>
           </div>
@@ -174,9 +192,12 @@ const AddJob = () => {
               <button
                 type='button'
                 onClick={() => resAppend("")}
-                className='btn-outline text-xs border'
+                className='grid place-items-center rounded-full flex-shrink-0 bg-green-500/20 border border-green-500 h-11 w-11 group transition-all hover:bg-green-500'
               >
-                Add Responsibility
+                <FiPlusCircle
+                  className='text-green-500 group-hover:text-white transition-all'
+                  size='20'
+                />
               </button>
             </div>
           </div>
@@ -211,16 +232,22 @@ const AddJob = () => {
               <button
                 type='button'
                 onClick={() => reqAppend("")}
-                className='btn-outline text-xs border'
+                className='grid place-items-center rounded-full flex-shrink-0 bg-green-500/20 border border-green-500 h-11 w-11 group transition-all hover:bg-green-500'
               >
-                Add Requirement
+                <FiPlusCircle
+                  className='text-green-500 group-hover:text-white transition-all'
+                  size='20'
+                />
               </button>
             </div>
           </div>
         </div>
 
         <div className='flex justify-end items-center w-full mt-3'>
-          <button className='btn' type='submit'>
+          <button
+            type='submit'
+            className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all btn'
+          >
             Submit
           </button>
         </div>

@@ -30,7 +30,7 @@ export const getAllJobController = async (req: express.Request, res: express.Res
 export const createJobController = async (req: express.Request, res: express.Response) => {
     try {
         const handleJobData = req.body;
-        console.log("handleJobData line 32:", handleJobData);
+        // console.log("handleJobData line 32:", handleJobData);
         if (!handleJobData) {
             return res.status(400).json({
                 success: false,
@@ -62,8 +62,8 @@ export const createJobController = async (req: express.Request, res: express.Res
 
 // get 1 job by id 
 export const getJobController = async (req: express.Request, res: express.Response) => {
-    const id = req.params?.id as string;
     try {
+        const id = req.params?.id as string;
         if (!id) {
             return res.status(400).json({
                 success: false,
@@ -76,11 +76,11 @@ export const getJobController = async (req: express.Request, res: express.Respon
             return res.status(200).json({
                 success: false,
                 message: `Job data not found for the id: ${id}`,
-                data: { id },
             });
         } else {
             return res.status(200).json({
                 success: true,
+                message: `Successfully found the job By id: ${id}`,
                 data: getJobData,
             });
         }
