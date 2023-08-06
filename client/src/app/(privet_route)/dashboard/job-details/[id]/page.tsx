@@ -19,8 +19,6 @@ const page: FC<pageProps> = ({ }) => {
     const id = pathNameTotalArray[pathNameTotalArray.length - 1];
     const { data, isLoading, isError } = useJobByIdQuery(id);
 
-    console.log(id, data);
-
     return <div>
         {
             data?.data?.companyName && <JobDetails jobData={data?.data} />

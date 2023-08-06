@@ -5,7 +5,7 @@ const apiSlice = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_DEVELOPMENT_SERVER,
     }),
-    tagTypes: ["Jobs", "PostJobs"],
+    tagTypes: ["JobAll", "JobById", "PostJobs"],
     endpoints: (builder) => ({}),
 });
 

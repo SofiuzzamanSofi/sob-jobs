@@ -1,17 +1,25 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import meeting from "../assets/meeting.jpg";
 import { BsArrowRightShort, BsArrowReturnRight } from "react-icons/bs";
 import { JobDataTypes } from "../interfaceTypes/interfaceTypes";
 import Image from "next/image";
-
+import { RootState } from "../redux/store";
+import { useSelector } from "react-redux";
+import { useJobApplyMutation } from "../redux/features/job/jobApi";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation"
 
 interface JobDataProps {
   jobData: JobDataTypes
 }
 
 const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
+
+  const router = useRouter();
+  const reduxStore = useSelector((state: RootState) => state);
+  const [jobApply, { isLoading, isError, isSuccess }] = useJobApplyMutation();
   const {
     position,
     companyName,
@@ -21,14 +29,48 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     salaryRange,
     location,
     overview,
-
     skills,
     requirements,
     responsibilities,
-
     queries,
     _id,
+    applicants
   } = jobData || {};
+
+  console.log(applicants);
+  const isAppliedAlready = applicants?.find(applicant => applicant?.userEmail === reduxStore?.auth?.user?.email);
+  console.log(isAppliedAlready)
+
+  const handleApply = () => {
+    if (reduxStore?.auth?.user?.role === "Employer") {
+      return toast.error("You are a Employee, \n So how a employer can be applied.")
+    }
+    else if (reduxStore?.auth?.user?.role === "Candidate") {
+      const permission = window.confirm("do you want to apply");
+      if (permission) {
+        const jobApplyData = {
+          jobId: _id,
+          userId: reduxStore?.auth?.user?._id,
+          userEmail: reduxStore?.auth?.user?.email,
+        }
+        jobApply(jobApplyData);
+      };
+    } else {
+      router.push("/dashboard/register")
+    };
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading("Please wait...", { id: "Apply-Job" });
+    };
+    if (isSuccess) {
+      toast.success("Apply on this job Success.", { id: "Apply-Job" });
+    };
+    if (isError) {
+      toast.error("Error ...", { id: "Apply-Job" })
+    };
+  }, [isLoading, isSuccess, isError]);
 
   return (
     <div className='pt-14 grid grid-cols-12 gap-5'>
@@ -39,7 +81,13 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
         <div className='space-y-5'>
           <div className='flex justify-between items-center mt-5'>
             <h1 className='text-xl font-semibold text-primary'>{position}</h1>
-            <button className='btn'>Apply</button>
+            <button
+              className={`border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white  hover:bg-primary ${isAppliedAlready ? "" : "hover:px-4"} transition-all`}
+              onClick={handleApply}
+              disabled={isAppliedAlready ? true : false}
+            >
+              {isAppliedAlready ? "Already Applied" : "Apply"}
+            </button>
           </div>
           <div>
             <h1 className='text-primary text-lg font-medium mb-3'>Overview</h1>
@@ -50,8 +98,8 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
             <ul>
               {
                 skills &&
-                skills.map((skill) => (
-                  <li className='flex items-center'>
+                skills.map((skill, index) => (
+                  <li key={index} className='flex items-center'>
                     <BsArrowRightShort /> <span>{skill}</span>
                   </li>
                 ))
@@ -65,9 +113,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
             <ul>
               {
                 requirements &&
-                requirements.map((skill) => (
-                  <li className='flex items-center'>
-                    <BsArrowRightShort /> <span>{skill}</span>
+                requirements.map((requirement, index) => (
+                  <li key={index} className='flex items-center'>
+                    <BsArrowRightShort /> <span>{requirement}</span>
                   </li>
                 ))
               }
@@ -80,9 +128,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
             <ul>
               {
                 responsibilities &&
-                responsibilities.map((skill) => (
-                  <li className='flex items-center'>
-                    <BsArrowRightShort /> <span>{skill}</span>
+                responsibilities.map((responsibiliti, index) => (
+                  <li key={index} className='flex items-center'>
+                    <BsArrowRightShort /> <span>{responsibiliti}</span>
                   </li>
                 ))
               }
@@ -129,7 +177,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
               <input
                 placeholder='Ask a question...'
                 type='text'
-                className='w-full'
+                className='w-full border rounded-md p-2'
               />
               <button
                 className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white'

@@ -67,15 +67,16 @@ const Navbar = () => {
                     {
                         reduxStore?.auth?.email ?
                             <button
-                                className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-black hover:bg-primary hover:px-4 transition-all '
+                                className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
                                 onClick={handleSignUout}
+                                title={reduxStore?.auth?.email}
                             >
                                 Sign Out
                             </button>
                             :
                             <Link
                                 href="/sign-in"
-                                className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-black hover:bg-primary hover:px-4 transition-all '
+                                className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
                             >
                                 Sign In
                             </Link>

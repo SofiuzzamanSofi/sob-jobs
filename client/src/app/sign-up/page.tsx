@@ -5,7 +5,7 @@ import loginImage from "@/workArea/assets/login.svg";
 import { useForm, useWatch } from "react-hook-form";
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
-import { SignUpFormValues } from "@/workArea/interfaceTypes/interfaceTypes";
+import { SignUpFormValueTypes } from "@/workArea/interfaceTypes/interfaceTypes";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { googleLogin, signUpUser } from "@/workArea/redux/features/auth/authSlice";
@@ -13,7 +13,7 @@ import { AppDispatch, RootState } from "@/workArea/redux/store";
 import { toast } from "react-hot-toast";
 
 const SignUp = () => {
-  const { handleSubmit, register, control } = useForm<SignUpFormValues>();
+  const { handleSubmit, register, control } = useForm<SignUpFormValueTypes>();
   const password = useWatch({ control, name: "password" });
   const confirmPassword = useWatch({ control, name: "confirmPassword" });
   const router = useRouter();
@@ -36,7 +36,7 @@ const SignUp = () => {
     }
   }, [password, confirmPassword]);
 
-  const onSubmit = ({ email, password }: SignUpFormValues) => {
+  const onSubmit = ({ email, password }: SignUpFormValueTypes) => {
     dispatch(signUpUser({ email, password }));
     // Rest of the form submission logic
   };

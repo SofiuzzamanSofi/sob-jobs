@@ -15,6 +15,17 @@ export interface RegisterDataTypes {
     term?: boolean;
 };
 
+export interface JobQueryArrayTypes {
+    id?: string;
+    email: string;
+    question?: string;
+    reply: string[];
+};
+
+export interface JobApplicants {
+    userId?: string;
+    userEmail?: string;
+};
 export interface JobDataTypes {
     position?: string;
     companyName?: string | undefined;
@@ -29,4 +40,6 @@ export interface JobDataTypes {
     skills?: string[];
     // _id?: string;
     // __v?: string;
+    queries?: JobQueryArrayTypes[];
+    applicants?: JobApplicants[];
 };

@@ -1,4 +1,4 @@
-import { JobDataTypes, getJobsResTypes, jobByIdResTypes } from "@/workArea/interfaceTypes/interfaceTypes";
+import { JobApplyDataTypes, JobDataTypes, GetJobsResTypes, JobByIdResTypes } from "@/workArea/interfaceTypes/interfaceTypes";
 import apiSlice from "../api/apiSlice";
 
 const jobApi = apiSlice.injectEndpoints({
@@ -9,7 +9,7 @@ const jobApi = apiSlice.injectEndpoints({
                 url: "/routes/job",
                 body: data,
             }),
-            invalidatesTags: ["Jobs"],
+            invalidatesTags: ["JobAll"],
             async onQueryStarted(data, { dispatch, queryFulfilled }) {
                 try {
                     const res = await queryFulfilled;
@@ -19,18 +19,27 @@ const jobApi = apiSlice.injectEndpoints({
                 }
             }
         }),
-        getJobs: builder.query<getJobsResTypes, void>({
+        getJobs: builder.query<GetJobsResTypes, void>({
             query: () => ({
                 url: "/routes/job",
             }),
-            providesTags: ["Jobs"],
+            providesTags: ["JobAll"],
         }),
-        jobById: builder.query<jobByIdResTypes, string>({
+        jobById: builder.query<JobByIdResTypes, string>({
             query: (id) => ({
                 url: `/routes/job/${id}`,
             }),
+            providesTags: ["JobById"]
+        }),
+        jobApply: builder.mutation<void, JobApplyDataTypes>({
+            query: (jobApplyData) => ({
+                url: "/routes/job",
+                method: "PATCH",
+                body: jobApplyData,
+            }),
+            invalidatesTags: ["JobById"],
         }),
     })
 });
 
-export const { usePostJobMutation, useGetJobsQuery, useJobByIdQuery } = jobApi;
+export const { usePostJobMutation, useGetJobsQuery, useJobByIdQuery, useJobApplyMutation } = jobApi;

@@ -3,49 +3,53 @@ import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema<JobDataTypes>({
     position: {
-        type: String,
+        type: "string",
         required: false,
     },
     companyName: {
-        type: String,
+        type: "string",
         required: false,
     },
     experience: {
-        type: String,
+        type: "string",
         required: false,
     },
     workLevel: {
-        type: String,
+        type: "string",
         required: false,
     },
     employmentType: {
-        type: String,
+        type: "string",
         required: false,
     },
     location: {
-        type: String,
+        type: "string",
         required: false,
     },
     overview: {
-        type: String,
+        type: "string",
         required: false,
     },
     requirements: {
-        type: [String],
+        type: ["string"],
         required: false,
     },
     responsibilities: {
-        type: [String],
+        type: ["string"],
         required: false,
     },
     salaryRange: {
-        type: String,
+        type: "string",
         required: false,
     },
     skills: {
-        type: [String],
+        type: ["string"],
         required: false,
     },
+    applicants: {
+        type: [mongoose.Schema.Types.Mixed],
+        required: false,
+    }
 });
 
 // Create a Mongoose Model for Job

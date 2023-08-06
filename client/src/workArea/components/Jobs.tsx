@@ -16,8 +16,8 @@ const Jobs: FC<jobsProps> = ({ }) => {
 
     return <div>
         <div>
-            <h1>
-                This is All jobs Pages dgs.
+            <h1 className="text-center">
+                Showing All Jobs on This Site.
             </h1>
         </div>
         <div

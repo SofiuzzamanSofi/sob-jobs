@@ -1,11 +1,11 @@
 
 import { auth } from "@/workArea/firebase/firebase.config";
-import { AuthType, createUserData } from "@/workArea/interfaceTypes/interfaceTypes";
+import { AuthTypes, CreateUserDataTypes } from "@/workArea/interfaceTypes/interfaceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 
-const initialState: AuthType = {
+const initialState: AuthTypes = {
     email: "",
     role: "",
     isLoading: true,
@@ -17,7 +17,7 @@ const initialState: AuthType = {
 export const signUpUser = createAsyncThunk(
     "auth/signUpUser",
     async (
-        data: createUserData,
+        data: CreateUserDataTypes,
         thunkApi
     ) => {
         const responseData = await createUserWithEmailAndPassword(auth, data.email, data.password);
@@ -28,7 +28,7 @@ export const signUpUser = createAsyncThunk(
 export const signInUser = createAsyncThunk(
     "auth/signInUser",
     async (
-        data: createUserData,
+        data: CreateUserDataTypes,
         thunkApi
     ) => {
         const responseData = await signInWithEmailAndPassword(auth, data.email, data.password);
@@ -130,6 +130,7 @@ const authSlice = createSlice({
     reducers: {
         signOutReducer: (state) => {
             state.email = "";
+            state.user = {};
         },
         setUser: (state, { payload }) => {
             state.email = payload;

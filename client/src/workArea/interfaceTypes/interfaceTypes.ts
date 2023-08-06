@@ -1,4 +1,4 @@
-export interface AuthType {
+export interface AuthTypes {
     email: string | null;
     role: string;
     isLoading: boolean;
@@ -7,12 +7,12 @@ export interface AuthType {
     user?: RegisterTypes;
 };
 
-export interface createUserData {
+export interface CreateUserDataTypes {
     email: string;
     password: string;
 };
 
-export interface SignUpFormValues {
+export interface SignUpFormValueTypes {
     email: string;
     password: string;
     confirmPassword?: string;
@@ -76,12 +76,17 @@ export interface EmployerFormDataTypes {
     term?: boolean;
 };
 
-export interface JobQueryArray {
+export interface JobQueryArrayTypes {
     id?: string;
     email: string;
     question?: string;
     reply: string[];
-}
+};
+
+export interface JobApplicantsTypes {
+    userId?: string;
+    userEmail?: string;
+};
 export interface JobDataTypes {
     position?: string;
     companyName?: string | undefined;
@@ -96,15 +101,22 @@ export interface JobDataTypes {
     skills?: string[];
     _id?: string;
     __v?: string;
-    queries?: JobQueryArray[];
+    queries?: JobQueryArrayTypes[];
+    applicants?: JobApplicantsTypes[];
 };
-export interface getJobsResTypes {
+export interface GetJobsResTypes {
     success: boolean;
     message: string;
     data: JobDataTypes[];
 };
-export interface jobByIdResTypes {
+export interface JobByIdResTypes {
     success: boolean;
     message: string;
     data: JobDataTypes;
+};
+
+export interface JobApplyDataTypes {
+    jobId: string | undefined;
+    userId: string | undefined;
+    userEmail: string | undefined;
 };

@@ -208,7 +208,11 @@ const EmployerRegistration = () => {
               />
               <label htmlFor='terms'>I agree to terms and conditions</label>
             </div>
-            <button disabled={!term} className='btn' type='submit'>
+            <button
+              disabled={!term}
+              type='submit'
+              className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
+            >
               Submit
             </button>
           </div>
