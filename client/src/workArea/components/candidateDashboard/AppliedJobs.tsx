@@ -16,20 +16,21 @@ const AppliedJobs = () => {
   if (isLoading) {
     return <Loading />;
   }
-
-  return (
-    <div>
-      <h1 className='text-xl py-5'>Applied jobs</h1>
-      <div className='grid grid-cols-2 gap-5 pb-5'>
-        {
-          data?.data?.length &&
-          data?.data?.map((job, index) => (
-            <JobCard key={index} jobData={job} />
-          ))
-        }
+  else {
+    return (
+      <div>
+        <h1 className='text-xl py-5 text-center'>Applied jobs</h1>
+        <div className='grid grid-cols-2 gap-5 pb-5'>
+          {
+            data?.data?.length &&
+            data?.data?.map((job, index) => (
+              <JobCard key={index} jobData={job} />
+            ))
+          }
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 };
 
 export default AppliedJobs;

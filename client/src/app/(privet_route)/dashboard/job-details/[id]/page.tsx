@@ -1,5 +1,3 @@
-"use client"
-
 "use client";
 
 import JobDetails from '@/workArea/components/JobDetails';

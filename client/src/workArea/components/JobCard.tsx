@@ -16,7 +16,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobData }) => {
   return (
     <div
       key={_id}
-      className='border border-gray-300 shadow-xl p-5 rounded-2xl text-primary'
+      className='border border-gray-300 shadow-xl p-5 rounded-md text-primary'
     >
       <div className='flex justify-between  text-primary'>
         <div>
@@ -32,7 +32,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobData }) => {
       </div>
       <div className='flex justify-between items-center mt-5'>
         <p>{employmentType}</p>
-        <Link href={`dashboard/job-details/${_id}`} className="border px-4 py-1 rounded-md">
+        <Link href={`job-details/${_id}`} className="border px-4 py-1 rounded-md">
           <button className='btn'>
             Details
           </button>

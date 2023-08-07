@@ -7,9 +7,10 @@ import { JobDataTypes } from "../interfaceTypes/interfaceTypes";
 import Image from "next/image";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
-import { useJobApplyMutation } from "../redux/features/job/jobApi";
+import { useJobApplyMutation, useJobQuestionMutation } from "../redux/features/job/jobApi";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation"
+import { useForm } from "react-hook-form";
 
 interface JobDataProps {
   jobData: JobDataTypes
@@ -19,7 +20,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
 
   const router = useRouter();
   const reduxStore = useSelector((state: RootState) => state);
-  const [jobApply, { isLoading, isError, isSuccess }] = useJobApplyMutation();
+  const [jobApply, { isLoading: applyLoading, isError: applyError, isSuccess: applySuccess }] = useJobApplyMutation();
+  const { register, handleSubmit, reset } = useForm<{ question: string }>();
+  const [jobQuestion, { isLoading: questionLoading, isError: questionError, isSuccess: questionSuccess }] = useJobQuestionMutation();
   const {
     position,
     companyName,
@@ -59,16 +62,32 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
   };
 
   useEffect(() => {
-    if (isLoading) {
+    if (applyLoading) {
       toast.loading("Please wait...", { id: "Apply-Job" });
     };
-    if (isSuccess) {
+    if (applySuccess) {
       toast.success("Apply on this job Success.", { id: "Apply-Job" });
     };
-    if (isError) {
+    if (applyError) {
       toast.error("Error ...", { id: "Apply-Job" })
     };
-  }, [isLoading, isSuccess, isError]);
+  }, [applyLoading, applySuccess, applyError]);
+
+  const submitQuestion = (data: { question: string }) => {
+    const questionData = {
+      jobId: _id,
+      userId: reduxStore.auth.user?._id,
+      userEmail: reduxStore.auth.user?.email,
+      question: {
+        time: new Date(),
+        questionString: data.question,
+      }
+    };
+    reset();
+    console.log(questionData);
+    jobQuestion(questionData);
+  };
+  console.log("jobData", jobData)
 
   return (
     <div className='pt-14 grid grid-cols-12 gap-5'>
@@ -171,19 +190,23 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
               }
             </div>
 
-            <div className='flex gap-3 my-5'>
-              <input
-                placeholder='Ask a question...'
-                type='text'
-                className='w-full border rounded-md p-2'
-              />
-              <button
-                className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white'
-                type='button'
-              >
-                <BsArrowRightShort size={30} />
-              </button>
-            </div>
+            <form onSubmit={handleSubmit(submitQuestion)}>
+              <div className='flex gap-3 my-5'>
+                <input
+                  placeholder='Ask a question...'
+                  type='text'
+                  id='question'
+                  className='w-full border rounded-md p-2'
+                  {...register("question")}
+                />
+                <button
+                  className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white'
+                  type='button'
+                >
+                  <BsArrowRightShort size={30} />
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

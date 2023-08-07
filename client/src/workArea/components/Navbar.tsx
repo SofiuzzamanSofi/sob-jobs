@@ -47,7 +47,9 @@ const Navbar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className='hover:text-primary' href="/jobs">
+                    <Link
+                        className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
+                        href="/jobs">
                         Jobs
                     </Link>
                 </li>
@@ -56,7 +58,7 @@ const Navbar = () => {
                         reduxStore?.auth?.email &&
                         <Link
                             href="/dashboard"
-                            className='hover:text-primary'
+                            className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
                         >
                             Dashboard
                         </Link>

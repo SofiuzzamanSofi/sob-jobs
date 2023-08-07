@@ -3,7 +3,6 @@
 import { RootState } from '@/workArea/redux/store';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
-import Jobs from '@/workArea/components/Jobs';
 
 interface pageProps {
 
@@ -36,7 +35,6 @@ const Dashboard = ({ }) => {
                             <h6 className='text-center'>
                                 More Feature is comming soon...
                             </h6>
-                            <Jobs />
                         </div>
                     </div>
                 </div>

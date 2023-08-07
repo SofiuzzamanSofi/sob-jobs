@@ -7,4 +7,6 @@ export default (router: express.Router) => {
     router.patch("/job", patchJobController);
     router.get("/job/:id", getJobController);
     router.get("/applied-jobs/:email", getAppliedJobController);
+    router.patch("/job/query", getJobController);
+    router.patch("/job/riplay", getJobController);
 };

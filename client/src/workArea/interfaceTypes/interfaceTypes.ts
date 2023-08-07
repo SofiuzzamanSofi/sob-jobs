@@ -120,3 +120,43 @@ export interface JobApplyDataTypes {
     userId: string | undefined;
     userEmail: string | undefined;
 };
+export interface QuestionDataTypes {
+    jobId: string | undefined;
+    userId: string | undefined;
+    userEmail: string | undefined;
+    question: QuestionTypes;
+};
+
+export interface QuestionAnsTypes {
+    userId: string;
+    userEmail: string;
+    question: QuestionTypes;
+    ans?: AnsTypes[] | undefined;
+};
+
+export interface QuestionTypes {
+    time: Date;
+    questionString: string;
+};
+export interface AnsTypes {
+    time: Date;
+    ansString: string;
+};
+
+const QuestionAns = [
+    {
+        userId: "ESFSFS4545VD465",
+        userEmail: "example@example.com",
+        question: "Question Name in string",
+        ans: [
+            {
+                time: "15 minutes ago",
+                ansString: "Question Ans in string",
+            },
+            {
+                time: "15 minutes ago",
+                ansString: "Question Ans in string",
+            },
+        ]
+    }
+];

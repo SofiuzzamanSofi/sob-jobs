@@ -11,11 +11,11 @@ const Sidebar = () => {
 
     const reduxStore = useSelector((state: RootState) => state);
     const pathname = usePathname() || "";
-    // const pathNameTotalArray = usePathname()?.split("/") || [];
+    const pathNameTotalArray = usePathname()?.split("/") || [];
     // const id = pathNameTotalArray[pathNameTotalArray.length - 1];
+    // const isPathnameIncludes = pathname.includes("/dashboard/jobs")
     // console.log("pathname:", pathname);
-    // console.log("id:", id);
-    // const isPathnameIncludes = pathname.includes
+    // console.log("pathNameTotalArray:", pathNameTotalArray.length);
 
     const employerRoutes = [
         {
@@ -40,20 +40,28 @@ const Sidebar = () => {
                         <FaChevronLeft />
                         <h1>Back</h1>
                     </Link>
-                    <h1 className='text-xl'>
+                    {/* <h1 className='text-xl'>
                         <Link
                             href='/dashboard'
                             className='hover:bg-primary hover:text-white bg-primary/10 transition-all w-full block py-2 px-3 rounded-md'
                         >
                             Dashboard
                         </Link>
-                    </h1>
+                    </h1> */}
                 </div>
+                <li>
+                    <Link
+                        href='/dashboard'
+                        className={`hover:bg-primary ${pathNameTotalArray.length === 2 ? "bg-primary text-white" : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
+                    >
+                        Dashboard
+                    </Link>
+                </li>
                 <li>
                     <Link
                         //   style={"pointer-events: none"}
                         href='/dashboard/all-jobs'
-                        className={`hover:bg-primary ${pathname.includes("/dashboard/jobs") ? "hover:bg-primary " : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
+                        className={`hover:bg-primary ${pathname.includes("/all-jobs") ? "bg-primary text-white" : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
                     >
                         All Jobs
                     </Link>
@@ -64,7 +72,7 @@ const Sidebar = () => {
                         <li key={index}>
                             <Link
                                 href={path}
-                                className={`hover:bg-primary ${pathname.includes(path) ? "hover:bg-primary " : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
+                                className={`hover:bg-primary ${pathname.includes(path) ? "bg-primary text-white" : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
                             >
                                 {name}
                             </Link>
@@ -77,7 +85,7 @@ const Sidebar = () => {
                         <li key={index}>
                             <Link
                                 href={path}
-                                className={`hover:bg-primary ${pathname.includes(path) ? "hover:bg-primary " : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
+                                className={`hover:bg-primary ${pathname.includes(path) ? "bg-primary text-white" : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
                             >
                                 {name}
                             </Link>
