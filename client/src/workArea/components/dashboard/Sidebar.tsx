@@ -48,6 +48,7 @@ const Sidebar = () => {
                             Dashboard
                         </Link>
                     </h1> */}
+                    <h6>{reduxStore.auth.user?.role}</h6>
                 </div>
                 <li>
                     <Link

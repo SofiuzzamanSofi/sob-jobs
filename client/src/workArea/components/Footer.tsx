@@ -22,7 +22,8 @@ const Footer: FC<FooterProps> = ({ }) => {
     return (
         <div
             style={{
-                position: 'fixed',
+                // position: 'fixed',
+                // marginTop: "30px",
                 bottom: '0px',
                 left: '0px',
                 right: '0px',

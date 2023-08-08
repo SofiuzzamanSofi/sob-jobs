@@ -3,6 +3,6 @@ import express from "express";
 
 
 export default (router: express.Router) => {
-    router.post("/register", createRegController);
-    router.get("/register/:email", getRegController);
+    router.post("/register", createRegController); // post a user
+    router.get("/register/:email", getRegController); // get a user by email 
 };

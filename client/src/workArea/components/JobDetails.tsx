@@ -7,7 +7,7 @@ import { JobDataTypes } from "../interfaceTypes/interfaceTypes";
 import Image from "next/image";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
-import { useJobApplyMutation, useJobQuestionMutation } from "../redux/features/job/jobApi";
+import { useJobApplyMutation, useJobQuestionMutation,useJobAnsMutation } from "../redux/features/job/jobApi";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form";
@@ -23,7 +23,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
   const [jobApply, { isLoading: applyLoading, isError: applyError, isSuccess: applySuccess }] = useJobApplyMutation();
   const { register, handleSubmit, reset } = useForm<{ question: string }>();
   const [jobQuestion, { isLoading: questionLoading, isError: questionError, isSuccess: questionSuccess }] = useJobQuestionMutation();
+  const [jobAns, { isLoading: ansLoading, isError: ansError, isSuccess: ansSuccess }] = useJobAnsMutation();
   const {
+    email,
     position,
     companyName,
     experience,
@@ -35,9 +37,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     skills,
     requirements,
     responsibilities,
-    queries,
     _id,
-    applicants
+    applicants,
+    questionAns
   } = jobData || {};
 
   const isAppliedAlready = applicants?.find(applicant => applicant?.userEmail === reduxStore?.auth?.user?.email);
@@ -61,6 +63,31 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     };
   };
 
+  const submitQuestion = (data: { question: string }) => {
+    const questionData = {
+      jobId: _id,
+      userId: reduxStore.auth.user?._id,
+      userEmail: reduxStore.auth.user?.email,
+      ...data,
+    };
+    reset();
+    console.log(questionData);
+    jobQuestion(questionData);
+  };
+
+  const submitAns = (e: React.FormEvent<HTMLFormElement>, questionId: string) => {
+    e.preventDefault();
+    const ansData = {
+      jobId: _id,
+      questionId,
+      userEmail: reduxStore.auth.user?.email,
+      riplay: e.currentTarget.ans.value,
+    };
+    jobAns(ansData);
+    console.log("ansData", ansData);
+    (e.target as HTMLFormElement).reset();
+  };
+
   useEffect(() => {
     if (applyLoading) {
       toast.loading("Please wait...", { id: "Apply-Job" });
@@ -73,21 +100,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     };
   }, [applyLoading, applySuccess, applyError]);
 
-  const submitQuestion = (data: { question: string }) => {
-    const questionData = {
-      jobId: _id,
-      userId: reduxStore.auth.user?._id,
-      userEmail: reduxStore.auth.user?.email,
-      question: {
-        time: new Date(),
-        questionString: data.question,
-      }
-    };
-    reset();
-    console.log(questionData);
-    jobQuestion(questionData);
-  };
-  console.log("jobData", jobData)
+  console.log("jobData", jobData);
 
   return (
     <div className='pt-14 grid grid-cols-12 gap-5'>
@@ -160,53 +173,70 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
             <h1 className='text-xl font-semibold text-primary mb-5'>
               General Q&A
             </h1>
-            <div className='text-primary my-2'>
+            <div className='text-primary grid gap-3'>
               {
-                queries &&
-                queries.map(({ question, email, reply, id }, index) => (
+                questionAns &&
+                questionAns?.map((question, index) => (
                   <div key={index}>
-                    <small>{email}</small>
-                    <p className='text-lg font-medium'>{question}</p>
+                    <small>{question?.userEmail}</small>
+                    <p className='text-lg font-medium'>{question?.question?.questionString}</p>
                     {
-                      reply &&
-                      reply?.map((item, index) => (
+                      question?.ans &&
+                      question?.ans?.map((item, index) => (
                         <p key={index} className='flex items-center gap-2 relative left-5'>
-                          <BsArrowReturnRight /> {item}
+                          <BsArrowReturnRight /> {item?.ansString}
                         </p>
                       ))
                     }
-
-                    <div className='flex gap-3 my-5'>
-                      <input placeholder='Reply' type='text' className='w-full' />
-                      <button
-                        className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white'
-                        type='button'
+                    {
+                      reduxStore.auth.user?.role === 'Employer' &&
+                      reduxStore?.auth?.user?.email === email &&
+                      <form
+                        onSubmit={(e) => submitAns(e, question?.questionId)}
                       >
-                        <BsArrowRightShort size={30} />
-                      </button>
-                    </div>
+                        <div className='flex gap-3 my-5'>
+                          <input
+                            placeholder='Reply'
+                            type='text'
+                            name="ans"
+                            className="w-full p-2 border-b-2 focus:outline-none focus:border-b-black"
+                          />
+                          <button
+                            className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white'
+                            type='submit'
+                          >
+                            <BsArrowRightShort size={30} />
+                          </button>
+                        </div>
+                      </form>
+                    }
                   </div>
                 ))
               }
             </div>
 
-            <form onSubmit={handleSubmit(submitQuestion)}>
-              <div className='flex gap-3 my-5'>
-                <input
-                  placeholder='Ask a question...'
-                  type='text'
-                  id='question'
-                  className='w-full border rounded-md p-2'
-                  {...register("question")}
-                />
-                <button
-                  className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white'
-                  type='button'
-                >
-                  <BsArrowRightShort size={30} />
-                </button>
-              </div>
-            </form>
+            {
+              reduxStore.auth.user?.role === 'Candidate' &&
+              <form
+                onSubmit={handleSubmit(submitQuestion)}
+              >
+                <div className='flex gap-3 my-5'>
+                  <input
+                    placeholder='Ask a question...'
+                    type='text'
+                    id='question'
+                    className='w-full border rounded-md p-2'
+                    {...register("question")}
+                  />
+                  <button
+                    className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white'
+                    type="submit"
+                  >
+                    <BsArrowRightShort size={30} />
+                  </button>
+                </div>
+              </form>
+            }
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@ const AddJob = () => {
 
   const onSubmit = (data: JobDataTypes) => {
     console.log("data line 33:", data);
-    postJob(data);
+    postJob({ ...data, email: reduxStore.auth.user?.email });
     console.log(data);
   };
 

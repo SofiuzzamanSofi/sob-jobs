@@ -2,6 +2,10 @@ import { JobDataTypes } from "interfaceServer.ts/interfaceServer.ts";
 import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema<JobDataTypes>({
+    email: {
+        type: "string",
+        required: false,
+    },
     position: {
         type: "string",
         required: false,
@@ -47,6 +51,10 @@ const jobSchema = new mongoose.Schema<JobDataTypes>({
         required: false,
     },
     applicants: {
+        type: [mongoose.Schema.Types.Mixed],
+        required: false,
+    },
+    questionAns: {
         type: [mongoose.Schema.Types.Mixed],
         required: false,
     }

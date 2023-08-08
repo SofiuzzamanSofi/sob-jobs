@@ -37,20 +37,6 @@ export interface RegisterTypes {
     __v?: string | number;
 };
 
-// export interface JobDataTypes {
-//     position?: string;
-//     companyName?: string | undefined;
-//     experience?: string;
-//     workLevel?: string;
-//     employmentType?: string;
-//     location?: string;
-//     overview?: string;
-//     requirements?: string[];
-//     responsibilities?: string[];
-//     salaryRange?: string;
-//     skills?: string[];
-// }
-
 export interface CandidateFormDataTypes {
     firstName?: string;
     lastName?: string;
@@ -76,18 +62,31 @@ export interface EmployerFormDataTypes {
     term?: boolean;
 };
 
-export interface JobQueryArrayTypes {
-    id?: string;
-    email: string;
-    question?: string;
-    reply: string[];
+export interface AnsTypes {
+    time: Date;
+    ansString: string;
+};
+
+export interface QuestionTypes {
+    time: Date;
+    questionString: string;
+};
+
+export interface QuestionAnsTypes {
+    userId: string;
+    userEmail: string;
+    questionId: string;
+    question: QuestionTypes;
+    ans?: AnsTypes[] | undefined;
 };
 
 export interface JobApplicantsTypes {
     userId?: string;
     userEmail?: string;
 };
+
 export interface JobDataTypes {
+    email?: string | undefined;
     position?: string;
     companyName?: string | undefined;
     experience?: string;
@@ -101,14 +100,16 @@ export interface JobDataTypes {
     skills?: string[];
     _id?: string;
     __v?: string;
-    queries?: JobQueryArrayTypes[];
     applicants?: JobApplicantsTypes[];
+    questionAns?: QuestionAnsTypes[];
 };
+
 export interface GetJobsResTypes {
     success: boolean;
     message: string;
     data: JobDataTypes[];
 };
+
 export interface JobByIdResTypes {
     success: boolean;
     message: string;
@@ -120,27 +121,18 @@ export interface JobApplyDataTypes {
     userId: string | undefined;
     userEmail: string | undefined;
 };
+
 export interface QuestionDataTypes {
     jobId: string | undefined;
     userId: string | undefined;
     userEmail: string | undefined;
-    question: QuestionTypes;
+    question: string;
 };
-
-export interface QuestionAnsTypes {
-    userId: string;
-    userEmail: string;
-    question: QuestionTypes;
-    ans?: AnsTypes[] | undefined;
-};
-
-export interface QuestionTypes {
-    time: Date;
-    questionString: string;
-};
-export interface AnsTypes {
-    time: Date;
-    ansString: string;
+export interface AnsDataTypes {
+    jobId: string | undefined;
+    questionId: string | undefined;
+    userEmail: string | undefined;
+    riplay: string;
 };
 
 const QuestionAns = [

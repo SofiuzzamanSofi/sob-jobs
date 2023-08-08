@@ -1,4 +1,4 @@
-import { JobApplyDataTypes, JobDataTypes, GetJobsResTypes, JobByIdResTypes, QuestionDataTypes } from "@/workArea/interfaceTypes/interfaceTypes";
+import { JobApplyDataTypes, JobDataTypes, GetJobsResTypes, JobByIdResTypes, QuestionDataTypes, AnsDataTypes } from "@/workArea/interfaceTypes/interfaceTypes";
 import apiSlice from "../api/apiSlice";
 
 const jobApi = apiSlice.injectEndpoints({
@@ -47,7 +47,14 @@ const jobApi = apiSlice.injectEndpoints({
         }),
         jobQuestion: builder.mutation<void, QuestionDataTypes>({
             query: (questionData) => ({
-                url: "/job/query",
+                url: "/routes/job/query",
+                method: "PATCH",
+                body: questionData,
+            }),
+        }),
+        jobAns: builder.mutation<void, AnsDataTypes>({
+            query: (questionData) => ({
+                url: "/routes/job/riplay",
                 method: "PATCH",
                 body: questionData,
             }),
@@ -55,4 +62,4 @@ const jobApi = apiSlice.injectEndpoints({
     })
 });
 
-export const { usePostJobMutation, useGetJobsQuery, useJobByIdQuery, useJobApplyMutation, useGetAppliedJobsQuery, useJobQuestionMutation } = jobApi;
+export const { usePostJobMutation, useGetJobsQuery, useJobByIdQuery, useJobApplyMutation, useGetAppliedJobsQuery, useJobQuestionMutation, useJobAnsMutation } = jobApi;
