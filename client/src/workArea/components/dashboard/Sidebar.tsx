@@ -6,10 +6,12 @@ import { FaChevronLeft } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "@/workArea/redux/store";
 import { usePathname } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
 
     const reduxStore = useSelector((state: RootState) => state);
+    const router = useRouter();
     const pathname = usePathname() || "";
     const pathNameTotalArray = usePathname()?.split("/") || [];
     // const id = pathNameTotalArray[pathNameTotalArray.length - 1];
@@ -34,12 +36,13 @@ const Sidebar = () => {
         <div className='bg-primary/10 col-span-4 h-screen sticky top-0 border'>
             <ul className='flex flex-col gap-2 w-full h-full  p-3'>
                 <div className='flex justify-between items-center text-primary my-1'>
-                    <Link
-                        href='/'
+                    <button
+                        onClick={() => window.history.back()}
+
                         className='flex items-center border'>
                         <FaChevronLeft />
                         <h1>Back</h1>
-                    </Link>
+                    </button>
                     {/* <h1 className='text-xl'>
                         <Link
                             href='/dashboard'

@@ -99,7 +99,7 @@ export const createJobController = async (req: express.Request, res: express.Res
 export const patchAppliedJobController = async (req: express.Request, res: express.Response) => {
     try {
         const { jobId, userId, userEmail } = req.body;
-        console.log("jobId, userId, userEmail:", jobId, userId, userEmail);
+        // console.log("jobId, userId, userEmail:", jobId, userId, userEmail);
         if (!jobId && !userId && !userEmail) {
             return res.status(400).json({
                 success: false,
@@ -198,7 +198,7 @@ export const patchQuestionJobController = async (req: express.Request, res: expr
                     questionString: question,
                 },
             };
-            console.log("questionAns:", questionAns);
+            // console.log("questionAns:", questionAns);
             const updateJobforQuestion = await JobSchema.findByIdAndUpdate(
                 jobId,
                 {
@@ -238,7 +238,7 @@ export const patchQuestionJobController = async (req: express.Request, res: expr
 export const patchAnsJobController = async (req: express.Request, res: express.Response) => {
     try {
         const { jobId, questionId, userEmail, riplay } = req.body;
-        console.log("jobId, questionId, userEmail, riplay :", jobId, questionId, userEmail, riplay);
+        // console.log("jobId, questionId, userEmail, riplay :", jobId, questionId, userEmail, riplay);
         if (!jobId || !questionId || !userEmail || !riplay) {
             return res.status(400).json({
                 success: false,
@@ -250,7 +250,7 @@ export const patchAnsJobController = async (req: express.Request, res: express.R
                 time: new Date(),
                 ansString: riplay,
             };
-            console.log("ANS DATA:", ans, jobId, questionId, userEmail, riplay);
+            // console.log("ANS DATA:", ans, jobId, questionId, userEmail, riplay);
             const updateJObforAns = await JobSchema.findOneAndUpdate(
                 {
                     _id: jobId,

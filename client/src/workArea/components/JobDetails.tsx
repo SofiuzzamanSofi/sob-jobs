@@ -70,9 +70,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
       userEmail: reduxStore.auth.user?.email,
       ...data,
     };
-    reset();
     // console.log(questionData);
     jobQuestion(questionData);
+    reset();
   };
 
   const submitAns = (e: React.FormEvent<HTMLFormElement>, questionId: string) => {
@@ -83,8 +83,8 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
       userEmail: reduxStore.auth.user?.email,
       riplay: e.currentTarget.ans.value,
     };
-    jobAns(ansData);
     // console.log("ansData", ansData);
+    jobAns(ansData);
     (e.target as HTMLFormElement).reset();
   };
 

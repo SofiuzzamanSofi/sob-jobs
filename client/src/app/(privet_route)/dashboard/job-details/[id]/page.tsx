@@ -14,7 +14,7 @@ const page: FC<pageProps> = ({ }) => {
     const pathname = usePathname() || "";
     const pathNameTotalArray = pathname.split("/")
     const id = pathNameTotalArray[pathNameTotalArray.length - 1];
-    const { data, isLoading, isError } = useJobByIdQuery(id);
+    const { data, isLoading, isError } = useJobByIdQuery(id, { pollingInterval: 2000 });
 
     return <div>
         {
