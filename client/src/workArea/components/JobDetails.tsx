@@ -7,7 +7,7 @@ import { JobDataTypes } from "../interfaceTypes/interfaceTypes";
 import Image from "next/image";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
-import { useJobApplyMutation, useJobQuestionMutation,useJobAnsMutation } from "../redux/features/job/jobApi";
+import { useJobApplyMutation, useJobQuestionMutation, useJobAnsMutation } from "../redux/features/job/jobApi";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form";
@@ -71,7 +71,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
       ...data,
     };
     reset();
-    console.log(questionData);
+    // console.log(questionData);
     jobQuestion(questionData);
   };
 
@@ -84,7 +84,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
       riplay: e.currentTarget.ans.value,
     };
     jobAns(ansData);
-    console.log("ansData", ansData);
+    // console.log("ansData", ansData);
     (e.target as HTMLFormElement).reset();
   };
 
@@ -100,7 +100,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     };
   }, [applyLoading, applySuccess, applyError]);
 
-  console.log("jobData", jobData);
+  // console.log("jobData", jobData);
 
   return (
     <div className='pt-14 grid grid-cols-12 gap-5'>
