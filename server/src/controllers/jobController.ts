@@ -177,6 +177,40 @@ export const getAppliedJobController = async (req: express.Request, res: express
         });
     }
 };
+// get posted-jobs by email 
+export const getPostedJobController = async (req: express.Request, res: express.Response) => {
+    try {
+        const email = req.params?.email as string;
+        if (!email) {
+            return res.status(400).json({
+                success: false,
+                message: "Email is missing in the request",
+            });
+        }
+        else {
+            // const query = { "applicants.userEmail": email }
+            const getPostedJobData = await JobSchema.find({ email })
+            if (!getPostedJobData) {
+                return res.status(200).json({
+                    success: false,
+                    message: `Job data not found for the email: ${email}`,
+                });
+            } else {
+                return res.status(200).json({
+                    success: true,
+                    message: `Successfully found the job By id: ${email}`,
+                    data: getPostedJobData,
+                });
+            };
+        };
+    } catch (error) {
+        console.error("Error fetching job data:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to fetch job data",
+        });
+    }
+};
 
 // edit job for Question
 export const patchQuestionJobController = async (req: express.Request, res: express.Response) => {

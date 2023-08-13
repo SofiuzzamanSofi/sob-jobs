@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import meeting from "../assets/meeting.jpg";
-import { BsArrowRightShort, BsArrowReturnRight } from "react-icons/bs";
+import { BsArrowRightShort, BsArrowReturnRight, BsPeople } from "react-icons/bs";
 import { JobDataTypes } from "../interfaceTypes/interfaceTypes";
 import Image from "next/image";
 import { RootState } from "../redux/store";
@@ -11,6 +11,7 @@ import { useJobApplyMutation, useJobQuestionMutation, useJobAnsMutation } from "
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form";
+
 
 interface JobDataProps {
   jobData: JobDataTypes
@@ -118,6 +119,14 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
             >
               {isAppliedAlready ? "Already Applied" : "Apply"}
             </button>
+          </div>
+          <div className='flex justify-between items-center mt-5'>
+            <h1 className='text-primary text-md font-medium'>
+              Number of openings: 02
+            </h1>
+            <div className='text-primary text-md font-medium flex items-center gap-2'>
+              <BsPeople /> {applicants?.length} applicants
+            </div>
           </div>
           <div>
             <h1 className='text-primary text-lg font-medium mb-3'>Overview</h1>
@@ -277,7 +286,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
           </div>
           <div>
             <p>Email</p>
-            <h1 className='font-semibold text-lg'>company.email@name.com</h1>
+            <h1 className='font-semibold text-lg'>
+              {email ? email : "company@mail.com"}
+            </h1>
           </div>
           <div>
             <p>Company Location</p>

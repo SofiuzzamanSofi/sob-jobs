@@ -23,10 +23,14 @@ const Jobs: FC<jobsProps> = ({ }) => {
                 className='grid md:grid-cols-2 gap-4'
             >
                 {
-                    data?.data?.length &&
-                    data.data.map((jobData, index) => (
-                        <JobCard key={index} jobData={jobData} />
-                    ))
+                    data?.data?.length ?
+                        data.data.map((jobData, index) => (
+                            <JobCard key={index} jobData={jobData} />
+                        ))
+                        :
+                        <div>
+                            <h1> No jobs yet on this website.</h1>
+                        </div>
                 }
             </div>
         </div>

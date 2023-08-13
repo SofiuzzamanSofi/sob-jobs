@@ -1,21 +1,11 @@
 Employee Management 
 
 
-
 Description: 
 
 
 
-
-
-
-
 In this task, you will add an extra section to the Jobbox application shown in modules 7, 8, and 9. Feel free to use the starter pack provided previously with the module.
-
-
-
-
-
 
 
 Tech Stack (Required) : 

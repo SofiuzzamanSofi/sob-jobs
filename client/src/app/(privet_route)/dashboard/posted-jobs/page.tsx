@@ -1,4 +1,4 @@
-import AppliedJobs from '@/workArea/components/AppliedJobs'
+import PostedJobs from '@/workArea/components/PostedJobs'
 import { FC } from 'react'
 
 interface pageProps {
@@ -8,7 +8,7 @@ interface pageProps {
 const page: FC<pageProps> = ({ }) => {
     return (
         <div>
-            <AppliedJobs />
+            <PostedJobs />
         </div>
     )
 }
