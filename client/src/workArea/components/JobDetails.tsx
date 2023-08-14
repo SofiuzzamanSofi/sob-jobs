@@ -12,7 +12,6 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form";
 
-
 interface JobDataProps {
   jobData: JobDataTypes
 }

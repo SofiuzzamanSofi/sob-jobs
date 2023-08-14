@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm, SubmitHandler } from "react-hook-form";
 import { FiTrash, FiPlusCircle } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { RootState } from '@/workArea/redux/store';
@@ -33,10 +33,9 @@ const AddJob = () => {
     remove: reqRemove,
   } = useFieldArray({ control, name: "requirements" });
 
-  const onSubmit = (data: JobDataTypes) => {
-    console.log("data line 33:", data);
-    postJob({ ...data, email: reduxStore.auth.user?.email });
-    console.log(data);
+  const onSubmit: SubmitHandler<JobDataTypes> = (data) => {
+    console.log("data on submit handler addJObs:", data);
+    postJob({ ...data, email: reduxStore.auth.user?.email, isOpen: true });
   };
 
   useEffect(() => {
@@ -257,15 +256,3 @@ const AddJob = () => {
 };
 
 export default AddJob;
-
-// Position name
-// Company name
-// Experience
-// Work Level
-// Salary Range
-// Employment Type
-// Location
-// Overview
-// Responsibilities
-// Requirements
-// Skills

@@ -1,3 +1,4 @@
+// UserSchema / Data Types 
 export interface AuthTypes {
     email: string | null;
     role: string;
@@ -16,25 +17,6 @@ export interface SignUpFormValueTypes {
     email: string;
     password: string;
     confirmPassword?: string;
-};
-
-export interface RegisterTypes {
-    firstName?: string;
-    lastName?: string;
-    email?: string | undefined;
-    gender?: string;
-    country?: string;
-    address?: string;
-    city?: string;
-    postcode?: string;
-    companyCategory?: string;
-    companyName?: string;
-    employeeRange?: string;
-    roleInCompany?: string;
-    term?: boolean;
-    role?: string;
-    _id?: string;
-    __v?: string | number;
 };
 
 export interface CandidateFormDataTypes {
@@ -60,6 +42,57 @@ export interface EmployerFormDataTypes {
     lastName?: string;
     roleInCompany?: string;
     term?: boolean;
+};
+
+export interface RegisterTypes {
+    firstName?: string;
+    lastName?: string;
+    email?: string | undefined;
+    gender?: string;
+    country?: string;
+    address?: string;
+    city?: string;
+    postcode?: string;
+    companyCategory?: string;
+    companyName?: string;
+    employeeRange?: string;
+    roleInCompany?: string;
+    term?: boolean;
+    role?: string;
+    _id?: string;
+    __v?: string | number;
+};
+
+// JobSchema / Data Types
+export interface GetJobsResTypes {
+    success: boolean;
+    message: string;
+    data: JobDataTypes[];
+};
+
+export interface JobByIdResTypes {
+    success: boolean;
+    message: string;
+    data: JobDataTypes;
+};
+
+export interface JobApplyDataTypes {
+    jobId: string | undefined;
+    userId: string | undefined;
+    userEmail: string | undefined;
+};
+
+export interface QuestionDataTypes {
+    jobId: string | undefined;
+    userId: string | undefined;
+    userEmail: string | undefined;
+    question: string;
+};
+export interface AnsDataTypes {
+    jobId: string | undefined;
+    questionId: string | undefined;
+    userEmail: string | undefined;
+    riplay: string;
 };
 
 export interface AnsTypes {
@@ -102,53 +135,5 @@ export interface JobDataTypes {
     __v?: string;
     applicants?: JobApplicantsTypes[];
     questionAns?: QuestionAnsTypes[];
+    isOpen?: boolean;
 };
-
-export interface GetJobsResTypes {
-    success: boolean;
-    message: string;
-    data: JobDataTypes[];
-};
-
-export interface JobByIdResTypes {
-    success: boolean;
-    message: string;
-    data: JobDataTypes;
-};
-
-export interface JobApplyDataTypes {
-    jobId: string | undefined;
-    userId: string | undefined;
-    userEmail: string | undefined;
-};
-
-export interface QuestionDataTypes {
-    jobId: string | undefined;
-    userId: string | undefined;
-    userEmail: string | undefined;
-    question: string;
-};
-export interface AnsDataTypes {
-    jobId: string | undefined;
-    questionId: string | undefined;
-    userEmail: string | undefined;
-    riplay: string;
-};
-
-const QuestionAns = [
-    {
-        userId: "ESFSFS4545VD465",
-        userEmail: "example@example.com",
-        question: "Question Name in string",
-        ans: [
-            {
-                time: "15 minutes ago",
-                ansString: "Question Ans in string",
-            },
-            {
-                time: "15 minutes ago",
-                ansString: "Question Ans in string",
-            },
-        ]
-    }
-];
