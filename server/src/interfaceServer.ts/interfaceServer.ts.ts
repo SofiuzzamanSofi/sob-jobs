@@ -55,4 +55,5 @@ export interface JobDataTypes {
     // __v?: string;
     applicants?: JobApplicants[];
     questionAns?: QuestionAnsTypes[];
+    isOpen: boolean,
 };
