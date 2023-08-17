@@ -26,13 +26,14 @@ const AccountCreator = () => {
     if (reduxStore?.auth?.role) {
       return router.push("/dashboard");
     };
-  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.role]);
+  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.role, router]);
 
   if (reduxStore?.auth?.isLoading) {
     return <Loading />;
   }
   else if (reduxStore?.auth?.role) {
-    return router.push("/dashboard");
+    router.push("/dashboard");
+    return null;
   }
   else {
     return (

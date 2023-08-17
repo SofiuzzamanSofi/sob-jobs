@@ -47,7 +47,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ statusCode }) => {
         >
             <div>
                 <h1>{statusCode} - Page Not Found _error.tsx</h1>
-                <p style={myH1TagsStyle}>Oops! The page you're looking for does not exist.</p>
+                <p style={myH1TagsStyle}>Oops! The page you&apos;re looking for does not exist.</p>
                 <Link
                     href="/"
                     onMouseOver={handleMouseOver}

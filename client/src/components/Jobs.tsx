@@ -25,7 +25,7 @@ const Jobs: FC<jobsProps> = ({ }) => {
             >
                 {
                     data?.data?.length ?
-                        data.data.map((jobData: JobDataTypes, index: Key | null | undefined) => (
+                        data.data.map((jobData: JobDataTypes, index: Key) => (
                             <JobCard key={index} jobData={jobData} />
                         ))
                         :

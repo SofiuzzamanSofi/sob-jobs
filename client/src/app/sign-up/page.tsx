@@ -57,7 +57,7 @@ const SignUp = () => {
     if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
       toast.error("Error ", { id: "user-creating" })
     };
-  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError]);
+  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, router]);
 
 
   return (
@@ -117,7 +117,7 @@ const SignUp = () => {
                       <span
                         className="invisible"
                       >
-                        "Firebase: Error (auth/wrong-password)."
+                        &quot;Firebase: Error (auth/wrong-password).&quot;
                       </span>
                   }
                 </p>

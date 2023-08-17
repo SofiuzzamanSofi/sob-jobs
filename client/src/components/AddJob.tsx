@@ -46,7 +46,7 @@ const AddJob = () => {
       toast.success("Post Job Success", { id: "post-job" });
       router.push("/dashboard");
     }
-  }, [isLoading, isSuccess]);
+  }, [isLoading, isSuccess, router]);
 
 
   return (

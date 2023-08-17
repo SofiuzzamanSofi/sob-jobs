@@ -52,7 +52,7 @@ const SignIn = () => {
     if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
       toast.error("Error ", { id: "user-creating" })
     };
-  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError]);
+  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, router]);
 
   return (
     <div className='flex h-screen items-center pt-14 border border-red-700'>
@@ -109,7 +109,7 @@ const SignIn = () => {
                       <span
                         className="invisible"
                       >
-                        "Firebase: Error (auth/wrong-password)."
+                        &quot;Firebase: Error (auth/wrong-password).&quot;
                       </span>
                   }
                 </p>
@@ -126,7 +126,7 @@ const SignIn = () => {
               </div>
               <div>
                 <p>
-                  Don't have an accoount?{" "}
+                  Don&apos;t have an accoount?{" "}
                   <br />
                   <Link href="/sign-up"
                     className='text-primary hover:underline cursor-pointer bg-gray-100'

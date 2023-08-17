@@ -67,7 +67,7 @@ const EmployerRegistration = () => {
     if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
-  }, [isLoading, isError, isSuccess, reduxStore?.auth?.role]);
+  }, [isLoading, isError, isSuccess, reduxStore?.auth?.role, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, reduxStore?.auth?.isLoading, router]);
 
 
   return (
@@ -144,7 +144,7 @@ const EmployerRegistration = () => {
           <hr className='w-full mt-2 bg-black' />
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='companyName'>
-              Company's name
+              Company&apos;s name
             </label>
             <input className="border p-2" type='text' {...register("companyName")} id='companyName' />
           </div>
@@ -155,8 +155,8 @@ const EmployerRegistration = () => {
             <select className="border p-2" {...register("country")} id='country'>
               {countries
                 .sort((a, b) => a?.name?.common?.localeCompare(b?.name?.common))
-                .map(({ name }) => (
-                  <option key={name.common} value={name.common}>{name.common}</option>
+                .map(({ name }, index) => (
+                  <option key={index} value={name.common}>{name.common}</option>
                 ))}
             </select>
           </div>
@@ -167,21 +167,21 @@ const EmployerRegistration = () => {
             <select className="border p-2" {...register("employeeRange")} id='employeeRange'>
               {employeeRange
                 .sort((a, b) => a.localeCompare(b))
-                .map((category) => (
-                  <option className="border p-2" value={category}>{category}</option>
+                .map((category, index) => (
+                  <option key={index} className="border p-2" value={category}>{category}</option>
                 ))}
             </select>
           </div>
 
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-3' htmlFor='companyCategory'>
-              Company's Category
+              Company&apos;s Category
             </label>
             <select className="border p-2" {...register("companyCategory")} id='companyCategory'>
               {businessCategory
                 .sort((a, b) => a.localeCompare(b))
-                .map((category) => (
-                  <option className="border p-2" value={category}>{category}</option>
+                .map((category, index) => (
+                  <option key={index} className="border p-2" value={category}>{category}</option>
                 ))}
             </select>
           </div>

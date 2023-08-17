@@ -24,7 +24,7 @@ const PostedJobs = () => {
         <div className='grid grid-cols-2 gap-5 pb-5'>
           {
             data?.data?.length ?
-              data?.data?.map((job: JobDataTypes, index: React.Key | null | undefined) => (
+              data?.data?.map((job: JobDataTypes, index: React.Key) => (
                 <JobCard key={index} jobData={job} />
               ))
               :

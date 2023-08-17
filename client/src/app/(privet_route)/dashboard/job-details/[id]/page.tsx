@@ -10,7 +10,7 @@ interface pageProps {
 
 }
 
-const page: FC<pageProps> = ({ }) => {
+const Page: FC<pageProps> = ({ }) => {
 
     const pathname = usePathname() || "";
     const pathNameTotalArray = pathname.split("/")
@@ -25,4 +25,4 @@ const page: FC<pageProps> = ({ }) => {
     </div>
 }
 
-export default page
+export default Page

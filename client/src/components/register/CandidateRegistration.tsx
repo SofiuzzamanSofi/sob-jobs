@@ -45,7 +45,7 @@ const CandidateRegistration = () => {
     if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
-  }, [isLoading, isError, isSuccess, reduxStore?.auth?.role]);
+  }, [isLoading, isError, isSuccess, reduxStore?.auth?.role, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, reduxStore?.auth?.isLoading, router]);
 
   return (
     <div className='pt-14'>
@@ -133,8 +133,8 @@ const CandidateRegistration = () => {
             <select className="border p-2" {...register("country")} id='country'>
               {countries
                 .sort((a, b) => a?.name?.common?.localeCompare(b?.name?.common))
-                .map(({ name }) => (
-                  <option key={name.common} value={name.common}>{name.common}</option>
+                .map(({ name }, index) => (
+                  <option key={index} value={name.common}>{name.common}</option>
                 ))}
             </select>
           </div>

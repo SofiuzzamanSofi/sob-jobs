@@ -1,14 +1,10 @@
-"use client";
-
 import Providers from '@/redux/provider';
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { usePathname } from 'next/navigation';
 import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ExtraComponentProps from '@/components/ExtraComponent';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,31 +20,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const pathname = usePathname() ?? '';
-  // console.log("pathname:", pathname)
 
   return (
     <Providers>
       <html lang="en">
-        <body>
-          {
-            pathname === "/sign-up" || pathname === "/sign-in" ?
-              ""
-              :
-              <Navbar />
-          }
+        <body
+          className="flex flex-col justify-between min-h-screen"
+        >
+          <Navbar />
           <div
             className="max-w-7xl bg-white mx-auto border-2"
           >
             {children}
           </div>
-          {
-            pathname === "/sign-up" || pathname === "/sign-in" ?
-              ""
-              :
-              <Footer />
-          }
-          <ExtraComponentProps />
+          <Footer />
           <Toaster />
         </body>
       </html>
