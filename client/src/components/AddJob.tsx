@@ -62,7 +62,7 @@ const AddJob = () => {
           <label className='mb-2 underline' htmlFor='position'>
             Position:
           </label>
-          <input className="p-2 border" type='text' id='position' {...register("position")} />
+          <input className="p-2 border" type='text' id='position' {...register("position")} required />
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2 underline' htmlFor='companyName'>
@@ -83,13 +83,13 @@ const AddJob = () => {
           <label className='mb-2 underline' htmlFor='experience'>
             Experience:
           </label>
-          <input className="p-2 border" type='text' id='experience' {...register("experience")} />
+          <input className="p-2 border" type='text' id='experience' {...register("experience")} required />
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2 underline' htmlFor='workLevel'>
             Work Level:
           </label>
-          <input className="p-2 border" type='text' id='workLevel' {...register("workLevel")} />
+          <input className="p-2 border" type='text' id='workLevel' {...register("workLevel")} required />
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2 underline' htmlFor='employmentType'>
@@ -100,26 +100,33 @@ const AddJob = () => {
             type='text'
             id='employmentType'
             {...register("employmentType")}
+            required
           />
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2 underline' htmlFor='salaryRange'>
             Salary Range:
           </label>
-          <input className="p-2 border" type='text' id='salaryRange' {...register("salaryRange")} />
+          <input className="p-2 border" type='text' id='salaryRange' {...register("salaryRange")} required />
         </div>
-        <div className='flex flex-col w-full'>
+        <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2 underline' htmlFor='location'>
             Location:
           </label>
-          <input className="p-2 border" type='text' id='location' {...register("location")} />
+          <input className="p-2 border" type='text' id='location' {...register("location")} required />
+        </div>
+        <div className='flex flex-col w-full max-w-xs'>
+          <label className='mb-2 underline' htmlFor='location'>
+            Number of Openings:
+          </label>
+          <input className="p-2 border" type='number' id='location' {...register("noOpening")} required />
         </div>
         <hr className='w-full mt-2 bg-black' />
         <div className='flex flex-col w-full'>
           <label className='mb-2 underline' htmlFor='overview'>
             Overview:
           </label>
-          <textarea className="p-2 border" rows={8} {...register("overview")} id='overview' />
+          <textarea className="p-2 border" rows={8} {...register("overview")} id='overview' required />
         </div>
         <div className='flex flex-col w-full'>
           <label className='mb-2 underline'>Skills:</label>

@@ -33,6 +33,8 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     employmentType,
     salaryRange,
     location,
+    noOpening,
+    isOpen,
     overview,
     skills,
     requirements,
@@ -110,7 +112,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
         </div>
         <div className='space-y-5'>
           <div className='flex justify-between items-center mt-5'>
-            <h1 className='text-xl font-semibold text-primary'>{position}</h1>
+            <h1 className='text-primary text-md font-medium'>
+              Job Status: <span className="font-bold text-lg">{isOpen ? "Open" : "Closed"}</span>
+            </h1>
             <button
               className={`border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white  hover:bg-primary ${isAppliedAlready ? "" : "hover:px-4"} transition-all`}
               onClick={handleApply}
@@ -121,11 +125,14 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
           </div>
           <div className='flex justify-between items-center mt-5'>
             <h1 className='text-primary text-md font-medium'>
-              Number of openings: 02
+              Number of openings: {noOpening}
             </h1>
             <div className='text-primary text-md font-medium flex items-center gap-2'>
               <BsPeople /> {applicants?.length} applicants
             </div>
+          </div>
+          <div className='flex justify-between items-center mt-5'>
+            <h1 className='text-xl font-semibold text-primary'>{position}</h1>
           </div>
           <div>
             <h1 className='text-primary text-lg font-medium mb-3'>Overview</h1>

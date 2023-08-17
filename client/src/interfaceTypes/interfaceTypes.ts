@@ -81,6 +81,11 @@ export interface JobApplyDataTypes {
     userId: string | undefined;
     userEmail: string | undefined;
 };
+export interface JobIsOpenDataTypes {
+    jobId: string | undefined;
+    userId: string | undefined;
+    userEmail: string | undefined;
+};
 
 export interface QuestionDataTypes {
     jobId: string | undefined;
@@ -126,6 +131,8 @@ export interface JobDataTypes {
     workLevel?: string;
     employmentType?: string;
     location?: string;
+    noOpening?: string;
+    isOpen?: boolean;
     overview?: string;
     requirements?: string[];
     responsibilities?: string[];
@@ -135,5 +142,4 @@ export interface JobDataTypes {
     __v?: string;
     applicants?: JobApplicantsTypes[];
     questionAns?: QuestionAnsTypes[];
-    isOpen?: boolean;
 };

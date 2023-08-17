@@ -1,4 +1,4 @@
-import { JobApplyDataTypes, JobDataTypes, GetJobsResTypes, JobByIdResTypes, QuestionDataTypes, AnsDataTypes } from "@/interfaceTypes/interfaceTypes";
+import { JobApplyDataTypes, JobDataTypes, GetJobsResTypes, JobByIdResTypes, QuestionDataTypes, AnsDataTypes, JobIsOpenDataTypes } from "@/interfaceTypes/interfaceTypes";
 import apiSlice from "../api/apiSlice";
 
 const jobApi = apiSlice.injectEndpoints({
@@ -33,9 +33,17 @@ const jobApi = apiSlice.injectEndpoints({
         }),
         jobApply: builder.mutation<void, JobApplyDataTypes>({
             query: (jobApplyData) => ({
-                url: "/routes/job",
+                url: "/routes/job/applied-job",
                 method: "PATCH",
                 body: jobApplyData,
+            }),
+            invalidatesTags: ["JobById", "AppliedJobs"],
+        }),
+        jobIsOpen: builder.mutation<void, JobIsOpenDataTypes>({
+            query: (jobIsOpenData) => ({
+                url: "/routes/job/isopen-job",
+                method: "PATCH",
+                body: jobIsOpenData,
             }),
             invalidatesTags: ["JobById", "AppliedJobs"],
         }),
