@@ -46,6 +46,8 @@ export interface JobDataTypes {
     workLevel?: string;
     employmentType?: string;
     location?: string;
+    noOpening: string;
+    isOpen: boolean;
     overview?: string;
     requirements?: string[];
     responsibilities?: string[];
@@ -55,5 +57,4 @@ export interface JobDataTypes {
     // __v?: string;
     applicants?: JobApplicants[];
     questionAns?: QuestionAnsTypes[];
-    isOpen: boolean,
 };

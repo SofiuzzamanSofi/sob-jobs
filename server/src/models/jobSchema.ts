@@ -30,6 +30,14 @@ const jobSchema = new mongoose.Schema<JobDataTypes>({
         type: "string",
         required: false,
     },
+    noOpening: {
+        type: "string",
+        required: true,
+    },
+    isOpen: {
+        type: "boolean",
+        required: true,
+    },
     overview: {
         type: "string",
         required: false,
