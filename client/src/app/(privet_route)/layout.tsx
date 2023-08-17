@@ -13,7 +13,7 @@ interface Privetlayout {
 }
 
 // const PrivetLayout = ({ children }: Props): JSX.Element => {
-const PrivetLayout = ({ children }: Privetlayout) => {
+export default function PrivetLayout({ children }: Privetlayout) {
 
     const reduxStore = useSelector((state: RootState) => state);
     const router = useRouter();
@@ -52,5 +52,3 @@ const PrivetLayout = ({ children }: Privetlayout) => {
         );
     };
 };
-
-export default PrivetLayout;
