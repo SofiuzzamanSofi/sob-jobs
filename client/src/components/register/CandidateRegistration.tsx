@@ -1,8 +1,8 @@
 "use client";
 
-import { RegisterTypes } from "@/workArea/interfaceTypes/interfaceTypes";
-import { useRegisterMutation } from "@/workArea/redux/features/auth/authApi";
-import { RootState } from "@/workArea/redux/store";
+import { RegisterTypes } from "@/interfaceTypes/interfaceTypes";
+import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import { RootState } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
@@ -168,9 +168,9 @@ const CandidateRegistration = () => {
               <label htmlFor='terms'>I agree to terms and conditions</label>
             </div>
             <button
-            disabled={!term}
-            type='submit'
-            className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
+              disabled={!term}
+              type='submit'
+              className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
             >
               Submit
             </button>

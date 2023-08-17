@@ -1,4 +1,5 @@
-import EmployerRegistration from '@/workArea/components/register/EmployerRegistration';
+
+import EmployerRegistration from '@/components/register/EmployerRegistration';
 import { FC } from 'react'
 
 interface employerProps {

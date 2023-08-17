@@ -1,11 +1,12 @@
 "use client";
 
-import { useGetAppliedJobsQuery } from "@/workArea/redux/features/job/jobApi";
-import { RootState } from "@/workArea/redux/store";
+import { RootState } from "@/redux/store";
 import React from "react";
 import Loading from "./Loading";
 import JobCard from "./JobCard";
 import { useSelector } from 'react-redux';
+import { useGetAppliedJobsQuery } from "@/redux/features/job/jobApi";
+import { JobDataTypes } from "@/interfaceTypes/interfaceTypes";
 
 const AppliedJobs = () => {
 
@@ -23,7 +24,7 @@ const AppliedJobs = () => {
         <div className='grid grid-cols-2 gap-5 pb-5'>
           {
             data?.data?.length ?
-              data?.data?.map((job, index) => (
+              data?.data?.map((job: JobDataTypes, index: React.Key | null | undefined) => (
                 <JobCard key={index} jobData={job} />
               ))
               :

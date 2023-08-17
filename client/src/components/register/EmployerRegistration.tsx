@@ -2,14 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
-import { useRegisterMutation } from "@/workArea/redux/features/auth/authApi";
 import { useRouter } from "next/navigation";
-import { RootState } from "@/workArea/redux/store";
+import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
-import { RegisterTypes } from "@/workArea/interfaceTypes/interfaceTypes";
 import { toast } from "react-hot-toast";
+import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import { RegisterTypes } from "@/interfaceTypes/interfaceTypes";
 
 const EmployerRegistration = () => {
   const [countries, setCountries] = useState<any[]>([]);

@@ -35,7 +35,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/workArea/components/employeeDashboard/AddJob.js"
+    "src/components/employeeDashboard/AddJob.js"
   ],
   "exclude": [
     "node_modules"

@@ -1,9 +1,10 @@
 "use client";
 
-import { FC } from 'react'
+import { FC, Key } from 'react'
 import { useGetJobsQuery } from '../redux/features/job/jobApi'
 import JobCard from './JobCard';
 import Loading from './Loading';
+import { JobDataTypes } from '@/interfaceTypes/interfaceTypes';
 
 interface jobsProps {
 
@@ -24,7 +25,7 @@ const Jobs: FC<jobsProps> = ({ }) => {
             >
                 {
                     data?.data?.length ?
-                        data.data.map((jobData, index) => (
+                        data.data.map((jobData: JobDataTypes, index: Key | null | undefined) => (
                             <JobCard key={index} jobData={jobData} />
                         ))
                         :

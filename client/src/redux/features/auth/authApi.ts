@@ -1,4 +1,4 @@
-import { RegisterTypes } from "@/workArea/interfaceTypes/interfaceTypes";
+import { RegisterTypes } from "@/interfaceTypes/interfaceTypes";
 import apiSlice from "../api/apiSlice";
 import { getUser } from "./authSlice";
 

@@ -1,6 +1,6 @@
 
-import { auth } from "@/workArea/firebase/firebase.config";
-import { AuthTypes, CreateUserDataTypes } from "@/workArea/interfaceTypes/interfaceTypes";
+import { auth } from "@/firebase/firebase.config";
+import { AuthTypes, CreateUserDataTypes } from "@/interfaceTypes/interfaceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";

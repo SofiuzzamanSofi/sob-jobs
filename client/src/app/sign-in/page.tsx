@@ -1,16 +1,17 @@
 "use client"
 
 import React, { useEffect, useState } from "react";
-import loginImage from "@/workArea/assets/login.svg";
+import loginImage from "@/assets/login.svg";
 import { useForm, useWatch } from "react-hook-form";
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
-import { SignUpFormValueTypes } from "@/workArea/interfaceTypes/interfaceTypes";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { googleLogin, signInUser } from "@/workArea/redux/features/auth/authSlice";
-import { AppDispatch, RootState } from "@/workArea/redux/store";
+
 import toast from 'react-hot-toast';
+import { AppDispatch, RootState } from "@/redux/store";
+import { SignUpFormValueTypes } from "@/interfaceTypes/interfaceTypes";
+import { googleLogin, signInUser } from "@/redux/features/auth/authSlice";
 
 const SignIn = () => {
   const { handleSubmit, register, control } = useForm<SignUpFormValueTypes>();

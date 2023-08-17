@@ -1,4 +1,5 @@
-import CandidateRegistration from '@/workArea/components/register/CandidateRegistration';
+
+import CandidateRegistration from '@/components/register/CandidateRegistration';
 import { FC } from 'react'
 
 interface candidateProps {

@@ -1,8 +1,10 @@
 "use client";
 
-import { RootState } from '@/workArea/redux/store';
-import { useRouter } from 'next/navigation';
-import { useSelector } from 'react-redux';
+import { RootState } from "@/redux/store";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+
+
 
 interface pageProps {
 

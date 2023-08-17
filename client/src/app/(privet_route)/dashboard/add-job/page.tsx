@@ -1,5 +1,4 @@
-
-import AddJob from '@/workArea/components/AddJob';
+import AddJob from '@/components/AddJob';
 import { FC } from 'react'
 
 

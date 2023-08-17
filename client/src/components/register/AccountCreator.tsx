@@ -2,16 +2,16 @@
 
 import React, { useEffect } from "react";
 
-import candidate from "@/workArea/assets/candidate.svg";
-import employer from "@/workArea/assets/employer.svg";
+import candidate from "@/assets/candidate.svg";
+import employer from "@/assets/employer.svg";
 import CandidateRegistration from "./CandidateRegistration";
 import EmployerRegistration from "./EmployerRegistration";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { RootState } from "@/workArea/redux/store";
 import { toast } from "react-hot-toast";
 import Loading from "../Loading";
+import { RootState } from "@/redux/store";
 
 interface pageProps {
 

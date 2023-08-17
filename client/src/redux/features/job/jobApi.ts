@@ -1,4 +1,4 @@
-import { JobApplyDataTypes, JobDataTypes, GetJobsResTypes, JobByIdResTypes, QuestionDataTypes, AnsDataTypes } from "@/workArea/interfaceTypes/interfaceTypes";
+import { JobApplyDataTypes, JobDataTypes, GetJobsResTypes, JobByIdResTypes, QuestionDataTypes, AnsDataTypes } from "@/interfaceTypes/interfaceTypes";
 import apiSlice from "../api/apiSlice";
 
 const jobApi = apiSlice.injectEndpoints({

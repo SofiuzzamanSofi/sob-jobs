@@ -1,4 +1,4 @@
-import AccountCreator from '@/workArea/components/register/AccountCreator'
+import AccountCreator from '@/components/register/AccountCreator'
 import { FC } from 'react'
 
 interface pageProps {

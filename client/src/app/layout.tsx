@@ -1,14 +1,14 @@
 "use client";
 
-import Providers from '@/workArea/redux/provider'
+import Providers from '@/redux/provider';
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Navbar from './../workArea/components/Navbar';
-import Footer from '@/workArea/components/Footer'
-import ExtraComponentProps from '@/workArea/components/ExtraComponent'
 import { usePathname } from 'next/navigation';
 import { Toaster } from 'react-hot-toast';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import ExtraComponentProps from '@/components/ExtraComponent';
 
 const inter = Inter({ subsets: ['latin'] })
 

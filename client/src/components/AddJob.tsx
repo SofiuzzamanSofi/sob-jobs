@@ -4,11 +4,11 @@ import React, { useEffect } from "react";
 import { useFieldArray, useForm, SubmitHandler } from "react-hook-form";
 import { FiTrash, FiPlusCircle } from "react-icons/fi";
 import { useSelector } from "react-redux";
-import { RootState } from '@/workArea/redux/store';
-import { JobDataTypes } from "@/workArea/interfaceTypes/interfaceTypes";
-import { usePostJobMutation } from "@/workArea/redux/features/job/jobApi";
+import { RootState } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { usePostJobMutation } from "@/redux/features/job/jobApi";
+import { JobDataTypes } from "@/interfaceTypes/interfaceTypes";
 
 
 const AddJob = () => {

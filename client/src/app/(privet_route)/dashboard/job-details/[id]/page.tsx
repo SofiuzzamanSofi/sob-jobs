@@ -1,7 +1,8 @@
 "use client";
 
-import JobDetails from '@/workArea/components/JobDetails';
-import { useJobByIdQuery } from '@/workArea/redux/features/job/jobApi';
+
+import JobDetails from '@/components/JobDetails';
+import { useJobByIdQuery } from '@/redux/features/job/jobApi';
 import { usePathname } from 'next/navigation';
 import { FC } from 'react'
 

@@ -4,9 +4,9 @@ import React from "react";
 import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { RootState } from "@/workArea/redux/store";
 import { usePathname } from 'next/navigation';
 import { useRouter } from "next/navigation";
+import { RootState } from "@/redux/store";
 
 const Sidebar = () => {
 

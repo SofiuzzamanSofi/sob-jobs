@@ -1,4 +1,5 @@
-import AppliedJobs from '@/workArea/components/AppliedJobs'
+
+import AppliedJobs from '@/components/AppliedJobs'
 import { FC } from 'react'
 
 interface pageProps {
