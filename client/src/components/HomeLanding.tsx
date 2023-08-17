@@ -28,6 +28,8 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
     const tl = useRef<gsap.core.Timeline>();
     const tl2 = useRef<gsap.core.Timeline>();
 
+    // ... previous imports and code
+
     useLayoutEffect(() => {
         let cards = gsap.utils.toArray(".statCard");
 
@@ -36,13 +38,38 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                 tl.current = gsap
                     .timeline({ repeat: -1 })
                     .to("#hero1", { opacity: 1, duration: 2 })
-                    // ... other animations
+                    .to("#hero1", { opacity: 0, display: "none", duration: 2, delay: 1 })
+                    .to("#hero2", { opacity: 1, duration: 2 })
+                    .to("#hero2", { opacity: 0, display: "none", duration: 2, delay: 1 })
+                    .to("#hero3", { opacity: 1, duration: 2 })
                     .to("#hero3", { opacity: 0, display: "none", duration: 2, delay: 1 });
-                // ... other animations
-            }, el);
+
+                tl2.current = gsap
+                    .timeline()
+                    .from("#hero-title", { delay: 0.2, y: 50, opacity: 0, duration: 0.3 })
+                    .from("#hero-subtitle", { y: 50, opacity: 0, duration: 0.3 })
+                    .from("#search-container", { y: 50, opacity: 0, duration: 0.3 })
+                    .from("#search-button", {
+                        x: -100,
+                        opacity: 0,
+                        duration: 0.5,
+                        ease: "power2",
+                    })
+                    .from(".badge-container", { opacity: 0 })
+                    .from(".badge", { opacity: 0, y: 50, stagger: 0.1 });
+            });
 
         const movement = (e: MouseEvent) => {
-            // ... movement logic
+            cards.forEach((card, index) => {
+                const depth = 90;
+                const moveX = (e.pageX - window.innerWidth / 2) / depth;
+                const moveY = (e.pageY - window.innerHeight / 2) / depth;
+                index++;
+                gsap.to(card as any, {
+                    x: moveX * index,
+                    y: moveY * index,
+                });
+            });
         };
 
         document.addEventListener("mousemove", movement);
@@ -53,6 +80,9 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
             document.removeEventListener("mousemove", movement);
         };
     }, []);
+
+    // ... rest of the JSX code
+
 
     return (
         <div ref={el} className='h-screen'>
