@@ -45,7 +45,7 @@ const SignIn = () => {
       toast.loading("Please wait...", { id: "user-creating" });
     };
     if (!reduxStore?.auth?.isLoading && reduxStore?.auth?.email) {
-      toast.success("Sign-Up Success.", { id: "user-creating" });
+      toast.success("Sign-In Success.", { id: "user-creating" });
       router.back();
       // router.push("/");
     };

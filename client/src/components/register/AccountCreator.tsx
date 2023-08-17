@@ -1,15 +1,11 @@
 "use client";
 
 import React, { useEffect } from "react";
-
 import candidate from "@/assets/candidate.svg";
 import employer from "@/assets/employer.svg";
-import CandidateRegistration from "./CandidateRegistration";
-import EmployerRegistration from "./EmployerRegistration";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { toast } from "react-hot-toast";
 import Loading from "../Loading";
 import { RootState } from "@/redux/store";
 
