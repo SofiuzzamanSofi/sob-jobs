@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import meeting from "../assets/meeting.jpg";
 import { BsArrowRightShort, BsArrowReturnRight, BsPeople } from "react-icons/bs";
 import { JobDataTypes } from "../interfaceTypes/interfaceTypes";
 import Image from "next/image";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
-import { useJobApplyMutation, useJobQuestionMutation, useJobAnsMutation } from "../redux/features/job/jobApi";
+import { useJobApplyMutation, useJobIsOpenMutation, useJobQuestionMutation, useJobAnsMutation } from "../redux/features/job/jobApi";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form";
+import AlertModal from "./shared/AlertModal";
 
 interface JobDataProps {
   jobData: JobDataTypes
@@ -19,11 +20,13 @@ interface JobDataProps {
 const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
 
   const router = useRouter();
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const reduxStore = useSelector((state: RootState) => state);
   const [jobApply, { isLoading: applyLoading, isError: applyError, isSuccess: applySuccess }] = useJobApplyMutation();
-  const { register, handleSubmit, reset } = useForm<{ question: string }>();
+  const [jobIsOpen, { isLoading: jobIsOpenLoading, isError: jobIsOpenError, isSuccess: jobIsOpenSuccess }] = useJobIsOpenMutation();
   const [jobQuestion, { isLoading: questionLoading, isError: questionError, isSuccess: questionSuccess }] = useJobQuestionMutation();
   const [jobAns, { isLoading: ansLoading, isError: ansError, isSuccess: ansSuccess }] = useJobAnsMutation();
+  const { register, handleSubmit, reset } = useForm<{ question: string }>();
   const {
     email,
     position,
@@ -90,6 +93,20 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     (e.target as HTMLFormElement).reset();
   };
 
+  const submitIsOpenJobs = () => {
+    if (_id && reduxStore.auth.user?._id && reduxStore.auth.user?.email) {
+      const isOpenData = {
+        jobId: _id,
+        isOpen,
+        userId: reduxStore.auth.user._id,
+        userEmail: reduxStore.auth.user.email,
+      }
+      console.log("isOpenData:", isOpenData);
+      jobIsOpen(isOpenData);
+      setIsOpenModal((prev) => !prev);
+    }
+  }
+
   useEffect(() => {
     if (applyLoading) {
       toast.loading("Please wait...", { id: "Apply-Job" });
@@ -102,7 +119,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     };
   }, [applyLoading, applySuccess, applyError]);
 
-  // console.log("jobData", jobData);
+  console.log("jobData", jobData);
 
   return (
     <div className='pt-14 grid grid-cols-12 gap-5'>
@@ -113,15 +130,41 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
         <div className='space-y-5'>
           <div className='flex justify-between items-center mt-5'>
             <h1 className='text-primary text-md font-medium'>
-              Job Status: <span className="font-bold text-lg">{isOpen ? "Open" : "Closed"}</span>
+              {email === reduxStore.auth.user?.email ?
+                <span>
+                  Job Status: &nbsp;
+                  <span
+                    className="font-bold text-lg border rounded-md bg-primary/10 p-5 text-primary px-2 py-1 hover:cursor-pointer"
+                    onClick={() => setIsOpenModal((prev) => !prev)}
+                  >
+                    {isOpen ? "Open" : "Closed"}
+                  </span>
+                </span>
+                :
+                <span>
+                  Job Status: &nbsp; <span className="font-bold text-lg border rounded-md bg-primary/10 p-5 text-primary px-2 py-1">{isOpen ? "Open" : "Closed"}</span>
+                </span>
+              }
             </h1>
-            <button
-              className={`border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white  hover:bg-primary ${isAppliedAlready ? "" : "hover:px-4"} transition-all`}
-              onClick={handleApply}
-              disabled={isAppliedAlready ? true : false}
-            >
-              {isAppliedAlready ? "Already Applied" : "Apply"}
-            </button>
+            {
+              isOpen &&
+              <button
+                className={`border border-black px-2 py-1 rounded-md  ${isAppliedAlready ? "" : "hover:px-4 hover:border-primary text-gray-600 hover:text-white  hover:bg-primary"} transition-all`}
+                onClick={handleApply}
+                disabled={isAppliedAlready ? true : false}
+              >
+                {isAppliedAlready ? "Already Applied" : "Apply"}
+              </button>
+            }
+            {
+              !isOpen && isAppliedAlready &&
+              <button
+                className={`border border-black px-2 py-1 rounded-md ${isAppliedAlready ? "" : "hover:px-4"} transition-all`}
+                disabled={isAppliedAlready ? true : false}
+              >
+                Already Applied
+              </button>
+            }
           </div>
           <div className='flex justify-between items-center mt-5'>
             <h1 className='text-primary text-md font-medium'>
@@ -308,6 +351,12 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
           </div>
         </div>
       </div>
+      <AlertModal
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+        submitIsOpenJobs={submitIsOpenJobs}
+        isOpen={isOpen}
+      />
     </div>
   );
 };

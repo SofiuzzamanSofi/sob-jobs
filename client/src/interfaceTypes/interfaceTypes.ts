@@ -82,9 +82,9 @@ export interface JobApplyDataTypes {
     userEmail: string | undefined;
 };
 export interface JobIsOpenDataTypes {
-    jobId: string | undefined;
-    userId: string | undefined;
-    userEmail: string | undefined;
+    jobId: string;
+    isOpen: boolean | undefined;
+    userId: string; userEmail: string;
 };
 
 export interface QuestionDataTypes {

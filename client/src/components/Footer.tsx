@@ -25,7 +25,7 @@ const Footer: FC<FooterProps> = ({ }) => {
                     bottom: '0px',
                     left: '0px',
                     right: '0px',
-                    zIndex: '1000',
+                    zIndex: '10',
                 }}
             >
                 <h6

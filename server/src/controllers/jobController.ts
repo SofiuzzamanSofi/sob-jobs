@@ -143,6 +143,72 @@ export const patchAppliedJobController = async (req: express.Request, res: expre
     };
 };
 
+// edit job for isOpen or closed
+export const patchIsOpenJobController = async (req: express.Request, res: express.Response) => {
+    try {
+        const { jobId, isOpen, userId, userEmail } = req.body;
+
+        if (!jobId || !userId || !userEmail) {
+            return res.status(400).json({
+                success: false,
+                message: "userId, jobId, userEmail is missing in the request",
+            });
+        } else {
+            console.log("jobId isOpen userId userEmail:", jobId, userId, userEmail);
+
+            const jobToUpdate = await JobSchema.findOne({
+                _id: jobId,
+                email: userEmail,
+                isOpen,
+            });
+
+            if (!jobToUpdate) {
+                return res.status(404).json({
+                    success: false,
+                    message: `Job not found with jobId: ${jobId}`,
+                });
+            }
+            if (isOpen === jobToUpdate.isOpen) {
+                const updatedIsOpen = !jobToUpdate.isOpen;
+                const patchJob = await JobSchema.findOneAndUpdate(
+                    {
+                        _id: jobId,
+                        email: userEmail,
+                    },
+                    {
+                        $set: {
+                            isOpen: updatedIsOpen,
+                        },
+                    },
+                    {
+                        new: true,
+                    }
+                );
+
+                if (!patchJob) {
+                    return res.status(200).json({
+                        success: false,
+                        message: `Job data was not edited for jobId: ${jobId}`,
+                    });
+                } else {
+                    return res.status(200).json({
+                        success: true,
+                        message: `Successfully edited the job for jobId: ${jobId}`,
+                        data: patchJob,
+                    });
+                }
+            }
+        }
+    } catch (error) {
+        console.error("Error fetching job data:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to PATCH job data",
+        });
+    }
+};
+
+
 // get applied-jobs by email 
 export const getAppliedJobController = async (req: express.Request, res: express.Response) => {
     try {
