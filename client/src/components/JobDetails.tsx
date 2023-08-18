@@ -12,6 +12,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form";
 import AlertModal from "./shared/AlertModal";
+import Link from "next/link";
 
 interface JobDataProps {
   jobData: JobDataTypes
@@ -171,7 +172,17 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
               Number of openings: {noOpening}
             </h1>
             <div className='text-primary text-md font-medium flex items-center gap-2'>
-              <BsPeople /> {applicants?.length} applicants
+              {
+                email === reduxStore.auth.user?.email && applicants?.length ?
+                  <Link
+                    href={`/dashboard/job-details/${_id}/applicants-details`}
+                  >
+
+                    <BsPeople /> {applicants?.length} applicants
+                  </Link>
+                  :
+                  <><BsPeople /> {applicants?.length} applicants</>
+              }
             </div>
           </div>
           <div className='flex justify-between items-center mt-5'>
