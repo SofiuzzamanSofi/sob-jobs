@@ -154,8 +154,7 @@ export const patchIsOpenJobController = async (req: express.Request, res: expres
                 message: "userId, jobId, userEmail is missing in the request",
             });
         } else {
-            console.log("jobId isOpen userId userEmail:", jobId, userId, userEmail);
-
+            // console.log("jobId isOpen userId userEmail:", jobId, userId, userEmail);
             const jobToUpdate = await JobSchema.findOne({
                 _id: jobId,
                 email: userEmail,
@@ -208,7 +207,6 @@ export const patchIsOpenJobController = async (req: express.Request, res: expres
     }
 };
 
-
 // get applied-jobs by email 
 export const getAppliedJobController = async (req: express.Request, res: express.Response) => {
     try {
@@ -243,6 +241,7 @@ export const getAppliedJobController = async (req: express.Request, res: express
         });
     }
 };
+
 // get posted-jobs by email 
 export const getPostedJobController = async (req: express.Request, res: express.Response) => {
     try {
@@ -332,7 +331,6 @@ export const patchQuestionJobController = async (req: express.Request, res: expr
         });
     };
 };
-
 
 // edit job for Ans
 export const patchAnsJobController = async (req: express.Request, res: express.Response) => {
