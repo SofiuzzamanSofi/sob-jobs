@@ -20,6 +20,7 @@ const Page: FC<PageProps> = ({ params, }) => {
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
     const [id1, id2] = params?.params[0]?.split("-")
     // console.log("id1, id2:", id1, id2);
+    /////////////////////// id1= Employee id2 = Candidate
 
     const { isLoading: messageIsLoading, isError: messageIsError, data: messageData } = useGetMessageByIdQuery(`${id1}-${id2}`);
     const [postMessage, { isLoading: postMessageIsLoading, isError: postMessageIsError, isSuccess: postMessageIsSuccess }] = usePostMessageByIdMutation();

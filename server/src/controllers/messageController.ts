@@ -1,5 +1,6 @@
 import express from 'express';
 import { RegSchema } from '../models/regSchema';
+import { MessageSchema } from '../models/messageSchema';
 
 // get all message by messageId 
 export const getAllMessageById = async (req: express.Request, res: express.Response) => {
@@ -21,6 +22,12 @@ export const getMessageById = async (req: express.Request, res: express.Response
         const [id1, id2] = id.split("-");
         console.log('id1, id2, id:', id1, id2, id);
         // console.log('id1, id2, id:');
+
+        //get message by id1 and id2
+        // const messageResponse = await MessageSchema.findOne({
+        //     // messageId: 
+        // })
+
 
         // get user by id
         const user1 = await RegSchema.findById(id1);
