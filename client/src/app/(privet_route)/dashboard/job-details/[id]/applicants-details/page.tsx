@@ -32,7 +32,7 @@ const page: FC<pageProps> = ({ params }) => {
     const reduxStore = useSelector((state: RootState) => state);
     const [jobIsOpen, { isLoading: jobIsOpenLoading, isError: jobIsOpenError, isSuccess: jobIsOpenSuccess }] = useJobIsOpenMutation();
     const { data, isLoading, isError } = useJobByIdQuery(params.id);
-    console.log("iddddddd data in applicans name:::", data)
+    // console.log("iddddddd data in applicans name:::", data);
     const {
         email,
         position,

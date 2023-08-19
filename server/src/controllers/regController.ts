@@ -42,7 +42,7 @@ export const getRegController = async (req: express.Request, res: express.Respon
                 message: "Body is empty line 12",
             });
         };
-        console.log('email:', email);
+        // console.log('email:', email);
         const getUserData = await RegSchema.findOne({ email });
         if (!getUserData) {
             return res.status(201).json({

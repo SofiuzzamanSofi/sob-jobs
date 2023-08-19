@@ -1,4 +1,4 @@
-import { getAllMessageById, getMessageById, postMessageById } from 'controllers/messageController';
+import { getAllMessageById, getMessageById, postMessageById } from './../controllers/messageController';
 import express from 'express';
 
 export default (router: express.Router) => {

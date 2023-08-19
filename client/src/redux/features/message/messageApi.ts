@@ -8,8 +8,8 @@ const messageApi = apiSlice.injectEndpoints({
             }),
         }),
         getMessageById: builder.query({
-            query: (data) => ({
-                url: `/routes/message/details/${data}`,
+            query: (id) => ({
+                url: `/routes/message/details/${id}`,
             }),
         }),
         postMessageById: builder.mutation({
