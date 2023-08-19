@@ -28,7 +28,7 @@ export const getMessageById = async (req: express.Request, res: express.Response
 
 // post 1 message by message id
 
-export const postMessage = async (req: express.Request, res: express.Response) => {
+export const postMessageById = async (req: express.Request, res: express.Response) => {
     try {
 
     } catch (error) {
