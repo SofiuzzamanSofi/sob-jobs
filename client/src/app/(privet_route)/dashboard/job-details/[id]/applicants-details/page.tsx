@@ -116,7 +116,10 @@ const page: FC<pageProps> = ({ params }) => {
                                         <td>{applicant.userEmail}</td>
                                         <td>
                                             <Link
-                                                href={`/dashboard/chat/${reduxStore.auth.user?._id}-${applicant.userId}`}
+                                                href={{
+                                                    pathname: `/dashboard/chat/${reduxStore.auth.user?._id}-${applicant.userId}`,
+                                                    query: { messageEmail: `${reduxStore.auth.user?.email}-${applicant.userEmail}` },
+                                                }}
                                             >
                                                 <button>
                                                     Message
@@ -125,8 +128,12 @@ const page: FC<pageProps> = ({ params }) => {
                                         </td>
                                         <td>
                                             <Link
-                                                href={`/dashboard/profile?email=${applicant?.userEmail}`}
+                                                href={{
+                                                    pathname: `/dashboard/profile?email=${applicant?.userEmail}`,
+                                                    // query: loginUserInfoUser
+                                                }}
                                             >
+
                                                 Profile
                                             </Link>
                                         </td>

@@ -48,7 +48,10 @@ const Page: FC<PageProps> = ({ }) => {
                         }
                     </h1>
                     <Link
-                        href={`chat/${reduxStore.auth.user?._id}-${data?.data?._id}`}
+                        href={{
+                            pathname: `chat/${reduxStore.auth.user?._id}-${data?.data?._id}`,
+                            query: {messageEmail: `${reduxStore.auth.user?.email}-${data?.data?.email}`},
+                        }}
                     >
                         <button>
                             Message
