@@ -58,3 +58,58 @@ export interface JobDataTypes {
     applicants?: JobApplicants[];
     questionAns?: QuestionAnsTypes[];
 };
+
+// messageTypes 
+export interface MessageType {
+    time: Date;
+    userId: string;
+    message: string;
+};
+
+
+export interface MessageObjectType {
+    _id: string;
+    __v: string;
+    messageId: string;
+    messageName: string;
+    messages: MessageType[];
+};
+
+const message: MessageObjectType = {
+    _id: "string",
+    __v: "string",
+    messageId: "string",
+    messageName: "string",
+    messages: [
+        {
+            time: new Date(),
+            userId: "string1",
+            message: "string",
+        },
+        {
+            time: new Date(),
+            userId: "string1",
+            message: "string",
+        },
+        {
+            time: new Date(),
+            userId: "string2",
+            message: "string",
+        },
+        {
+            time: new Date(),
+            userId: "string1",
+            message: "string",
+        },
+        {
+            time: new Date(),
+            userId: "string2",
+            message: "string",
+        },
+        {
+            time: new Date(),
+            userId: "string1",
+            message: "string",
+        },
+    ],
+};

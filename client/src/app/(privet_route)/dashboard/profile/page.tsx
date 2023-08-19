@@ -1,9 +1,12 @@
 "use client";
 
-import { AppDispatch } from '@/redux/store';
+import Loading from '@/components/Loading';
+import { useGetApplicantQuery } from '@/redux/features/applicant/applicantApi';
+import { AppDispatch, RootState } from '@/redux/store';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FC } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface PageProps {
 
@@ -12,29 +15,49 @@ interface PageProps {
 const Page: FC<PageProps> = ({ }) => {
 
     const dispatch: AppDispatch = useDispatch();
+    const reduxStore = useSelector((state: RootState) => state);
     const router = useRouter();
     const searchParams = useSearchParams();
     const email = searchParams?.get('email')
-    console.log("email:", email)
 
+    const { isLoading, data } = useGetApplicantQuery(email!);
+    console.log('email:', email);
+    console.log('data:', data);
 
-    // every time relode and get user/register user from DATABASE 
-    // useEffect(() => {
-    //     onAuthStateChanged(auth, (user) => {
-    //         if (user?.email) {
-    //             dispatch(getUser(user?.email));
-    //             // dispatch(setUser(user?.email));
-    //             // console.log("user?.email:", user?.email);
-    //         }
-    //         else {
-    //             // console.log("user?.email: Email nai");
-    //             dispatch(toggleLoading());
-    //         }
-    //     });
-    // }, [dispatch]);
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div>
-            Page
+            {
+                data?.data &&
+                <div>
+                    <h1>
+                        {
+                            data?.data?.email
+                        }
+                    </h1>
+                    <h1>
+                        {
+                            data?.data?.address
+                        }
+                    </h1>
+                    <h1>
+                        {
+                            data?.data?.role
+                        }
+                    </h1>
+                    <Link
+                        href={`chat/${reduxStore.auth.user?._id}-${data?.data?._id}`}
+                    >
+                        <button>
+                            Message
+                        </button>
+                    </Link>
+
+                </div>
+
+            }
         </div>
     )
 }

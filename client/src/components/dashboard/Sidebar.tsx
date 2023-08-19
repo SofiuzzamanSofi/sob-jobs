@@ -109,6 +109,14 @@ const Sidebar = () => {
                         Others
                     </Link>
                 </li>
+                <li >
+                    <Link
+                        href="/dashboard/chat"
+                        className={`hover:bg-primary ${pathname.includes("chat") ? "bg-primary text-white" : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
+                    >
+                        Message
+                    </Link>
+                </li>
             </ul>
         </div>
     );

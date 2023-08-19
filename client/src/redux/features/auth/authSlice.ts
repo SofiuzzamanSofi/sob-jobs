@@ -130,6 +130,7 @@ const authSlice = createSlice({
     reducers: {
         signOutReducer: (state) => {
             state.email = "";
+            state.role = "";
             state.user = {};
         },
         setUser: (state, { payload }) => {

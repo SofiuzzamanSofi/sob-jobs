@@ -63,6 +63,12 @@ export interface RegisterTypes {
     __v?: string | number;
 };
 
+export interface applicantResponseTypes {
+    success: boolean;
+    message: string;
+    data: RegisterTypes
+}
+
 // JobSchema / Data Types
 export interface GetJobsResTypes {
     success: boolean;
@@ -142,4 +148,20 @@ export interface JobDataTypes {
     __v?: string;
     applicants?: JobApplicantsTypes[];
     questionAns?: QuestionAnsTypes[];
+};
+
+// messageTypes 
+export interface MessageType {
+    time: Date;
+    userId: string;
+    message: string;
+};
+
+
+export interface MessageObjectType {
+    _id: string;
+    __v: string;
+    messageId: string;
+    messageName: string;
+    messages: MessageType[];
 };

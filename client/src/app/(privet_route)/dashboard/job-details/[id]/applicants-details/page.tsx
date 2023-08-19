@@ -111,13 +111,21 @@ const page: FC<pageProps> = ({ params }) => {
                             </tr>
                             {
                                 applicants?.map((applicant, index) => (
-                                    <tr key={index}>
+                                    <tr key={index} className="my-2">
                                         <td>{index + 1}</td>
                                         <td>{applicant.userEmail}</td>
-                                        <td>Message</td>
                                         <td>
                                             <Link
-                                                href="/dashboard/profile?email=example@email.com"
+                                                href={`/dashboard/chat/${reduxStore.auth.user?._id}-${applicant.userId}`}
+                                            >
+                                                <button>
+                                                    Message
+                                                </button>
+                                            </Link>
+                                        </td>
+                                        <td>
+                                            <Link
+                                                href={`/dashboard/profile?email=${applicant?.userEmail}`}
                                             >
                                                 Profile
                                             </Link>

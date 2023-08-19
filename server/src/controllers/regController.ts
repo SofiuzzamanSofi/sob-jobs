@@ -42,16 +42,18 @@ export const getRegController = async (req: express.Request, res: express.Respon
                 message: "Body is empty line 12",
             });
         };
+        console.log('email:', email);
         const getUserData = await RegSchema.findOne({ email });
         if (!getUserData) {
-            return res.status(200).json({
+            return res.status(201).json({
                 success: false,
                 message: `Function called but no user data foundby the email: ${email}`,
                 data: { email, }
             });
         } else {
-            return res.status(201).json({
+            return res.status(200).json({
                 success: true,
+                message: `Successfully got data by this: ${email}`,
                 data: getUserData,
             })
         };
