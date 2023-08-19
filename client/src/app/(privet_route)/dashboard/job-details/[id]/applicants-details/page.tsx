@@ -128,10 +128,7 @@ const page: FC<pageProps> = ({ params }) => {
                                         </td>
                                         <td>
                                             <Link
-                                                href={{
-                                                    pathname: `/dashboard/profile?email=${applicant?.userEmail}`,
-                                                    // query: loginUserInfoUser
-                                                }}
+                                                href={`/dashboard/profile?email=${applicant?.userEmail}`}
                                             >
 
                                                 Profile

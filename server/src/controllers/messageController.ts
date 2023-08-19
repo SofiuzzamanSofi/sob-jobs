@@ -1,4 +1,5 @@
 import express from 'express';
+import { RegSchema } from '../models/regSchema';
 
 // get all message by messageId 
 export const getAllMessageById = async (req: express.Request, res: express.Response) => {
@@ -20,6 +21,18 @@ export const getMessageById = async (req: express.Request, res: express.Response
         const [id1, id2] = id.split("-");
         console.log('id1, id2, id:', id1, id2, id);
         // console.log('id1, id2, id:');
+
+        // get user by id
+        const user1 = await RegSchema.findById(id1);
+        const user2 = await RegSchema.findById(id2);
+        console.log('user1, user2:', user1, user2);
+        if (user1 && user2) {
+            return res.status(200).json({
+                success: false,
+                message: `Job data not found for the id: ${id}`,
+                data: { user1, user2 },
+            });
+        }
 
         return res.status(200).json({
             success: false,
