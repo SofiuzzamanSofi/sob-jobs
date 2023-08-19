@@ -175,7 +175,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
               {
                 email === reduxStore.auth.user?.email && applicants?.length ?
                   <Link
-                    href={`/dashboard/job-details/${_id}/applicants-details`}
+                    href={{
+                      pathname: `/dashboard/job-details/${_id}/applicants-details`,
+                    }}
                   >
 
                     <BsPeople /> {applicants?.length} applicants
