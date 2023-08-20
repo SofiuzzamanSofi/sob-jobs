@@ -6,12 +6,29 @@ import { generateRandomStringId } from '../randomId/randomId';
 // get all message by messageId 
 export const getAllMessageById = async (req: express.Request, res: express.Response) => {
     try {
+        const id = req.params?.id as string;
+        const userFromDatabaseById = await RegSchema.findById(id);
 
+        if (userFromDatabaseById) {
+            const getMessagesFromDatabase = await MessageSchema.find({
+                participants: {
+                    $elemMatch: { userId: userFromDatabaseById._id },
+                }
+            });
+            console.log('getMessagesFromDatabase:', getMessagesFromDatabase);
+            if (getMessagesFromDatabase) {
+                return res.status(500).json({
+                    success: true,
+                    message: "Messages from database get Successfully",
+                    data: getMessagesFromDatabase,
+                });
+            };
+        };
     } catch (error) {
         console.error("Error fetching job data:", error);
         return res.status(500).json({
             success: false,
-            message: "Failed to fetch job data",
+            message: "Failed to fetch MESSAGE job data",
         });
     };
 };

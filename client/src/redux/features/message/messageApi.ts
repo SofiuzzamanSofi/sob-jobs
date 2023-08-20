@@ -1,11 +1,11 @@
-import { MessageObjectResponseType } from "@/interfaceTypes/interfaceTypes";
+import { AllMessageObjectResponseType, MessageObjectResponseType } from "@/interfaceTypes/interfaceTypes";
 import apiSlice from "../api/apiSlice";
 
 const messageApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getAllMessageById: builder.query({
-            query: (data) => ({
-                url: `/routes/message/${data}`,
+        getAllMessageById: builder.query<AllMessageObjectResponseType, string | undefined>({
+            query: (userId) => ({
+                url: `/routes/message/${userId}`,
             }),
         }),
         getMessageById: builder.query<MessageObjectResponseType, string>({

@@ -107,7 +107,7 @@ const Page: FC<PageProps> = ({ params, }) => {
                         messageDetailsData.data.messages.map((message) => (
                             <p
                                 key={message.messageId}
-                                className={`${message.senderEmail === reduxStore.auth.user?.email ? "" : "text-right"}`}
+                                className={`${message.senderEmail === reduxStore.auth.user?.email ? "text-right" : ""}`}
                             >
                                 {message.content}
                             </p>

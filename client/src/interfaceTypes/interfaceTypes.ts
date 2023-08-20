@@ -177,3 +177,8 @@ export interface MessageObjectResponseType {
     message: string;
     data: MessageObjectType;
 };
+export interface AllMessageObjectResponseType {
+    status: boolean;
+    message: string;
+    data: MessageObjectType[];
+};
