@@ -17,7 +17,7 @@ export const getAllMessageById = async (req: express.Request, res: express.Respo
             });
             console.log('getMessagesFromDatabase:', getMessagesFromDatabase);
             if (getMessagesFromDatabase) {
-                return res.status(500).json({
+                return res.status(200).json({
                     success: true,
                     message: "Messages from database get Successfully",
                     data: getMessagesFromDatabase,
