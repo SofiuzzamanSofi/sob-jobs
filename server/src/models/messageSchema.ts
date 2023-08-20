@@ -2,27 +2,38 @@ import { MessageObjectType } from "interfaceServer.ts/interfaceServer.ts";
 import mongoose from "mongoose";
 
 const messageSchema = new mongoose.Schema<MessageObjectType>({
-    messageId: {
-        type: String,
+    chatId: {
+        type: "string",
         required: true
     },
-    messageName: {
-        type: String,
-        required: true
-    },
+    participants: [
+        {
+            userId: "string",
+            userName: "string",
+            userEmail: "string",
+        }
+    ],
     messages: [
         {
-            time: {
+            messageId: {
+                type: "string",
+                required: true
+            },
+            timestamp: {
                 type: Date,
                 default: new Date(),
             },
-            userId: {
+            senderId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "User",
                 required: true
             },
-            message: {
-                type: String,
+            senderEmail: {
+                type: "string",
+                required: true,
+            },
+            content: {
+                type: "string",
                 required: true
             }
         }

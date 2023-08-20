@@ -150,18 +150,30 @@ export interface JobDataTypes {
     questionAns?: QuestionAnsTypes[];
 };
 
-// messageTypes 
+// messageTypes
 export interface MessageType {
-    time: Date;
-    userId: string;
-    message: string;
+    messageId: string;
+    timestamp: Date; // Use Date type if you prefer
+    senderId: string;
+    senderEmail: string;
+    content: string;
 };
 
+interface Participant {
+    userId: string;
+    userName: string;
+    userEmail: string;
+};
 
 export interface MessageObjectType {
     _id: string;
     __v: string;
-    messageId: string;
-    messageName: string;
+    chatId: string;
+    participants: Participant[];
     messages: MessageType[];
+};
+export interface MessageObjectResponseType {
+    status: boolean;
+    message: string;
+    data: MessageObjectType;
 };

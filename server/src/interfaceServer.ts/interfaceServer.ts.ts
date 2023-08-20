@@ -61,55 +61,75 @@ export interface JobDataTypes {
 
 // messageTypes 
 export interface MessageType {
-    time: Date;
-    userId: string;
-    message: string;
+    messageId: string;
+    timestamp: Date; // Use Date type if you prefer
+    senderId: string;
+    senderEmail: string;
+    content: string;
 };
 
+interface Participant {
+    userId: string;
+    userName: string;
+    userEmail: string;
+};
 
 export interface MessageObjectType {
     _id: string;
     __v: string;
-    messageId: string;
-    messageName: string;
+    chatId: string;
+    participants: Participant[];
     messages: MessageType[];
 };
 
-const message: MessageObjectType = {
-    _id: "string",
-    __v: "string",
-    messageId: "string",
-    messageName: "string",
-    messages: [
-        {
-            time: new Date(),
-            userId: "string1",
-            message: "string",
-        },
-        {
-            time: new Date(),
-            userId: "string1",
-            message: "string",
-        },
-        {
-            time: new Date(),
-            userId: "string2",
-            message: "string",
-        },
-        {
-            time: new Date(),
-            userId: "string1",
-            message: "string",
-        },
-        {
-            time: new Date(),
-            userId: "string2",
-            message: "string",
-        },
-        {
-            time: new Date(),
-            userId: "string1",
-            message: "string",
-        },
-    ],
-};
+// const message: MessageObjectType = {
+//     "chatId": "abc123",
+//     "participants": [
+//         {
+//             "userId": "user1",
+//             "username": "Alice"
+//         },
+//         {
+//             "userId": "user2",
+//             "username": "Bob"
+//         }
+//     ],
+//     "messages": [
+//         {
+//             "messageId": "msg1",
+//             "senderId": "user1",
+//             "timestamp": new Date(),
+//             "content": "Hey Bob, how are you?"
+//         },
+//         {
+//             "messageId": "msg2",
+//             "senderId": "user2",
+//             "timestamp": new Date(),
+//             "content": "I'm good, thanks! How about you?"
+//         },
+//         {
+//             "messageId": "msg3",
+//             "senderId": "user1",
+//             "timestamp": new Date(),
+//             "content": "I'm doing well too. Did you finish the project?"
+//         },
+//         {
+//             "messageId": "msg4",
+//             "senderId": "user2",
+//             "timestamp": new Date(),
+//             "content": "Yes, I completed it yesterday. How about you?"
+//         },
+//         {
+//             "messageId": "msg5",
+//             "senderId": "user1",
+//             "timestamp": new Date(),
+//             "content": "I'm almost done. Just need to review a few things."
+//         }
+//         // {
+//         //   "messageId": "msg5",
+//         //   "senderId": "user1",
+//         //   "timestamp": "2023-08-17T12:34:00Z",
+//         //   "content": "I'm almost done. Just need to review a few things."
+//         // }
+//     ]
+// }

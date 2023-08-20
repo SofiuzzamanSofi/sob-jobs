@@ -1,3 +1,4 @@
+import { MessageObjectResponseType } from "@/interfaceTypes/interfaceTypes";
 import apiSlice from "../api/apiSlice";
 
 const messageApi = apiSlice.injectEndpoints({
@@ -7,7 +8,7 @@ const messageApi = apiSlice.injectEndpoints({
                 url: `/routes/message/${data}`,
             }),
         }),
-        getMessageById: builder.query({
+        getMessageById: builder.query<MessageObjectResponseType, string>({
             query: (id) => ({
                 url: `/routes/message/details/${id}`,
             }),

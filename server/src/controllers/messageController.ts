@@ -1,6 +1,7 @@
 import express from 'express';
 import { RegSchema } from '../models/regSchema';
 import { MessageSchema } from '../models/messageSchema';
+import { generateRandomStringId } from '../randomId/randomId';
 
 // get all message by messageId 
 export const getAllMessageById = async (req: express.Request, res: express.Response) => {
@@ -23,34 +24,71 @@ export const getMessageById = async (req: express.Request, res: express.Response
         console.log('id1, id2, id:', id1, id2, id);
         // console.log('id1, id2, id:');
 
-        //get message by id1 and id2
-        // const messageResponse = await MessageSchema.findOne({
-        //     // messageId: 
-        // })
+        //get message by id1 and id2 Sender: Employee
+        const messageResponse1Employee = await MessageSchema.findOne({
+            messageId: id
+        });
+        if (messageResponse1Employee) {
+            return res.status(200).json({
+                success: true,
+                message: `Message Data is found for Employee: ${id}`,
+                data: messageResponse1Employee,
+            });
+        };
+        //get message by id1 and id2 Sender: Candidate
+        const messageResponse2Candidate = await MessageSchema.findOne({
+            messageId: `${id2}-${id1}`,
+        })
+        if (messageResponse2Candidate) {
+            return res.status(200).json({
+                success: true,
+                message: `Message Data is found for Candidate: ${id}`,
+                data: messageResponse2Candidate,
+            });
+        };
 
-
+        // if no message is found || FirstTime message
         // get user by id
         const user1 = await RegSchema.findById(id1);
         const user2 = await RegSchema.findById(id2);
-        console.log('user1, user2:', user1, user2);
+        // console.log('user1, user2:', user1, user2);
         if (user1 && user2) {
             return res.status(200).json({
-                success: false,
-                message: `Job data not found for the id: ${id}`,
-                data: { user1, user2 },
+                success: true,
+                message: `Job data not found But User Found for Starting the chat By Id: ${id}`,
+                data: {
+                    chatId: id,
+                    participants: [
+                        {
+                            userId: user1._id,
+                            userName: user1.firstName + ' ' + user1.lastName,
+                            userEmail: user1.email,
+                        },
+                        {
+                            userId: user2._id,
+                            userName: user2.firstName + '' + user2.lastName,
+                            userEmail: user2.email,
+                        },
+
+                    ],
+                    messages: [
+
+                    ],
+                },
             });
         }
-
-        return res.status(200).json({
-            success: false,
-            message: `Job data not found for the id: ${id}`,
-            // data: data,
-        });
+        else {
+            return res.status(403).json({
+                success: false,
+                message: `No message Found And No User Found for this Id: ${id}`,
+                // data: data,
+            });
+        };
     } catch (error) {
         console.error("Error fetching job data:", error);
         return res.status(500).json({
             success: false,
-            message: "Failed to fetch job data",
+            message: "Failed to fetch job data || Server error from Catch-Error",
         });
     };
 };
@@ -59,7 +97,49 @@ export const getMessageById = async (req: express.Request, res: express.Response
 
 export const postMessageById = async (req: express.Request, res: express.Response) => {
     try {
+        const { chatId, message, participants } = req.body;
+        if (!chatId || !message || !participants) {
+            return res.status(400).json({
+                success: false,
+                message: "NotFound: chatId, message, or participants not provided",
+            });
+        };
 
+        message.timestamp = new Date();
+        message.messageId = generateRandomStringId(24);
+        const [id1, id2] = chatId.split("-");
+        // return console.log('messageData:', chatId, message, participants);
+
+        //    const message messageGotById1AndId2(messageData.chatId);
+        const messagePost = await MessageSchema.findOneAndUpdate(
+            {
+                chatId: { $in: [chatId, `${id2}-${id1}`] },
+                // participants: [participants || participants.reverse()],
+            },
+            {
+                $addToSet: { //add participants without duplicates
+                    participants: {
+                        $each: participants,
+                    },
+                },
+                $push: {  // add data on db push
+                    messages: message,
+                }
+            },
+            {
+                new: true, //save new message
+                upsert: true, // Create a new document if it doesn't exist
+                setDefaultsOnInsert: true, // Set default values when upserting
+            }
+
+        );
+        console.log('messagePost:', messagePost);
+
+        return res.status(200).json({
+            success: true,
+            message: `Message POST Success:  ${chatId}, ${message}, ${participants}`,
+            // data: messageResponse2Candidate,
+        });
     } catch (error) {
         console.error("Error fetching job data:", error);
         return res.status(500).json({
@@ -68,3 +148,24 @@ export const postMessageById = async (req: express.Request, res: express.Respons
         });
     };
 };
+
+
+
+const messageGotById1AndId2 = async (id: string) => {
+    const [id1, id2] = id.split("-");
+    //get message by id1 and id2 Sender: Employee
+    const messageResponse1Employee = await MessageSchema.findOne({
+        chatId: id
+    });
+    if (messageResponse1Employee) {
+        return messageResponse1Employee;
+    };
+    //get message by id1 and id2 Sender: Candidate
+    const messageResponse2Candidate = await MessageSchema.findOne({
+        chatId: `${id2}-${id1}`,
+    })
+    if (messageResponse2Candidate) {
+        return messageResponse2Candidate;
+    };
+    return null;
+}
