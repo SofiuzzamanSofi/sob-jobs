@@ -31,6 +31,7 @@ const page: FC<pageProps> = ({ params }) => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     const reduxStore = useSelector((state: RootState) => state);
     const [jobIsOpen, { isLoading: jobIsOpenLoading, isError: jobIsOpenError, isSuccess: jobIsOpenSuccess }] = useJobIsOpenMutation();
+    // const { data, isLoading, isError } = useJobByIdQuery(params.id, { pollingInterval: 2000 });
     const { data, isLoading, isError } = useJobByIdQuery(params.id);
     // console.log("iddddddd data in applicans name:::", data);
     const {
@@ -65,6 +66,8 @@ const page: FC<pageProps> = ({ params }) => {
             setIsOpenModal((prev) => !prev);
         }
     }
+
+    const applicantsReverse = applicants ? [...applicants].reverse() : [];
 
     return (
         <div className='pt-14 grid grid-cols-12 gap-5'>
@@ -110,7 +113,8 @@ const page: FC<pageProps> = ({ params }) => {
                                 <th>Action</th>
                             </tr>
                             {
-                                applicants?.map((applicant, index) => (
+                                applicantsReverse &&
+                                applicantsReverse.map((applicant, index) => (
                                     <tr key={index} className="my-2">
                                         <td>{index + 1}</td>
                                         <td>{applicant.userEmail}</td>

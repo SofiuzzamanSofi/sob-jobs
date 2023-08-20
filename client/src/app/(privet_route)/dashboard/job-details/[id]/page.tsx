@@ -7,12 +7,12 @@ import { usePathname } from 'next/navigation';
 import { FC } from 'react'
 
 interface pageProps {
-params: {
-    id: string;
-}
+    params: {
+        id: string;
+    }
 }
 
-const Page: FC<pageProps> = ({params }) => {
+const Page: FC<pageProps> = ({ params }) => {
 
     // const pathname = usePathname() || "";
     // const pathNameTotalArray = pathname.split("/")
@@ -20,7 +20,8 @@ const Page: FC<pageProps> = ({params }) => {
     // // const { data, isLoading, isError } = useJobByIdQuery(id, { pollingInterval: 2000 });
     // const { data, isLoading, isError } = useJobByIdQuery(id);
     console.log('params:', params);
-    const { data, isLoading, isError } = useJobByIdQuery(params.id);
+    // const { data, isLoading, isError } = useJobByIdQuery(params.id, { pollingInterval: 2000 });
+    const { data, isLoading, isError } = useJobByIdQuery(params.id, { pollingInterval: 2000 });
 
     return <div>
         {

@@ -27,7 +27,8 @@ const Page: FC<PageProps> = ({ params, }) => {
     /////////////////////// id1= Employee id2 = Candidate
 
     const reduxStore = useSelector((state: RootState) => state);
-    const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetMessageByIdQuery(`${id1}-${id2}`);
+    // const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetMessageByIdQuery(`${id1}-${id2}`, { pollingInterval: 2000 });
+    const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetMessageByIdQuery(`${id1}-${id2}`, { pollingInterval: 1000 });
     const [postMessage, { isLoading: postMessageIsLoading, isError: postMessageIsError, isSuccess: postMessageIsSuccess }] = usePostMessageByIdMutation();
 
     const submitMessage = () => {
@@ -90,8 +91,8 @@ const Page: FC<PageProps> = ({ params, }) => {
     };
     if (messageDetailsData) {
 
-        const participantsOthers = messageDetailsData.data.participants.filter((p) => p.userEmail !== reduxStore.auth.user?.email)
-        console.log("messageDetailsData.data.messages:", messageDetailsData.data.messages);
+        const participantsOthers = messageDetailsData.data.participants.filter((p) => p.userEmail !== reduxStore.auth.user?.email);
+        // console.log("messageDetailsData.data.messages:", messageDetailsData.data.messages);
 
 
         return (
@@ -100,8 +101,9 @@ const Page: FC<PageProps> = ({ params, }) => {
                     <h1>{participantsOthers[0]?.userName}</h1>
                     <h1>{participantsOthers[0]?.userEmail}</h1>
                 </div>
-                <div>
-                    <h1>MIDDLE</h1>
+                <div
+                    className="border-2 border-black"
+                >
                     {
                         messageDetailsData.data.messages &&
                         messageDetailsData.data.messages.map((message) => (
@@ -123,7 +125,7 @@ const Page: FC<PageProps> = ({ params, }) => {
                         onChange={(e) => setText(e.target.value)}
                         onKeyDown={(e) => functionCallOnPressInter(e)}
                     />
-
+                    <button onClick={submitMessage}>Submit</button>
                 </div>
             </div>
         );

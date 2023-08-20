@@ -159,10 +159,11 @@ export interface MessageType {
     content: string;
 };
 
-interface Participant {
+export interface Participant {
     userId: string;
     userName: string;
     userEmail: string;
+    _id: string;
 };
 
 export interface MessageObjectType {
