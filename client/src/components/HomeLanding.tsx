@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { gsap } from "gsap";
 import Badge from "./Badge";
@@ -12,6 +12,8 @@ import Image from "next/image";
 interface HomeLandingProps { }
 
 const HomeLanding: React.FC<HomeLandingProps> = () => {
+
+    const [inputText, setInputText] = useState<string>("");
     const keywords = [
         "Web Developer",
         "Web Designer",
@@ -82,7 +84,21 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
     }, []);
 
     // ... rest of the JSX code
+    const submitInputMessage = () => {
+        const trimmedText = inputText?.trim(); // Remove leading and trailing whitespaces
+        if (!trimmedText) {
+            return; // Return early if the text is empty or whitespace-only
+        } else {
+            console.log('trimmedText:', trimmedText);
+        }
+    }
 
+    const functionCallOnPressInter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            submitInputMessage();
+        }
+    };
 
     return (
         <div ref={el} className='h-screen'>
@@ -125,10 +141,14 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                                 name='search'
                                 id='search'
                                 placeholder='Job title or Keyword'
+                                value={inputText}
+                                onChange={(e) => setInputText(e.target.value)}
+                                onKeyDown={(e) => functionCallOnPressInter(e)}
                             />
                             <button
                                 id='search-button'
                                 className='p-2 rounded-full bg-primary  h-14 w-14 grid place-items-center'
+                                onClick={submitInputMessage}
                             >
                                 <BiSearchAlt size='23' color='white' />
                             </button>

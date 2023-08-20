@@ -4,9 +4,13 @@
   "version": "1.0.0",
   "main": "server.js",
   "license": "MIT",
+  "keywords": [],
+  "author": "Sofiuzzaman Sofi",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon"
+    "dev": "nodemon",
+    "build": "tsc",
+    "start": "node ./build/server.js"
   },
   "dependencies": {
     "colors": "^1.4.0",

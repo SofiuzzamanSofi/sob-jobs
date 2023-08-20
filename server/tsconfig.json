@@ -2,7 +2,7 @@
     "compilerOptions": {
         "target": "ES2019",
         "module": "commonjs",
-        "outDir": "dist",
+        "outDir": "build",
         "rootDir": "src",
         "baseUrl": "src",
         "strict": true,

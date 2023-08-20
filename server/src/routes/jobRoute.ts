@@ -1,8 +1,9 @@
-import { createJobController, getAllJobController, getAppliedJobController, getJobController, getPostedJobController, patchAnsJobController, patchAppliedJobController, patchIsOpenJobController, patchQuestionJobController } from './../controllers/jobController';
+import { createJobController, getAllJobBySearchTextController, getAllJobController, getAppliedJobController, getJobController, getPostedJobController, patchAnsJobController, patchAppliedJobController, patchIsOpenJobController, patchQuestionJobController } from './../controllers/jobController';
 import express from 'express';
 
 export default (router: express.Router) => {
     router.get("/job", getAllJobController); // get all jobs 
+    router.get("/job/search/:text", getAllJobBySearchTextController); // get all jobs By Search Text
     router.get("/job/:id", getJobController); // get 1 job by id 
     router.post("/job", createJobController); // post a job 
     router.patch("/job/applied-job", patchAppliedJobController); // edit job for applicant: APPLIED

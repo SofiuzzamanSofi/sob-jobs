@@ -26,6 +26,37 @@ export const getAllJobController = async (req: express.Request, res: express.Res
         });
     };
 };
+// get all jobs By Search Text
+export const getAllJobBySearchTextController = async (req: express.Request, res: express.Response) => {
+    const text = req.params?.text as string;
+    // give me the code
+    try {
+        const getJobData = await JobSchema.find(
+            {
+                $text: { $search: text },
+            },
+        );
+        if (!getJobData) {
+            return res.status(200).json({
+                success: false,
+                message: `Job data not found.`,
+            });
+        };
+        console.log('Ok:', "Ok");
+        return res.status(200).json({
+            success: true,
+            message: "Successfully got all jobs.",
+            data: getJobData,
+        });
+
+    } catch (error) {
+        console.error("Error fetching job data:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to fetch job data",
+        });
+    };
+};
 
 // get 1 job by id 
 export const getJobController = async (req: express.Request, res: express.Response) => {

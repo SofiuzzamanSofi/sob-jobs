@@ -19,7 +19,7 @@ interface pageProps {
     }
 }
 
-const page: FC<pageProps> = ({ params }) => {
+const Page: FC<pageProps> = ({ params }) => {
 
     // const router = useRouter();
     // const {id} = router.query;
@@ -210,4 +210,4 @@ const page: FC<pageProps> = ({ params }) => {
     );
 }
 
-export default page;
+export default Page;
