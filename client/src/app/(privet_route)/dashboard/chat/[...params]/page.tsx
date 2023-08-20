@@ -91,7 +91,7 @@ const Page: FC<PageProps> = ({ params, }) => {
     if (messageDetailsData) {
 
         const participantsOthers = messageDetailsData.data.participants.filter((p) => p.userEmail !== reduxStore.auth.user?.email)
-        console.log("participantsOthers:", participantsOthers);
+        console.log("messageDetailsData.data.messages:", messageDetailsData.data.messages);
 
 
         return (
@@ -102,6 +102,17 @@ const Page: FC<PageProps> = ({ params, }) => {
                 </div>
                 <div>
                     <h1>MIDDLE</h1>
+                    {
+                        messageDetailsData.data.messages &&
+                        messageDetailsData.data.messages.map((message) => (
+                            <p
+                                key={message.messageId}
+                                className={`${message.senderEmail === reduxStore.auth.user?.email ? "" : "text-right"}`}
+                            >
+                                {message.content}
+                            </p>
+                        ))
+                    }
                 </div>
                 <div>
                     <textarea
