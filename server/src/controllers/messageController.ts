@@ -26,7 +26,7 @@ export const getMessageById = async (req: express.Request, res: express.Response
 
         //get message by id1 and id2 Sender: Employee
         const messageResponse1Employee = await MessageSchema.findOne({
-            messageId: id
+            chatId: id
         });
         if (messageResponse1Employee) {
             return res.status(200).json({
@@ -35,9 +35,10 @@ export const getMessageById = async (req: express.Request, res: express.Response
                 data: messageResponse1Employee,
             });
         };
+
         //get message by id1 and id2 Sender: Candidate
         const messageResponse2Candidate = await MessageSchema.findOne({
-            messageId: `${id2}-${id1}`,
+            chatId: `${id2}-${id1}`,
         })
         if (messageResponse2Candidate) {
             return res.status(200).json({
@@ -94,7 +95,6 @@ export const getMessageById = async (req: express.Request, res: express.Response
 };
 
 // post 1 message by message id
-
 export const postMessageById = async (req: express.Request, res: express.Response) => {
     try {
         const { chatId, message, participants } = req.body;
@@ -110,35 +110,65 @@ export const postMessageById = async (req: express.Request, res: express.Respons
         const [id1, id2] = chatId.split("-");
         // return console.log('messageData:', chatId, message, participants);
 
-        //    const message messageGotById1AndId2(messageData.chatId);
-        const messagePost = await MessageSchema.findOneAndUpdate(
+        //    const message ID=Eployeee-Candidate
+        const messagePostId1Id2 = await MessageSchema.findOneAndUpdate(
             {
-                chatId: { $in: [chatId, `${id2}-${id1}`] },
-                // participants: [participants || participants.reverse()],
+                chatId: chatId,
             },
             {
-                $addToSet: { //add participants without duplicates
-                    participants: {
-                        $each: participants,
-                    },
-                },
                 $push: {  // add data on db push
                     messages: message,
                 }
             },
             {
                 new: true, //save new message
-                upsert: true, // Create a new document if it doesn't exist
-                setDefaultsOnInsert: true, // Set default values when upserting
             }
-
         );
-        console.log('messagePost:', messagePost);
+        console.log('messagePostId1Id2:', messagePostId1Id2);
+        if (messagePostId1Id2) {
+            return res.status(200).json({
+                success: true,
+                message: `Message POST Success By-Id: ${chatId}`,
+                data: messagePostId1Id2,
+            });
+        };
 
+        //    const message ID=Candidate-Eployeee
+        const messagePostId2Id1 = await MessageSchema.findOneAndUpdate(
+            {
+                chatId: `${id2}-${id1}`,
+            },
+            {
+                $push: {  // add data on db push
+                    messages: message,
+                }
+            },
+            {
+                new: true, //save new message
+            }
+        );
+        console.log('messagePostId2Id1:', messagePostId2Id1);
+        if (messagePostId2Id1) {
+            return res.status(200).json({
+                success: true,
+                message: `Message POST Success By-Id: ${chatId}`,
+                data: messagePostId2Id1,
+            });
+        };
+
+        // First Time Send Message 
+        const messagePostFirstTime = await new MessageSchema({ chatId, participants, message }).save();
+        console.log('messagePostFirstTime:', messagePostFirstTime);
+        if (messagePostFirstTime) {
+            return res.status(200).json({
+                success: true,
+                message: `Message POST Success By-Id: ${chatId}`,
+                data: messagePostFirstTime,
+            });
+        };
         return res.status(200).json({
-            success: true,
-            message: `Message POST Success:  ${chatId}, ${message}, ${participants}`,
-            // data: messageResponse2Candidate,
+            success: false,
+            message: `Message POST Fails Dont match anythig:  ${chatId}, ${message}, ${participants}`,
         });
     } catch (error) {
         console.error("Error fetching job data:", error);
@@ -169,3 +199,27 @@ const messageGotById1AndId2 = async (id: string) => {
     };
     return null;
 }
+// const extraObject = {
+//     const messagePost = await MessageSchema.findOneAndUpdate(
+//         {
+//             chatId: chatId || `${id2}-${id1}`,
+//             // participants: [participants || participants.reverse()],
+//         },
+//         {
+//             $addToSet: { //add participants without duplicates
+//                 participants: {
+//                     $each: participants,
+//                 },
+//             },
+//             $push: {  // add data on db push
+//                 messages: message,
+//             }
+//         },
+//         {
+//             new: true, //save new message
+//             upsert: true, // Create a new document if it doesn't exist
+//             setDefaultsOnInsert: true, // Set default values when upserting
+//         }
+
+//     );
+// }
