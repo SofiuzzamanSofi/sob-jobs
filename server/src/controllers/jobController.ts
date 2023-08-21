@@ -90,7 +90,7 @@ export const getAllJobBySearchTextController = async (
 
 
 
-        console.log('query:', query);
+        // console.log('query:', query);
 
         // Find the MOST RECENT  
         if (searchData?.timestamp === "new") {

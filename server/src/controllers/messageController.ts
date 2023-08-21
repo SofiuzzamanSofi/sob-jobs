@@ -121,7 +121,7 @@ export const postMessageById = async (req: express.Request, res: express.Respons
             });
         };
 
-        message.timestamp = new Date();
+        // message.timestamp = new Date();
         message.messageId = generateRandomStringId(24);
         const [id1, id2] = chatId.split("-");
         // return console.log('messageData:', chatId, message, participants);
@@ -172,8 +172,28 @@ export const postMessageById = async (req: express.Request, res: express.Respons
             });
         };
 
-        // First Time Send Message 
-        const messagePostFirstTime = await new MessageSchema({ chatId, participants, message }).save();
+        // First Time Send Message
+//         const messagePostData = {
+//             chatId,
+//             participants,
+//             messages : [
+//                 {
+// message,
+//                 }
+//             ]
+//         }
+        const messagePostFirstTime = await new MessageSchema({
+            chatId,
+            participants,
+            messages:[
+                {
+                    messageId: message.messageId,
+                    senderId: message.senderId,
+                    senderEmail: message.senderEmail,
+                    content: message.content,
+                }
+            ],
+        }).save();
         // console.log('messagePostFirstTime:', messagePostFirstTime);
         if (messagePostFirstTime) {
             return res.status(200).json({
