@@ -40,8 +40,7 @@ const page: FC<pageProps> = ({ }) => {
                 timestamp: newOrOld,
             }
             console.log('searchData:',searchData);
-            jobBySearchData(searchData);
-      
+            // jobBySearchData(searchData);      
     }, [titleText, companyText, locationText, newOrOld, isOpenClosed]);
 
     if (isLoading) {
