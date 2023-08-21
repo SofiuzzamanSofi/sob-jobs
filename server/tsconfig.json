@@ -1,22 +1,3 @@
-// {
-//     "compilerOptions": {
-//         "target": "ES2019",
-//         "module": "commonjs",
-//         "outDir": "build",
-//         "rootDir": "src",
-//         "baseUrl": "src",
-//         "strict": true,
-//         "esModuleInterop": true
-//     },
-//     "include": [
-//         "src/**/*",
-//     ],
-//     "exclude": [
-//         "node_modules",
-//         "dist"
-//     ]
-// }
-
 {
     "compilerOptions": {
         "module": "commonjs",
@@ -26,7 +7,7 @@
         "noImplicitAny": true,
         "moduleResolution": "node",
         "sourceMap": true,
-        "outDir": "build",
+        "outDir": "dist",
         "baseUrl": ".",
         "paths": {
             "*": ["node_modules/*", "src/types/*"]
@@ -34,4 +15,3 @@
     },
     "include": ["./src/**/*"]
     }
-  
