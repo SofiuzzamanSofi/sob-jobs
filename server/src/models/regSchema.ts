@@ -1,4 +1,4 @@
-import { RegisterDataTypes } from "interfaceServer.ts/interfaceServer.ts";
+import { RegisterDataTypes } from "../interfaceServer/interfaceServer.ts";
 import mongoose from "mongoose";
 
 const registerSchema = new mongoose.Schema<RegisterDataTypes>({

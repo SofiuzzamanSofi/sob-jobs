@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/redux/store";
@@ -47,29 +47,29 @@ const EmployerRegistration = () => {
       .then((data) => setCountries(data));
   }, []);
 
-  const onSubmit = (data: RegisterTypes) => {
+  const onSubmit: SubmitHandler<RegisterTypes> = (data) => {
+    // e?.preventDefault();
     postUser({ ...data, role: "Employer", email: reduxStore?.auth?.email || "", });
-    // console.log("hello clicked", data);
+    console.log('"Clicked on OnSubmit":', "Clicked on OnSubmit");
+    // e?.stopPropagation(); // USED HERE!
   };
 
   useEffect(() => {
-    if (reduxStore?.auth?.role) {
-      return router.push("/dashboard");
-    };
     if (reduxStore?.auth?.isLoading) {
       toast.loading("Please wait...", { id: "post-user-on-db" });
     };
-    if (!reduxStore?.auth?.isLoading && !reduxStore?.auth?.email) {
-      toast.success("Register Success. on DB", { id: "post-user-on-db" });
-      return router.back();
-      // router.push("/");
+    if (!reduxStore?.auth?.isLoading && reduxStore.auth.user?.email && reduxStore.auth.user?.role) {
+      toast.success("Register Success.", { id: "post-user-on-db" });
+      router.push("/dashboard");
     };
     if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
-  }, [isLoading, isError, isSuccess, reduxStore?.auth?.role, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, reduxStore?.auth?.isLoading, router]);
+  }, [isLoading, isError, isSuccess, reduxStore?.auth?.role, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, reduxStore?.auth?.isLoading]);
 
-
+  if (reduxStore?.auth?.user?.role) {
+    return router.push("/dashboard");
+  };
   return (
     <div className='pt-14'>
       <div
@@ -82,7 +82,7 @@ const EmployerRegistration = () => {
       <div className='flex justify-center items-center overflow-auto p-10'>
         <form
           className='bg-secondary/20 shadow-lg p-10 rounded-2xl flex flex-wrap gap-3 max-w-3xl justify-between'
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={()=>handleSubmit(onSubmit)}
         >
           <h1 className='w-full text-2xl text-primary mb-5'>Employer</h1>
           <div className='flex flex-col w-full max-w-xs'>
@@ -210,7 +210,7 @@ const EmployerRegistration = () => {
             <button
               disabled={!term}
               type='submit'
-              className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
+              className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:cursor-pointer transition-all '
             >
               Submit
             </button>

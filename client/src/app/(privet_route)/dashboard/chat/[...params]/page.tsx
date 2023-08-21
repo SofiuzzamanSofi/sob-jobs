@@ -1,14 +1,12 @@
 "use client";
 
-import Loading from '@/components/Loading';
-import { useGetMessageByIdQuery, usePostMessageByIdMutation } from '@/redux/features/message/messageApi';
-import { RootState } from '@/redux/store';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { FC } from 'react'
-import React, { useState } from 'react';
-import { useRef, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { RootState } from '@/redux/store';
 import { useSelector } from 'react-redux';
+import Loading from '@/components/Loading';
+import { useRouter } from 'next/navigation';
+import React, { FC, useRef, useState, useEffect } from 'react';
+import { useGetMessageByIdQuery, usePostMessageByIdMutation } from '@/redux/features/message/messageApi';
 
 interface PageProps {
     params: {
@@ -19,45 +17,33 @@ interface PageProps {
 const Page: FC<PageProps> = ({ params, }) => {
 
     const router = useRouter();
-    // const searchParams = useSearchParams()
     const [text, setText] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
     const [id1, id2] = params?.params[0]?.split("-")
-    // console.log("id1, id2:", id1, id2);
-    /////////////////////// id1= Employee id2 = Candidate
 
     const reduxStore = useSelector((state: RootState) => state);
-    // const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetMessageByIdQuery(`${id1}-${id2}`, { pollingInterval: 2000 });
+    // get Message Detail By Id1 - Id2
     const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetMessageByIdQuery(`${id1}-${id2}`, { pollingInterval: 1000 });
     const [postMessage, { isLoading: postMessageIsLoading, isError: postMessageIsError, isSuccess: postMessageIsSuccess }] = usePostMessageByIdMutation();
 
     const submitMessage = () => {
-        const trimmedText = text?.trim(); // Remove leading and trailing whitespaces
+        const trimmedText = text?.trim(); // Remove leading and trailing 
         if (!trimmedText) {
-            return; // Return early if the text is empty or whitespace-only
+            return; 
         } else {
             if (messageDetailsData?.data?.participants && reduxStore.auth.user?.email && reduxStore.auth.user?._id) {
                 const messageData = {
                     chatId: `${id1}-${id2}`,
                     participants: messageDetailsData.data.participants,
                     message: {
-                        // messageId: string;
-                        // timestamp: Date; 
                         senderId: reduxStore.auth.user._id,
                         senderEmail: reduxStore.auth.user.email,
                         content: trimmedText,
                     },
-
                 }
-                // console.log("submitPress-TEXT:", messageData); // whatsApp is similler like this
-                // console.log("submitPress-TEXT:", text);
                 postMessage(messageData);
                 setText("");
-                // next code for the function
-                // window.alert(trimmedText);
-                // textAreaRef.current?.focus()
             }
-
         }
     }
 
@@ -68,32 +54,38 @@ const Page: FC<PageProps> = ({ params, }) => {
         }
     };
 
-
-    // console.log("params line 48:", params);
-    // console.log("router line 49:", router);
-    // console.log("searchParams line 50:", searchParams?.get("messageEmail"));
-    // console.log("messageDetailsData Like WhatsApp:", messageDetailsData);
-
-
     useEffect(() => {
         if (textAreaRef.current) {
             textAreaRef.current.focus();
         }
     }, []);
 
+    console.log("messageDetailsData:", messageDetailsData);
+    console.log("reduxStore.auth.user:", reduxStore.auth.user);
+
+    // other user not seen other chat 
+        const matchUser = messageDetailsData?.data.participants.filter((userInfo)=> userInfo.userEmail === reduxStore.auth.user?.email && userInfo.userId ===  reduxStore.auth.user?._id)
+        console.log('matchUser:',matchUser);
+
     if (messageDetailsIsLoading) {
         return <Loading />
     };
     if (messageDetailsIsError) {
+        // if sender/Employee & receiver/Candidate userId dont match on server FIRSTTIME MESSAGE 
         toast.error("No user information found for message.")
         router.back();
-
+        return null;
+    };
+    if(!matchUser?.length){
+        router.push("/dashboard/chat");
+        return null;
+    };
+    if(!messageDetailsData?.data?.messages?.length ){
+        router.push("/dashboard/chat");
+        return null;
     };
     if (messageDetailsData) {
-
         const participantsOthers = messageDetailsData.data.participants.filter((p) => p.userEmail !== reduxStore.auth.user?.email);
-        // console.log("messageDetailsData.data.messages:", messageDetailsData.data.messages);
-
 
         return (
             <div>

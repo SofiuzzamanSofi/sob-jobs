@@ -1,4 +1,4 @@
-import { JobDataTypes } from "interfaceServer.ts/interfaceServer.ts";
+import { JobDataTypes } from "../interfaceServer/interfaceServer.ts";
 import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema<JobDataTypes>({
@@ -58,14 +58,68 @@ const jobSchema = new mongoose.Schema<JobDataTypes>({
         type: ["string"],
         required: false,
     },
-    applicants: {
-        type: [mongoose.Schema.Types.Mixed],
-        required: false,
-    },
-    questionAns: {
-        type: [mongoose.Schema.Types.Mixed],
-        required: false,
-    },
+    // applicants: {
+    //     type: [mongoose.Schema.Types.Mixed],
+    //     required: false,
+    // },
+    applicants: [
+        {
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+                require: false,
+            },
+            userEmail: {
+                type: "string",
+                require: false,
+            },
+        }
+    ],
+    // questionAns: {
+    //     type: [mongoose.Schema.Types.Mixed],
+    //     required: false,
+    // },
+    questionAns: [
+        {
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+                require: false,
+            },
+            userEmail: {
+                type: "string",
+                require: false,
+            },
+            questionId: {
+                type: "string",
+                require: false,
+            },
+            question: {
+                time: {
+                    type: Date,
+                    default: new Date(),
+                    required: false,
+                },
+                questionString: {
+                    type: "string",
+                    required: false,
+                },
+            },
+            ans: [
+                {
+                    time: {
+                        type: Date,
+                        default: new Date(),
+                        required: false,
+                    },
+                    ansString: {
+                        type: "string",
+                        required: false,
+                    },
+                }
+            ]
+        }
+    ],
     timestamp: {
         type: Date,
         default: Date.now,

@@ -1,4 +1,4 @@
-import { MessageObjectType } from "interfaceServer.ts/interfaceServer.ts";
+import { MessageObjectType } from "../interfaceServer/interfaceServer.ts";
 import mongoose from "mongoose";
 
 const messageSchema = new mongoose.Schema<MessageObjectType>({
