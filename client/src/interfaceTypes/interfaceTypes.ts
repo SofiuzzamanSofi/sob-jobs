@@ -70,6 +70,14 @@ export interface applicantResponseTypes {
 }
 
 // JobSchema / Data Types
+export interface serarchDataTypes {
+    position?: string;
+    companyName?: string;
+    isOpen?: string;
+    location?: string;
+    timestamp?: Date;
+};
+
 export interface GetJobsResTypes {
     success: boolean;
     message: string;

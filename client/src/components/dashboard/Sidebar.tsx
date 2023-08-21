@@ -68,6 +68,15 @@ const Sidebar = () => {
                 <li>
                     <Link
                         //   style={"pointer-events: none"}
+                        href='/dashboard/search-jobs'
+                        className={`hover:bg-primary ${pathname.includes("/search-jobs") ? "bg-primary text-white" : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
+                    >
+                        Search Jobs
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        //   style={"pointer-events: none"}
                         href='/dashboard/all-jobs'
                         className={`hover:bg-primary ${pathname.includes("/all-jobs") ? "bg-primary text-white" : "bg-primary/10"} hover:text-white transition-all w-full block py-2 px-3 rounded-md`}
                     >

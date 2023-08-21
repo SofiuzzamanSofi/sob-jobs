@@ -1,11 +1,12 @@
 "use client"
 
-import React, { useEffect } from "react";
 import Link from "next/link";
+import React, { useEffect } from "react";
+import { BiSearchAlt } from "react-icons/bi";
 import { usePathname } from "next/navigation";
+import { auth } from "../firebase/firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
-import { auth } from "../firebase/firebase.config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { getUser, setUser, signOutReducer, toggleLoading } from "../redux/features/auth/authSlice";
 
@@ -52,6 +53,14 @@ const Navbar = () => {
                 <ul className="max-w-7xl mx-auto flex gap-3 h-full items-center">
                     <li className="flex-auto font-semibold text-2xl">
                         <Link href="/">Sob-Jobs</Link>
+                    </li>
+                    <li>
+                        <Link
+                           className='p-2 rounded-full bg-white border  h-10 w-10 grid place-items-center'
+                            href='/dashboard/search-jobs'
+                        >
+                             <BiSearchAlt size='23' color='black' />
+                        </Link>
                     </li>
                     <li>
                         <Link

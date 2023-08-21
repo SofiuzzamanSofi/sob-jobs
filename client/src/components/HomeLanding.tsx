@@ -1,19 +1,22 @@
 "use client";
 
-import React, { useLayoutEffect, useRef, useState } from "react";
-import { BiSearchAlt } from "react-icons/bi";
 import { gsap } from "gsap";
 import Badge from "./Badge";
+import Link from "next/link";
+import Image from "next/image";
 import hero1 from "../assets/hero-01.jpg";
 import hero2 from "../assets/hero-02.jpg";
 import hero3 from "../assets/hero-03.jpg";
-import Image from "next/image";
+import { useRouter } from 'next/navigation';
+import { BiSearchAlt } from "react-icons/bi";
+import React, { useLayoutEffect, useRef, useState } from "react";
 
 interface HomeLandingProps { }
 
 const HomeLanding: React.FC<HomeLandingProps> = () => {
 
-    const [inputText, setInputText] = useState<string>("");
+    const router = useRouter();
+    // const [inputText, setInputText] = useState<string>("");
     const keywords = [
         "Web Developer",
         "Web Designer",
@@ -84,21 +87,26 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
     }, []);
 
     // ... rest of the JSX code
-    const submitInputMessage = () => {
-        const trimmedText = inputText?.trim(); // Remove leading and trailing whitespaces
-        if (!trimmedText) {
-            return; // Return early if the text is empty or whitespace-only
-        } else {
-            console.log('trimmedText:', trimmedText);
-        }
-    }
+    // const submitInputMessage = () => {
+    //     const trimmedText = inputText?.trim(); // Remove leading and trailing whitespaces
+    //     if (!trimmedText) {
+    //         return; // Return early if the text is empty or whitespace-only
+    //     } else {
+    //         // console.log('trimmedText:', trimmedText);
+    //     }
+    // }
 
-    const functionCallOnPressInter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            submitInputMessage();
-        }
-    };
+    // const functionCallOnPressInter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    //     if (e.key === "Enter" && !e.shiftKey) {
+    //         e.preventDefault();
+    //         submitInputMessage();
+    //     }
+    // };
+    // useLayoutEffect(() => {
+    //     if (inputText) {
+    //         router.push("/dashboard/search-jobs");
+    //     }
+    // }, [inputText]);
 
     return (
         <div ref={el} className='h-screen'>
@@ -141,17 +149,22 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                                 name='search'
                                 id='search'
                                 placeholder='Job title or Keyword'
-                                value={inputText}
-                                onChange={(e) => setInputText(e.target.value)}
-                                onKeyDown={(e) => functionCallOnPressInter(e)}
+                                // value={inputText}
+                                // onChange={(e) => setInputText(e.target.value)}
+                                // onKeyDown={(e) => functionCallOnPressInter(e)}
+                                onFocus={() => router.push("/dashboard/search-jobs")}
                             />
-                            <button
-                                id='search-button'
-                                className='p-2 rounded-full bg-primary  h-14 w-14 grid place-items-center'
-                                onClick={submitInputMessage}
+                            <Link
+                                href='/dashboard/search-jobs'
                             >
-                                <BiSearchAlt size='23' color='white' />
-                            </button>
+                                <button
+                                    id='search-button'
+                                    className='p-2 rounded-full bg-primary  h-14 w-14 grid place-items-center'
+                                // onClick={submitInputMessage}
+                                >
+                                    <BiSearchAlt size='23' color='white' />
+                                </button>
+                            </Link>
                         </div>
                         <div className='mt-16'>
                             <h2 className='badge-container'>Popular Search</h2>

@@ -65,6 +65,10 @@ const jobSchema = new mongoose.Schema<JobDataTypes>({
     questionAns: {
         type: [mongoose.Schema.Types.Mixed],
         required: false,
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now,
     }
 });
 
