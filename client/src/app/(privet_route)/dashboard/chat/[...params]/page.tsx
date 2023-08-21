@@ -49,7 +49,7 @@ const Page: FC<PageProps> = ({ params, }) => {
                     },
 
                 }
-                console.log("submitPress-TEXT:", messageData); // whatsApp is similler like this
+                // console.log("submitPress-TEXT:", messageData); // whatsApp is similler like this
                 // console.log("submitPress-TEXT:", text);
                 postMessage(messageData);
                 setText("");

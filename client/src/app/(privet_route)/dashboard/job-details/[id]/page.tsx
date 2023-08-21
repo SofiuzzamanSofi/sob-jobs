@@ -19,7 +19,7 @@ const Page: FC<pageProps> = ({ params }) => {
     // const id = pathNameTotalArray[pathNameTotalArray.length - 1];
     // // const { data, isLoading, isError } = useJobByIdQuery(id, { pollingInterval: 2000 });
     // const { data, isLoading, isError } = useJobByIdQuery(id);
-    console.log('params:', params);
+    // console.log('params:', params);
     // const { data, isLoading, isError } = useJobByIdQuery(params.id, { pollingInterval: 2000 });
     const { data, isLoading, isError } = useJobByIdQuery(params.id, { pollingInterval: 2000 });
 

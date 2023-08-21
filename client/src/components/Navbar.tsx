@@ -8,7 +8,7 @@ import { auth } from "../firebase/firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { getUser, setUser, signOutReducer, toggleLoading } from "../redux/features/auth/authSlice";
+import { getUser,  signOutReducer, toggleLoading } from "../redux/features/auth/authSlice";
 
 const Navbar = () => {
 
@@ -24,7 +24,7 @@ const Navbar = () => {
             if (user?.email) {
                 dispatch(getUser(user?.email));
                 // dispatch(setUser(user?.email));
-                console.log("From Navbar:", user?.email);
+                // console.log("From Navbar:", user?.email);
             }
             else {
                 // console.log("user?.email: Email nai");
@@ -36,7 +36,7 @@ const Navbar = () => {
     const handleSignOut = () => {
         signOut(auth)
             .then(() => {
-                console.log("log out clicked.");
+                // console.log("log out clicked.");
                 dispatch(signOutReducer());
             })
             .catch((error) => {

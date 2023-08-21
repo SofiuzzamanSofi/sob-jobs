@@ -34,7 +34,7 @@ const AddJob = () => {
   } = useFieldArray({ control, name: "requirements" });
 
   const onSubmit: SubmitHandler<JobDataTypes> = (data) => {
-    console.log("data on submit handler addJObs:", data);
+    // console.log("data on submit handler addJObs:", data);
     postJob({ ...data, email: reduxStore.auth.user?.email, isOpen: true });
   };
 

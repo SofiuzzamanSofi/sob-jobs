@@ -102,7 +102,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
         userId: reduxStore.auth.user._id,
         userEmail: reduxStore.auth.user.email,
       }
-      console.log("isOpenData:", isOpenData);
+      // console.log("isOpenData:", isOpenData);
       jobIsOpen(isOpenData);
       setIsOpenModal((prev) => !prev);
     }
@@ -120,7 +120,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     };
   }, [applyLoading, applySuccess, applyError]);
 
-  console.log("jobData", jobData);
+  // console.log("jobData", jobData);
 
   return (
     <div className='pt-14 grid grid-cols-12 gap-5'>

@@ -49,7 +49,7 @@ const EmployerRegistration = () => {
 
   const onSubmit = (data: RegisterTypes) => {
     postUser({ ...data, role: "Employer", email: reduxStore?.auth?.email || "", });
-    console.log("hello clicked", data);
+    // console.log("hello clicked", data);
   };
 
   useEffect(() => {

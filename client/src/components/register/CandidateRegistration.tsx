@@ -27,7 +27,7 @@ const CandidateRegistration = () => {
 
   const onSubmit = (data: RegisterTypes) => {
     postUser({ ...data, role: "Candidate", email: reduxStore?.auth?.email || "", });
-    console.log("hello clicked", data);
+    // console.log("hello clicked", data);
   };
 
   useEffect(() => {

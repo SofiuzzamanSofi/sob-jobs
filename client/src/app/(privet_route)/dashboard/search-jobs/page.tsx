@@ -11,7 +11,7 @@ interface pageProps {
 
 }
 
-const page: FC<pageProps> = ({ }) => {
+const Page: FC<pageProps> = ({ }) => {
 
     const [titleText, setTitleText] = useState<string>("");
     const [companyText, setCompanyText] = useState<string>("");
@@ -26,6 +26,11 @@ const page: FC<pageProps> = ({ }) => {
     // console.log(new Date());
 
 
+
+const handleFromSubmit =(e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+}
+
     // console.log('newOrOld:', newOrOld);
     useEffect(() => {
         const trimmedtitleText = titleText?.trim();
@@ -39,9 +44,9 @@ const page: FC<pageProps> = ({ }) => {
                 isOpen: isOpenClosed,
                 timestamp: newOrOld,
             }
-            console.log('searchData:',searchData);
-            // jobBySearchData(searchData);      
-    }, [titleText, companyText, locationText, newOrOld, isOpenClosed]);
+            // console.log('searchData:',searchData);
+            jobBySearchData(searchData);      
+    }, [titleText, companyText, locationText, newOrOld, isOpenClosed,jobBySearchData]);
 
     if (isLoading) {
         return <Loading />;
@@ -55,7 +60,10 @@ const page: FC<pageProps> = ({ }) => {
                     <div>
                         <h1 className='text-2xl pt-2 text-center'>Search Jobs</h1>
                     </div>
-                    <form className='rounded-lg grid place-items-center border px-5'>
+                    <form
+                    className='rounded-lg grid place-items-center border px-5'
+                    onSubmit={handleFromSubmit}
+                    >
                         <div className='gap-2 grid lg:flex lg:justify-between justify-center w-full border'>
 
                             <div className='flex flex-col items-start border'>
@@ -141,7 +149,6 @@ const page: FC<pageProps> = ({ }) => {
                                 </div>
                             </div>
                             <button
-
                                 type='submit'
                                 className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
                             >
@@ -171,4 +178,4 @@ const page: FC<pageProps> = ({ }) => {
     };
 };
 
-export default page
+export default Page;

@@ -13,7 +13,7 @@ const jobApi = apiSlice.injectEndpoints({
             async onQueryStarted(data, { dispatch, queryFulfilled }) {
                 try {
                     const res = await queryFulfilled;
-                    console.log("onQueryStarted queryFulfilled.")
+                    // console.log("onQueryStarted queryFulfilled.");
                 } catch (error) {
                     console.log("error on query onQueryStarted postjob: ", error);
                 }

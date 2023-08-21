@@ -21,8 +21,8 @@ const Page: FC<PageProps> = ({ }) => {
     const email = searchParams?.get('email')
 
     const { isLoading, data } = useGetApplicantQuery(email!);
-    console.log('email:', email);
-    console.log('data:', data);
+    // console.log('email:', email);
+    // console.log('data:', data);
 
     if (isLoading) {
         return <Loading />;

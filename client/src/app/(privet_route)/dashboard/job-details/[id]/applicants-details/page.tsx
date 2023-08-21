@@ -61,7 +61,7 @@ const Page: FC<pageProps> = ({ params }) => {
                 userId: reduxStore.auth.user._id,
                 userEmail: reduxStore.auth.user.email,
             }
-            console.log("isOpenData:", isOpenData);
+            // console.log("isOpenData:", isOpenData);
             jobIsOpen(isOpenData);
             setIsOpenModal((prev) => !prev);
         }
