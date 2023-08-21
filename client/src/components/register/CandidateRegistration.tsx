@@ -41,10 +41,11 @@ const CandidateRegistration = () => {
     if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
-  }, [isLoading, isError, isSuccess, reduxStore?.auth?.role, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, reduxStore?.auth?.isLoading, router]);
+  }, [reduxStore?.auth?.isLoading, reduxStore.auth.user?.email, reduxStore.auth.user?.role, reduxStore?.auth?.isError, reduxStore?.auth?.error, router]);
 
   if (reduxStore?.auth?.user?.role) {
-    return router.push("/dashboard");
+    router.push("/dashboard");
+    return null;
   };
   return (
     <div className='pt-14'>

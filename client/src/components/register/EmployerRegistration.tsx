@@ -65,10 +65,11 @@ const EmployerRegistration = () => {
     if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
-  }, [isLoading, isError, isSuccess, reduxStore?.auth?.role, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, reduxStore?.auth?.isLoading]);
+  }, [reduxStore?.auth?.isLoading, reduxStore.auth.user?.email, reduxStore.auth.user?.role, reduxStore?.auth?.isError, reduxStore?.auth?.error, router]);
 
   if (reduxStore?.auth?.user?.role) {
-    return router.push("/dashboard");
+    router.push("/dashboard");
+    return null;
   };
   return (
     <div className='pt-14'>
@@ -82,7 +83,7 @@ const EmployerRegistration = () => {
       <div className='flex justify-center items-center overflow-auto p-10'>
         <form
           className='bg-secondary/20 shadow-lg p-10 rounded-2xl flex flex-wrap gap-3 max-w-3xl justify-between'
-          onSubmit={()=>handleSubmit(onSubmit)}
+          onSubmit={() => handleSubmit(onSubmit)}
         >
           <h1 className='w-full text-2xl text-primary mb-5'>Employer</h1>
           <div className='flex flex-col w-full max-w-xs'>

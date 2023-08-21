@@ -80,7 +80,7 @@ const Page: FC<PageProps> = ({ params, }) => {
         router.push("/dashboard/chat");
         return null;
     };
-    if(!messageDetailsData?.data?.messages?.length ){
+    if(!messageDetailsData?.data?.messages?.length && reduxStore.auth.user?.role === "Candidate"){
         router.push("/dashboard/chat");
         return null;
     };

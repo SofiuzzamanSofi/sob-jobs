@@ -14,7 +14,7 @@ interface PageProps {
 const Page: FC<PageProps> = ({ }) => {
 
     const reduxStore = useSelector((state: RootState) => state);
-    const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetAllMessageByIdQuery(reduxStore.auth.user?._id);
+    const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetAllMessageByIdQuery(reduxStore.auth.user?._id, {pollingInterval: 5000});
     // console.log('reduxStore.auth.user?._id:', reduxStore.auth.user?._id);
     // console.log('messageDetailsData:', messageDetailsData);
 
