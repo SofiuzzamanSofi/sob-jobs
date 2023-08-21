@@ -13,6 +13,7 @@ const AppliedJobs = () => {
   const reduxStore = useSelector((state: RootState) => state);
 
   const { data, isLoading } = useGetAppliedJobsQuery(reduxStore.auth.user?.email || "");
+  const JobDatas = data?.data ? [...data?.data].reverse() : [];
 
   if (isLoading) {
     return <Loading />;
@@ -24,7 +25,7 @@ const AppliedJobs = () => {
         <div className='grid grid-cols-2 gap-5 pb-5'>
           {
             data?.data?.length ?
-              data?.data?.map((job: JobDataTypes, index: React.Key) => (
+              JobDatas?.map((job: JobDataTypes, index: React.Key) => (
                 <JobCard key={index} jobData={job} />
               ))
               :

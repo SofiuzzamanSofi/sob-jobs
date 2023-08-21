@@ -12,6 +12,7 @@ interface jobsProps {
 
 const Jobs: FC<jobsProps> = ({ }) => {
     const { isLoading, data } = useGetJobsQuery();
+    const JobDatas = data?.data ? [...data?.data].reverse() : [];
     if (isLoading) {
         return <Loading />;
     }
@@ -25,7 +26,7 @@ const Jobs: FC<jobsProps> = ({ }) => {
             >
                 {
                     data?.data?.length ?
-                        data.data.map((jobData: JobDataTypes, index: Key) => (
+                        JobDatas.map((jobData: JobDataTypes, index: Key) => (
                             <JobCard key={index} jobData={jobData} />
                         ))
                         :

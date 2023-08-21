@@ -3,7 +3,10 @@ import { JobSchema } from "../models/jobSchema";
 import { generateRandomStringId } from "../randomId/randomId";
 
 // get all jobs 
-export const getAllJobController = async (req: express.Request, res: express.Response) => {
+export const getAllJobController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const getJobData = await JobSchema.find();
         if (!getJobData) {
@@ -27,36 +30,75 @@ export const getAllJobController = async (req: express.Request, res: express.Res
     };
 };
 // get all jobs By Search Text
-export const getAllJobBySearchTextController = async (req: express.Request, res: express.Response) => {
-    const text = req.params?.text as string;
-    // give me the code
+
+export const getAllJobBySearchTextController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
-        const getJobData = await JobSchema.find(
-            {
-                $text: { $search: text },
-            },
-        );
-        if (!getJobData) {
+        const searchData = req.body;
+
+        interface QueryTypes {
+            position?: RegExp;
+            companyName?: RegExp;
+            isOpen?: boolean;
+            location?: RegExp;
+            experience?: RegExp;
+            createdAt?: Date;
+            // Add other fields from your schema here...
+        }
+
+        const query: QueryTypes = {};
+
+        if (searchData?.position) {
+            query.position = new RegExp(searchData.position, 'i');
+        }
+        if (searchData?.companyName) {
+            query.companyName = new RegExp(searchData.companyName, 'i');
+        }
+
+        // if (searchData?.isNewerJob === true) {
+        //     query.createdAt = {
+        //       $expr: { $gte: ['$createdAt', new Date()] }, // Assuming the field is named createdAt
+        //     };
+        //   }
+        //   if (searchData?.isNewerJob === false) {
+        //     query.createdAt = {
+        //       $expr: { $lt: ['$createdAt', new Date()] }, // Assuming the field is named createdAt
+        //     };
+        //   }
+
+        if (searchData?.isOpen === true || searchData?.isOpen === false) {
+            query.isOpen = searchData?.isOpen;
+        }
+
+        if (searchData.location) {
+            query.location = new RegExp(searchData.location, 'i');
+        }
+        console.log('query:', query);
+
+        const getJobData = await JobSchema.find(query);
+        if (!getJobData.length) {
             return res.status(200).json({
                 success: false,
                 message: `Job data not found.`,
             });
-        };
-        console.log('Ok:', "Ok");
+        }
+
         return res.status(200).json({
             success: true,
             message: "Successfully got all jobs.",
             data: getJobData,
         });
-
     } catch (error) {
         console.error("Error fetching job data:", error);
         return res.status(500).json({
             success: false,
             message: "Failed to fetch job data",
         });
-    };
+    }
 };
+
 
 // get 1 job by id 
 export const getJobController = async (req: express.Request, res: express.Response) => {
@@ -93,7 +135,10 @@ export const getJobController = async (req: express.Request, res: express.Respon
 };
 
 // post a job 
-export const createJobController = async (req: express.Request, res: express.Response) => {
+export const createJobController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const handleJobData = req.body;
         // console.log("handleJobData line 32:", handleJobData);
@@ -127,7 +172,10 @@ export const createJobController = async (req: express.Request, res: express.Res
 };
 
 // edit job for applicant: APPLIED
-export const patchAppliedJobController = async (req: express.Request, res: express.Response) => {
+export const patchAppliedJobController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const { jobId, userId, userEmail } = req.body;
         // console.log("jobId, userId, userEmail:", jobId, userId, userEmail);
@@ -175,7 +223,10 @@ export const patchAppliedJobController = async (req: express.Request, res: expre
 };
 
 // edit job for isOpen or closed
-export const patchIsOpenJobController = async (req: express.Request, res: express.Response) => {
+export const patchIsOpenJobController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const { jobId, isOpen, userId, userEmail } = req.body;
 
@@ -239,7 +290,10 @@ export const patchIsOpenJobController = async (req: express.Request, res: expres
 };
 
 // get applied-jobs by email 
-export const getAppliedJobController = async (req: express.Request, res: express.Response) => {
+export const getAppliedJobController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const email = req.params?.email as string;
         if (!email) {
@@ -274,7 +328,10 @@ export const getAppliedJobController = async (req: express.Request, res: express
 };
 
 // get posted-jobs by email 
-export const getPostedJobController = async (req: express.Request, res: express.Response) => {
+export const getPostedJobController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const email = req.params?.email as string;
         if (!email) {
@@ -309,7 +366,10 @@ export const getPostedJobController = async (req: express.Request, res: express.
 };
 
 // edit job for Question
-export const patchQuestionJobController = async (req: express.Request, res: express.Response) => {
+export const patchQuestionJobController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const { jobId, userId, userEmail, question } = req.body;
         if (!jobId || !userId || !userEmail || !question) {
@@ -364,7 +424,10 @@ export const patchQuestionJobController = async (req: express.Request, res: expr
 };
 
 // edit job for Ans
-export const patchAnsJobController = async (req: express.Request, res: express.Response) => {
+export const patchAnsJobController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const { jobId, questionId, userEmail, riplay } = req.body;
         // console.log("jobId, questionId, userEmail, riplay :", jobId, questionId, userEmail, riplay);
