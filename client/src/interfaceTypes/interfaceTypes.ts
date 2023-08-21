@@ -73,9 +73,9 @@ export interface applicantResponseTypes {
 export interface serarchDataTypes {
     position?: string;
     companyName?: string;
-    isOpen?: string;
     location?: string;
-    timestamp?: Date;
+    isOpen?: string;
+    timestamp?: string;
 };
 
 export interface GetJobsResTypes {

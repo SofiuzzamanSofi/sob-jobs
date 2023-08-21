@@ -19,7 +19,7 @@ interface PageProps {
 const Page: FC<PageProps> = ({ params, }) => {
 
     const router = useRouter();
-    const searchParams = useSearchParams()
+    // const searchParams = useSearchParams()
     const [text, setText] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
     const [id1, id2] = params?.params[0]?.split("-")

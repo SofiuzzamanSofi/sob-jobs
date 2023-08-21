@@ -29,8 +29,8 @@ export const getAllJobController = async (
         });
     };
 };
-// get all jobs By Search Text
 
+// get all jobs By Search Text
 export const getAllJobBySearchTextController = async (
     req: express.Request,
     res: express.Response
@@ -45,6 +45,7 @@ export const getAllJobBySearchTextController = async (
             location?: RegExp;
             experience?: RegExp;
             createdAt?: Date;
+            timestamp?: Date;
             // Add other fields from your schema here...
         }
 
@@ -56,7 +57,25 @@ export const getAllJobBySearchTextController = async (
         if (searchData?.companyName) {
             query.companyName = new RegExp(searchData.companyName, 'i');
         }
+        if (searchData.location) {
+            query.location = new RegExp(searchData.location, 'i');
+        }
+        if (searchData?.isOpen === "open") {
+            query.isOpen = true;
+        }
+        if (searchData?.isOpen === "closed") {
+            query.isOpen = false;
+        }
 
+        // const targetDate = new Date(new Date());
+        // if (searchData?.timestamp === "new") {
+        //     query.createdAt = { $gt: targetDate } 
+        // }
+        // if (searchData?.timestamp === "old") {
+        //     query.createdAt = {
+        //         $expr: { $lt: ['$createdAt', new Date()] }, // Assuming the field is named createdAt
+        //       };
+        // }
         // if (searchData?.isNewerJob === true) {
         //     query.createdAt = {
         //       $expr: { $gte: ['$createdAt', new Date()] }, // Assuming the field is named createdAt
@@ -68,27 +87,37 @@ export const getAllJobBySearchTextController = async (
         //     };
         //   }
 
-        if (searchData?.isOpen === true || searchData?.isOpen === false) {
-            query.isOpen = searchData?.isOpen;
-        }
 
-        if (searchData.location) {
-            query.location = new RegExp(searchData.location, 'i');
-        }
+
+
         console.log('query:', query);
 
-        const getJobData = await JobSchema.find(query);
-        if (!getJobData.length) {
-            return res.status(200).json({
-                success: false,
-                message: `Job data not found.`,
-            });
+        // Find the MOST RECENT  
+        if (searchData?.timestamp === "new") {
+            const getRecentJobData = await JobSchema.find(query).sort({ timestamp: -1 });
+            if (getRecentJobData.length) {
+                return res.status(200).json({
+                    success: true,
+                    message: "Successfully got all jobs.",
+                    data: getRecentJobData,
+                });
+            }
         }
-
+        // Find the OLDEST 
+        if (searchData?.timestamp === "old") {
+            const getOldestData = await JobSchema.find(query).sort({ timestamp: 1 });
+            if (getOldestData.length) {
+                return res.status(200).json({
+                    success: true,
+                    message: "Successfully got all jobs.",
+                    data: getOldestData,
+                });
+            }
+        }
+        // no f0und anything;
         return res.status(200).json({
-            success: true,
-            message: "Successfully got all jobs.",
-            data: getJobData,
+            success: false,
+            message: `Job data not found.`,
         });
     } catch (error) {
         console.error("Error fetching job data:", error);
