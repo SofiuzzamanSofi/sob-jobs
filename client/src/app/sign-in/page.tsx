@@ -68,8 +68,9 @@ const SignIn = () => {
       <div className='w-1/2 grid place-items-center'>
         <div className='bg-[#FFFAF4] rounded-lg grid place-items-center p-10'>
           <h1 className='mb-10 font-medium text-2xl'>Sign In</h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='space-y-3'>
+
+          <div className='space-y-3'>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className='flex flex-col items-start'>
                 <label htmlFor='email' className='ml-5'>
                   Email
@@ -120,29 +121,30 @@ const SignIn = () => {
                   }
                 </p>
               </div>
-              <div className='!mt-8 '>
-                <button
-                  type='submit'
-                  className='font-bold text-white py-3 rounded-md bg-primary w-full disabled:bg-gray-300 disabled:cursor-not-allowed'
-                  // disabled={disabled}
-                  onClick={handleGoogleLogin}
-                >
-                  Sign In With Google
-                </button>
-              </div>
-              <div>
-                <p>
-                  Don&apos;t have an accoount?{" "}
-                  <br />
-                  <Link href="/sign-up"
-                    className='text-primary hover:underline cursor-pointer bg-gray-100'
-                  >
-                    Sign-Up
-                  </Link>
-                </p>
-              </div>
+            </form>
+            <div className='!mt-8 '>
+              <button
+                type='submit'
+                className='font-bold text-white py-3 rounded-md bg-primary w-full disabled:bg-gray-300 disabled:cursor-not-allowed'
+                // disabled={disabled}
+                onClick={handleGoogleLogin}
+              >
+                Sign In With Google
+              </button>
             </div>
-          </form>
+            <div>
+              <p>
+                Don&apos;t have an accoount?{" "}
+                <br />
+                <Link href="/sign-up"
+                  className='text-primary hover:underline cursor-pointer bg-gray-100'
+                >
+                  Sign-Up
+                </Link>
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
