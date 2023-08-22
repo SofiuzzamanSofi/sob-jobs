@@ -12,11 +12,11 @@ const registerSchema = new mongoose.Schema<RegisterDataTypes>({
   },
   email: {
     type: "string",
-    required: false,
+    required: true,
   },
   role: {
     type: "string",
-    required: false,
+    required: true,
   },
   gender: {
     type: "string",

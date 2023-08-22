@@ -29,7 +29,7 @@ const Page: FC<PageProps> = ({ params, }) => {
     const submitMessage = () => {
         const trimmedText = text?.trim(); // Remove leading and trailing 
         if (!trimmedText) {
-            return; 
+            return;
         } else {
             if (messageDetailsData?.data?.participants && reduxStore.auth.user?.email && reduxStore.auth.user?._id) {
                 const messageData = {
@@ -60,12 +60,9 @@ const Page: FC<PageProps> = ({ params, }) => {
         }
     }, []);
 
-    console.log("messageDetailsData:", messageDetailsData);
-    console.log("reduxStore.auth.user:", reduxStore.auth.user);
-
     // other user not seen other chat 
-        const matchUser = messageDetailsData?.data.participants.filter((userInfo)=> userInfo.userEmail === reduxStore.auth.user?.email && userInfo.userId ===  reduxStore.auth.user?._id)
-        console.log('matchUser:',matchUser);
+    const matchUser = messageDetailsData?.data.participants.filter((userInfo) => userInfo.userEmail === reduxStore.auth.user?.email && userInfo.userId === reduxStore.auth.user?._id)
+    // console.log('matchUser:',matchUser);
 
     if (messageDetailsIsLoading) {
         return <Loading />
@@ -76,11 +73,11 @@ const Page: FC<PageProps> = ({ params, }) => {
         router.back();
         return null;
     };
-    if(!matchUser?.length){
+    if (!matchUser?.length) {
         router.push("/dashboard/chat");
         return null;
     };
-    if(!messageDetailsData?.data?.messages?.length && reduxStore.auth.user?.role === "Candidate"){
+    if (!messageDetailsData?.data?.messages?.length && reduxStore.auth.user?.role === "Candidate") {
         router.push("/dashboard/chat");
         return null;
     };
