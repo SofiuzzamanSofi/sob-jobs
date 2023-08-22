@@ -7,7 +7,7 @@ import Link from "next/link";
 
 interface JobCardProps {
   jobData: JobDataTypes
-}
+};
 
 const JobCard: React.FC<JobCardProps> = ({ jobData }) => {
 

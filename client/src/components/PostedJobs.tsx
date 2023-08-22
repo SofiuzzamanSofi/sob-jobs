@@ -11,7 +11,6 @@ import { JobDataTypes } from "@/interfaceTypes/interfaceTypes";
 const PostedJobs = () => {
 
   const reduxStore = useSelector((state: RootState) => state);
-
   const { data, isLoading } = useGetPostedJobsQuery(reduxStore.auth.user?.email || "");
   const JobDatas = data?.data ? [...data?.data].reverse() : [];
 

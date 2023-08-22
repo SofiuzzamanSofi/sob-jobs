@@ -2,27 +2,22 @@
 
 import Loading from '@/components/Loading';
 import { useGetApplicantQuery } from '@/redux/features/applicant/applicantApi';
-import { AppDispatch, RootState } from '@/redux/store';
+import { RootState } from '@/redux/store';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { FC } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 interface PageProps {
 
-}
+};
 
 const Page: FC<PageProps> = ({ }) => {
 
-    const dispatch: AppDispatch = useDispatch();
-    const reduxStore = useSelector((state: RootState) => state);
-    const router = useRouter();
     const searchParams = useSearchParams();
     const email = searchParams?.get('email')
-
+    const reduxStore = useSelector((state: RootState) => state);
     const { isLoading, data } = useGetApplicantQuery(email!);
-    // console.log('email:', email);
-    // console.log('data:', data);
 
     if (isLoading) {
         return <Loading />;
@@ -50,7 +45,7 @@ const Page: FC<PageProps> = ({ }) => {
                     <Link
                         href={{
                             pathname: `chat/${reduxStore.auth.user?._id}-${data?.data?._id}`,
-                            query: {messageEmail: `${reduxStore.auth.user?.email}-${data?.data?.email}`},
+                            query: { messageEmail: `${reduxStore.auth.user?.email}-${data?.data?.email}` },
                         }}
                     >
                         <button>
@@ -63,6 +58,6 @@ const Page: FC<PageProps> = ({ }) => {
             }
         </div>
     )
-}
+};
 
 export default Page;

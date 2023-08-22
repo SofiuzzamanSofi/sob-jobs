@@ -6,7 +6,9 @@ SOB-JOBS
 
 This is a [NextJS](https://nextjs.org/) project made with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-### Live Preview site: [Live-Link](https://github.com/SofiuzzamanSofi/sob-jobs.git) [NOT READY YET]
+### Live Preview site: [Sob-Jobs](https://sob-jobs.vercel.app/)
+
+### server-site: [sob-jobs-server](https://sob-jobs-server-via-cli.vercel.app)
 
 ## Cloning and Installing dependencies
 

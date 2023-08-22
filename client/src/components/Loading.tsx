@@ -1,11 +1,13 @@
 import { FC } from 'react'
 import loading from "../assets/loading.gif";
 import Image from 'next/image';
+
 interface LoadingProps {
 
-}
+};
 
 const Loading: FC<LoadingProps> = ({ }) => {
+
     const style = {
         background: `radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 30%)`,
     };
@@ -18,4 +20,4 @@ const Loading: FC<LoadingProps> = ({ }) => {
     );
 };
 
-export default Loading
+export default Loading;

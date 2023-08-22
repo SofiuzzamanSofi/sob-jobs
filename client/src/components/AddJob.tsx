@@ -48,7 +48,6 @@ const AddJob = () => {
     }
   }, [isLoading, isSuccess, router]);
 
-
   return (
     <div className='flex justify-center items-center overflow-auto p-10'>
       <form

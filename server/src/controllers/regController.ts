@@ -2,7 +2,10 @@ import express from "express";
 import { RegSchema } from "../models/regSchema";
 
 // post a user
-export const createRegController = async (req: express.Request, res: express.Response) => {
+export const createRegController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const handleRegData = req.body;
         if (!handleRegData) {
@@ -33,7 +36,10 @@ export const createRegController = async (req: express.Request, res: express.Res
 };
 
 // get a user by email 
-export const getRegController = async (req: express.Request, res: express.Response) => {
+export const getRegController = async (
+    req: express.Request,
+    res: express.Response
+) => {
     const email = req.params?.email as string;
     try {
         if (!email) {

@@ -12,6 +12,3 @@ export default (): express.Router => {
     createMessageControllerRoute(router);
     return router;
 };
-
-
-

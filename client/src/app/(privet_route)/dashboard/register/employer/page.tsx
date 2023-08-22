@@ -1,12 +1,11 @@
-
 import EmployerRegistration from '@/components/register/EmployerRegistration';
 import { FC } from 'react'
 
-interface employerProps {
+interface EmployerProps {
 
-}
+};
 
-const employer: FC<employerProps> = ({ }) => {
+const Employer: FC<EmployerProps> = ({ }) => {
     return (
         <div>
             <EmployerRegistration />
@@ -14,4 +13,4 @@ const employer: FC<employerProps> = ({ }) => {
     );
 };
 
-export default employer
+export default Employer;

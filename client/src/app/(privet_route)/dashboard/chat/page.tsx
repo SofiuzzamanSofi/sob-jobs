@@ -9,21 +9,18 @@ import { useSelector } from 'react-redux';
 
 interface PageProps {
 
-}
+};
 
 const Page: FC<PageProps> = ({ }) => {
 
     const reduxStore = useSelector((state: RootState) => state);
-    const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetAllMessageByIdQuery(reduxStore.auth.user?._id, {pollingInterval: 5000});
-    // console.log('reduxStore.auth.user?._id:', reduxStore.auth.user?._id);
-    // console.log('messageDetailsData:', messageDetailsData);
+    const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetAllMessageByIdQuery(reduxStore.auth.user?._id, { pollingInterval: 5000 });
 
     const otheParticipentNameEmail = (participants: Participant[]) => {
         return participants.filter((p) => p.userEmail !== reduxStore.auth.user?.email);
     };
 
     const messageArrayReverse = messageDetailsData?.data ? [...messageDetailsData?.data].reverse() : [];
-
 
     return (
         <div>

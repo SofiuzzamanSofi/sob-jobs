@@ -8,11 +8,13 @@ import { JobDataTypes } from '@/interfaceTypes/interfaceTypes';
 
 interface jobsProps {
 
-}
+};
 
 const Jobs: FC<jobsProps> = ({ }) => {
+
     const { isLoading, data } = useGetJobsQuery();
     const JobDatas = data?.data ? [...data?.data].reverse() : [];
+
     if (isLoading) {
         return <Loading />;
     }

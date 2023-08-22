@@ -12,14 +12,14 @@ interface PageProps {
     params: {
         params: string[];
     };
-}
+};
 
 const Page: FC<PageProps> = ({ params, }) => {
 
     const router = useRouter();
     const [text, setText] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
-    const [id1, id2] = params?.params[0]?.split("-")
+    const [id1, id2] = params?.params[0]?.split("-");
 
     const reduxStore = useSelector((state: RootState) => state);
     // get Message Detail By Id1 - Id2
@@ -62,7 +62,6 @@ const Page: FC<PageProps> = ({ params, }) => {
 
     // other user not seen other chat 
     const matchUser = messageDetailsData?.data.participants.filter((userInfo) => userInfo.userEmail === reduxStore.auth.user?.email && userInfo.userId === reduxStore.auth.user?._id)
-    // console.log('matchUser:',matchUser);
 
     if (messageDetailsIsLoading) {
         return <Loading />

@@ -1,7 +1,7 @@
 "use client"
 
-import { Provider, } from 'react-redux'
-import store, { AppDispatch } from './store';
+import { Provider, } from 'react-redux';
+import store from './store';
 
 const Providers = (props: React.PropsWithChildren) => {
   return (
@@ -9,6 +9,6 @@ const Providers = (props: React.PropsWithChildren) => {
       {props.children}
     </Provider>
   )
-}
+};
 
-export default Providers
+export default Providers;

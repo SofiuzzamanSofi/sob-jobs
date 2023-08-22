@@ -7,4 +7,4 @@ export const generateRandomStringId = (lenght: number) => {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     };
     return result;
-}
+};

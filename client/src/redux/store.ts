@@ -4,6 +4,7 @@ import authSlice from './features/auth/authSlice'
 import apiSlice from './features/api/apiSlice'
 
 const store = configureStore({
+
     // devTools: false,
 
     reducer: {

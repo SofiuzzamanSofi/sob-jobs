@@ -4,7 +4,10 @@ import { MessageSchema } from '../models/messageSchema';
 import { generateRandomStringId } from '../randomId/randomId';
 
 // get all message by messageId 
-export const getAllMessageById = async (req: express.Request, res: express.Response) => {
+export const getAllMessageById = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const id = req.params?.id as string;
         const userFromDatabaseById = await RegSchema.findById(id);
@@ -15,6 +18,7 @@ export const getAllMessageById = async (req: express.Request, res: express.Respo
                     $elemMatch: { userId: userFromDatabaseById._id },
                 }
             });
+
             // console.log('getMessagesFromDatabase:', getMessagesFromDatabase);
             if (getMessagesFromDatabase) {
                 return res.status(200).json({
@@ -34,7 +38,10 @@ export const getAllMessageById = async (req: express.Request, res: express.Respo
 };
 
 // get 1 message Details by message id
-export const getMessageById = async (req: express.Request, res: express.Response) => {
+export const getMessageById = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const id = req.params?.id as string;
         const [id1, id2] = id.split("-");
@@ -111,7 +118,10 @@ export const getMessageById = async (req: express.Request, res: express.Response
 };
 
 // post 1 message by message id
-export const postMessageById = async (req: express.Request, res: express.Response) => {
+export const postMessageById = async (
+    req: express.Request,
+    res: express.Response
+) => {
     try {
         const { chatId, message, participants } = req.body;
         if (!chatId || !message || !participants) {
@@ -173,19 +183,10 @@ export const postMessageById = async (req: express.Request, res: express.Respons
         };
 
         // First Time Send Message
-//         const messagePostData = {
-//             chatId,
-//             participants,
-//             messages : [
-//                 {
-// message,
-//                 }
-//             ]
-//         }
         const messagePostFirstTime = await new MessageSchema({
             chatId,
             participants,
-            messages:[
+            messages: [
                 {
                     messageId: message.messageId,
                     senderId: message.senderId,
@@ -215,26 +216,26 @@ export const postMessageById = async (req: express.Request, res: express.Respons
     };
 };
 
+// if DOUBLE OR THRIPPLE then apply
+// const messageGotById1AndId2 = async (id: string) => {
+//     const [id1, id2] = id.split("-");
+//     //get message by id1 and id2 Sender: Employee
+//     const messageResponse1Employee = await MessageSchema.findOne({
+//         chatId: id
+//     });
+//     if (messageResponse1Employee) {
+//         return messageResponse1Employee;
+//     };
+//     //get message by id1 and id2 Sender: Candidate
+//     const messageResponse2Candidate = await MessageSchema.findOne({
+//         chatId: `${id2}-${id1}`,
+//     })
+//     if (messageResponse2Candidate) {
+//         return messageResponse2Candidate;
+//     };
+//     return null;
+// }
 
-
-const messageGotById1AndId2 = async (id: string) => {
-    const [id1, id2] = id.split("-");
-    //get message by id1 and id2 Sender: Employee
-    const messageResponse1Employee = await MessageSchema.findOne({
-        chatId: id
-    });
-    if (messageResponse1Employee) {
-        return messageResponse1Employee;
-    };
-    //get message by id1 and id2 Sender: Candidate
-    const messageResponse2Candidate = await MessageSchema.findOne({
-        chatId: `${id2}-${id1}`,
-    })
-    if (messageResponse2Candidate) {
-        return messageResponse2Candidate;
-    };
-    return null;
-}
 // const extraObject = {
 //     const messagePost = await MessageSchema.findOneAndUpdate(
 //         {

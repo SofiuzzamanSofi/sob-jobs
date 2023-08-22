@@ -1,15 +1,16 @@
 import AddJob from '@/components/AddJob';
-import { FC } from 'react'
+import { FC } from 'react';
 
+interface PageProps {
 
-interface pageProps {
+};
 
-}
+const Page: FC<PageProps> = ({ }) => {
+    return (
+        <div>
+            <AddJob />
+        </div>
+    );
+};
 
-const page: FC<pageProps> = ({ }) => {
-    return <div>
-        <AddJob />
-    </div>
-}
-
-export default page;
+export default Page;

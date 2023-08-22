@@ -34,7 +34,7 @@ const CandidateRegistration = () => {
     if (isLoading) {
       toast.loading("Please wait...", { id: "post-user-on-db" });
     };
-    if (!isLoading &&  isSuccess) {
+    if (!isLoading && isSuccess) {
       toast.success("Register Success.", { id: "post-user-on-db" });
       router.push("/dashboard");
     };
@@ -67,13 +67,13 @@ const CandidateRegistration = () => {
             <label className='mb-2' htmlFor='firstName'>
               First Name
             </label>
-            <input className="border p-2" type='text' id='firstName' {...register("firstName")}  required/>
+            <input className="border p-2" type='text' id='firstName' {...register("firstName")} required />
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='lastName'>
               Last Name
             </label>
-            <input className="border p-2" type='text' id='lastName' {...register("lastName")}  required/>
+            <input className="border p-2" type='text' id='lastName' {...register("lastName")} required />
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='email'>
@@ -152,19 +152,19 @@ const CandidateRegistration = () => {
             <label className='mb-2' htmlFor='address'>
               Street Address
             </label>
-            <input className="border p-2" type='text' {...register("address")} id='address'  required/>
+            <input className="border p-2" type='text' {...register("address")} id='address' required />
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='city'>
               City
             </label>
-            <input className="border p-2" type='text' {...register("city")} id='city'  required/>
+            <input className="border p-2" type='text' {...register("city")} id='city' required />
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='postcode'>
               Postal Code
             </label>
-            <input className="border p-2" type='text' {...register("postcode")} id='postcode'  required/>
+            <input className="border p-2" type='text' {...register("postcode")} id='postcode' required />
           </div>
 
           <div className='flex justify-between items-center w-full mt-3'>

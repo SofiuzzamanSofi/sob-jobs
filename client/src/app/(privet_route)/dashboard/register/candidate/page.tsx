@@ -1,12 +1,11 @@
-
 import CandidateRegistration from '@/components/register/CandidateRegistration';
 import React, { FC } from 'react'
 
-interface candidateProps {
-   
-}
+interface CandidateProps {
 
-const candidate: FC<candidateProps> = ({ }) => {
+};
+
+const Candidate: FC<CandidateProps> = ({ }) => {
     return (
         <div>
             <CandidateRegistration />
@@ -14,4 +13,4 @@ const candidate: FC<candidateProps> = ({ }) => {
     )
 };
 
-export default candidate
+export default Candidate;

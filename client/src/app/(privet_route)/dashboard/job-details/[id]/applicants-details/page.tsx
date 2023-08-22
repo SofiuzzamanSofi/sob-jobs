@@ -1,39 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
-import { JobDataTypes } from '@/interfaceTypes/interfaceTypes';
-import { useJobByIdQuery, useJobIsOpenMutation } from '@/redux/features/job/jobApi';
+import Link from "next/link";
 import Image from 'next/image';
-import meeting from "@/assets/meeting.jpg";
-import { FC } from 'react'
-import { BsArrowRightShort, BsPeople } from 'react-icons/bs';
-import AlertModal from "@/components/shared/AlertModal";
+import { BsPeople } from 'react-icons/bs';
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import Link from "next/link";
+import meeting from "@/assets/meeting.jpg";
+import React, { FC, useState } from "react";
+import AlertModal from "@/components/shared/AlertModal";
+import { JobDataTypes } from '@/interfaceTypes/interfaceTypes';
+import { useJobByIdQuery, useJobIsOpenMutation } from '@/redux/features/job/jobApi';
 
 
 interface pageProps {
     params: {
         id: string
     }
-}
+};
 
 const Page: FC<pageProps> = ({ params }) => {
 
-    // const router = useRouter();
-    // const {id} = router.query;
-    // console.log("id:", id)
-    // const pathname = usePathname() || "";
-    // const pathNameTotalArray = pathname.split("/")
-    // const id = pathNameTotalArray[pathNameTotalArray.length - 2];
-    // console.log("pathNameTotalArray:", pathNameTotalArray, "ddddd:", id)
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     const reduxStore = useSelector((state: RootState) => state);
     const [jobIsOpen, { isLoading: jobIsOpenLoading, isError: jobIsOpenError, isSuccess: jobIsOpenSuccess }] = useJobIsOpenMutation();
-    // const { data, isLoading, isError } = useJobByIdQuery(params.id, { pollingInterval: 2000 });
     const { data, isLoading, isError } = useJobByIdQuery(params.id);
-    // console.log("iddddddd data in applicans name:::", data);
+
     const {
         email,
         position,
@@ -100,7 +91,6 @@ const Page: FC<pageProps> = ({ params }) => {
                     <div className='flex justify-between items-center mt-5'>
                         <h1 className='text-xl font-semibold text-primary'>{position}</h1>
                     </div>
-
                 </div>
                 <div>
                     <table className="table-auto border">
@@ -134,7 +124,6 @@ const Page: FC<pageProps> = ({ params }) => {
                                             <Link
                                                 href={`/dashboard/profile?email=${applicant?.userEmail}`}
                                             >
-
                                                 Profile
                                             </Link>
                                         </td>
@@ -142,7 +131,6 @@ const Page: FC<pageProps> = ({ params }) => {
                                     </tr>
                                 ))
                             }
-
                         </thead>
                     </table>
                 </div>
@@ -208,6 +196,6 @@ const Page: FC<pageProps> = ({ params }) => {
             />
         </div>
     );
-}
+};
 
 export default Page;

@@ -1,19 +1,19 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
-import loginImage from "@/assets/login.svg";
-import { useForm, useWatch } from "react-hook-form";
-import { useRouter } from 'next/navigation'
 import Link from "next/link";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-
 import toast from 'react-hot-toast';
+import loginImage from "@/assets/login.svg";
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { AppDispatch, RootState } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { SignUpFormValueTypes } from "@/interfaceTypes/interfaceTypes";
 import { googleLogin, signInUser } from "@/redux/features/auth/authSlice";
 
 const SignIn = () => {
+
   const { handleSubmit, register, control } = useForm<SignUpFormValueTypes>();
   const password = useWatch({ control, name: "password" });
   const router = useRouter();
@@ -38,7 +38,7 @@ const SignIn = () => {
 
   const handleGoogleLogin = () => {
     dispatch(googleLogin());
-  }
+  };
 
   useEffect(() => {
     if (reduxStore?.auth?.isLoading) {

@@ -1,19 +1,19 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
-import loginImage from "@/assets/login.svg";
-import { useForm, useWatch } from "react-hook-form";
-import { useRouter } from 'next/navigation'
 import Link from "next/link";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-
 import { toast } from "react-hot-toast";
+import loginImage from "@/assets/login.svg";
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { AppDispatch, RootState } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { SignUpFormValueTypes } from "@/interfaceTypes/interfaceTypes";
 import { googleLogin, signUpUser } from "@/redux/features/auth/authSlice";
 
 const SignUp = () => {
+
   const { handleSubmit, register, control } = useForm<SignUpFormValueTypes>();
   const password = useWatch({ control, name: "password" });
   const confirmPassword = useWatch({ control, name: "confirmPassword" });
@@ -21,7 +21,6 @@ const SignUp = () => {
   const [disabled, setDisabled] = useState(true);
   const reduxStore = useSelector((state: RootState) => state);
   const dispatch: AppDispatch = useDispatch();
-
 
   useEffect(() => {
     if (
@@ -59,7 +58,7 @@ const SignUp = () => {
     };
   }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, router]);
 
-  
+
   if (reduxStore?.auth?.email) {
     router.push("/");
     return null;

@@ -50,7 +50,6 @@ export const getUser = createAsyncThunk(
     async (email: string) => {
         const resData = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/routes/register/${email}`);
         const data = await resData.json();
-        // console.log("data.data", data.data);
         return data.data;
     }
 );

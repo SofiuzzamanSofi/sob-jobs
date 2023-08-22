@@ -14,10 +14,6 @@ const Sidebar = () => {
     const router = useRouter();
     const pathname = usePathname() || "";
     const pathNameTotalArray = usePathname()?.split("/") || [];
-    // const id = pathNameTotalArray[pathNameTotalArray.length - 1];
-    // const isPathnameIncludes = pathname.includes("/dashboard/jobs")
-    // console.log("pathname:", pathname);
-    // console.log("pathNameTotalArray:", pathNameTotalArray.length);
 
     const employerRoutes = [
         {
@@ -132,4 +128,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-

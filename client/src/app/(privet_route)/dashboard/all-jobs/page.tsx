@@ -1,17 +1,16 @@
 import Jobs from '@/components/Jobs'
-import { FC } from 'react'
+import { FC } from 'react';
 
+interface PageProps {
 
-interface pageProps {
+};
 
-}
-
-const page: FC<pageProps> = ({ }) => {
+const Page: FC<PageProps> = ({ }) => {
     return (
         <div>
             <Jobs />
         </div>
-    )
-}
+    );
+};
 
-export default page
+export default Page;

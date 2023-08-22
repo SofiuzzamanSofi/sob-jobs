@@ -83,20 +83,20 @@ const EmployerRegistration = () => {
       <div className='flex justify-center items-center overflow-auto p-10'>
         <form
           className='bg-secondary/20 shadow-lg p-10 rounded-2xl flex flex-wrap gap-3 max-w-3xl justify-between'
-          onSubmit={handleSubmit(onSubmit)} 
+          onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className='w-full text-2xl text-primary mb-5'>Employer</h1>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='firstName'>
               First Name
             </label>
-            <input className="border p-2" type='text' id='firstName' {...register("firstName")} required/>
+            <input className="border p-2" type='text' id='firstName' {...register("firstName")} required />
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='lastName'>
               Last Name
             </label>
-            <input className="border p-2" type='text' id='lastName' {...register("lastName")} required/>
+            <input className="border p-2" type='text' id='lastName' {...register("lastName")} required />
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='email'>
@@ -150,7 +150,7 @@ const EmployerRegistration = () => {
             <label className='mb-2' htmlFor='companyName'>
               Company&apos;s name
             </label>
-            <input className="border p-2" type='text' {...register("companyName")} id='companyName' required/>
+            <input className="border p-2" type='text' {...register("companyName")} id='companyName' required />
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-3' htmlFor='country'>

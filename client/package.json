@@ -1,5 +1,6 @@
 {
-  "name": "manual-redux",
+  "name": "sofi-jobs-client-side",
+  "description": "sofi-jobs-client-side-description",
   "version": "0.1.0",
   "private": true,
   "scripts": {

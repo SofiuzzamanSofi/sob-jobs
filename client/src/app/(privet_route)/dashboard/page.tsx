@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 interface pageProps {
 
-}
+};
 
 const Dashboard = ({ }) => {
 

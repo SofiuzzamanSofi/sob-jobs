@@ -1,15 +1,14 @@
 "use client";
 
-import { FC, useState, useEffect } from 'react'
 import JobCard from '@/components/JobCard';
 import Loading from '@/components/Loading';
-import { useRouter } from 'next/navigation';
-import { useGetJobsQuery, useGetSearchJobsMutation } from '@/redux/features/job/jobApi'
+import { FC, useState, useEffect } from 'react';
 import { JobDataTypes, serarchDataTypes } from '@/interfaceTypes/interfaceTypes';
+import { useGetJobsQuery, useGetSearchJobsMutation } from '@/redux/features/job/jobApi';
 
 interface pageProps {
 
-}
+};
 
 const Page: FC<pageProps> = ({ }) => {
 
@@ -18,35 +17,25 @@ const Page: FC<pageProps> = ({ }) => {
     const [locationText, setLocationText] = useState<string>("");
     const [newOrOld, setnewOrOld] = useState<string>("new");
     const [isOpenClosed, setIsOpenClosed] = useState<string>("all");
-    const router = useRouter();
     const { isLoading, data } = useGetJobsQuery();
     const JobDatas = data?.data ? [...data?.data].reverse() : [];
-    const [jobBySearchData, {isError, isLoading: searchJobsIsLoading, data: searchJobsData}] = useGetSearchJobsMutation();
-    // console.log(router)
-    // console.log(new Date());
+    const [jobBySearchData, { isError, isLoading: searchJobsIsLoading, data: searchJobsData }] = useGetSearchJobsMutation();
 
+    const handleFromSubmit = (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+    };
 
-
-const handleFromSubmit =(e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-}
-
-    // console.log('newOrOld:', newOrOld);
     useEffect(() => {
-        const trimmedtitleText = titleText?.trim();
-        const trimmedcompanyText = titleText?.trim();
-        const trimmedlocationText = titleText?.trim();
-      
-            const searchData : serarchDataTypes = {
-                position: titleText?.trim(),
-                companyName: companyText?.trim(),
-                location: locationText?.trim(),
-                isOpen: isOpenClosed,
-                timestamp: newOrOld,
-            }
-            // console.log('searchData:',searchData);
-            jobBySearchData(searchData);      
-    }, [titleText, companyText, locationText, newOrOld, isOpenClosed,jobBySearchData]);
+        const searchData: serarchDataTypes = {
+            position: titleText?.trim(),
+            companyName: companyText?.trim(),
+            location: locationText?.trim(),
+            isOpen: isOpenClosed,
+            timestamp: newOrOld,
+        }
+        // console.log('searchData:',searchData);
+        jobBySearchData(searchData);
+    }, [titleText, companyText, locationText, newOrOld, isOpenClosed, jobBySearchData]);
 
     if (isLoading) {
         return <Loading />;
@@ -61,8 +50,8 @@ const handleFromSubmit =(e: { preventDefault: () => void; }) => {
                         <h1 className='text-2xl pt-2 text-center'>Search Jobs</h1>
                     </div>
                     <form
-                    className='rounded-lg grid place-items-center border px-5'
-                    onSubmit={handleFromSubmit}
+                        className='rounded-lg grid place-items-center border px-5'
+                        onSubmit={handleFromSubmit}
                     >
                         <div className='gap-2 grid lg:flex lg:justify-between justify-center w-full border'>
 
@@ -101,7 +90,6 @@ const handleFromSubmit =(e: { preventDefault: () => void; }) => {
                                     id='location'
                                     value={locationText}
                                     onChange={(e) => setLocationText(e.target.value)}
-
                                 />
                             </div>
                         </div>
@@ -118,9 +106,9 @@ const handleFromSubmit =(e: { preventDefault: () => void; }) => {
                                     <label htmlFor='newer'>New Jobs</label>
                                     <label htmlFor="onldNew"></label> */}
                                     <select
-                                    name="onldNew" id="onldNew" className='border'
-                                    value={newOrOld}
-                                    onChange={(e) => setnewOrOld(e.target.value)}
+                                        name="onldNew" id="onldNew" className='border'
+                                        value={newOrOld}
+                                        onChange={(e) => setnewOrOld(e.target.value)}
                                     >
                                         <option disabled value="">Chose One</option>
                                         <option value="new">New First</option>
@@ -136,10 +124,10 @@ const handleFromSubmit =(e: { preventDefault: () => void; }) => {
                                         onClick={() => setnewOrOld((prv) => !prv)}
                                     />
                                     <label htmlFor='older'>Old Jobs</label> */}
-                                     <select
-                                     name="openClosed" id="openClosed" className='border'
-                                     value={isOpenClosed}
-                                     onChange={(e) => setIsOpenClosed(e.target.value)}
+                                    <select
+                                        name="openClosed" id="openClosed" className='border'
+                                        value={isOpenClosed}
+                                        onChange={(e) => setIsOpenClosed(e.target.value)}
                                     >
                                         <option disabled value="">Chose One</option>
                                         <option value="all">All Jobs</option>
@@ -164,13 +152,13 @@ const handleFromSubmit =(e: { preventDefault: () => void; }) => {
             >
                 {
                     data?.data?.length &&
-                    searchJobsData?.data ?
-                     searchJobsData?.data.map((jobData: JobDataTypes) => (
+                        searchJobsData?.data ?
+                        searchJobsData?.data.map((jobData: JobDataTypes) => (
                             <JobCard key={jobData._id} jobData={jobData} />
                         ))
                         :
                         <div>
-                            <h1> No jobs yet on this website.</h1>
+                            <h1>NO Maches Or Pls Wait Or Error.</h1>
                         </div>
                 }
             </div>

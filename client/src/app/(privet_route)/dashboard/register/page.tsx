@@ -1,15 +1,14 @@
-
 import AccountCreator from '@/components/register/AccountCreator'
 import { FC } from 'react'
 
-interface pageProps {
+interface PageProps {
 
-}
+};
 
-const page: FC<pageProps> = ({ }) => {
+const Page: FC<PageProps> = ({ }) => {
     return <div>
         <AccountCreator />
     </div>
-}
+};
 
-export default page
+export default Page;

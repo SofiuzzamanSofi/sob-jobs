@@ -87,9 +87,6 @@ export const getAllJobBySearchTextController = async (
         //     };
         //   }
 
-
-
-
         // console.log('query:', query);
 
         // Find the MOST RECENT  
