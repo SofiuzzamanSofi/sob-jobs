@@ -9,10 +9,9 @@
   "scripts": {
     "dev": "nodemon",
     "ts.check": "tsc --project tsconfig.json",
-    "add-build": "git add build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf build && tsc",
-    "start": "node build/index.js"
+    "build": "tsc",
+    "start": "node ./build/index.js"
   },
   "dependencies": {
     "colors": "^1.4.0",
@@ -33,5 +32,5 @@
     "ts.check",
     "build",
     "add-build"
-]
+  ]
 }
