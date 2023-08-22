@@ -11,6 +11,7 @@ import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import { RegisterTypes } from "@/interfaceTypes/interfaceTypes";
 
 const EmployerRegistration = () => {
+
   const [countries, setCountries] = useState<any[]>([]);
   const { handleSubmit, register, control } = useForm();
   const term = useWatch({ control, name: "term" });
@@ -48,10 +49,8 @@ const EmployerRegistration = () => {
   }, []);
 
   const onSubmit: SubmitHandler<RegisterTypes> = (data) => {
-    // e?.preventDefault();
     postUser({ ...data, role: "Employer", email: reduxStore?.auth?.email || "", });
-    console.log('"Clicked on OnSubmit":', "Clicked on OnSubmit");
-    // e?.stopPropagation(); // USED HERE!
+    // console.log("hello clicked", data);
   };
 
   useEffect(() => {
@@ -211,7 +210,7 @@ const EmployerRegistration = () => {
             <button
               disabled={!term}
               type='submit'
-              className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:cursor-pointer transition-all '
+              className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
             >
               Submit
             </button>

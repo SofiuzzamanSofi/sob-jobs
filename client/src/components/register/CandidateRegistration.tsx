@@ -11,10 +11,10 @@ import { FaChevronLeft } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const CandidateRegistration = () => {
+
   const [countries, setCountries] = useState<any[]>([]);
   const { handleSubmit, register, control } = useForm();
   const term = useWatch({ control, name: "term" });
-  // console.log(term);
   const router = useRouter();
   const reduxStore = useSelector((state: RootState) => state);
   const [postUser, { isLoading, isError, isSuccess }] = useRegisterMutation();
@@ -47,6 +47,7 @@ const CandidateRegistration = () => {
     router.push("/dashboard");
     return null;
   };
+
   return (
     <div className='pt-14'>
       <div
