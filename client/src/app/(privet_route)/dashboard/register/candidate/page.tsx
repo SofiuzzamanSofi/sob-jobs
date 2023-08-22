@@ -8,7 +8,7 @@ interface candidateProps {
 
 const candidate: FC<candidateProps> = ({ }) => {
     return (
-        <div>;
+        <div>
             <CandidateRegistration />
         </div>
     )

@@ -54,6 +54,12 @@ const SignIn = () => {
     };
   }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, router]);
 
+
+  if (reduxStore?.auth?.email) {
+    router.push("/");
+    return null;
+  };
+
   return (
     <div className='flex h-screen items-center pt-14 border border-red-700'>
       <div className='w-1/2'>

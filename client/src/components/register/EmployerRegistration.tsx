@@ -13,7 +13,7 @@ import { RegisterTypes } from "@/interfaceTypes/interfaceTypes";
 const EmployerRegistration = () => {
 
   const [countries, setCountries] = useState<any[]>([]);
-  const { handleSubmit, register, control } = useForm();
+  const { handleSubmit, register, control } = useForm<RegisterTypes>();
   const term = useWatch({ control, name: "term" });
   const router = useRouter();
   const reduxStore = useSelector((state: RootState) => state);
@@ -49,27 +49,28 @@ const EmployerRegistration = () => {
   }, []);
 
   const onSubmit: SubmitHandler<RegisterTypes> = (data) => {
-    postUser({ ...data, role: "Employer", email: reduxStore?.auth?.email || "", });
+    postUser({ ...data, role: "Employer", email: reduxStore?.auth?.email || "", country: data.country || "Bangladesh" });
     // console.log("hello clicked", data);
   };
 
   useEffect(() => {
-    if (reduxStore?.auth?.isLoading) {
+    if (isLoading) {
       toast.loading("Please wait...", { id: "post-user-on-db" });
     };
-    if (!reduxStore?.auth?.isLoading && reduxStore.auth.user?.email && reduxStore.auth.user?.role) {
+    if (!isLoading && isSuccess) {
       toast.success("Register Success.", { id: "post-user-on-db" });
       router.push("/dashboard");
     };
-    if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
+    if (isError) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
-  }, [reduxStore?.auth?.isLoading, reduxStore.auth.user?.email, reduxStore.auth.user?.role, reduxStore?.auth?.isError, reduxStore?.auth?.error, router]);
+  }, [isLoading, isSuccess, isError, router]);
 
   if (reduxStore?.auth?.user?.role) {
     router.push("/dashboard");
     return null;
   };
+
   return (
     <div className='pt-14'>
       <div
@@ -82,20 +83,20 @@ const EmployerRegistration = () => {
       <div className='flex justify-center items-center overflow-auto p-10'>
         <form
           className='bg-secondary/20 shadow-lg p-10 rounded-2xl flex flex-wrap gap-3 max-w-3xl justify-between'
-          onSubmit={() => handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit)} 
         >
           <h1 className='w-full text-2xl text-primary mb-5'>Employer</h1>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='firstName'>
               First Name
             </label>
-            <input className="border p-2" type='text' id='firstName' {...register("firstName")} />
+            <input className="border p-2" type='text' id='firstName' {...register("firstName")} required/>
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='lastName'>
               Last Name
             </label>
-            <input className="border p-2" type='text' id='lastName' {...register("lastName")} />
+            <input className="border p-2" type='text' id='lastName' {...register("lastName")} required/>
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='email'>
@@ -112,6 +113,7 @@ const EmployerRegistration = () => {
                   id='male'
                   {...register("gender")}
                   value='male'
+                  required
                 />
                 <label className='ml-2 text-lg' htmlFor='male'>
                   Male
@@ -123,6 +125,7 @@ const EmployerRegistration = () => {
                   id='female'
                   {...register("gender")}
                   value='female'
+                  required
                 />
                 <label className='ml-2 text-lg' htmlFor='female'>
                   Female
@@ -134,6 +137,7 @@ const EmployerRegistration = () => {
                   id='other'
                   {...register("gender")}
                   value='other'
+                  required
                 />
                 <label className='ml-2 text-lg' htmlFor='other'>
                   Other
@@ -146,7 +150,7 @@ const EmployerRegistration = () => {
             <label className='mb-2' htmlFor='companyName'>
               Company&apos;s name
             </label>
-            <input className="border p-2" type='text' {...register("companyName")} id='companyName' />
+            <input className="border p-2" type='text' {...register("companyName")} id='companyName' required/>
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-3' htmlFor='country'>
@@ -156,7 +160,13 @@ const EmployerRegistration = () => {
               {countries
                 .sort((a, b) => a?.name?.common?.localeCompare(b?.name?.common))
                 .map(({ name }, index) => (
-                  <option key={index} value={name.common}>{name.common}</option>
+                  <option
+                    key={index}
+                    value={name.common}
+                    selected={name.common === "Bangladesh"}
+                  >
+                    {name.common}
+                  </option>
                 ))}
             </select>
           </div>
@@ -194,6 +204,7 @@ const EmployerRegistration = () => {
               type='text'
               {...register("roleInCompany")}
               id='roleInCompany'
+              required
             />
           </div>
 

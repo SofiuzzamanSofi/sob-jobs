@@ -59,6 +59,11 @@ const SignUp = () => {
     };
   }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, router]);
 
+  
+  if (reduxStore?.auth?.email) {
+    router.push("/");
+    return null;
+  };
 
   return (
     <div className='flex h-screen items-center pt-14'>

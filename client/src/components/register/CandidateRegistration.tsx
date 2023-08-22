@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 const CandidateRegistration = () => {
 
   const [countries, setCountries] = useState<any[]>([]);
-  const { handleSubmit, register, control } = useForm();
+  const { handleSubmit, register, control } = useForm<RegisterTypes>();
   const term = useWatch({ control, name: "term" });
   const router = useRouter();
   const reduxStore = useSelector((state: RootState) => state);
@@ -26,22 +26,22 @@ const CandidateRegistration = () => {
   }, []);
 
   const onSubmit: SubmitHandler<RegisterTypes> = (data) => {
-    postUser({ ...data, role: "Candidate", email: reduxStore?.auth?.email || "", });
+    postUser({ ...data, role: "Candidate", email: reduxStore?.auth?.email || "", country: data.country || "Bangladesh" });
     // console.log("hello clicked", data);
   };
 
   useEffect(() => {
-    if (reduxStore?.auth?.isLoading) {
+    if (isLoading) {
       toast.loading("Please wait...", { id: "post-user-on-db" });
     };
-    if (!reduxStore?.auth?.isLoading && reduxStore.auth.user?.email && reduxStore.auth.user?.role) {
+    if (!isLoading &&  isSuccess) {
       toast.success("Register Success.", { id: "post-user-on-db" });
       router.push("/dashboard");
     };
-    if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
+    if (isError) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
-  }, [reduxStore?.auth?.isLoading, reduxStore.auth.user?.email, reduxStore.auth.user?.role, reduxStore?.auth?.isError, reduxStore?.auth?.error, router]);
+  }, [isLoading, isSuccess, isError, router]);
 
   if (reduxStore?.auth?.user?.role) {
     router.push("/dashboard");
@@ -67,13 +67,13 @@ const CandidateRegistration = () => {
             <label className='mb-2' htmlFor='firstName'>
               First Name
             </label>
-            <input className="border p-2" type='text' id='firstName' {...register("firstName")} />
+            <input className="border p-2" type='text' id='firstName' {...register("firstName")}  required/>
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='lastName'>
               Last Name
             </label>
-            <input className="border p-2" type='text' id='lastName' {...register("lastName")} />
+            <input className="border p-2" type='text' id='lastName' {...register("lastName")}  required/>
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='email'>
@@ -97,6 +97,7 @@ const CandidateRegistration = () => {
                   id='male'
                   {...register("gender")}
                   value='male'
+                  required
                 />
                 <label className='ml-2 text-lg' htmlFor='male'>
                   Male
@@ -108,6 +109,7 @@ const CandidateRegistration = () => {
                   id='female'
                   {...register("gender")}
                   value='female'
+                  required
                 />
                 <label className='ml-2 text-lg' htmlFor='female'>
                   Female
@@ -119,6 +121,7 @@ const CandidateRegistration = () => {
                   id='other'
                   {...register("gender")}
                   value='other'
+                  required
                 />
                 <label className='ml-2 text-lg' htmlFor='other'>
                   Other
@@ -135,7 +138,13 @@ const CandidateRegistration = () => {
               {countries
                 .sort((a, b) => a?.name?.common?.localeCompare(b?.name?.common))
                 .map(({ name }, index) => (
-                  <option key={index} value={name.common}>{name.common}</option>
+                  <option
+                    key={index}
+                    value={name.common}
+                    selected={name.common === "Bangladesh"}
+                  >
+                    {name.common}
+                  </option>
                 ))}
             </select>
           </div>
@@ -143,19 +152,19 @@ const CandidateRegistration = () => {
             <label className='mb-2' htmlFor='address'>
               Street Address
             </label>
-            <input className="border p-2" type='text' {...register("address")} id='address' />
+            <input className="border p-2" type='text' {...register("address")} id='address'  required/>
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='city'>
               City
             </label>
-            <input className="border p-2" type='text' {...register("city")} id='city' />
+            <input className="border p-2" type='text' {...register("city")} id='city'  required/>
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='postcode'>
               Postal Code
             </label>
-            <input className="border p-2" type='text' {...register("postcode")} id='postcode' />
+            <input className="border p-2" type='text' {...register("postcode")} id='postcode'  required/>
           </div>
 
           <div className='flex justify-between items-center w-full mt-3'>
