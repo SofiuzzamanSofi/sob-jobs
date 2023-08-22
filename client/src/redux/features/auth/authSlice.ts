@@ -48,7 +48,7 @@ export const googleLogin = createAsyncThunk(
 export const getUser = createAsyncThunk(
     "auth/getUser",
     async (email: string) => {
-        const resData = await fetch(`${process.env.NEXT_PUBLIC_DEVELOPMENT_SERVER}/routes/register/${email}`);
+        const resData = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/routes/register/${email}`);
         const data = await resData.json();
         // console.log("data.data", data.data);
         return data.data;
