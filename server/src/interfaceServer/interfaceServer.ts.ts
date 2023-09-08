@@ -82,3 +82,15 @@ export interface MessageObjectType {
     participants: Participant[];
     messages: MessageType[];
 };
+
+// job query search types
+export interface getAllJobBySearchTextTypes {
+    position?: RegExp;
+    companyName?: RegExp;
+    isOpen?: boolean;
+    location?: RegExp;
+    // experience?: RegExp;
+    // createdAt?: Date;
+    timestamp?: Date;
+    // Add other fields from your schema here...
+}

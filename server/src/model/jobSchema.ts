@@ -1,4 +1,4 @@
-import { JobDataTypes } from "../interfaceServer/interfaceServer.ts";
+import { JobDataTypes } from "../interfaceServer/interfaceServer.ts.js";
 import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema<JobDataTypes>({

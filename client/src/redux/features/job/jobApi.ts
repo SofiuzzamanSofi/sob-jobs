@@ -6,7 +6,7 @@ const jobApi = apiSlice.injectEndpoints({
         postJob: builder.mutation<void, JobDataTypes>({
             query: (data) => ({
                 method: 'POST',
-                url: "/routes/job",
+                url: "/job",
                 body: data,
             }),
             invalidatesTags: ["JobAll", "PostedJobs"],
@@ -21,13 +21,13 @@ const jobApi = apiSlice.injectEndpoints({
         }),
         getJobs: builder.query<GetJobsResTypes, void>({
             query: () => ({
-                url: "/routes/job",
+                url: "/job",
             }),
             providesTags: ["JobAll"],
         }),
         getSearchJobs: builder.mutation<GetJobsResTypes, serarchDataTypes>({
             query: (searchData) => ({
-                url: "/routes/job/search",
+                url: "/job/search",
                 method: 'POST',
                 body: searchData
             }),
@@ -35,13 +35,13 @@ const jobApi = apiSlice.injectEndpoints({
         }),
         jobById: builder.query<JobByIdResTypes, string>({
             query: (id) => ({
-                url: `/routes/job/${id}`,
+                url: `/job/${id}`,
             }),
             providesTags: ["JobById"]
         }),
         jobApply: builder.mutation<void, JobApplyDataTypes>({
             query: (jobApplyData) => ({
-                url: "/routes/job/applied-job",
+                url: "/job/applied-job",
                 method: "PATCH",
                 body: jobApplyData,
             }),
@@ -49,7 +49,7 @@ const jobApi = apiSlice.injectEndpoints({
         }),
         jobIsOpen: builder.mutation<void, JobIsOpenDataTypes>({
             query: (jobIsOpenData) => ({
-                url: "/routes/job/isopen-job",
+                url: "/job/isopen-job",
                 method: "PATCH",
                 body: jobIsOpenData,
             }),
@@ -57,19 +57,19 @@ const jobApi = apiSlice.injectEndpoints({
         }),
         getAppliedJobs: builder.query<GetJobsResTypes, string>({
             query: (email) => ({
-                url: `/routes/applied-jobs/${email}`,
+                url: `/applied-jobs/${email}`,
             }),
             providesTags: ["AppliedJobs"],
         }),
         getPostedJobs: builder.query<GetJobsResTypes, string>({
             query: (email) => ({
-                url: `/routes/posted-jobs/${email}`,
+                url: `/posted-jobs/${email}`,
             }),
             providesTags: ["PostedJobs"],
         }),
         jobQuestion: builder.mutation<void, QuestionDataTypes>({
             query: (questionData) => ({
-                url: "/routes/job/query",
+                url: "/job/query",
                 method: "PATCH",
                 body: questionData,
             }),
@@ -77,7 +77,7 @@ const jobApi = apiSlice.injectEndpoints({
         }),
         jobAns: builder.mutation<void, AnsDataTypes>({
             query: (questionData) => ({
-                url: "/routes/job/riplay",
+                url: "/job/riplay",
                 method: "PATCH",
                 body: questionData,
             }),

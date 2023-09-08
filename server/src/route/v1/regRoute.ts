@@ -1,4 +1,4 @@
-import { createRegController, getRegController } from "./../controllers/regController";
+import { createRegController, getRegController } from "../../controller/regController";
 import express from "express";
 
 export default (router: express.Router) => {

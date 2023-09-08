@@ -1,6 +1,6 @@
 import express from 'express';
-import { RegSchema } from '../models/regSchema';
-import { MessageSchema } from '../models/messageSchema';
+import { RegSchema } from '../model/regSchema';
+import { MessageSchema } from '../model/messageSchema';
 import { generateRandomStringId } from '../utils/randomId/randomId';
 
 // get all message by messageId 

@@ -7,7 +7,7 @@ const authApi = apiSlice.injectEndpoints({
         register: builder.mutation<void, RegisterTypes>({
             query: (data) => ({
                 method: "POST",
-                url: "/routes/register",
+                url: "/register",
                 body: data,
             }),
             async onQueryStarted(data, { dispatch, queryFulfilled }) {

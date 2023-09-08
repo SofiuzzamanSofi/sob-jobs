@@ -1,5 +1,5 @@
 import express from "express";
-import { RegSchema } from "../models/regSchema";
+import { RegSchema } from "../model/regSchema";
 
 // post a user
 export const createRegController = async (

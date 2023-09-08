@@ -1,5 +1,4 @@
 import express from "express";
-import colors from 'colors';
 
 export const errorHandler = async (
     err: any, // Corrected the parameter type to 'any'

@@ -4,7 +4,7 @@ dotenv.config();
 import cors from 'cors';
 import colors from 'colors';
 import conncetDb from './utils/lib/mongodb';
-import routers from './routes/index';
+import routers from './route/v1/index';
 import { errorHandler } from './middleware/errorHandler';
 
 
@@ -26,7 +26,7 @@ try {
 };
 
 // routes
-app.use("/routes", routers());
+app.use("/api/v1", routers());
 
 // home || testing route
 app.get("/", (req, res) => {

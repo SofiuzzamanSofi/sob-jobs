@@ -1,6 +1,9 @@
 import express from "express";
-import { JobSchema } from "../models/jobSchema";
+import { JobSchema } from "../model/jobSchema";
 import { generateRandomStringId } from "../utils/randomId/randomId";
+import { getAllJobBySearchTextService, getAllJobService, getAppliedJobService, getOneJobService, getPostedJobService, patchAnsJobService, patchAppliedJobService, patchIsOpenJob1Service, patchIsOpenJob2Service, patchQuestionJobService, postJobService } from "../service/jobService";
+import { AnsTypes, QuestionAnsTypes, getAllJobBySearchTextTypes } from "interfaceServer/interfaceServer.ts";
+
 
 // get all jobs 
 export const getAllJobController = async (
@@ -9,7 +12,7 @@ export const getAllJobController = async (
     next: express.NextFunction,
 ) => {
     try {
-        const getJobData = await JobSchema.find();
+        const getJobData = await getAllJobService(next)
         if (!getJobData) {
             return res.status(200).json({
                 success: false,
@@ -52,7 +55,7 @@ export const getAllJobBySearchTextController = async (
             // Add other fields from your schema here...
         }
 
-        const query: QueryTypes = {};
+        const query: getAllJobBySearchTextTypes = {};
 
         if (searchData?.position) {
             query.position = new RegExp(searchData.position, 'i');
@@ -94,7 +97,8 @@ export const getAllJobBySearchTextController = async (
 
         // Find the MOST RECENT  
         if (searchData?.timestamp === "new") {
-            const getRecentJobData = await JobSchema.find(query).sort({ timestamp: -1 });
+            const getRecentJobData = await getAllJobBySearchTextService(next, query, -1)
+            // const getRecentJobData = await JobSchema.find(query).sort({ timestamp: -1 });
             if (getRecentJobData.length) {
                 return res.status(200).json({
                     success: true,
@@ -105,7 +109,8 @@ export const getAllJobBySearchTextController = async (
         }
         // Find the OLDEST 
         if (searchData?.timestamp === "old") {
-            const getOldestData = await JobSchema.find(query).sort({ timestamp: 1 });
+            const getOldestData = await getAllJobBySearchTextService(next, query, 1)
+            // const getOldestData = await   JobSchema.find(query).sort({ timestamp: 1 });
             if (getOldestData.length) {
                 return res.status(200).json({
                     success: true,
@@ -131,7 +136,7 @@ export const getAllJobBySearchTextController = async (
 
 
 // get 1 job by id 
-export const getJobController = async (
+export const getOneJobController = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
@@ -145,7 +150,7 @@ export const getJobController = async (
             });
         }
         else {
-            const getJobData = await JobSchema.findById(id);
+            const getJobData = await getOneJobService(next, id);
             if (!getJobData) {
                 return res.status(200).json({
                     success: false,
@@ -170,7 +175,7 @@ export const getJobController = async (
 };
 
 // post a job 
-export const createJobController = async (
+export const postJobController = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
@@ -185,7 +190,7 @@ export const createJobController = async (
             });
         }
         else {
-            const createJobData = await new JobSchema(handleJobData).save();
+            const createJobData = await postJobService(next, handleJobData);
             if (!createJobData) {
                 return res.status(400).json({
                     success: false,
@@ -224,20 +229,21 @@ export const patchAppliedJobController = async (
             });
         }
         else {
-            const patchJOb = await JobSchema.findByIdAndUpdate(
-                jobId,
-                {
-                    $push: {
-                        applicants: {
-                            userId,
-                            userEmail,
-                        },
-                    },
-                },
-                {
-                    new: true,
-                }
-            );
+            const patchJOb = await patchAppliedJobService(next, jobId, userId, userEmail)
+            // const patchJOb = await JobSchema.            findByIdAndUpdate(
+            //     jobId,
+            //     {
+            //         $push: {
+            //             applicants: {
+            //                 userId,
+            //                 userEmail,
+            //             },
+            //         },
+            //     },
+            //     {
+            //         new: true,
+            //     }
+            // );
             if (!patchJOb) {
                 return res.status(200).json({
                     success: false,
@@ -277,11 +283,12 @@ export const patchIsOpenJobController = async (
             });
         } else {
             // console.log("jobId isOpen userId userEmail:", jobId, userId, userEmail);
-            const jobToUpdate = await JobSchema.findOne({
-                _id: jobId,
-                email: userEmail,
-                isOpen,
-            });
+            const jobToUpdate = await patchIsOpenJob1Service(next, jobId, userEmail, isOpen)
+            // const jobToUpdate = await JobSchema.findOne({
+            //     _id: jobId,
+            //     email: userEmail,
+            //     isOpen,
+            // });
 
             if (!jobToUpdate) {
                 return res.status(404).json({
@@ -291,20 +298,22 @@ export const patchIsOpenJobController = async (
             }
             if (isOpen === jobToUpdate.isOpen) {
                 const updatedIsOpen = !jobToUpdate.isOpen;
-                const patchJob = await JobSchema.findOneAndUpdate(
-                    {
-                        _id: jobId,
-                        email: userEmail,
-                    },
-                    {
-                        $set: {
-                            isOpen: updatedIsOpen,
-                        },
-                    },
-                    {
-                        new: true,
-                    }
-                );
+
+                const patchJob = await patchIsOpenJob2Service(next, jobId, userEmail, updatedIsOpen)
+                // const patchJob = await JobSchema.findOneAndUpdate(
+                //     {
+                //         _id: jobId,
+                //         email: userEmail,
+                //     },
+                //     {
+                //         $set: {
+                //             isOpen: updatedIsOpen,
+                //         },
+                //     },
+                //     {
+                //         new: true,
+                //     }
+                // );
 
                 if (!patchJob) {
                     return res.status(200).json({
@@ -346,7 +355,8 @@ export const getAppliedJobController = async (
         }
         else {
             // const query = { "applicants.userEmail": email }
-            const getAppliedJobData = await JobSchema.find({ "applicants.userEmail": email })
+            const getAppliedJobData = await getAppliedJobService(next, email)
+            // const getAppliedJobData = await JobSchema.find({ "applicants.userEmail": email })
             if (!getAppliedJobData) {
                 return res.status(200).json({
                     success: false,
@@ -386,7 +396,8 @@ export const getPostedJobController = async (
         }
         else {
             // const query = { "applicants.userEmail": email }
-            const getPostedJobData = await JobSchema.find({ email })
+            const getPostedJobData = await getPostedJobService(next, email)
+            // const getPostedJobData = await JobSchema.find({ email })
             if (!getPostedJobData) {
                 return res.status(200).json({
                     success: false,
@@ -425,7 +436,7 @@ export const patchQuestionJobController = async (
             });
         }
         else {
-            const questionAns = {
+            const questionAns: QuestionAnsTypes = {
                 userId,
                 userEmail,
                 questionId: generateRandomStringId(24),
@@ -435,17 +446,18 @@ export const patchQuestionJobController = async (
                 },
             };
             // console.log("questionAns:", questionAns);
-            const updateJobforQuestion = await JobSchema.findByIdAndUpdate(
-                jobId,
-                {
-                    $push: {
-                        questionAns,
-                    },
-                },
-                {
-                    new: true,
-                },
-            );
+            const updateJobforQuestion = await patchQuestionJobService(next, jobId, questionAns);
+            // const updateJobforQuestion = await JobSchema.findByIdAndUpdate(
+            //     jobId,
+            //     {
+            //         $push: {
+            //             questionAns,
+            //         },
+            //     },
+            //     {
+            //         new: true,
+            //     },
+            // );
             if (!updateJobforQuestion) {
                 return res.status(400).json({
                     success: false,
@@ -486,26 +498,27 @@ export const patchAnsJobController = async (
             });
         }
         else {
-            const ans = {
+            const ans: AnsTypes = {
                 time: new Date(),
                 ansString: riplay,
             };
             // console.log("ANS DATA:", ans, jobId, questionId, userEmail, riplay);
-            const updateJObforAns = await JobSchema.findOneAndUpdate(
-                {
-                    _id: jobId,
-                    email: userEmail,
-                    "questionAns.questionId": questionId,
-                },
-                {
-                    $push: {
-                        "questionAns.$.ans": ans,
-                    }
-                },
-                {
-                    new: true,
-                },
-            )
+            const updateJObforAns = await patchAnsJobService(next, jobId, userEmail, questionId, ans)
+            // const updateJObforAns = await JobSchema.findOneAndUpdate(
+            //     {
+            //         _id: jobId,
+            //         email: userEmail,
+            //         "questionAns.questionId": questionId,
+            //     },
+            //     {
+            //         $push: {
+            //             "questionAns.$.ans": ans,
+            //         }
+            //     },
+            //     {
+            //         new: true,
+            //     },
+            // );
             if (!updateJObforAns) {
                 return res.status(200).json({
                     success: false,

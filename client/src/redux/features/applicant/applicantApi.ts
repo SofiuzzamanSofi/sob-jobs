@@ -5,7 +5,7 @@ const applicantApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getApplicant: builder.query<applicantResponseTypes, string>({
             query: (email) => ({
-                url: `/routes/register/applicant/${email}`
+                url: `/register/applicant/${email}`
             }),
         }),
     }),
