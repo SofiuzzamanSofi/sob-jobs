@@ -1,11 +1,12 @@
 import express from "express";
 import { JobSchema } from "../models/jobSchema";
-import { generateRandomStringId } from "../randomId/randomId";
+import { generateRandomStringId } from "../utils/randomId/randomId";
 
 // get all jobs 
 export const getAllJobController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const getJobData = await JobSchema.find();
@@ -22,18 +23,20 @@ export const getAllJobController = async (
             });
         };
     } catch (error) {
-        console.error("Error fetching job data:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to fetch job data",
-        });
+        next(error);
+        // console.error("Error fetching job data:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to fetch job data",
+        // });
     };
 };
 
 // get all jobs By Search Text
 export const getAllJobBySearchTextController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const searchData = req.body;
@@ -43,8 +46,8 @@ export const getAllJobBySearchTextController = async (
             companyName?: RegExp;
             isOpen?: boolean;
             location?: RegExp;
-            experience?: RegExp;
-            createdAt?: Date;
+            // experience?: RegExp;
+            // createdAt?: Date;
             timestamp?: Date;
             // Add other fields from your schema here...
         }
@@ -117,17 +120,22 @@ export const getAllJobBySearchTextController = async (
             message: `Job data not found.`,
         });
     } catch (error) {
-        console.error("Error fetching job data:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to fetch job data",
-        });
-    }
+        next(error);
+        // console.error("Error fetching job data:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to fetch job data",
+        // });
+    };
 };
 
 
 // get 1 job by id 
-export const getJobController = async (req: express.Request, res: express.Response) => {
+export const getJobController = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+) => {
     try {
         const id = req.params?.id as string;
         if (!id) {
@@ -152,18 +160,20 @@ export const getJobController = async (req: express.Request, res: express.Respon
             };
         };
     } catch (error) {
+        next(error);
         console.error("Error fetching job data:", error);
         return res.status(500).json({
             success: false,
             message: "Failed to fetch job data",
         });
-    }
+    };
 };
 
 // post a job 
 export const createJobController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const handleJobData = req.body;
@@ -189,18 +199,20 @@ export const createJobController = async (
             };
         };
     } catch (error) {
-        console.error("Error creating job:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to create job",
-        });
-    }
+        next(error);
+        // console.error("Error creating job:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to create job",
+        // });
+    };
 };
 
 // edit job for applicant: APPLIED
 export const patchAppliedJobController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const { jobId, userId, userEmail } = req.body;
@@ -240,6 +252,7 @@ export const patchAppliedJobController = async (
             };
         };
     } catch (error) {
+        next(error);
         console.error("Error fetching job data:", error);
         return res.status(500).json({
             success: false,
@@ -251,7 +264,8 @@ export const patchAppliedJobController = async (
 // edit job for isOpen or closed
 export const patchIsOpenJobController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const { jobId, isOpen, userId, userEmail } = req.body;
@@ -307,18 +321,20 @@ export const patchIsOpenJobController = async (
             }
         }
     } catch (error) {
-        console.error("Error fetching job data:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to PATCH job data",
-        });
-    }
+        next(error);
+        // console.error("Error fetching job data:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to PATCH job data",
+        // });
+    };
 };
 
 // get applied-jobs by email 
 export const getAppliedJobController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const email = req.params?.email as string;
@@ -345,18 +361,20 @@ export const getAppliedJobController = async (
             };
         };
     } catch (error) {
-        console.error("Error fetching job data:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to fetch job data",
-        });
-    }
+        next(error);
+        // console.error("Error fetching job data:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to fetch job data",
+        // });
+    };
 };
 
 // get posted-jobs by email 
 export const getPostedJobController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const email = req.params?.email as string;
@@ -383,18 +401,20 @@ export const getPostedJobController = async (
             };
         };
     } catch (error) {
-        console.error("Error fetching job data:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to fetch job data",
-        });
-    }
+        next(error);
+        // console.error("Error fetching job data:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to fetch job data",
+        // });
+    };
 };
 
 // edit job for Question
 export const patchQuestionJobController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const { jobId, userId, userEmail, question } = req.body;
@@ -441,18 +461,20 @@ export const patchQuestionJobController = async (
             };
         };
     } catch (error) {
-        console.error("Error updating job data for Question:", error);
-        return res.status(404).json({
-            success: false,
-            message: "Failed to update job data for Question: catch block",
-        });
+        next(error);
+        // console.error("Error updating job data for Question:", error);
+        // return res.status(404).json({
+        //     success: false,
+        //     message: "Failed to update job data for Question: catch block",
+        // });
     };
 };
 
 // edit job for Ans
 export const patchAnsJobController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const { jobId, questionId, userEmail, riplay } = req.body;
@@ -498,10 +520,11 @@ export const patchAnsJobController = async (
             };
         };
     } catch (error) {
-        console.error("Error fetching job data:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to PATCH ANS job data",
-        });
+        next(error);
+        // console.error("Error fetching job data:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to PATCH ANS job data",
+        // });
     };
 };

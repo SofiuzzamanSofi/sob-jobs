@@ -58,7 +58,11 @@ const registerSchema = new mongoose.Schema<RegisterDataTypes>({
     type: Boolean,
     required: false,
   },
-});
+},
+  {
+    timestamps: true, // for time save by default
+  }
+);
 
 // Create a Mongoose Model for Candidate Registration
 export const RegSchema = mongoose.model("RegSchema", registerSchema);

@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
+import colors from 'colors';
 
-const { MONGODB_DB_URI } = process.env;
-if (!MONGODB_DB_URI) {
-    throw new Error("MONGODB_DB_URI is required");
+const { MONGODB_DB_URI_LOCAL } = process.env;
+if (!MONGODB_DB_URI_LOCAL) {
+    throw new Error("MONGODB_DB_URI_LOCAL is required");
 };
 const conncetDb = async () => {
     try {
-        const { connection } = await mongoose.connect(MONGODB_DB_URI);
+        const { connection } = await mongoose.connect(MONGODB_DB_URI_LOCAL);
         if (connection?.readyState === 1) {
-            // console.log("DB connection is established/ON.")
+            console.log(colors.bgBlue("DB connection is established/ON."))
             return Promise?.resolve(true);
         };
     } catch (error) {

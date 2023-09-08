@@ -38,7 +38,11 @@ const messageSchema = new mongoose.Schema<MessageObjectType>({
             }
         }
     ]
-});
+},
+    {
+        timestamps: true, // for time save by default
+    }
+);
 
 //Create a Mongoose Model for Message
 export const MessageSchema = mongoose.model("MesssageSchema", messageSchema);

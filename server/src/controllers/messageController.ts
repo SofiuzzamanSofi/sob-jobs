@@ -1,12 +1,13 @@
 import express from 'express';
 import { RegSchema } from '../models/regSchema';
 import { MessageSchema } from '../models/messageSchema';
-import { generateRandomStringId } from '../randomId/randomId';
+import { generateRandomStringId } from '../utils/randomId/randomId';
 
 // get all message by messageId 
 export const getAllMessageById = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const id = req.params?.id as string;
@@ -29,18 +30,20 @@ export const getAllMessageById = async (
             };
         };
     } catch (error) {
-        console.error("Error fetching job data:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to fetch MESSAGE job data",
-        });
+        next(error);
+        // console.error("Error fetching job data:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to fetch MESSAGE job data",
+        // });
     };
 };
 
 // get 1 message Details by message id
 export const getMessageById = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const id = req.params?.id as string;
@@ -109,18 +112,20 @@ export const getMessageById = async (
             });
         };
     } catch (error) {
-        console.error("Error fetching job data:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to fetch job data || Server error from Catch-Error",
-        });
+        next(error);
+        // console.error("Error fetching job data:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to fetch job data || Server error from Catch-Error",
+        // });
     };
 };
 
 // post 1 message by message id
 export const postMessageById = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const { chatId, message, participants } = req.body;
@@ -208,11 +213,12 @@ export const postMessageById = async (
             message: `Message POST Fails Dont match anythig:  ${chatId}, ${message}, ${participants}`,
         });
     } catch (error) {
-        console.error("Error fetching job data:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to fetch job data",
-        });
+        next(error);
+        // console.error("Error fetching job data:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to fetch job data",
+        // });
     };
 };
 

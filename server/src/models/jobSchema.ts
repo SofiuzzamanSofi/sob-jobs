@@ -67,11 +67,11 @@ const jobSchema = new mongoose.Schema<JobDataTypes>({
             userId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "User",
-                require: false,
+                required: false,
             },
             userEmail: {
                 type: "string",
-                require: false,
+                required: false,
             },
         }
     ],
@@ -124,7 +124,11 @@ const jobSchema = new mongoose.Schema<JobDataTypes>({
         type: Date,
         default: Date.now,
     }
-});
+},
+    {
+        timestamps: true, // for time save by default
+    }
+);
 
 // Create a Mongoose Model for Job
 export const JobSchema = mongoose.model("JobSchema", jobSchema);

@@ -4,7 +4,8 @@ import { RegSchema } from "../models/regSchema";
 // post a user
 export const createRegController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
     try {
         const handleRegData = req.body;
@@ -27,21 +28,23 @@ export const createRegController = async (
             });
         }
     } catch (error) {
-        console.error("Error creating registration:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to create registration",
-        });
-    }
+        next(error);
+        // console.error("Error creating registration:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to create registration",
+        // });
+    };
 };
 
 // get a user by email 
 export const getRegController = async (
     req: express.Request,
-    res: express.Response
+    res: express.Response,
+    next: express.NextFunction,
 ) => {
-    const email = req.params?.email as string;
     try {
+        const email = req.params?.email as string;
         if (!email) {
             return res.status(400).json({
                 success: false,
@@ -64,10 +67,11 @@ export const getRegController = async (
             })
         };
     } catch (error) {
-        console.error("Error creating registration:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Failed to create registration",
-        });
-    }
+        next(error);
+        // console.error("Error creating registration:", error);
+        // return res.status(500).json({
+        //     success: false,
+        //     message: "Failed to create registration",
+        // });
+    };
 };
