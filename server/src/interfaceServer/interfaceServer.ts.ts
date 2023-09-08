@@ -60,6 +60,13 @@ export interface JobDataTypes {
     timestamp: Date;
 };
 
+//
+export interface postMessageByIdServiceType {
+    messageId: string,
+    senderId: string;
+    senderEmail: string;
+    content: string;
+};
 // messageTypes 
 export interface MessageType {
     messageId: string;
@@ -69,7 +76,7 @@ export interface MessageType {
     content: string;
 };
 
-interface Participant {
+export interface Participant {
     userId: string;
     userName: string;
     userEmail: string;

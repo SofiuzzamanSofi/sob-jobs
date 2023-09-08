@@ -2,6 +2,8 @@ import express from 'express';
 import { UserModel } from '../model/userSchema';
 import { MessageModel } from '../model/messageSchema';
 import { generateRandomStringId } from '../utils/randomId/randomId';
+import { getUserByIdService } from '../service/userService';
+import { getAllMessageByIdService, getMessageByIdService, postMessageByIdFirstTimeService, postMessageByIdService } from '../service/messageService';
 
 // get all message by messageId 
 export const getAllMessageByIdController = async (
@@ -10,15 +12,22 @@ export const getAllMessageByIdController = async (
     next: express.NextFunction,
 ) => {
     try {
-        const id = req.params?.id as string;
-        const userFromDatabaseById = await UserModel.findById(id);
-
-        if (userFromDatabaseById) {
-            const getMessagesFromDatabase = await MessageModel.find({
-                participants: {
-                    $elemMatch: { userId: userFromDatabaseById._id },
-                }
+        const id = req.params.id;
+        if (!id) {
+            return res.status(400).send({
+                status: false,
+                message: "Couldn't found id",
             });
+        };
+        const userFromDatabaseById = await getUserByIdService(next, id);
+
+        if (userFromDatabaseById._id) {
+            const getMessagesFromDatabase = await getAllMessageByIdService(next, userFromDatabaseById._id.toString());
+            // const getMessagesFromDatabase = await MessageModel.find({
+            //     participants: {
+            //         $elemMatch: { userId: userFromDatabaseById._id },
+            //     }
+            // });
 
             // console.log('getMessagesFromDatabase:', getMessagesFromDatabase);
             if (getMessagesFromDatabase) {
@@ -51,9 +60,12 @@ export const getMessageByIdController = async (
         // console.log('id1, id2, id:', id1, id2, id);
 
         //get message by id1 and id2 Sender: Employee
-        const messageResponse1Employee = await MessageModel.findOne({
-            chatId: id
-        });
+        const messageResponse1Employee = await getMessageByIdService(
+            next, id
+        );
+        // const messageResponse1Employee = await MessageModel.findOne({
+        //     chatId: id
+        // });
         if (messageResponse1Employee) {
             return res.status(200).json({
                 success: true,
@@ -63,9 +75,12 @@ export const getMessageByIdController = async (
         };
 
         //get message by id1 and id2 Sender: Candidate
-        const messageResponse2Candidate = await MessageModel.findOne({
-            chatId: `${id2}-${id1}`,
-        })
+        const messageResponse2Candidate = await getMessageByIdService(
+            next, `${id2}-${id1}`
+        );
+        // const messageResponse2Candidate = await MessageModel.findOne({
+        //     chatId: `${id2}-${id1}`,
+        // })
         if (messageResponse2Candidate) {
             return res.status(200).json({
                 success: true,
@@ -76,8 +91,8 @@ export const getMessageByIdController = async (
 
         // if no message is found || FirstTime message
         // get user by id
-        const user1 = await UserModel.findById(id1);
-        const user2 = await UserModel.findById(id2);
+        const user1 = await getUserByIdService(next, id1);
+        const user2 = await getUserByIdService(next, id2);
         // console.log('user1, user2:', user1, user2);
         if (user1 && user2) {
             return res.status(200).json({
@@ -142,19 +157,20 @@ export const postMessageByIdController = async (
         // return console.log('messageData:', chatId, message, participants);
 
         //    const message ID=Eployeee-Candidate
-        const messagePostId1Id2 = await MessageModel.findOneAndUpdate(
-            {
-                chatId: chatId,
-            },
-            {
-                $push: {  // add data on db push
-                    messages: message,
-                }
-            },
-            {
-                new: true, //save new message
-            }
-        );
+        const messagePostId1Id2 = await postMessageByIdService(next, chatId, message)
+        // const messagePostId1Id2 = await MessageModel.findOneAndUpdate(
+        //     {
+        //         chatId: chatId,
+        //     },
+        //     {
+        //         $push: {  // add data on db push
+        //             messages: message,
+        //         }
+        //     },
+        //     {
+        //         new: true, //save new message
+        //     }
+        // );
         // console.log('messagePostId1Id2:', messagePostId1Id2);
         if (messagePostId1Id2) {
             return res.status(200).json({
@@ -165,19 +181,20 @@ export const postMessageByIdController = async (
         };
 
         //    const message ID=Candidate-Eployeee
-        const messagePostId2Id1 = await MessageModel.findOneAndUpdate(
-            {
-                chatId: `${id2}-${id1}`,
-            },
-            {
-                $push: {  // add data on db push
-                    messages: message,
-                }
-            },
-            {
-                new: true, //save new message
-            }
-        );
+        const messagePostId2Id1 = await postMessageByIdService(next, `${id2}-${id1}`, message);
+        // const messagePostId2Id1 = await MessageModel.findOneAndUpdate(
+        //     {
+        //         chatId: `${id2}-${id1}`,
+        //     },
+        //     {
+        //         $push: {  // add data on db push
+        //             messages: message,
+        //         }
+        //     },
+        //     {
+        //         new: true, //save new message
+        //     }
+        // );
         // console.log('messagePostId2Id1:', messagePostId2Id1);
         if (messagePostId2Id1) {
             return res.status(200).json({
@@ -188,18 +205,19 @@ export const postMessageByIdController = async (
         };
 
         // First Time Send Message
-        const messagePostFirstTime = await new MessageModel({
-            chatId,
-            participants,
-            messages: [
-                {
-                    messageId: message.messageId,
-                    senderId: message.senderId,
-                    senderEmail: message.senderEmail,
-                    content: message.content,
-                }
-            ],
-        }).save();
+        const messagePostFirstTime = await postMessageByIdFirstTimeService(next, chatId, participants, message);
+        // const messagePostFirstTime = await new MessageModel({
+        //     chatId,
+        //     participants,
+        //     messages: [
+        //         {
+        //             messageId: message.messageId,
+        //             senderId: message.senderId,
+        //             senderEmail: message.senderEmail,
+        //             content: message.content,
+        //         }
+        //     ],
+        // }).save();
         // console.log('messagePostFirstTime:', messagePostFirstTime);
         if (messagePostFirstTime) {
             return res.status(200).json({

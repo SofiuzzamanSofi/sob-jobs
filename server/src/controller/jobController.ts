@@ -134,7 +134,6 @@ export const getAllJobBySearchTextController = async (
     };
 };
 
-
 // get 1 job by id 
 export const getOneJobController = async (
     req: express.Request,

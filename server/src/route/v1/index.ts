@@ -1,5 +1,5 @@
 import express from 'express'
-import createRegControllerRoute from "./regRoute"
+import createRegControllerRoute from "./userRoute"
 import createJobControllerRoute from "./jobRoute"
 import createMessageControllerRoute from "./messageRoute"
 
