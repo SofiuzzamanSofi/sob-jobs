@@ -1,4 +1,4 @@
-export interface RegisterDataTypes {
+export interface UserDataTypes {
     firstName?: string;
     lastName?: string;
     email?: string;

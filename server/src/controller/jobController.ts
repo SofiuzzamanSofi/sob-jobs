@@ -1,5 +1,5 @@
 import express from "express";
-import { JobSchema } from "../model/jobSchema";
+import { JobModel } from "../model/jobSchema";
 import { generateRandomStringId } from "../utils/randomId/randomId";
 import { getAllJobBySearchTextService, getAllJobService, getAppliedJobService, getOneJobService, getPostedJobService, patchAnsJobService, patchAppliedJobService, patchIsOpenJob1Service, patchIsOpenJob2Service, patchQuestionJobService, postJobService } from "../service/jobService";
 import { AnsTypes, QuestionAnsTypes, getAllJobBySearchTextTypes } from "interfaceServer/interfaceServer.ts";
@@ -98,7 +98,7 @@ export const getAllJobBySearchTextController = async (
         // Find the MOST RECENT  
         if (searchData?.timestamp === "new") {
             const getRecentJobData = await getAllJobBySearchTextService(next, query, -1)
-            // const getRecentJobData = await JobSchema.find(query).sort({ timestamp: -1 });
+            // const getRecentJobData = await JobModel.find(query).sort({ timestamp: -1 });
             if (getRecentJobData.length) {
                 return res.status(200).json({
                     success: true,
@@ -110,7 +110,7 @@ export const getAllJobBySearchTextController = async (
         // Find the OLDEST 
         if (searchData?.timestamp === "old") {
             const getOldestData = await getAllJobBySearchTextService(next, query, 1)
-            // const getOldestData = await   JobSchema.find(query).sort({ timestamp: 1 });
+            // const getOldestData = await   JobModel.find(query).sort({ timestamp: 1 });
             if (getOldestData.length) {
                 return res.status(200).json({
                     success: true,
@@ -230,7 +230,7 @@ export const patchAppliedJobController = async (
         }
         else {
             const patchJOb = await patchAppliedJobService(next, jobId, userId, userEmail)
-            // const patchJOb = await JobSchema.            findByIdAndUpdate(
+            // const patchJOb = await JobModel.            findByIdAndUpdate(
             //     jobId,
             //     {
             //         $push: {
@@ -284,7 +284,7 @@ export const patchIsOpenJobController = async (
         } else {
             // console.log("jobId isOpen userId userEmail:", jobId, userId, userEmail);
             const jobToUpdate = await patchIsOpenJob1Service(next, jobId, userEmail, isOpen)
-            // const jobToUpdate = await JobSchema.findOne({
+            // const jobToUpdate = await JobModel.findOne({
             //     _id: jobId,
             //     email: userEmail,
             //     isOpen,
@@ -300,7 +300,7 @@ export const patchIsOpenJobController = async (
                 const updatedIsOpen = !jobToUpdate.isOpen;
 
                 const patchJob = await patchIsOpenJob2Service(next, jobId, userEmail, updatedIsOpen)
-                // const patchJob = await JobSchema.findOneAndUpdate(
+                // const patchJob = await JobModel.findOneAndUpdate(
                 //     {
                 //         _id: jobId,
                 //         email: userEmail,
@@ -356,7 +356,7 @@ export const getAppliedJobController = async (
         else {
             // const query = { "applicants.userEmail": email }
             const getAppliedJobData = await getAppliedJobService(next, email)
-            // const getAppliedJobData = await JobSchema.find({ "applicants.userEmail": email })
+            // const getAppliedJobData = await JobModel.find({ "applicants.userEmail": email })
             if (!getAppliedJobData) {
                 return res.status(200).json({
                     success: false,
@@ -397,7 +397,7 @@ export const getPostedJobController = async (
         else {
             // const query = { "applicants.userEmail": email }
             const getPostedJobData = await getPostedJobService(next, email)
-            // const getPostedJobData = await JobSchema.find({ email })
+            // const getPostedJobData = await JobModel.find({ email })
             if (!getPostedJobData) {
                 return res.status(200).json({
                     success: false,
@@ -447,7 +447,7 @@ export const patchQuestionJobController = async (
             };
             // console.log("questionAns:", questionAns);
             const updateJobforQuestion = await patchQuestionJobService(next, jobId, questionAns);
-            // const updateJobforQuestion = await JobSchema.findByIdAndUpdate(
+            // const updateJobforQuestion = await JobModel.findByIdAndUpdate(
             //     jobId,
             //     {
             //         $push: {
@@ -504,7 +504,7 @@ export const patchAnsJobController = async (
             };
             // console.log("ANS DATA:", ans, jobId, questionId, userEmail, riplay);
             const updateJObforAns = await patchAnsJobService(next, jobId, userEmail, questionId, ans)
-            // const updateJObforAns = await JobSchema.findOneAndUpdate(
+            // const updateJObforAns = await JobModel.findOneAndUpdate(
             //     {
             //         _id: jobId,
             //         email: userEmail,

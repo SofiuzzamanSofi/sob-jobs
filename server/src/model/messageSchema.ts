@@ -1,6 +1,7 @@
 import { MessageObjectType } from "../interfaceServer/interfaceServer.ts.js";
 import mongoose from "mongoose";
 
+//create a schema
 const messageSchema = new mongoose.Schema<MessageObjectType>({
     chatId: {
         type: "string",
@@ -44,5 +45,5 @@ const messageSchema = new mongoose.Schema<MessageObjectType>({
     }
 );
 
-//Create a Mongoose Model for Message
-export const MessageSchema = mongoose.model("MesssageSchema", messageSchema);
+// Create a modal
+export const MessageModel = mongoose.model("Messsage", messageSchema);

@@ -69,7 +69,7 @@ export interface applicantResponseTypes {
     data: RegisterTypes
 }
 
-// JobSchema / Data Types
+// JobModel / Data Types
 export interface serarchDataTypes {
     position?: string;
     companyName?: string;

@@ -1,6 +1,7 @@
 import { JobDataTypes } from "../interfaceServer/interfaceServer.ts.js";
 import mongoose from "mongoose";
 
+//create a schema
 const jobSchema = new mongoose.Schema<JobDataTypes>({
     email: {
         type: "string",
@@ -130,5 +131,5 @@ const jobSchema = new mongoose.Schema<JobDataTypes>({
     }
 );
 
-// Create a Mongoose Model for Job
-export const JobSchema = mongoose.model("JobSchema", jobSchema);
+// Create a modal
+export const JobModel = mongoose.model("Job", jobSchema);

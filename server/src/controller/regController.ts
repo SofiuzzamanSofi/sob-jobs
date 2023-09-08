@@ -1,5 +1,5 @@
 import express from "express";
-import { RegSchema } from "../model/regSchema";
+import { UserModel } from "../model/userSchema";
 
 // post a user
 export const createRegController = async (
@@ -15,7 +15,7 @@ export const createRegController = async (
                 message: "Body is empty line 12",
             });
         };
-        const createRegisterData = await new RegSchema(handleRegData).save();
+        const createRegisterData = await new UserModel(handleRegData).save();
         if (!createRegisterData) {
             return res.status(400).json({
                 success: false,
@@ -52,7 +52,7 @@ export const getRegController = async (
             });
         };
         // console.log('email:', email);
-        const getUserData = await RegSchema.findOne({ email });
+        const getUserData = await UserModel.findOne({ email });
         if (!getUserData) {
             return res.status(201).json({
                 success: false,

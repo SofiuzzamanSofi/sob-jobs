@@ -1,20 +1,20 @@
 import express from 'express';
-import { RegSchema } from '../model/regSchema';
-import { MessageSchema } from '../model/messageSchema';
+import { UserModel } from '../model/userSchema';
+import { MessageModel } from '../model/messageSchema';
 import { generateRandomStringId } from '../utils/randomId/randomId';
 
 // get all message by messageId 
-export const getAllMessageById = async (
+export const getAllMessageByIdController = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
 ) => {
     try {
         const id = req.params?.id as string;
-        const userFromDatabaseById = await RegSchema.findById(id);
+        const userFromDatabaseById = await UserModel.findById(id);
 
         if (userFromDatabaseById) {
-            const getMessagesFromDatabase = await MessageSchema.find({
+            const getMessagesFromDatabase = await MessageModel.find({
                 participants: {
                     $elemMatch: { userId: userFromDatabaseById._id },
                 }
@@ -40,7 +40,7 @@ export const getAllMessageById = async (
 };
 
 // get 1 message Details by message id
-export const getMessageById = async (
+export const getMessageByIdController = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
@@ -51,7 +51,7 @@ export const getMessageById = async (
         // console.log('id1, id2, id:', id1, id2, id);
 
         //get message by id1 and id2 Sender: Employee
-        const messageResponse1Employee = await MessageSchema.findOne({
+        const messageResponse1Employee = await MessageModel.findOne({
             chatId: id
         });
         if (messageResponse1Employee) {
@@ -63,7 +63,7 @@ export const getMessageById = async (
         };
 
         //get message by id1 and id2 Sender: Candidate
-        const messageResponse2Candidate = await MessageSchema.findOne({
+        const messageResponse2Candidate = await MessageModel.findOne({
             chatId: `${id2}-${id1}`,
         })
         if (messageResponse2Candidate) {
@@ -76,8 +76,8 @@ export const getMessageById = async (
 
         // if no message is found || FirstTime message
         // get user by id
-        const user1 = await RegSchema.findById(id1);
-        const user2 = await RegSchema.findById(id2);
+        const user1 = await UserModel.findById(id1);
+        const user2 = await UserModel.findById(id2);
         // console.log('user1, user2:', user1, user2);
         if (user1 && user2) {
             return res.status(200).json({
@@ -122,7 +122,7 @@ export const getMessageById = async (
 };
 
 // post 1 message by message id
-export const postMessageById = async (
+export const postMessageByIdController = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
@@ -142,7 +142,7 @@ export const postMessageById = async (
         // return console.log('messageData:', chatId, message, participants);
 
         //    const message ID=Eployeee-Candidate
-        const messagePostId1Id2 = await MessageSchema.findOneAndUpdate(
+        const messagePostId1Id2 = await MessageModel.findOneAndUpdate(
             {
                 chatId: chatId,
             },
@@ -165,7 +165,7 @@ export const postMessageById = async (
         };
 
         //    const message ID=Candidate-Eployeee
-        const messagePostId2Id1 = await MessageSchema.findOneAndUpdate(
+        const messagePostId2Id1 = await MessageModel.findOneAndUpdate(
             {
                 chatId: `${id2}-${id1}`,
             },
@@ -188,7 +188,7 @@ export const postMessageById = async (
         };
 
         // First Time Send Message
-        const messagePostFirstTime = await new MessageSchema({
+        const messagePostFirstTime = await new MessageModel({
             chatId,
             participants,
             messages: [
@@ -226,14 +226,14 @@ export const postMessageById = async (
 // const messageGotById1AndId2 = async (id: string) => {
 //     const [id1, id2] = id.split("-");
 //     //get message by id1 and id2 Sender: Employee
-//     const messageResponse1Employee = await MessageSchema.findOne({
+//     const messageResponse1Employee = await MessageModel.findOne({
 //         chatId: id
 //     });
 //     if (messageResponse1Employee) {
 //         return messageResponse1Employee;
 //     };
 //     //get message by id1 and id2 Sender: Candidate
-//     const messageResponse2Candidate = await MessageSchema.findOne({
+//     const messageResponse2Candidate = await MessageModel.findOne({
 //         chatId: `${id2}-${id1}`,
 //     })
 //     if (messageResponse2Candidate) {
@@ -243,7 +243,7 @@ export const postMessageById = async (
 // }
 
 // const extraObject = {
-//     const messagePost = await MessageSchema.findOneAndUpdate(
+//     const messagePost = await MessageModel.findOneAndUpdate(
 //         {
 //             chatId: chatId || `${id2}-${id1}`,
 //             // participants: [participants || participants.reverse()],

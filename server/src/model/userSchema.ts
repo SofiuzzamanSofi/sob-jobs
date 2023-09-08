@@ -1,7 +1,8 @@
-import { RegisterDataTypes } from "../interfaceServer/interfaceServer.ts.js";
+import { UserDataTypes } from "../interfaceServer/interfaceServer.ts.js";
 import mongoose from "mongoose";
 
-const registerSchema = new mongoose.Schema<RegisterDataTypes>({
+//create a schema
+const userSchema = new mongoose.Schema<UserDataTypes>({
   firstName: {
     type: "string",
     required: false,
@@ -64,5 +65,5 @@ const registerSchema = new mongoose.Schema<RegisterDataTypes>({
   }
 );
 
-// Create a Mongoose Model for Candidate Registration
-export const RegSchema = mongoose.model("RegSchema", registerSchema);
+// Create a modal
+export const UserModel = mongoose.model("User", userSchema);

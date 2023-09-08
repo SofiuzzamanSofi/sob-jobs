@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import { JobSchema } from "../model/jobSchema";
+import { JobModel } from "../model/jobSchema";
 import { AnsTypes, JobDataTypes, QuestionAnsTypes, getAllJobBySearchTextTypes } from "../interfaceServer/interfaceServer.ts";
 
 type NextFunction = express.NextFunction;
@@ -10,7 +10,7 @@ export const getAllJobService = async (
     next: NextFunction
 ) => {
     try {
-        const jobs = await JobSchema.find();
+        const jobs = await JobModel.find();
         return jobs;
     } catch (error) {
         next(error);
@@ -23,7 +23,7 @@ export const getAllJobBySearchTextService = async (
     assendingDessending: any
 ) => {
     try {
-        const jobs = await JobSchema.find(query)
+        const jobs = await JobModel.find(query)
             .sort({ timestamp: assendingDessending });
         return jobs;
     } catch (error) {
@@ -36,7 +36,7 @@ export const getOneJobService = async (
     id: string,
 ) => {
     try {
-        const jobs = await JobSchema.findById(id);
+        const jobs = await JobModel.findById(id);
         return jobs;
     } catch (error) {
         next(error);
@@ -48,7 +48,7 @@ export const postJobService = async (
     handleJobData: JobDataTypes,
 ) => {
     try {
-        const jobs = await new JobSchema(handleJobData).save();
+        const jobs = await new JobModel(handleJobData).save();
         return jobs;
     } catch (error) {
         next(error);
@@ -62,7 +62,7 @@ export const patchAppliedJobService = async (
     userEmail: string,
 ) => {
     try {
-        const jobs = await JobSchema.findByIdAndUpdate(
+        const jobs = await JobModel.findByIdAndUpdate(
             jobId,
             {
                 $push: {
@@ -89,7 +89,7 @@ export const patchIsOpenJob1Service = async (
     isOpen: boolean,
 ) => {
     try {
-        const jobs = await JobSchema.findOne({
+        const jobs = await JobModel.findOne({
             _id: jobId,
             email: userEmail,
             isOpen,
@@ -107,7 +107,7 @@ export const patchIsOpenJob2Service = async (
     updatedIsOpen: boolean,
 ) => {
     try {
-        const jobs = await JobSchema.findOneAndUpdate(
+        const jobs = await JobModel.findOneAndUpdate(
             {
                 _id: jobId,
                 email: userEmail,
@@ -132,7 +132,7 @@ export const getAppliedJobService = async (
     email: string,
 ) => {
     try {
-        const jobs = await JobSchema.find({ "applicants.userEmail": email })
+        const jobs = await JobModel.find({ "applicants.userEmail": email })
         return jobs;
     } catch (error) {
         next(error);
@@ -144,7 +144,7 @@ export const getPostedJobService = async (
     email: string,
 ) => {
     try {
-        const jobs = await JobSchema.find({ email })
+        const jobs = await JobModel.find({ email })
         return jobs;
     } catch (error) {
         next(error);
@@ -157,7 +157,7 @@ export const patchQuestionJobService = async (
     questionAns: QuestionAnsTypes,
 ) => {
     try {
-        const jobs = await JobSchema.findByIdAndUpdate(
+        const jobs = await JobModel.findByIdAndUpdate(
             jobId,
             {
                 $push: {
@@ -182,7 +182,7 @@ export const patchAnsJobService = async (
     ans: AnsTypes,
 ) => {
     try {
-        const jobs = await JobSchema.findOneAndUpdate(
+        const jobs = await JobModel.findOneAndUpdate(
             {
                 _id: jobId,
                 email: userEmail,
