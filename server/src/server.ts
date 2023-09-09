@@ -1,7 +1,9 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
 dotenv.config();
 import cors from 'cors';
+import compression from 'compression';
 import colors from 'colors';
 import conncetDb from './utils/lib/mongodb';
 import routers from './route/v1/index';
@@ -15,8 +17,11 @@ const port = process.env.PORT || 5000;
 // middleware
 app.use(cors({
     credentials: true,
+    origin: [process.env.CLIENT_SITE_URL_LOCAL, process.env.CLIENT_SITE_URL_ONLINE],
 }));
 app.use(express.json());
+app.use(cookieParser())   // cookie send receive package is more easi via this
+app.use(compression());  //reduce size for production levele fast working
 
 // mongodb connect 
 try {
@@ -41,7 +46,7 @@ app.get("/", (req, res) => {
 app.all("*", (req, res) => {
     res.status(404).send("NO ROUTE FOUND.");
 });
-
+.03214
 // global error handler
 app.use(errorHandler);
 

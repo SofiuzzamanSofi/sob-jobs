@@ -1,4 +1,3 @@
-
 import { auth } from "@/firebase/firebase.config";
 import { AuthTypes, CreateUserDataTypes } from "@/interfaceTypes/interfaceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -12,6 +11,7 @@ const initialState: AuthTypes = {
     isError: false,
     error: "",
     user: { email: "", role: "", },
+    token: ""
 };
 
 export const signUpUser = createAsyncThunk(

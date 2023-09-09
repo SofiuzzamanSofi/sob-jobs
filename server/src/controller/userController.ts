@@ -57,12 +57,27 @@ export const createUserController = async (
             // const tokenData = {email: user.email, role: user.role}
             const token = generateToken({ email: user.email, role: user.role });
 
-            const { ...userData } = user.toObject();  // mongodb add many things when split a data so .toObject() 
-            const userWithToken = { ...userData, token }
-            return res.status(201).json({
-                success: true,
-                data: userWithToken,
-            });
+            // const { ...userData } = user.toObject();  // mongodb add many things when split a data so .toObject() 
+            // const userWithToken = { ...userData, token };
+            const domailUrl = `${req.protocol}://${req.get("host")}`
+            console.log('token:', token);
+            console.log('domailUrl:', domailUrl);
+            console.log('req.originalUrl:', req.originalUrl);
+            console.log("req.get('User-Agent'):", req.get('User-Agent'));
+            return res.status(201)
+                .cookie(
+                    "userAccessToken",
+                    token,
+                    {
+                        secure: true,
+                        httpOnly: true,
+                        // sameSite: "strict",
+                        // domain: domailUrl,
+                    }
+                ).send({
+                    success: true,
+                    data: user,
+                });
         }
     } catch (error) {
         next(error);
@@ -81,6 +96,7 @@ export const getUserController = async (
     next: express.NextFunction,
 ) => {
     try {
+        console.log('Hitted-on-get-user:');
         const email = req.params?.email as string;
         if (!email) {
             return res.status(400).json({

@@ -12,7 +12,6 @@ export const getAllJobController = async (
     next: express.NextFunction,
 ) => {
     try {
-        console.log('req:', req);
         const getJobData = await getAllJobService(next)
         if (!getJobData) {
             return res.status(200).json({

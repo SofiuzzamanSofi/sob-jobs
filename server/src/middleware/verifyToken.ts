@@ -17,7 +17,7 @@ export default async (
         };
 
         // jwt verify ()
-        const decoded = await jwt.verify(token, process.env.TOKEN_SECRET) as { email: string, role: string };
+        const decoded = await jwt.verify(token, process.env.TOKEN_SECRET) as { email: string, role: string, iat: number };
 
         console.log('decoded:', decoded);
 
@@ -39,7 +39,7 @@ export default async (
 declare global {
     namespace Express {
         interface Request {
-            user?: { email: string, role: string }
+            user?: { email: string, role: string, iat: number }
         }
     }
 };

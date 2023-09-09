@@ -13,11 +13,26 @@ import { useSelector } from "react-redux";
 const CandidateRegistration = () => {
 
   const [countries, setCountries] = useState<any[]>([]);
-  const { handleSubmit, register, control } = useForm<RegisterTypes>();
-  const term = useWatch({ control, name: "term" });
-  const router = useRouter();
   const reduxStore = useSelector((state: RootState) => state);
+  const router = useRouter();
   const [postUser, { isLoading, isError, isSuccess }] = useRegisterMutation();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    control,
+    formState: { errors },
+  } = useForm<RegisterTypes>();
+  const term = useWatch({ control, name: "term" });
+
+  const onSubmit: SubmitHandler<RegisterTypes> = (data) => {
+    postUser({ ...data, role: "Candidate", email: reduxStore?.auth?.email || "", country: data.country || "Bangladesh" });
+    console.log(data)
+  };
+
+
+  console.log(watch()) // watch input value by passing the name of it
+
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
@@ -25,10 +40,6 @@ const CandidateRegistration = () => {
       .then((data) => setCountries(data));
   }, []);
 
-  const onSubmit: SubmitHandler<RegisterTypes> = (data) => {
-    postUser({ ...data, role: "Candidate", email: reduxStore?.auth?.email || "", country: data.country || "Bangladesh" });
-    // console.log("hello clicked", data);
-  };
 
   useEffect(() => {
     if (isLoading) {
@@ -36,32 +47,33 @@ const CandidateRegistration = () => {
     };
     if (!isLoading && isSuccess) {
       toast.success("Register Success.", { id: "post-user-on-db" });
-      router.push("/dashboard");
+      // router.push("/dashboard");
     };
     if (isError) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
   }, [isLoading, isSuccess, isError, router]);
 
-  if (reduxStore?.auth?.user?.role) {
-    router.push("/dashboard");
-    return null;
-  };
+  // if (reduxStore?.auth?.user?.role) {
+  //   router.push("/dashboard");
+  //   return null;
+  // };
 
   return (
     <div className='pt-14'>
-      <div
-        onClick={() => router.back()}
-        className='cursor-pointer w-fit mt-5 flex items-center'
-      >
-        <FaChevronLeft />
-        <p>back</p>
+      <div>
+        <div
+          onClick={() => router.back()}
+          className='cursor-pointer w-fit mt-5 flex items-center'
+        >
+          <FaChevronLeft />
+          <p>back</p>
+        </div>
       </div>
       <div className='flex justify-center items-center overflow-auto p-10'>
-        <form
-          className='bg-secondary/20 shadow-lg p-10 rounded-2xl flex flex-wrap gap-3 max-w-3xl justify-between'
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
+
+
           <h1 className='w-full text-2xl text-primary mb-5'>Candidate</h1>
           <div className='flex flex-col w-full max-w-xs'>
             <label className='mb-2' htmlFor='firstName'>
@@ -177,18 +189,18 @@ const CandidateRegistration = () => {
               />
               <label htmlFor='terms'>I agree to terms and conditions</label>
             </div>
-            <button
+            <input
               disabled={!term}
-              type='submit'
-              className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
-            >
-              Submit
-            </button>
+              type="submit"
+              className={`${!term ? "cursor-not-allowed" : ""} border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary transition-all `}
+
+
+            />
           </div>
         </form>
       </div>
     </div>
-  );
+  )
 };
 
 export default CandidateRegistration;

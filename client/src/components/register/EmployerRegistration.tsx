@@ -48,7 +48,7 @@ const EmployerRegistration = () => {
       .then((data) => setCountries(data));
   }, []);
 
-  const onSubmit: SubmitHandler<RegisterTypes> = (data) => {
+  const onSubmitFunction: SubmitHandler<RegisterTypes> = (data) => {
     postUser({ ...data, role: "Employer", email: reduxStore?.auth?.email || "", country: data.country || "Bangladesh" });
     // console.log("hello clicked", data);
   };
@@ -59,17 +59,17 @@ const EmployerRegistration = () => {
     };
     if (!isLoading && isSuccess) {
       toast.success("Register Success.", { id: "post-user-on-db" });
-      router.push("/dashboard");
+      // router.push("/dashboard");
     };
     if (isError) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
   }, [isLoading, isSuccess, isError, router]);
 
-  if (reduxStore?.auth?.user?.role) {
-    router.push("/dashboard");
-    return null;
-  };
+  // if (reduxStore?.auth?.user?.role) {
+  //   router.push("/dashboard");
+  //   return null;
+  // };
 
   return (
     <div className='pt-14'>
@@ -83,7 +83,7 @@ const EmployerRegistration = () => {
       <div className='flex justify-center items-center overflow-auto p-10'>
         <form
           className='bg-secondary/20 shadow-lg p-10 rounded-2xl flex flex-wrap gap-3 max-w-3xl justify-between'
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmitFunction)}
         >
           <h1 className='w-full text-2xl text-primary mb-5'>Employer</h1>
           <div className='flex flex-col w-full max-w-xs'>
@@ -221,7 +221,7 @@ const EmployerRegistration = () => {
             <button
               disabled={!term}
               type='submit'
-              className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
+              className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary transition-all '
             >
               Submit
             </button>
