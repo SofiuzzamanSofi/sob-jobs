@@ -1,5 +1,34 @@
 import express from "express";
 import { createUserService, getUserService } from "../service/userService";
+import { generateToken } from "../utils/token/generateToken";
+
+// get user first time open on browser
+export const getMe = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+) => {
+    try {
+        const email = req.user?.email; // Access the user object from req
+        const getUserData = await getUserService
+            (next, email);
+        if (!getUserData) {
+            return res.status(201).json({
+                success: false,
+                message: `Function called but no user data foundby the email: ${email}`,
+                data: { email, }
+            });
+        } else {
+            return res.status(200).json({
+                success: true,
+                message: `Successfully got data by this: ${email}`,
+                data: getUserData,
+            })
+        };
+    } catch (error) {
+        next(error);
+    };
+};
 
 // post a user
 export const createUserController = async (
@@ -15,17 +44,24 @@ export const createUserController = async (
                 message: "Body is empty line 12",
             });
         };
-        const createUseristerData = await createUserService(next, handleUserData);
-        // const createUseristerData = await new UserModel(handleUserData).save();
-        if (!createUseristerData) {
+        const user = await createUserService(next, handleUserData);
+        // const user = await new UserModel(handleUserData).save();
+        if (!user) {
             return res.status(400).json({
                 success: false,
                 message: `Function called but User not set on Db `,
             });
         } else {
+
+            // generate token
+            // const tokenData = {email: user.email, role: user.role}
+            const token = generateToken({ email: user.email, role: user.role });
+
+            const { ...userData } = user.toObject();  // mongodb add many things when split a data so .toObject() 
+            const userWithToken = { ...userData, token }
             return res.status(201).json({
                 success: true,
-                data: createUseristerData,
+                data: userWithToken,
             });
         }
     } catch (error) {

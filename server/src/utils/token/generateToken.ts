@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-export const getGenerateToken = (
+export const generateToken = (
     userInfo: { email: string, role: string }
 ) => {
 
@@ -13,9 +13,6 @@ export const getGenerateToken = (
     const token = jwt.sign(
         payload,
         process.env.TOKEN_SECRET,
-        {
-            // expiresIn: "7days",
-        }
     );
     return token;
 };

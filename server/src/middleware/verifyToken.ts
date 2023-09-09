@@ -19,9 +19,16 @@ export default async (
         // jwt verify ()
         const decoded = await jwt.verify(token, process.env.TOKEN_SECRET) as { email: string, role: string };
 
-        req.user = decoded
+        console.log('decoded:', decoded);
 
-        next();
+        if (decoded.email && decoded.role) {
+            // attached user with request
+            req.user = decoded
+            next();
+        }
+        else {
+            return res.status(401).send({ status: false, message: "Token Expires or Invalid.", });
+        }
     } catch (error) {
         next(error);
     };
