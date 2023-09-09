@@ -7,7 +7,7 @@ const authApi = apiSlice.injectEndpoints({
         register: builder.mutation<void, RegisterTypes>({
             query: (data) => ({
                 method: "POST",
-                url: "/register",
+                url: "/user",
                 body: data,
             }),
             async onQueryStarted(data, { dispatch, queryFulfilled }) {
@@ -15,7 +15,7 @@ const authApi = apiSlice.injectEndpoints({
                     const res = await queryFulfilled;
                     dispatch(getUser(data?.email || ""));
                 } catch (error) {
-                    console.log("error on query onQueryStarted register: ", error);
+                    console.log("error on query onQueryStarted user: ", error);
                 }
             },
         }),

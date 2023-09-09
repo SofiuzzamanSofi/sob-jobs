@@ -2,7 +2,7 @@ import { createUserController, getUserController } from "../../controller/userCo
 import express from "express";
 
 export default (router: express.Router) => {
-    router.post("/userister", createUserController); // post a user
-    router.get("/userister/:email", getUserController); // get a user by email 
-    router.get("/userister/applicant/:email", getUserController); // get a APPLICANT/user by email 
+    router.post("/user", createUserController); // post a user
+    router.get("/user/:email", getUserController); // get a user by email 
+    router.get("/user/applicant/:email", getUserController); // get a APPLICANT/user by email 
 };

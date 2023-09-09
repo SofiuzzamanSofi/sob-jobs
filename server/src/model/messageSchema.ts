@@ -46,4 +46,4 @@ const messageSchema = new mongoose.Schema<MessageObjectType>({
 );
 
 // Create a modal
-export const MessageModel = mongoose.model("Messsage", messageSchema);
+export const MessageModel = mongoose.model("Message", messageSchema);
