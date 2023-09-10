@@ -13,9 +13,9 @@ export const getMe = async (
         // console.log('Cookies: ', req.cookies)
         // console.log('userAccessToken: ', userAccessToken)
         const email = req.user?.email; // Access the user object from req
-        const getUserData = await getUserService
+        const user = await getUserService
             (next, email);
-        if (!getUserData) {
+        if (!user) {
             return res.status(201).json({
                 success: false,
                 message: `Function called but no user data foundby the email: ${email}`,
@@ -25,7 +25,7 @@ export const getMe = async (
             return res.status(200).json({
                 success: true,
                 message: `Successfully got data by this: ${email}`,
-                data: getUserData,
+                data: user,
             })
         };
     } catch (error) {
@@ -126,20 +126,41 @@ export const getUserController = async (
             });
         };
         // console.log('email:', email);
-        const getUserData = await getUserService
+        const user = await getUserService
             (next, email);
-        if (!getUserData) {
+        if (!user) {
             return res.status(201).json({
                 success: false,
                 message: `Function called but no user data foundby the email: ${email}`,
                 data: { email, }
             });
         } else {
-            return res.status(200).json({
-                success: true,
-                message: `Successfully got data by this: ${email}`,
-                data: getUserData,
-            })
+            // generate token
+            // const tokenData = {email: user.email, role: user.role}
+            const token = generateToken({ email: user.email, role: user.role });
+
+            // const { ...userData } = user.toObject();  // mongodb add many things when split a data so .toObject() 
+            // const userWithToken = { ...userData, token };
+            const domailUrl = `${req.protocol}://${req.get("host")}`
+            console.log('token:', token);
+            console.log('domailUrl:', domailUrl);
+            console.log('req.originalUrl:', req.originalUrl);
+            console.log("req.get('User-Agent'):", req.get('User-Agent'));
+            return res.status(201)
+                .cookie(
+                    "userAccessToken",
+                    token,
+                    {
+                        httpOnly: true,
+                        secure: true,
+                        sameSite: "strict",
+                        // domain: domailUrl,
+                    }
+                ).json({
+                    success: true,
+                    message: `Successfully got data by this: ${email}`,
+                    data: user,
+                })
         };
     } catch (error) {
         next(error);

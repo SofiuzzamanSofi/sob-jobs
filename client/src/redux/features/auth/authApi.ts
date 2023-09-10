@@ -10,7 +10,7 @@ const authApi = apiSlice.injectEndpoints({
             query: (data) => ({
                 method: "POST",
                 url: "/user/signup",
-                credentials: 'include',  // ***SET THE COOKIE ***
+                // credentials: 'include',  // ***SET THE COOKIE ***
                 body: data,
             }),
             async onQueryStarted(data, { dispatch, queryFulfilled }) {

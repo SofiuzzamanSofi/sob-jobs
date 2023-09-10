@@ -1,5 +1,4 @@
 import express from "express";
-import { JobModel } from "../model/jobSchema";
 import { generateRandomStringId } from "../utils/randomId/randomId";
 import { getAllJobBySearchTextService, getAllJobService, getAppliedJobService, getOneJobService, getPostedJobService, patchAnsJobService, patchAppliedJobService, patchIsOpenJob1Service, patchIsOpenJob2Service, patchQuestionJobService, postJobService } from "../service/jobService";
 import { AnsTypes, QuestionAnsTypes, getAllJobBySearchTextTypes } from "interfaceServer/interfaceServer.ts";
