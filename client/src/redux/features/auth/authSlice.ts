@@ -61,7 +61,11 @@ export const logOutUser = createAsyncThunk(
             //firebase signOut Function
             const signOutRes = await signOut(auth);
             // clear cookie 
-            const resData = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/user/signout`);
+            const resData = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/user/signout`, {
+                credentials: "include",
+
+            });
+
             if (resData?.ok) {
                 // clear user from redux state
                 // const data = await resData.json();

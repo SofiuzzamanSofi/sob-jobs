@@ -30,13 +30,14 @@ export const getMe = async (
     };
 };
 
-// LogOut || clearCookie
+// signOut || clearCookie
 export const signOut = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
 ) => {
     try {
+        console.log('HITTED log out controller:');
         res.clearCookie('userAccessToken');
         return res.status(201).json({
             success: true,
