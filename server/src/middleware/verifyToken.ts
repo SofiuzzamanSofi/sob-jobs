@@ -11,13 +11,16 @@ export default async (
 ) => {
 
     try {
-        const token = req.headers?.authorization?.split(" ")[1] as string;
+        // const token = req.headers?.authorization?.split(" ")[1] as string;
+        // const { userAccessToken } = req.cookies
+
+        const token = req.headers?.cookie.split("=")[1] as string;;
         if (!token) {
             return res.status(401).send({ status: false, message: "You are not LogIn.", });
         };
 
         // jwt verify ()
-        const decoded = await jwt.verify(token, process.env.TOKEN_SECRET) as { email: string, role: string, iat: number };
+        const decoded = jwt.verify(token, process.env.TOKEN_SECRET) as { email: string, role: string, iat: number };
 
         console.log('decoded:', decoded);
 

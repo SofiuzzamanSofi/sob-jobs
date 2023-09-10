@@ -22,6 +22,7 @@ const jobApi = apiSlice.injectEndpoints({
         getJobs: builder.query<GetJobsResTypes, void>({
             query: () => ({
                 url: "/job",
+                credentials: 'include', // *** Include cookies with the request ***
             }),
             providesTags: ["JobAll"],
         }),

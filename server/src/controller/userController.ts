@@ -9,6 +9,9 @@ export const getMe = async (
     next: express.NextFunction,
 ) => {
     try {
+        // const { userAccessToken } = req.cookies
+        // console.log('Cookies: ', req.cookies)
+        // console.log('userAccessToken: ', userAccessToken)
         const email = req.user?.email; // Access the user object from req
         const getUserData = await getUserService
             (next, email);

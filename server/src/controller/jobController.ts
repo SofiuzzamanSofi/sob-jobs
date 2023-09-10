@@ -12,6 +12,10 @@ export const getAllJobController = async (
     next: express.NextFunction,
 ) => {
     try {
+        const { userAccessToken } = req.cookies
+        console.log("hitted. all jobs")
+        console.log('Cookies: ', req.cookies)
+        console.log('userAccessToken: ', userAccessToken)
         const getJobData = await getAllJobService(next)
         if (!getJobData) {
             return res.status(200).json({
