@@ -8,7 +8,7 @@ import { auth } from "../firebase/firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { getUser,  signOutReducer, toggleLoading } from "../redux/features/auth/authSlice";
+import { getMe, logOutUser, signOutReducer, toggleLoading } from "../redux/features/auth/authSlice";
 
 const Navbar = () => {
 
@@ -22,7 +22,7 @@ const Navbar = () => {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user?.email) {
-                dispatch(getUser(user?.email));
+                dispatch(getMe(user?.email));
                 // dispatch(setUser(user?.email));
                 // console.log("From Navbar:", user?.email);
             }
@@ -34,14 +34,18 @@ const Navbar = () => {
     }, [dispatch]);
 
     const handleSignOut = () => {
-        signOut(auth)
-            .then(() => {
-                // console.log("log out clicked.");
-                dispatch(signOutReducer());
-            })
-            .catch((error) => {
-                // Handle error if needed
-            });
+
+        dispatch(logOutUser());
+
+
+        // signOut(auth)
+        //     .then(() => {
+        //         // console.log("log out clicked.");
+        //         dispatch(signOutReducer());
+        //     })
+        //     .catch((error) => {
+        //         // Handle error if needed
+        //     });
     };
 
     if (pathNameArray.includes("sign-up") || pathNameArray.includes("sign-in")) {
@@ -56,10 +60,10 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link
-                           className='p-2 rounded-full bg-white border  h-10 w-10 grid place-items-center'
+                            className='p-2 rounded-full bg-white border  h-10 w-10 grid place-items-center'
                             href='/dashboard/search-jobs'
                         >
-                             <BiSearchAlt size='23' color='black' />
+                            <BiSearchAlt size='23' color='black' />
                         </Link>
                     </li>
                     <li>

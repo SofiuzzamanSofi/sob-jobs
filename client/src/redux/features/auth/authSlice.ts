@@ -1,7 +1,7 @@
 import { auth } from "@/firebase/firebase.config";
 import { AuthTypes, CreateUserDataTypes } from "@/interfaceTypes/interfaceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 
 const initialState: AuthTypes = {
@@ -45,13 +45,34 @@ export const googleLogin = createAsyncThunk(
     },
 );
 
-export const getUser = createAsyncThunk(
-    "auth/getUser",
+export const getMe = createAsyncThunk(
+    "auth/getMe",
     async (email: string) => {
         const resData = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/user/${email}`);
         const data = await resData.json();
         return data.data;
     }
+);
+
+export const logOutUser = createAsyncThunk(
+    "auth/logOutUser",
+    async () => {
+        try {
+            //firebase signOut Function
+            const signOutRes = await signOut(auth);
+            // clear cookie 
+            const resData = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/user/signout`);
+            if (resData?.ok) {
+                // clear user from redux state
+                // const data = await resData.json();
+                // return data.data;
+                // signOutReducer();
+                return;
+            }
+        } catch (error) {
+            // console.log('error from authApi logout functon:',error);
+        };
+    },
 );
 
 const authSlice = createSlice({
@@ -107,23 +128,41 @@ const authSlice = createSlice({
                 state.error = "";
                 state.email = payload;
             })
-            .addCase(getUser.pending, (state) => {
+            .addCase(getMe.pending, (state) => {
                 state.isLoading = true;
                 state.isError = false;
                 state.error = "";
             })
-            .addCase(getUser.rejected, (state, action) => {
+            .addCase(getMe.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.error = action?.error?.message || "User Authentication Failed";
             })
-            .addCase(getUser.fulfilled, (state, { payload }) => {
+            .addCase(getMe.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
                 state.isError = false;
                 state.error = "";
                 state.user = payload;
                 state.email = payload.email;
                 state.role = payload?.role || "";
+            })
+            .addCase(logOutUser.pending, (state) => {
+                state.isLoading = true;
+                state.isError = false;
+                state.error = "";
+            })
+            .addCase(logOutUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.error = action?.error?.message || "User Log OUT Failed";
+            })
+            .addCase(logOutUser.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.error = "";
+                state.email = "";
+                state.role = "";
+                state.user = {};
             })
     },
     reducers: {

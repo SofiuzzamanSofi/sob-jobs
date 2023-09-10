@@ -30,8 +30,25 @@ export const getMe = async (
     };
 };
 
+// LogOut || clearCookie
+export const signOut = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+) => {
+    try {
+        res.clearCookie('userAccessToken');
+        return res.status(201).json({
+            success: true,
+            message: "Log out success."
+        });
+    } catch (error) {
+        next(error);
+    };
+};
+
 // post a user
-export const createUserController = async (
+export const signUp = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
@@ -70,8 +87,8 @@ export const createUserController = async (
                     token,
                     {
                         httpOnly: true,
-                        // secure: true,
-                        // sameSite: "strict",
+                        secure: true,
+                        sameSite: "strict",
                         // domain: domailUrl,
                     }
                 ).json({

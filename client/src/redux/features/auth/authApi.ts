@@ -1,6 +1,6 @@
 import { RegisterTypes } from "@/interfaceTypes/interfaceTypes";
 import apiSlice from "../api/apiSlice";
-import { getUser } from "./authSlice";
+import { getMe } from "./authSlice";
 import { cookies } from "next/dist/client/components/headers";
 import Cookies from 'js-cookie';
 
@@ -10,13 +10,13 @@ const authApi = apiSlice.injectEndpoints({
             query: (data) => ({
                 method: "POST",
                 url: "/user/signup",
-                credentials: 'include',
+                credentials: 'include',  // ***SET THE COOKIE ***
                 body: data,
             }),
             async onQueryStarted(data, { dispatch, queryFulfilled }) {
                 try {
                     const res = await queryFulfilled;
-                    dispatch(getUser(data?.email || ""));
+                    dispatch(getMe(data?.email || ""));
 
                     // (res.meta?.response?.headers.getSetCookie.name)
                     // Cookies.set(res.meta?.response?.headers.getSetCookie.name || "", res.meta?.response?.headers.getSetCookie. || "");
