@@ -10,6 +10,7 @@ const authApi = apiSlice.injectEndpoints({
             query: (data) => ({
                 method: "POST",
                 url: "/user/signup",
+                credentials: 'include',
                 body: data,
             }),
             async onQueryStarted(data, { dispatch, queryFulfilled }) {
@@ -18,7 +19,7 @@ const authApi = apiSlice.injectEndpoints({
                     dispatch(getUser(data?.email || ""));
 
                     // (res.meta?.response?.headers.getSetCookie.name)
-                    // Cookies.set(res.meta?.response?.headers.getSetCookie.name || "", " res.meta?.response?.headers.getSetCookie" || "");
+                    // Cookies.set(res.meta?.response?.headers.getSetCookie.name || "", res.meta?.response?.headers.getSetCookie. || "");
                     console.log('res.meta?.response?.headers:', res.meta?.response?.headers);
                 } catch (error) {
                     console.log("error on query onQueryStarted user: ", error);

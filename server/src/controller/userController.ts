@@ -69,12 +69,12 @@ export const createUserController = async (
                     "userAccessToken",
                     token,
                     {
-                        // httpOnly: true,
+                        httpOnly: true,
                         // secure: true,
                         // sameSite: "strict",
                         // domain: domailUrl,
                     }
-                ).send({
+                ).json({
                     success: true,
                     data: user,
                 });

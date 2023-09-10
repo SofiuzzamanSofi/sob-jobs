@@ -44,17 +44,17 @@ const CandidateRegistration = () => {
     };
     if (!isLoading && isSuccess) {
       toast.success("Register Success.", { id: "post-user-on-db" });
-      router.push("/dashboard");
+      // router.push("/dashboard");
     };
     if (isError) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
   }, [isLoading, isSuccess, isError, router]);
 
-  if (reduxStore?.auth?.user?.role) {
-    router.push("/dashboard");
-    return null;
-  };
+  // if (reduxStore?.auth?.user?.role) {
+  //   router.push("/dashboard");
+  //   return null;
+  // };
 
   return (
     <div className='pt-14'>
