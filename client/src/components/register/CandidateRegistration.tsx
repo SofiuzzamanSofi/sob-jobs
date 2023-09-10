@@ -44,7 +44,7 @@ const CandidateRegistration = () => {
     };
     if (!isLoading && isSuccess) {
       toast.success("Register Success.", { id: "post-user-on-db" });
-      // router.push("/dashboard");
+      router.push("/dashboard");
     };
     if (isError) {
       toast.error("Error ", { id: "post-user-on-db" })
