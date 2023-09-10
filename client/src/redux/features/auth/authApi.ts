@@ -2,6 +2,7 @@ import { RegisterTypes } from "@/interfaceTypes/interfaceTypes";
 import apiSlice from "../api/apiSlice";
 import { getUser } from "./authSlice";
 import { cookies } from "next/dist/client/components/headers";
+import Cookies from 'js-cookie';
 
 const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -15,7 +16,9 @@ const authApi = apiSlice.injectEndpoints({
                 try {
                     const res = await queryFulfilled;
                     // dispatch(getUser(data?.email || ""));
-                    // (res.meta?.response?.headers.getSetCookie.name)
+                    (res.meta?.response?.headers.getSetCookie.name)
+                    // Cookies.set(res.meta?.response?.headers.getSetCookie.name || "", " res.meta?.response?.headers.getSetCookie" || "");
+
                     console.log('res.meta?.response?.headers:', res.meta?.response?.headers);
                 } catch (error) {
                     console.log("error on query onQueryStarted user: ", error);
