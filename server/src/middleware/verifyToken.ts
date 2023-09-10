@@ -12,15 +12,16 @@ export default async (
 
     try {
         // const token = req.headers?.authorization?.split(" ")[1] as string;
-        // const { userAccessToken } = req.cookies
 
-        const token = req.headers?.cookie.split("=")[1] as string;;
-        if (!token) {
+        // const token = req.headers?.cookie.split("=")[1] as string;
+        const { userAccessToken } = req.cookies
+
+        if (!userAccessToken) {
             return res.status(401).send({ status: false, message: "You are not LogIn.", });
         };
 
         // jwt verify ()
-        const decoded = jwt.verify(token, process.env.TOKEN_SECRET) as { email: string, role: string, iat: number };
+        const decoded = jwt.verify(userAccessToken, process.env.TOKEN_SECRET) as { email: string, role: string, iat: number };
 
         console.log('token-verify-decoded:', decoded);
 

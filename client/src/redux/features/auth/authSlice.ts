@@ -72,24 +72,23 @@ export const signInUser = createAsyncThunk(
 export const googleLogin = createAsyncThunk(
     "auth/googleLogin",
     async () => {
-        try {
-            const provider = new GoogleAuthProvider();
-            const responseData = await signInWithPopup(auth, provider);
+        const provider = new GoogleAuthProvider();
+        const responseData = await signInWithPopup(auth, provider);
+        // console.log("hit- googleLogin:", responseData.user.email);
+        if (responseData?.user?.email) {
             const resDataFromDb = await fetch(
-                `${process.env.NEXT_PUBLIC_SERVER}/user/signup`,
+                `${process.env.NEXT_PUBLIC_SERVER}/user/signin-social-media`,
                 {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(responseData?.user),
+                    body: JSON.stringify({ email: responseData?.user?.email }),
                     credentials: "include"
                 }
             );
             const userData = await resDataFromDb.json();
-            return userData?.data?.email
-        } catch (error) {
-            // console.log('error on authSlice googleLogin:',error);
+            return userData?.data
         };
     },
 );
@@ -184,7 +183,7 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.error = "";
-                state.email = payload;
+                state.user = payload;
             })
             .addCase(getMe.pending, (state) => {
                 state.isLoading = true;

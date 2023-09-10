@@ -1,6 +1,7 @@
 import express from "express";
 import { createUserService, getUserByEmail, updateUserByEmail } from "../service/userService";
 import { generateToken } from "../utils/token/generateToken";
+import { UserDataTypes } from "interfaceServer/interfaceServer.ts";
 
 // get user first time open on browser
 export const getMe = async (
@@ -14,7 +15,7 @@ export const getMe = async (
         // console.log('userAccessToken: ', userAccessToken)
         const email = req.user?.email; // Access the user object from req
         const user = await getUserByEmail(next, email);
-        if (!user) {
+        if (!user.email) {
             return res.status(201).json({
                 success: false,
                 message: `Function called but no user data foundby the email: ${email}`,
@@ -66,7 +67,7 @@ export const signUp = async (
             });
         };
         const user = await createUserService(next, handleUserData);
-        if (!user) {
+        if (!user.email) {
             return res.status(400).json({
                 success: false,
                 message: `Function called but User not set on Db `,
@@ -110,6 +111,60 @@ export const signIn = async (
                 message: "Body is empty line 12",
             });
         };
+        let user = {} as UserDataTypes;
+
+        // get user form DB
+        user = await getUserByEmail(next, handleUserData.email);
+        if (!user.email) {
+
+            // first time on DB
+            user = await createUserService(next, handleUserData);
+        };
+
+        if (!user?.email) {
+            return res.status(400).json({
+                success: false,
+                message: `Function called but User not set on Db `,
+            });
+        }
+        else {
+            // generate token
+            const token = generateToken({ email: user.email, role: user?.role });
+            return res.status(201)
+                .cookie(
+                    "userAccessToken",
+                    token,
+                    {
+                        httpOnly: true,
+                        secure: true,
+                        sameSite: "strict",
+                        // domain: domailUrl,
+                    }
+                ).json({
+                    success: true,
+                    data: user,
+                });
+        }
+    } catch (error) {
+        next(error);
+    };
+};
+
+// signIn
+export const signInWithSocial = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+) => {
+    try {
+        const handleUserData = req.body;
+        console.log("hit- signInWithSocial:");
+        if (!handleUserData) {
+            return res.status(400).json({
+                success: false,
+                message: "Body is empty line 12",
+            });
+        };
         const user = await getUserByEmail(next, handleUserData.email);
         if (!user) {
             return res.status(400).json({
@@ -118,7 +173,7 @@ export const signIn = async (
             });
         } else {
             // generate token
-            const token = await generateToken({ email: user.email, role: user?.role });
+            const token = generateToken({ email: user.email, role: user?.role });
             return res.status(201)
                 .cookie(
                     "userAccessToken",
