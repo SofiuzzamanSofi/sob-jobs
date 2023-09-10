@@ -5,7 +5,7 @@ import apiSlice from './features/api/apiSlice'
 
 const store = configureStore({
 
-    // devTools: false,
+    devTools: process.env.NODE_ENV !== 'production',
 
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,

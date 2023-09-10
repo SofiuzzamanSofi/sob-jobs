@@ -13,6 +13,9 @@ export interface UserDataTypes {
     employeeRange?: string;
     roleInCompany?: string;
     term?: boolean;
+    createdAt?: string,
+    updatedAt?: string,
+    _id?: string;
 };
 
 export interface AnsTypes {

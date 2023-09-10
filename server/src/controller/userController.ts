@@ -1,5 +1,5 @@
 import express from "express";
-import { createUserService, getUserService } from "../service/userService";
+import { createUserService, getUserByEmail, updateUserByEmail } from "../service/userService";
 import { generateToken } from "../utils/token/generateToken";
 
 // get user first time open on browser
@@ -13,8 +13,7 @@ export const getMe = async (
         // console.log('Cookies: ', req.cookies)
         // console.log('userAccessToken: ', userAccessToken)
         const email = req.user?.email; // Access the user object from req
-        const user = await getUserService
-            (next, email);
+        const user = await getUserByEmail(next, email);
         if (!user) {
             return res.status(201).json({
                 success: false,
@@ -51,8 +50,53 @@ export const signOut = async (
     };
 };
 
-// post a user
+// signUp
 export const signUp = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+) => {
+    try {
+        const handleUserData = req.body;
+        // console.log('handleUserData signup:', handleUserData);
+        if (!handleUserData) {
+            return res.status(400).json({
+                success: false,
+                message: "Body is empty line 12",
+            });
+        };
+        const user = await createUserService(next, handleUserData);
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: `Function called but User not set on Db `,
+            });
+        } else {
+            const { createdAt, updatedAt, ...others } = user.toObject();
+            //TOKEN
+            const token = generateToken({ email: user.email });
+            return res.status(201)
+                .cookie(
+                    "userAccessToken",
+                    token,
+                    {
+                        httpOnly: true,
+                        secure: true,
+                        sameSite: "strict",
+                        // domain: domailUrl,
+                    }
+                ).json({
+                    success: true,
+                    data: others,
+                });
+        }
+    } catch (error) {
+        next(error);
+    };
+};
+
+// signIn
+export const signIn = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
@@ -65,7 +109,51 @@ export const signUp = async (
                 message: "Body is empty line 12",
             });
         };
-        const user = await createUserService(next, handleUserData);
+        const user = await getUserByEmail(next, handleUserData.email);
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: `Function called but User not set on Db `,
+            });
+        } else {
+            // generate token
+            const token = await generateToken({ email: user.email, role: user?.role });
+            return res.status(201)
+                .cookie(
+                    "userAccessToken",
+                    token,
+                    {
+                        httpOnly: true,
+                        secure: true,
+                        sameSite: "strict",
+                        // domain: domailUrl,
+                    }
+                ).json({
+                    success: true,
+                    data: user,
+                });
+        }
+    } catch (error) {
+        next(error);
+    };
+};
+
+// edit user with  role and other info
+export const registrationController = async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+) => {
+    try {
+        const handleUserData = req.body;
+        // console.log('handleUserData registrationController:', handleUserData);
+        if (!handleUserData) {
+            return res.status(400).json({
+                success: false,
+                message: "Body is empty line 12",
+            });
+        };
+        const user = await updateUserByEmail(next, handleUserData);
         // const user = await new UserModel(handleUserData).save();
         if (!user) {
             return res.status(400).json({
@@ -80,11 +168,12 @@ export const signUp = async (
 
             // const { ...userData } = user.toObject();  // mongodb add many things when split a data so .toObject() 
             // const userWithToken = { ...userData, token };
-            const domailUrl = `${req.protocol}://${req.get("host")}`
-            console.log('token:', token);
-            console.log('domailUrl:', domailUrl);
-            console.log('req.originalUrl:', req.originalUrl);
-            console.log("req.get('User-Agent'):", req.get('User-Agent'));
+            // const domailUrl = `${req.protocol}://${req.get("host")}`
+            // console.log('token:', token);
+            // console.log('domailUrl:', domailUrl);
+            // console.log('req.originalUrl:', req.originalUrl);
+            // console.log("req.get('User-Agent'):", req.get('User-Agent'));
+            // console.log('handleUserData registrationController/user:', user);
             return res.status(201)
                 .cookie(
                     "userAccessToken",
@@ -126,7 +215,7 @@ export const getUserController = async (
             });
         };
         // console.log('email:', email);
-        const user = await getUserService
+        const user = await getUserByEmail
             (next, email);
         if (!user) {
             return res.status(201).json({

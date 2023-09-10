@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema<UserDataTypes>({
   },
   role: {
     type: "string",
-    required: true,
+    required: false,
   },
   gender: {
     type: "string",

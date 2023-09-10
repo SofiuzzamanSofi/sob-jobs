@@ -22,7 +22,7 @@ export default async (
         // jwt verify ()
         const decoded = jwt.verify(token, process.env.TOKEN_SECRET) as { email: string, role: string, iat: number };
 
-        console.log('decoded:', decoded);
+        console.log('token-verify-decoded:', decoded);
 
         if (decoded.email && decoded.role) {
             // attached user with request

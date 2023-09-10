@@ -8,8 +8,8 @@ const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         register: builder.mutation<void, RegisterTypes>({
             query: (data) => ({
-                method: "POST",
-                url: "/user/signup",
+                method: "PUT",
+                url: "/user/registration",
                 // credentials: 'include',  // ***SET THE COOKIE ***
                 body: data,
             }),

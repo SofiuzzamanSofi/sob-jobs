@@ -6,7 +6,6 @@ export interface AuthTypes {
     isError: boolean;
     error: string;
     user?: RegisterTypes;
-    token?: string,
 };
 
 export interface CreateUserDataTypes {

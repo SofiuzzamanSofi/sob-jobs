@@ -11,9 +11,9 @@ const initialState: AuthTypes = {
     isError: false,
     error: "",
     user: { email: "", role: "", },
-    token: ""
 };
 
+// signup on firebase and save data on db
 export const signUpUser = createAsyncThunk(
     "auth/signUpUser",
     async (
@@ -21,27 +21,75 @@ export const signUpUser = createAsyncThunk(
         thunkApi
     ) => {
         const responseData = await createUserWithEmailAndPassword(auth, data.email, data.password);
-        return responseData?.user?.email;
+        // console.log('responseData?.user?.email:', responseData)
+        if (responseData?.user?.email) {
+            const resDataFromDb = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER}/user/signup`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email: responseData?.user?.email }),
+                    credentials: "include"
+                }
+            );
+            const userData = await resDataFromDb.json();
+            return userData?.data
+        };
     },
 );
 
+// signin on firebase and get data from db
 export const signInUser = createAsyncThunk(
     "auth/signInUser",
     async (
         data: CreateUserDataTypes,
         thunkApi
     ) => {
+
         const responseData = await signInWithEmailAndPassword(auth, data.email, data.password);
-        return responseData?.user?.email;
+        if (responseData?.user?.email) {
+            const resDataFromDb = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER}/user/signin`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email: responseData?.user?.email }),
+                    credentials: "include"
+                }
+            );
+            const userData = await resDataFromDb.json();
+            return userData?.data
+        };
     },
 );
 
+// signup or signin on firebase and set or get data from db
 export const googleLogin = createAsyncThunk(
     "auth/googleLogin",
     async () => {
-        const provider = new GoogleAuthProvider();
-        const responseData = await signInWithPopup(auth, provider);
-        return responseData?.user?.email;
+        try {
+            const provider = new GoogleAuthProvider();
+            const responseData = await signInWithPopup(auth, provider);
+            const resDataFromDb = await fetch(
+                `${process.env.NEXT_PUBLIC_SERVER}/user/signup`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(responseData?.user),
+                    credentials: "include"
+                }
+            );
+            const userData = await resDataFromDb.json();
+            return userData?.data?.email
+        } catch (error) {
+            // console.log('error on authSlice googleLogin:',error);
+        };
     },
 );
 
@@ -57,12 +105,14 @@ export const getMe = createAsyncThunk(
     }
 );
 
+// logOut from firebase and remove cookei and clear redux state
 export const logOutUser = createAsyncThunk(
     "auth/logOutUser",
     async () => {
         try {
             //firebase signOut Function
             const signOutRes = await signOut(auth);
+            // console.log('signOutRes:', signOutRes); // => signOutRes: undefined
             // clear cookie 
             const resData = await fetch(
                 `${process.env.NEXT_PUBLIC_SERVER}/user/signout`,
@@ -101,7 +151,7 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.error = "";
-                state.email = payload;
+                state.user = payload;
             })
             .addCase(signInUser.pending, (state) => {
                 state.isLoading = true;
