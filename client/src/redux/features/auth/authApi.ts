@@ -15,10 +15,10 @@ const authApi = apiSlice.injectEndpoints({
             async onQueryStarted(data, { dispatch, queryFulfilled }) {
                 try {
                     const res = await queryFulfilled;
-                    // dispatch(getUser(data?.email || ""));
-                    (res.meta?.response?.headers.getSetCookie.name)
-                    // Cookies.set(res.meta?.response?.headers.getSetCookie.name || "", " res.meta?.response?.headers.getSetCookie" || "");
+                    dispatch(getUser(data?.email || ""));
 
+                    // (res.meta?.response?.headers.getSetCookie.name)
+                    // Cookies.set(res.meta?.response?.headers.getSetCookie.name || "", " res.meta?.response?.headers.getSetCookie" || "");
                     console.log('res.meta?.response?.headers:', res.meta?.response?.headers);
                 } catch (error) {
                     console.log("error on query onQueryStarted user: ", error);
