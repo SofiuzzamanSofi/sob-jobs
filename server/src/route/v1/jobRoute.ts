@@ -5,10 +5,9 @@ import express from 'express';
 export default (router: express.Router) => {
 
     // Middleware that applies to all routes below this point
-    // router.use(verifyToken);
+    router.use(verifyToken);
 
-
-    router.get("/job", verifyToken, getAllJobController); // get all jobs 
+    router.get("/job", getAllJobController); // get all jobs 
     router.post("/job/search", getAllJobBySearchTextController); // get all jobs By Search Text
     router.get("/job/:id", getOneJobController); // get 1 job by id 
     router.post("/job", postJobController); // post a job 
