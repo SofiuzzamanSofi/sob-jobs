@@ -27,7 +27,7 @@ const authApi = apiSlice.injectEndpoints({
         }),
         // editRegister 
         // others endpoints
-    })
+    }),
 });
 
 export const { useRegisterMutation } = authApi;
