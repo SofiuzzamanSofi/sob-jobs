@@ -49,6 +49,7 @@ export const signInUser = createAsyncThunk(
     ) => {
 
         const responseData = await signInWithEmailAndPassword(auth, data.email, data.password);
+        // console.log("hit- signInUser:", responseData.user.email);
         if (responseData?.user?.email) {
             const resDataFromDb = await fetch(
                 `${process.env.NEXT_PUBLIC_SERVER}/user/signin`,
@@ -167,7 +168,7 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.error = "";
-                state.email = payload;
+                state.user = payload;
             })
             .addCase(googleLogin.pending, (state) => {
                 state.isLoading = true;

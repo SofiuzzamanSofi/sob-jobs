@@ -58,7 +58,7 @@ export const signUp = async (
 ) => {
     try {
         const handleUserData = req.body;
-        // console.log('handleUserData signup:', handleUserData);
+        console.log("hit- signUp:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -103,6 +103,7 @@ export const signIn = async (
 ) => {
     try {
         const handleUserData = req.body;
+        console.log("hit- signIn:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -139,14 +140,14 @@ export const signIn = async (
 };
 
 // edit user with  role and other info
-export const registrationController = async (
+export const updateUserWithRole = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
 ) => {
     try {
         const handleUserData = req.body;
-        // console.log('handleUserData registrationController:', handleUserData);
+        console.log("hit- updateUserWithRole:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -154,26 +155,14 @@ export const registrationController = async (
             });
         };
         const user = await updateUserByEmail(next, handleUserData);
-        // const user = await new UserModel(handleUserData).save();
         if (!user) {
             return res.status(400).json({
                 success: false,
                 message: `Function called but User not set on Db `,
             });
         } else {
-
             // generate token
-            // const tokenData = {email: user.email, role: user.role}
             const token = generateToken({ email: user.email, role: user.role });
-
-            // const { ...userData } = user.toObject();  // mongodb add many things when split a data so .toObject() 
-            // const userWithToken = { ...userData, token };
-            // const domailUrl = `${req.protocol}://${req.get("host")}`
-            // console.log('token:', token);
-            // console.log('domailUrl:', domailUrl);
-            // console.log('req.originalUrl:', req.originalUrl);
-            // console.log("req.get('User-Agent'):", req.get('User-Agent'));
-            // console.log('handleUserData registrationController/user:', user);
             return res.status(201)
                 .cookie(
                     "userAccessToken",
@@ -191,32 +180,25 @@ export const registrationController = async (
         }
     } catch (error) {
         next(error);
-        // console.error("Error creating Useristration:", error);
-        // return res.status(500).json({
-        //     success: false,
-        //     message: "Failed to create Useristration",
-        // });
     };
 };
 
 // get a user by email 
-export const getUserController = async (
+export const getUserControllerByEmail = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
 ) => {
     try {
-        console.log('Hitted-on-get-user:');
         const email = req.params?.email as string;
+        console.log("hit- getUserControllerByEmail:");
         if (!email) {
             return res.status(400).json({
                 success: false,
                 message: "Body is empty line 12",
             });
         };
-        // console.log('email:', email);
-        const user = await getUserByEmail
-            (next, email);
+        const user = await getUserByEmail(next, email);
         if (!user) {
             return res.status(201).json({
                 success: false,
@@ -224,39 +206,13 @@ export const getUserController = async (
                 data: { email, }
             });
         } else {
-            // generate token
-            // const tokenData = {email: user.email, role: user.role}
-            const token = generateToken({ email: user.email, role: user.role });
-
-            // const { ...userData } = user.toObject();  // mongodb add many things when split a data so .toObject() 
-            // const userWithToken = { ...userData, token };
-            const domailUrl = `${req.protocol}://${req.get("host")}`
-            console.log('token:', token);
-            console.log('domailUrl:', domailUrl);
-            console.log('req.originalUrl:', req.originalUrl);
-            console.log("req.get('User-Agent'):", req.get('User-Agent'));
-            return res.status(201)
-                .cookie(
-                    "userAccessToken",
-                    token,
-                    {
-                        httpOnly: true,
-                        secure: true,
-                        sameSite: "strict",
-                        // domain: domailUrl,
-                    }
-                ).json({
-                    success: true,
-                    message: `Successfully got data by this: ${email}`,
-                    data: user,
-                })
+            return res.status(201).send({
+                success: true,
+                message: `Successfully got data by this: ${email}`,
+                data: user,
+            })
         };
     } catch (error) {
         next(error);
-        // console.error("Error creating Useristration:", error);
-        // return res.status(500).json({
-        //     success: false,
-        //     message: "Failed to create Useristration",
-        // });
     };
 };

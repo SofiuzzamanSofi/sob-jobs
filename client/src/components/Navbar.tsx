@@ -19,19 +19,19 @@ const Navbar = () => {
     const dispatch: AppDispatch = useDispatch();
 
     // every time relode and get user/register user from DATABASE 
-    // useEffect(() => {
-    //     onAuthStateChanged(auth, (user) => {
-    //         if (user?.email) {
-    //             dispatch(getMe(user?.email));
-    //             // dispatch(setUser(user?.email));
-    //             console.log("From Navbar:", user?.email);
-    //         }
-    //         else {
-    //             // console.log("user?.email: Email nai");
-    //             dispatch(toggleLoading());
-    //         }
-    //     });
-    // }, [dispatch]);
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user?.email) {
+                dispatch(getMe(user?.email));
+                // dispatch(setUser(user?.email));
+                console.log("From Navbar:", user?.email);
+            }
+            else {
+                // console.log("user?.email: Email nai");
+                dispatch(toggleLoading());
+            }
+        });
+    }, [dispatch]);
 
     const handleSignOut = () => {
 
