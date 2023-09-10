@@ -68,12 +68,12 @@ export const createUserController = async (
                 .cookie(
                     "userAccessToken",
                     token,
-                    // {
-                    //     secure: true,
-                    //     httpOnly: true,
-                    //     sameSite: "strict",
-                    //     // domain: domailUrl,
-                    // }
+                    {
+                        // httpOnly: true,
+                        // secure: true,
+                        // sameSite: "strict",
+                        // domain: domailUrl,
+                    }
                 ).send({
                     success: true,
                     data: user,

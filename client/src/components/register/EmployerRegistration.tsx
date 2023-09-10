@@ -50,7 +50,7 @@ const EmployerRegistration = () => {
 
   const onSubmitFunction: SubmitHandler<RegisterTypes> = (data) => {
     postUser({ ...data, role: "Employer", email: reduxStore?.auth?.email || "", country: data.country || "Bangladesh" });
-    // console.log("hello clicked", data);
+    // console.log("EmployerRegistration clicked", data);
   };
 
   useEffect(() => {
@@ -59,17 +59,17 @@ const EmployerRegistration = () => {
     };
     if (!isLoading && isSuccess) {
       toast.success("Register Success.", { id: "post-user-on-db" });
-      // router.push("/dashboard");
+      router.push("/dashboard");
     };
     if (isError) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
   }, [isLoading, isSuccess, isError, router]);
 
-  // if (reduxStore?.auth?.user?.role) {
-  //   router.push("/dashboard");
-  //   return null;
-  // };
+  if (reduxStore?.auth?.user?.role) {
+    router.push("/dashboard");
+    return null;
+  };
 
   return (
     <div className='pt-14'>

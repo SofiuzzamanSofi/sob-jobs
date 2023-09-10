@@ -27,19 +27,16 @@ const CandidateRegistration = () => {
 
   const onSubmit: SubmitHandler<RegisterTypes> = (data) => {
     postUser({ ...data, role: "Candidate", email: reduxStore?.auth?.email || "", country: data.country || "Bangladesh" });
-    console.log(data)
+    // console.log("CandidateRegistration clicked:",data)
   };
 
-
-  console.log(watch()) // watch input value by passing the name of it
-
+  // console.log(watch()) // watch input value by passing the name of it
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((res) => res.json())
       .then((data) => setCountries(data));
   }, []);
-
 
   useEffect(() => {
     if (isLoading) {
@@ -54,10 +51,10 @@ const CandidateRegistration = () => {
     };
   }, [isLoading, isSuccess, isError, router]);
 
-  // if (reduxStore?.auth?.user?.role) {
-  //   router.push("/dashboard");
-  //   return null;
-  // };
+  if (reduxStore?.auth?.user?.role) {
+    router.push("/dashboard");
+    return null;
+  };
 
   return (
     <div className='pt-14'>
@@ -189,13 +186,13 @@ const CandidateRegistration = () => {
               />
               <label htmlFor='terms'>I agree to terms and conditions</label>
             </div>
+
             <input
               disabled={!term}
               type="submit"
               className={`${!term ? "cursor-not-allowed" : ""} border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary transition-all `}
-
-
             />
+
           </div>
         </form>
       </div>
