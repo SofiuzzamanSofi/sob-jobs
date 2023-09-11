@@ -14,10 +14,15 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
-app.use(cors({
+const corsOptions = {
     credentials: true,
-    origin: [process.env.CLIENT_SITE_URL_ONLINE, process.env.CLIENT_SITE_URL_LOCAL],
-}));
+    origin: [
+        process.env.CLIENT_SITE_URL_ONLINE,
+        process.env.CLIENT_SITE_URL_LOCAL,
+    ],
+};
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(cookieParser())   // cookie send receive package is more easi via this
 app.use(compression());  //reduce size for production levele fast working
