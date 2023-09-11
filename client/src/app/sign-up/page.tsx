@@ -49,17 +49,17 @@ const SignUp = () => {
     if (reduxStore?.auth?.isLoading) {
       toast.loading("Please wait...", { id: "user-creating" });
     };
-    if (!reduxStore?.auth?.isLoading && reduxStore?.auth?.email) {
+    if (!reduxStore?.auth?.isLoading && reduxStore?.auth?.user?.email) {
       toast.success("Sign-Up Success.", { id: "user-creating" });
       router.push("/");
     };
     if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
       toast.error("Error ", { id: "user-creating" })
     };
-  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, router]);
+  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.user?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, router]);
 
 
-  if (reduxStore?.auth?.email) {
+  if (reduxStore?.auth?.user?.email) {
     router.push("/");
     return null;
   };

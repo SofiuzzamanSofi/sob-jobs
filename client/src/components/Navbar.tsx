@@ -8,7 +8,7 @@ import { auth } from "../firebase/firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { getMe, logOutUser, signOutReducer, toggleLoading } from "../redux/features/auth/authSlice";
+import { getMe, signOutUser, } from "../redux/features/auth/authSlice";
 
 const Navbar = () => {
 
@@ -18,24 +18,27 @@ const Navbar = () => {
     const reduxStore = useSelector((state: RootState) => state);
     const dispatch: AppDispatch = useDispatch();
 
-    // every time relode and get user/register user from DATABASE 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user?.email) {
-                dispatch(getMe(user?.email));
-                // dispatch(setUser(user?.email));
-                console.log("From Navbar:", user?.email);
-            }
-            else {
-                // console.log("user?.email: Email nai");
-                dispatch(toggleLoading());
-            }
-        });
-    }, [dispatch]);
+    // // every time relode and get user/register user from DATABASE 
+    // useEffect(() => {
+    //     // onAuthStateChanged(auth, (user) => {
+    //     //     if (user?.email) {
+    //     //         dispatch(getMe(user?.email));
+    //     //         // dispatch(setUser(user?.email));
+    //     //         console.log("From Navbar:", user?.email);
+    //     //     }
+    //     //     else {
+    //     //         // console.log("user?.email: Email nai");
+    //     //         dispatch(toggleLoading());
+    //     //     }
+    //     // });
+
+    //     dispatch(getMe());
+    //     // dispatch(onAuthFirebase());
+    // }, [dispatch]);
 
     const handleSignOut = () => {
 
-        dispatch(logOutUser());
+        dispatch(signOutUser());
 
 
         // signOut(auth)
@@ -75,7 +78,7 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li>
-                        {reduxStore.auth?.email && (
+                        {reduxStore.auth?.user?.email && (
                             <Link
                                 href="/dashboard"
                                 className="border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all"
@@ -86,11 +89,11 @@ const Navbar = () => {
                     </li>
 
                     <li>
-                        {reduxStore.auth?.email ? (
+                        {reduxStore.auth?.user?.email ? (
                             <button
                                 className="border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all"
                                 onClick={handleSignOut}
-                                title={reduxStore.auth.email}
+                                title={reduxStore.auth?.user?.email}
                             >
                                 Sign Out
                             </button>

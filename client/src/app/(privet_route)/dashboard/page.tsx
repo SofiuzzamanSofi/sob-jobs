@@ -13,7 +13,7 @@ const Dashboard = ({ }) => {
     const reduxStore = useSelector((state: RootState) => state);
     const router = useRouter();
 
-    if ((!reduxStore?.auth?.isLoading && reduxStore?.auth?.email) && !reduxStore?.auth?.role) {
+    if ((!reduxStore?.auth?.isLoading && reduxStore?.auth?.user?.email) && !reduxStore?.auth?.user?.role) {
         return router.push('/dashboard/register');
     }
     else {
@@ -27,7 +27,7 @@ const Dashboard = ({ }) => {
                     <div>
                         <div>
                             <h1 className="text-xl text-center py-1">Wellcome to Dashboard</h1>
-                            <h1 className="text-xl text-center py-1">You are a: {reduxStore?.auth?.role}</h1>
+                            <h1 className="text-xl text-center py-1">You are a: {reduxStore?.auth?.user?.role}</h1>
                         </div>
                         <div
                             className="pt-10"

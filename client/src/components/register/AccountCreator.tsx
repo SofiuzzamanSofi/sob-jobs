@@ -19,15 +19,15 @@ const AccountCreator = () => {
   const reduxStore = useSelector((state: RootState) => state);
 
   useEffect(() => {
-    if (reduxStore?.auth?.role) {
+    if (reduxStore?.auth?.user?.role) {
       return router.push("/dashboard");
     };
-  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.role, router]);
+  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.user?.role, router]);
 
   if (reduxStore?.auth?.isLoading) {
     return <Loading />;
   }
-  else if (reduxStore?.auth?.role) {
+  else if (reduxStore?.auth?.user?.role) {
     router.push("/dashboard");
     return null;
   }

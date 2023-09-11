@@ -1,7 +1,5 @@
 // UserSchema / Data Types 
 export interface AuthTypes {
-    email: string | null;
-    role: string;
     isLoading: boolean;
     isError: boolean;
     error: string;

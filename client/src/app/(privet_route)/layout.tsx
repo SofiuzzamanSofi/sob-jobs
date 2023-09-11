@@ -18,15 +18,15 @@ export default function PrivetLayout({ children }: Privetlayout) {
     const reduxStore = useSelector((state: RootState) => state);
     const router = useRouter();
 
-    const dashboardComponents = !reduxStore?.auth?.isLoading && reduxStore?.auth?.email && reduxStore?.auth?.role ? true : false;
+    const dashboardComponents = !reduxStore?.auth?.isLoading && reduxStore?.auth?.user?.email && reduxStore?.auth?.user?.role ? true : false;
 
     if (reduxStore?.auth?.isLoading) {
         return <Loading />
     }
-    else if (!reduxStore?.auth?.isLoading && !reduxStore?.auth?.email) {
+    else if (!reduxStore?.auth?.isLoading && !reduxStore?.auth?.user?.email) {
         return router.push("/sign-in")
     }
-    // else if ((!reduxStore?.auth?.isLoading && reduxStore?.auth?.email) && !reduxStore?.auth?.role) {
+    // else if ((!reduxStore?.auth?.isLoading && reduxStore?.auth?.user?.email) && !reduxStore?.auth?.user?.role) {
     //     return (
     //         <div>
     //             {children}

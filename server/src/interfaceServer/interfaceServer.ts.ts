@@ -16,6 +16,7 @@ export interface UserDataTypes {
     createdAt?: string,
     updatedAt?: string,
     _id?: string;
+    __v?: number;
 };
 
 export interface AnsTypes {

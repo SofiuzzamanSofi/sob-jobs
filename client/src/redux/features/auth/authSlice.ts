@@ -1,12 +1,11 @@
 import { auth } from "@/firebase/firebase.config";
 import { AuthTypes, CreateUserDataTypes } from "@/interfaceTypes/interfaceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 
+//
 const initialState: AuthTypes = {
-    email: "",
-    role: "",
     isLoading: true,
     isError: false,
     error: "",
@@ -93,45 +92,81 @@ export const googleLogin = createAsyncThunk(
     },
 );
 
+//
 export const getMe = createAsyncThunk(
     "auth/getMe",
-    async (email: string) => {
-        const resData = await fetch(
-            `${process.env.NEXT_PUBLIC_SERVER}/user/${email}`,
-            { credentials: "include" }
+    async () => {
+        // const getMeFunction = async () => {
+        console.log('userData-from-get-Me:upper.',);
+        const resDataFromDb = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER}/user/me`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({}),
+                credentials: "include"
+            }
         );
-        const data = await resData.json();
-        return data.data;
+        const userData = await resDataFromDb.json();
+        console.log('userData-from-get-Me:', userData);
+        return userData?.data
+        // };
+        // return  getMeFunction();        
     }
 );
 
-// logOut from firebase and remove cookei and clear redux state
-export const logOutUser = createAsyncThunk(
-    "auth/logOutUser",
-    async () => {
-        try {
-            //firebase signOut Function
-            const signOutRes = await signOut(auth);
-            // console.log('signOutRes:', signOutRes); // => signOutRes: undefined
-            // clear cookie 
-            const resData = await fetch(
-                `${process.env.NEXT_PUBLIC_SERVER}/user/signout`,
-                { credentials: "include", }
-            );
+// //
+// export const onAuthFirebase = createAsyncThunk(
+//     "auth/onAuthFirebase",
+//     async () => {
+//         onAuthStateChanged(auth, (user) => {
+//             if (user?.email) {
+//                 getMe();
+//                 // dispatch(getMe(user?.email));
+//                 // dispatch(setUser(user?.email));
 
-            if (resData?.ok) {
-                // clear user from redux state
-                // const data = await resData.json();
-                // return data.data;
-                // signOutReducer();
-                return;
-            }
-        } catch (error) {
-            // console.log('error from authApi logout functon:',error);
-        };
+
+//                 console.log("From-Navbar-onAuthStateChanged:", user?.email);
+//             }
+//             else {
+//                 // console.log("user?.email: Email nai");
+//                 // dispatch(toggleLoading());
+//                 toggleLoading();
+//             }
+//         });
+//     }
+// );
+
+// logOut from firebase and remove cookei and clear redux state
+export const signOutUser = createAsyncThunk(
+    "auth/signOutUser",
+    async () => {
+        // try {
+        //firebase signOut Function
+        const signOutRes = await signOut(auth);
+        // console.log('signOutRes:', signOutRes); // => signOutRes: undefined
+        // clear cookie 
+        const resData = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER}/user/signout`,
+            { credentials: "include", }
+        );
+
+        if (resData?.ok) {
+            // clear user from redux state
+            // const data = await resData.json();
+            // return data.data;
+            // signOutReducer();
+            return;
+        }
+        // } catch (error) {
+        //     // console.log('error from authApi logout functon:',error);
+        // };
     },
 );
 
+//
 const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -192,54 +227,51 @@ const authSlice = createSlice({
             })
             .addCase(getMe.rejected, (state, action) => {
                 state.isLoading = false;
-                state.isError = true;
-                state.error = action?.error?.message || "User Authentication Failed";
+                state.isError = false;
+                state.error = "";
             })
             .addCase(getMe.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
                 state.isError = false;
                 state.error = "";
                 state.user = payload;
-                state.email = payload.email;
-                state.role = payload?.role || "";
             })
-            .addCase(logOutUser.pending, (state) => {
+            .addCase(signOutUser.pending, (state) => {
                 state.isLoading = true;
                 state.isError = false;
                 state.error = "";
             })
-            .addCase(logOutUser.rejected, (state, action) => {
+            .addCase(signOutUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.error = action?.error?.message || "User Log OUT Failed";
             })
-            .addCase(logOutUser.fulfilled, (state, action) => {
+            .addCase(signOutUser.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isError = false;
                 state.error = "";
-                state.email = "";
-                state.role = "";
                 state.user = {};
             })
     },
     reducers: {
-        signOutReducer: (state) => {
-            state.email = "";
-            state.role = "";
-            state.user = {};
-        },
-        setUser: (state, { payload }) => {
-            state.email = payload;
-            state.isLoading = false;
-        },
-        toggleLoading: (state) => {
-            state.isLoading = false;
-            state.isError = false;
-            state.error = "";
-        },
+        // signOutReducer: (state) => {
+        //     state.email = "";
+        //     state.role = "";
+        //     state.user = {};
+        // },
+        // setUser: (state, { payload }) => {
+        //     state.email = payload;
+        //     state.isLoading = false;
+        // },
+        // toggleLoading: (state) => {
+        //     state.isLoading = false;
+        //     state.isError = false;
+        //     state.error = "";
+        // },
     },
 });
 
-export const { signOutReducer, setUser, toggleLoading } = authSlice.actions;
+// export const { signOutReducer, setUser, toggleLoading } = authSlice.actions;
+export const { } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -13,23 +13,26 @@ export const generateToken = (
     const token = jwt.sign(
         payload,
         process.env.TOKEN_SECRET,
+        {
+            // expiresIn: "7days",
+        }
     );
     return token;
 };
 
-// generate token with only email
-export const generateTokenWithEmail = (
-    userInfo: { email: string }
-) => {
+// // generate token with only email
+// export const generateTokenWithEmail = (
+//     userInfo: { email: string }
+// ) => {
 
-    const payload = {
-        email: userInfo.email,
-    };
+//     const payload = {
+//         email: userInfo.email,
+//     };
 
-    // generate token
-    const token = jwt.sign(
-        payload,
-        process.env.TOKEN_SECRET,
-    );
-    return token;
-};
+//     // generate token
+//     const token = jwt.sign(
+//         payload,
+//         process.env.TOKEN_SECRET,
+//     );
+//     return token;
+// };

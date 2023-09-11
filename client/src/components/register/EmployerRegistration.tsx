@@ -49,7 +49,7 @@ const EmployerRegistration = () => {
   }, []);
 
   const onSubmitFunction: SubmitHandler<RegisterTypes> = (data) => {
-    postUser({ ...data, role: "Employer", email: reduxStore?.auth?.email || "", country: data.country || "Bangladesh" });
+    postUser({ ...data, role: "Employer", email: reduxStore?.auth?.user?.email || "", country: data.country || "Bangladesh" });
     // console.log("EmployerRegistration clicked", data);
   };
 
@@ -102,7 +102,7 @@ const EmployerRegistration = () => {
             <label className='mb-2' htmlFor='email'>
               Email
             </label>
-            <input className="border p-2" type='email' id='email' disabled {...register("email")} defaultValue={reduxStore?.auth?.email || ""} />
+            <input className="border p-2" type='email' id='email' disabled {...register("email")} defaultValue={reduxStore?.auth?.user?.email || ""} />
           </div>
           <div className='flex flex-col w-full max-w-xs'>
             <h1 className='mb-3'>Gender</h1>

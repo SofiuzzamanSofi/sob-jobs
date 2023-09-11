@@ -10,9 +10,7 @@ export const getMe = async (
     next: express.NextFunction,
 ) => {
     try {
-        // const { userAccessToken } = req.cookies
-        // console.log('Cookies: ', req.cookies)
-        // console.log('userAccessToken: ', userAccessToken)
+        console.log('get-me-user:')
         const email = req.user?.email; // Access the user object from req
         const user = await getUserByEmail(next, email);
         if (!user.email) {
@@ -22,6 +20,8 @@ export const getMe = async (
                 data: { email, }
             });
         } else {
+            console.log('get-me-user:', user);
+            const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(200).json({
                 success: true,
                 message: `Successfully got data by this: ${email}`,
@@ -73,9 +73,9 @@ export const signUp = async (
                 message: `Function called but User not set on Db `,
             });
         } else {
-            const { createdAt, updatedAt, ...others } = user.toObject();
             //TOKEN
             const token = generateToken({ email: user.email });
+            const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(201)
                 .cookie(
                     "userAccessToken",
@@ -111,25 +111,12 @@ export const signIn = async (
                 message: "Body is empty line 12",
             });
         };
-        let user = {} as UserDataTypes;
-
         // get user form DB
-        user = await getUserByEmail(next, handleUserData.email);
-        if (!user.email) {
-
-            // first time on DB
-            user = await createUserService(next, handleUserData);
-        };
-
-        if (!user?.email) {
-            return res.status(400).json({
-                success: false,
-                message: `Function called but User not set on Db `,
-            });
-        }
-        else {
+        const user = await getUserByEmail(next, handleUserData.email);
+        if (user.email) {
             // generate token
             const token = generateToken({ email: user.email, role: user?.role });
+            const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(201)
                 .cookie(
                     "userAccessToken",
@@ -142,15 +129,36 @@ export const signIn = async (
                     }
                 ).json({
                     success: true,
-                    data: user,
+                    data: others,
                 });
         }
+        else {
+            // first time on DB
+            const user = await createUserService(next, handleUserData);
+            const token = generateToken({ email: user.email, role: user?.role });
+            const { createdAt, updatedAt, __v, ...others } = user.toObject();
+            return res.status(201)
+                .cookie(
+                    "userAccessToken",
+                    token,
+                    {
+                        httpOnly: true,
+                        secure: true,
+                        sameSite: "strict",
+                        // domain: domailUrl,
+                    }
+                ).json({
+                    success: true,
+                    data: others,
+                });
+        };
+
     } catch (error) {
         next(error);
     };
 };
 
-// signIn
+// signIn social
 export const signInWithSocial = async (
     req: express.Request,
     res: express.Response,
@@ -202,7 +210,9 @@ export const updateUserWithRole = async (
 ) => {
     try {
         const handleUserData = req.body;
+        // console.log("hit- updateUserWithRole:", handleUserData); 
         console.log("hit- updateUserWithRole:");
+
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -239,14 +249,14 @@ export const updateUserWithRole = async (
 };
 
 // get a user by email 
-export const getUserControllerByEmail = async (
+export const getUserByEmailController = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
 ) => {
     try {
         const email = req.params?.email as string;
-        console.log("hit- getUserControllerByEmail:");
+        console.log("hit- getUserByEmailController:");
         if (!email) {
             return res.status(400).json({
                 success: false,

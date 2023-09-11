@@ -26,7 +26,7 @@ const CandidateRegistration = () => {
   const term = useWatch({ control, name: "term" });
 
   const onSubmit: SubmitHandler<RegisterTypes> = (data) => {
-    postUser({ ...data, role: "Candidate", email: reduxStore?.auth?.email || "", country: data.country || "Bangladesh" });
+    postUser({ ...data, role: "Candidate", email: reduxStore?.auth?.user?.email || "", country: data.country || "Bangladesh" });
     // console.log("CandidateRegistration clicked:",data)
   };
 
@@ -94,7 +94,7 @@ const CandidateRegistration = () => {
               id="email"
               disabled
               {...register("email")}
-              defaultValue={reduxStore?.auth?.email || ""}
+              defaultValue={reduxStore?.auth?.user?.email || ""}
             />
           </div>
           <div className='flex flex-col w-full max-w-xs'>

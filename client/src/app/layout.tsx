@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Providers from '@/redux/provider';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
+import ExtraPage from '@/components/ExtraPage';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         <body
           className="flex flex-col justify-between min-h-screen"
         >
+          <ExtraPage />
           <Navbar />
           <div
             className="max-w-7xl bg-white mx-auto border-2"
