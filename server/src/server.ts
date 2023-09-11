@@ -16,7 +16,7 @@ const port = process.env.PORT || 5000;
 // middleware
 app.use(cors({
     credentials: true,
-    origin: [process.env.CLIENT_SITE_URL_LOCAL, process.env.CLIENT_SITE_URL_ONLINE],
+    origin: [process.env.CLIENT_SITE_URL_ONLINE, process.env.CLIENT_SITE_URL_LOCAL],
 }));
 app.use(express.json());
 app.use(cookieParser())   // cookie send receive package is more easi via this
