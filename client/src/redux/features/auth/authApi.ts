@@ -19,12 +19,12 @@ const authApi = apiSlice.injectEndpoints({
                     // dispatch(getMe(data?.email || ""));
                     dispatch(getMe());
 
-                    console.log('authApi-register.',);
+                    // console.log('authApi-register.',);
                     // (res.meta?.response?.headers.getSetCookie.name)
                     // Cookies.set(res.meta?.response?.headers.getSetCookie.name || "", res.meta?.response?.headers.getSetCookie. || "");
                     // console.log('res.meta?.response?.headers:', res.meta?.response?.headers);
                 } catch (error) {
-                    console.log("error on query onQueryStarted user: ", error);
+                    // console.log("error on query onQueryStarted user: ", error);
                 }
             },
         }),

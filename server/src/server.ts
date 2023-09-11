@@ -1,14 +1,13 @@
-import express from 'express'
 import dotenv from 'dotenv'
-import cookieParser from 'cookie-parser'
 dotenv.config();
+import express from 'express'
+import cookieParser from 'cookie-parser'
 import cors from 'cors';
 import compression from 'compression';
 import colors from 'colors';
 import conncetDb from './utils/lib/mongodb';
 import routers from './route/v1/index';
 import { errorHandler } from './middleware/errorHandler';
-
 
 // initialized the app and port
 const app = express();
@@ -46,7 +45,7 @@ app.get("/", (req, res) => {
 app.all("*", (req, res) => {
     res.status(404).send("NO ROUTE FOUND.");
 });
-.03214
+
 // global error handler
 app.use(errorHandler);
 

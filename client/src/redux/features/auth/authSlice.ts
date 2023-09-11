@@ -97,7 +97,7 @@ export const getMe = createAsyncThunk(
     "auth/getMe",
     async () => {
         // const getMeFunction = async () => {
-        console.log('userData-from-get-Me:upper.',);
+        // console.log('userData-from-get-Me:upper.',);
         const resDataFromDb = await fetch(
             `${process.env.NEXT_PUBLIC_SERVER}/user/me`,
             {
@@ -110,7 +110,7 @@ export const getMe = createAsyncThunk(
             }
         );
         const userData = await resDataFromDb.json();
-        console.log('userData-from-get-Me:', userData);
+        // console.log('userData-from-get-Me:', userData);
         return userData?.data
         // };
         // return  getMeFunction();        
@@ -128,7 +128,7 @@ export const getMe = createAsyncThunk(
 //                 // dispatch(setUser(user?.email));
 
 
-//                 console.log("From-Navbar-onAuthStateChanged:", user?.email);
+//          //  console.log("From-Navbar-onAuthStateChanged:", user?.email);
 //             }
 //             else {
 //                 // console.log("user?.email: Email nai");

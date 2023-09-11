@@ -16,7 +16,7 @@ const jobApi = apiSlice.injectEndpoints({
                     const res = await queryFulfilled;
                     // console.log("onQueryStarted queryFulfilled.");
                 } catch (error) {
-                    console.log("error on query onQueryStarted postjob: ", error);
+                    //  console.log("error on query onQueryStarted postjob: ", error);
                 }
             }
         }),

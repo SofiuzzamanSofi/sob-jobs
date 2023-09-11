@@ -24,7 +24,7 @@ const Navbar = () => {
     //     //     if (user?.email) {
     //     //         dispatch(getMe(user?.email));
     //     //         // dispatch(setUser(user?.email));
-    //     //         console.log("From Navbar:", user?.email);
+    //     //  //  console.log("From Navbar:", user?.email);
     //     //     }
     //     //     else {
     //     //         // console.log("user?.email: Email nai");

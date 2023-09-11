@@ -7,7 +7,7 @@ export const errorHandler = async (
     next: express.NextFunction // Corrected the parameter type to 'express.NextFunction'
 ) => {
     try {
-        console.log('errorHandler middleware called. error:', err);
+        //  console.log('errorHandler middleware called. error:', err);
         return res.status(err?.statusCode || 500).send({
             success: false,
             message: err.message || "Error From Error Handler.",

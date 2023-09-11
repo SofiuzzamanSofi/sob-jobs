@@ -24,7 +24,7 @@ export default async (
         const decoded = jwt.verify(userAccessToken, process.env.TOKEN_SECRET) as { email: string, role: string, iat: number };
 
         // console.log('token-verify-all-req.cookies:', req.cookies);
-        console.log('token-verify-decoded:', decoded);
+        // console.log('token-verify-decoded:', decoded);
 
         // if (decoded.email && decoded.role) {
         if (decoded.email) {

@@ -10,7 +10,7 @@ export const getMe = async (
     next: express.NextFunction,
 ) => {
     try {
-        console.log('get-me-user:')
+        //  console.log('get-me-user:')
         const email = req.user?.email; // Access the user object from req
         const user = await getUserByEmail(next, email);
         if (!user.email) {
@@ -20,7 +20,7 @@ export const getMe = async (
                 data: { email, }
             });
         } else {
-            console.log('get-me-user:', user);
+            //  console.log('get-me-user:', user);
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(200).json({
                 success: true,
@@ -40,7 +40,7 @@ export const signOut = async (
     next: express.NextFunction,
 ) => {
     try {
-        console.log('HITTED log out controller:');
+        //  console.log('HITTED log out controller:');
         res.clearCookie('userAccessToken');
         return res.status(201).json({
             success: true,
@@ -59,7 +59,7 @@ export const signUp = async (
 ) => {
     try {
         const handleUserData = req.body;
-        console.log("hit- signUp:");
+        //  console.log("hit- signUp:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -104,7 +104,7 @@ export const signIn = async (
 ) => {
     try {
         const handleUserData = req.body;
-        console.log("hit- signIn:");
+        //  console.log("hit- signIn:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -166,7 +166,7 @@ export const signInWithSocial = async (
 ) => {
     try {
         const handleUserData = req.body;
-        console.log("hit- signInWithSocial:");
+        //  console.log("hit- signInWithSocial:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -211,7 +211,7 @@ export const updateUserWithRole = async (
     try {
         const handleUserData = req.body;
         // console.log("hit- updateUserWithRole:", handleUserData); 
-        console.log("hit- updateUserWithRole:");
+        //  console.log("hit- updateUserWithRole:");
 
         if (!handleUserData) {
             return res.status(400).json({
@@ -256,7 +256,7 @@ export const getUserByEmailController = async (
 ) => {
     try {
         const email = req.params?.email as string;
-        console.log("hit- getUserByEmailController:");
+        //  console.log("hit- getUserByEmailController:");
         if (!email) {
             return res.status(400).json({
                 success: false,
