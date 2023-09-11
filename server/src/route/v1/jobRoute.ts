@@ -1,6 +1,6 @@
+import express from 'express';
 import verifyToken from '../../middleware/verifyToken';
 import { postJobController, getAllJobBySearchTextController, getAllJobController, getAppliedJobController, getOneJobController, getPostedJobController, patchAnsJobController, patchAppliedJobController, patchIsOpenJobController, patchQuestionJobController } from '../../controller/jobController';
-import express from 'express';
 
 export default (router: express.Router) => {
 
