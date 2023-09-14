@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema<UserDataTypes>({
   email: {
     type: "string",
     required: true,
+    unique: true,
   },
   role: {
     type: "string",

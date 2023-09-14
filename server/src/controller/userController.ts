@@ -59,7 +59,7 @@ export const signUp = async (
 ) => {
     try {
         const handleUserData = req.body;
-        //  console.log("hit- signUp:");
+        console.log("hit- signUp:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -104,7 +104,7 @@ export const signIn = async (
 ) => {
     try {
         const handleUserData = req.body;
-        //  console.log("hit- signIn:");
+        console.log("hit- signIn:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,

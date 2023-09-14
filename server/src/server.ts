@@ -19,6 +19,7 @@ const corsOptions = {
     origin: [
         process.env.CLIENT_SITE_URL_ONLINE,
         process.env.CLIENT_SITE_URL_LOCAL,
+        process.env.CLIENT_SITE_URL_VERCEL_APP,
     ],
 };
 app.use(cors(corsOptions));

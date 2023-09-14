@@ -9,7 +9,7 @@ const conncetDb = async () => {
     try {
         const { connection } = await mongoose.connect(MONGODB_DB_URI);
         if (connection?.readyState === 1) {
-            //  console.log(colors.bgBlue("DB connection is established/ON."))
+            console.log(colors.bgBlue("DB connection is established/ON."))
             return Promise?.resolve(true);
         };
     } catch (error) {
