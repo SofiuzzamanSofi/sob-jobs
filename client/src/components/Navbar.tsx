@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import React, { useEffect } from "react";
+import logo from "../assets/Sob-Jobs-Logo.png";
 import { BiSearchAlt } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import { auth } from "../firebase/firebase.config";
@@ -9,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { getMe, signOutUser, } from "../redux/features/auth/authSlice";
+import Image from "next/image";
 
 const Navbar = () => {
 
@@ -56,10 +58,16 @@ const Navbar = () => {
     }
     else {
         return (
-            <nav className={`border-2  h-14  w-full z-[20] ${pathname === "/" ? null : "bg-white"}`}>
-                <ul className="max-w-7xl mx-auto flex gap-3 h-full items-center">
+            <nav className={`border-b h-24  w-full z-[20] `}>
+                <ul className="max-w-7xl mx-auto p-4 flex gap-3 items-center">
                     <li className="flex-auto font-semibold text-2xl">
-                        <Link href="/">Sob-Jobs</Link>
+                        <Link href="/">
+                            <Image
+                                src={logo}
+                                alt=''
+                                className='h-[3.9375rem] max-w-[11.8125rem] sm:max-w-[15.75rem] rounded-md'
+                            />
+                        </Link>
                     </li>
                     <li>
                         <Link
@@ -69,14 +77,14 @@ const Navbar = () => {
                             <BiSearchAlt size='23' color='black' />
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link
                             className="border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all"
                             href="/jobs"
                         >
                             Jobs
                         </Link>
-                    </li>
+                    </li> */}
                     <li>
                         {reduxStore.auth?.user?.email && (
                             <Link
@@ -99,10 +107,13 @@ const Navbar = () => {
                             </button>
                         ) : (
                             <Link
+                                className="flex items-center gap-x-2 font-medium text-black hover:text-blue-600 sm:border-l sm:border-gray-300 sm:my-6 sm:pl-6 dark:border-gray-700 dark:text-black dark:hover:text-blue-500"
                                 href="/sign-in"
-                                className="border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all"
                             >
-                                Sign In
+                                <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                </svg>
+                                Log In
                             </Link>
                         )}
                     </li>

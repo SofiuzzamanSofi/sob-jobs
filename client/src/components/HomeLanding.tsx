@@ -7,6 +7,8 @@ import Image from "next/image";
 import hero1 from "../assets/hero-01.jpg";
 import hero2 from "../assets/hero-02.jpg";
 import hero3 from "../assets/hero-03.jpg";
+import hero4 from "../assets/hero-04.jpg";
+import hero5 from "../assets/hero-05.jpg";
 import { useRouter } from 'next/navigation';
 import { BiSearchAlt } from "react-icons/bi";
 import React, { useLayoutEffect, useRef, useState } from "react";
@@ -47,7 +49,11 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                     .to("#hero2", { opacity: 1, duration: 2 })
                     .to("#hero2", { opacity: 0, display: "none", duration: 2, delay: 1 })
                     .to("#hero3", { opacity: 1, duration: 2 })
-                    .to("#hero3", { opacity: 0, display: "none", duration: 2, delay: 1 });
+                    .to("#hero3", { opacity: 0, display: "none", duration: 2, delay: 1 })
+                    .to("#hero4", { opacity: 1, duration: 2 })
+                    .to("#hero4", { opacity: 0, display: "none", duration: 2, delay: 1 })
+                    .to("#hero5", { opacity: 1, duration: 2 })
+                    .to("#hero5", { opacity: 0, display: "none", duration: 2, delay: 1 });
 
                 tl2.current = gsap
                     .timeline()
@@ -110,7 +116,7 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
 
     return (
         <div ref={el} className='h-screen'>
-            <div className='max-w-2xl h-[80vh] rounded-b-full absolute top-0 left-1/2 -translate-x-1/2 overflow-hidden z-0'>
+            <div className='max-w-7xl h-[100vh] rounded-xl absolute top-28 left-1/2 -translate-x-1/2 overflow-hidden z-0'>
                 <Image
                     id='hero1'
                     src={hero1}
@@ -126,6 +132,18 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                 <Image
                     id='hero3'
                     src={hero3}
+                    alt=''
+                    className='object-cover h-full w-full opacity-0'
+                />
+                <Image
+                    id='hero4'
+                    src={hero4}
+                    alt=''
+                    className='object-cover h-full w-full opacity-0'
+                />
+                <Image
+                    id='hero5'
+                    src={hero5}
                     alt=''
                     className='object-cover h-full w-full opacity-0'
                 />

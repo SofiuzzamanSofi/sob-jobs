@@ -31,7 +31,7 @@ export default function RootLayout({
           <ExtraPage />
           <Navbar />
           <div
-            className="max-w-7xl bg-white mx-auto border-2"
+            className="max-w-7xl xl:min-w-[80rem] p-4 mx-auto bg-gray-50"
           >
             {children}
           </div>

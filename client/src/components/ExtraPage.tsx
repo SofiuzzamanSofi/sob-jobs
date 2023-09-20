@@ -5,6 +5,7 @@ import { AppDispatch } from '@/redux/store';
 import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+
 interface ExtraPageProps {
 
 };
@@ -17,8 +18,14 @@ const ExtraPage: FC<ExtraPageProps> = ({ }) => {
         dispatch(getMe());
     }, [dispatch]);
 
+    useEffect(() => require("preline"), []);
+
     return (
-        <div>
+        <div
+            style={{
+                display: "none"
+            }}
+        >
 
         </div>
     );
