@@ -15,6 +15,25 @@ const Page: FC<PageProps> = ({ }) => {
                 <svg className="w-5 h-5" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                 </svg>
+                <h1>helllllllllllfffffffft trh dfh dfddddd        at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:77:9)
+                    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:104:11)
+                    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:396:13)
+                    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:166:11)
+                    at RSCComponent               fsfjslfsfs fsaf</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
+                <h1>helllllllllll</h1>
             </button>
 
 

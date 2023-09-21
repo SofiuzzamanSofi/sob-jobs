@@ -116,7 +116,7 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
 
     return (
         <div ref={el} className='h-[calc(100vh-11.5rem)]'>
-            <div className='max-w-7xl h-[calc(100vh-12rem)] rounded-xl absolute top-[7.625rem] left-1/2 -translate-x-1/2 overflow-hidden z-0'>
+            {/* <div className='max-w-7xl h-[calc(100vh-12rem)] rounded-xl absolute top-[7.625rem] left-1/2 -translate-x-1/2 overflow-hidden z-0'>
                 <Image
                     id='hero1'
                     src={hero1}
@@ -223,7 +223,7 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

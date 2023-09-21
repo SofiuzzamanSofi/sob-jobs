@@ -22,8 +22,8 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/custom-forms'),
     // require("daisyui"),
+    require('@tailwindcss/custom-forms'),
     require('preline/plugin'),
   ]
 }

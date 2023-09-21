@@ -26,7 +26,7 @@ export default function RootLayout({
     <Providers>
       <html lang="en">
         <body
-          className="flex flex-col justify-between min-h-screen"
+          className="flex flex-col justify-between min-h-screen border border-red-700"
         >
           <ExtraPage />
           <Navbar />
