@@ -61,7 +61,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className='flex h-screen items-center pt-14 border border-red-700'>
+    <div className='flex h-[calc(100vh-2rem)] items-center pt-14 border border-red-700'>
       <div className='w-1/2'>
         <Image src={loginImage} className='h-full w-full' alt='Sign-Up-Image' />
       </div>

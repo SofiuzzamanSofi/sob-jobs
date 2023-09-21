@@ -58,8 +58,8 @@ const Navbar = () => {
     }
     else {
         return (
-            <nav className={`border-b h-24  w-full z-[20] `}>
-                <ul className="max-w-7xl mx-auto p-4 flex gap-3 items-center">
+            <nav className={`border-b h-[6.5rem] w-full z-[20] `}>
+                <ul className="max-w-7xl p-4 mx-auto flex gap-3 items-center">
                     <li className="flex-auto font-semibold text-2xl">
                         <Link href="/">
                             <Image
@@ -71,7 +71,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link
-                            className='p-2 rounded-full bg-white border  h-10 w-10 grid place-items-center'
+                            className='rounded-full bg-white border  h-10 w-10 grid place-items-center'
                             href='/dashboard/search-jobs'
                         >
                             <BiSearchAlt size='23' color='black' />
@@ -79,7 +79,7 @@ const Navbar = () => {
                     </li>
                     {/* <li>
                         <Link
-                            className="border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all"
+                            className="border border-blackrounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all"
                             href="/jobs"
                         >
                             Jobs
@@ -113,7 +113,7 @@ const Navbar = () => {
                                 <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                                 </svg>
-                                Log In
+                                LOG IN
                             </Link>
                         )}
                     </li>

@@ -26,13 +26,14 @@ const Footer: FC<FooterProps> = ({ }) => {
                     // left: '0px',
                     // right: '0px',
                     // zIndex: '10',
+                    height: "3rem",
+                    borderTopWidth: "1px",
+                    padding: "16px",
                 }}
             >
                 <h6
                     style={{
                         textAlign: 'center',
-                        borderTopWidth: "1px",
-                        padding: "16px"
                     }}
                 >
                     All Right Reserver @ 2023
