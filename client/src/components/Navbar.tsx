@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 import logo from "../assets/Sob-Jobs-Logo.png";
+import avatar from "../assets/avatar.svg";
 import { BiSearchAlt } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import { auth } from "../firebase/firebase.config";
@@ -183,7 +184,10 @@ const Navbar = () => {
 
                 <>
                     <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-0 sm:py-0 dark:bg-gray-800 dark:border-gray-700">
-                        <nav className="relative max-w-[85rem] flex flex-wrap basis-full items-center w-full mx-auto sm:flex sm:items-center sm:justify-between px-4" aria-label="Global">
+                        <nav
+                            className="relative max-w-[85rem] flex flex-wrap basis-full items-center w-full mx-auto sm:flex sm:items-center sm:justify-between px-4 border border-red-700"
+                            aria-label="Global"
+                        >
                             <div className="flex items-center justify-between">
                                 <Link
                                     className="flex-none text-xl font-semibold dark:text-white"
@@ -202,6 +206,7 @@ const Navbar = () => {
 
                             </div>
 
+                            {/* menu  */}
                             <div className="flex items-center ml-auto sm:ml-0 sm:order-3">
                                 <div className="sm:hidden">
                                     <button type="button" className="p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-overlay="#navbar-offcanvas-example" aria-controls="navbar-offcanvas-example" aria-label="Toggle navigation">
@@ -211,6 +216,42 @@ const Navbar = () => {
                                         </svg>
                                     </button>
                                 </div>
+                            </div>
+
+                            {/* dasb board toggle  */}
+                            <div className="flex items-center ml-auto sm:ml-0 sm:order-3">
+                                <div className="sm:hidden">
+                                    <button type="button" className="p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-overlay="#navbar-offcanvas-example" aria-controls="navbar-offcanvas-example" aria-label="Toggle navigation">
+                                        <button type="button" className="text-gray-500 hover:text-gray-600" data-hs-overlay="#docs-sidebar" aria-controls="docs-sidebar" aria-label="Toggle navigation">
+                                            <span className="sr-only">Toggle Navigation</span>
+                                            <svg className="w-5 h-5" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                                            </svg>
+                                        </button>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* login || out */}
+                            <div className="flex items-center ml-auto sm:ml-0 sm:order-3">
+                                {!reduxStore.auth?.user?.email ? (
+                                    <Link
+                                        className="flex items-center gap-x-2 font-semibold text-gray-500 hover:text-blue-600 sm:border-l sm:border-gray-300 sm:my-6 sm:pl-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
+                                        href="/sign-in"
+                                    >
+                                        <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                        </svg>
+                                        Sign In
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        className="flex items-center gap-x-2 font-semibold text-gray-500 hover:text-blue-600 sm:border-l sm:border-gray-300 sm:my-6 sm:pl-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
+                                        href=""
+                                    >
+                                        <Image className="bg-white rounded-full p-1 h-7 w-7" src={avatar} alt='' />
+                                    </Link>
+                                )}
                             </div>
 
                             <div id="navbar-offcanvas-example" className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full fixed top-0 left-0 transition-all duration-300 transform h-full max-w-xs w-full z-[60] bg-white border-r basis-full grow sm:order-2 sm:static sm:block sm:h-auto sm:max-w-none sm:w-auto sm:border-r-transparent sm:transition-none sm:translate-x-0 sm:z-40 sm:basis-auto dark:bg-gray-800 dark:border-r-gray-700 sm:dark:border-r-transparent hidden" tabIndex={-1} data-hs-overlay-close-on-resize>
@@ -235,19 +276,27 @@ const Navbar = () => {
                                     </Link>
                                     <div className="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
                                         <button type="button" className="flex items-center w-full text-gray-500 hover:text-gray-400 font-medium px-4 dark:text-gray-400 dark:hover:text-gray-500">
-                                            Dashboard
+                                            <Image className="bg-white rounded-full p-1 h-7 w-7" src={avatar} alt='' />
                                             <svg className="ml-2 w-2.5 h-2.5 text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
                                             </svg>
                                         </button>
 
-                                        <div className="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] sm:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 sm:w-48 hidden z-10 bg-white sm:shadow-md rounded-lg py-2 px-3 sm:px-2 dark:bg-gray-800 sm:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full sm:border before:-top-5 before:left-0 before:w-full before:h-5">
+                                        <div
+                                            className="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] sm:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 sm:w-48 hidden z-10 bg-white sm:shadow-md rounded-lg p-4 dark:bg-gray-800 sm:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full  sm:border before:-top-5 before:left-0 before:w-full before:h-5"
+                                        >
                                             <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                                                About
+                                                <span>
+                                                    {reduxStore.auth?.user?.firstName}
+                                                    {reduxStore.auth?.user?.lastName}
+                                                </span>
+                                            </a>
+                                            <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+                                                {reduxStore.auth?.user?.email}
                                             </a>
                                             <div className="hs-dropdown relative [--strategy:static] sm:[--strategy:absolute] [--adaptive:none] sm:[--trigger:hover]">
                                                 <button type="button" className="w-full flex justify-between  items-center text-sm text-gray-800 rounded-md py-2 px-3 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
-                                                    Sub Menu
+                                                    More Upcomming
                                                     <svg className="sm:-rotate-90 ml-2 w-2.5 h-2.5 text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
                                                     </svg>
@@ -265,13 +314,9 @@ const Navbar = () => {
                                                     </a>
                                                 </div>
                                             </div>
-
-                                            <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                                                Downloads
-                                            </a>
-
                                             <button
                                                 className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-white hover:text-black bg-red-700 w-full"
+                                                onClick={handleSignOut}
                                             >
                                                 Sign Out
                                             </button>
@@ -288,6 +333,12 @@ const Navbar = () => {
                                             Sign In
                                         </Link>
                                     )}
+                                    <button type="button" className="text-gray-500 hover:text-gray-600" data-hs-overlay="#docs-sidebar" aria-controls="docs-sidebar" aria-label="Toggle navigation">
+                                        <span className="sr-only">Toggle Navigation</span>
+                                        <svg className="w-5 h-5" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         </nav>
