@@ -12,6 +12,8 @@ import { AppDispatch, RootState } from "../redux/store";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { getMe, signOutUser, } from "../redux/features/auth/authSlice";
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
+
 
 const Navbar = () => {
 
@@ -20,6 +22,7 @@ const Navbar = () => {
     const pathNameArray = pathNameTotalArray.filter((path) => path !== "");
     const reduxStore = useSelector((state: RootState) => state);
     const dispatch: AppDispatch = useDispatch();
+    const router = useRouter();
 
     // small display slider and profile slider -----------
     const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -105,9 +108,8 @@ const Navbar = () => {
     }, [isProfileOpen, isMenuOpen]);
 
     useEffect(() => {
-        console.log('toggleProfile-useEffect:', isProfileOpen);
-        console.log('toggleMenu-useEffect:', isMenuOpen);
-    }, [isProfileOpen, isMenuOpen]);
+        handleCloseProfileAndMenu();
+    }, [router]);
 
     // sign out function
     const handleSignOut = () => {
