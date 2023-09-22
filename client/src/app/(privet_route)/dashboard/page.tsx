@@ -23,7 +23,7 @@ const Dashboard = ({ }) => {
             >
                 <div>
                     <div>
-                        <h1 className="font-bold text-7xl capitalize text-center py-1">Wellcome to Dashboard</h1>
+                        <h1 className="font-bold text-4xl md:text-7xl capitalize text-center py-1">Wellcome to Dashboard</h1>
                         <h1 className="text-lg text-center py-1">You are a: {reduxStore?.auth?.user?.role}</h1>
                     </div>
                     <div

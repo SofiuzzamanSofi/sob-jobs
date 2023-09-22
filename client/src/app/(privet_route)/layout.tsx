@@ -44,7 +44,7 @@ export default function PrivetLayout({ children }: Privetlayout) {
                         ""
                 }
                 <div className={dashboardComponents ? "col-span-8" : ""} >
-                    <div className={dashboardComponents ? "h-full max-w-7xl mx-auto" : ""} >
+                    <div className={dashboardComponents ? "h-full max-w-[85rem] mx-auto" : ""} >
                         {children}
                     </div>
                 </div>
