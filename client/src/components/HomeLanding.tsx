@@ -115,8 +115,8 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
     // }, [inputText]);
 
     return (
-        <div ref={el} className='h-[calc(100vh-11.5rem)]'>
-            {/* <div className='max-w-7xl h-[calc(100vh-12rem)] rounded-xl absolute top-[7.625rem] left-1/2 -translate-x-1/2 overflow-hidden z-0'>
+        <div ref={el} className=''>
+            <div className='max-w-7xl h-[calc(100vh-18rem)] rounded-xl absolute top-[7.625rem] left-1/2 -translate-x-1/2 overflow-hidden z-0'>
                 <Image
                     id='hero1'
                     src={hero1}
@@ -196,34 +196,34 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                         </div>
                     </div>
                     <div className='flex flex-col justify-between '>
-                        <div className='statCard rounded-3xl shadow-2xl p-7 bg-white relative left-[80%]'>
-                            <div>
+                        <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[80%]'>
+                            <p>
                                 <span className='text-2xl font-bold'>319 </span>
                                 <span>Job offers</span>
-                            </div>
-                            <p className='font-light text-gray-500'>
+                            </p>
+                            <p className='font-light'>
                                 In Business Development
                             </p>
                         </div>
-                        <div className='statCard rounded-3xl shadow-2xl p-7 bg-white relative left-[60%]'>
+                        <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[60%]'>
                             <div>
                                 <span className='text-2xl font-bold'>265 </span>
                                 <span>Job offers</span>
                             </div>
-                            <p className='font-light text-gray-500'>
+                            <p className='font-light '>
                                 In Marketing & Communication
                             </p>
                         </div>
-                        <div className='statCard rounded-3xl shadow-2xl p-7 bg-white relative left-[40%]'>
+                        <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[40%]'>
                             <div>
                                 <span className='text-2xl font-bold'>324 </span>
                                 <span>Job offers</span>
                             </div>
-                            <p className='font-light text-gray-500'>In Project Management</p>
+                            <p className='font-light '>In Project Management</p>
                         </div>
                     </div>
                 </div>
-            </div> */}
+            </div>
         </div>
     );
 };

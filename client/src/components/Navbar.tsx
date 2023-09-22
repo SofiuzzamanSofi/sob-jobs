@@ -142,7 +142,7 @@ const Navbar = () => {
     else {
         return (
             <header
-                className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full  border-b border-gray-200 text-sm py-0 sm:py-0 bg-white dark:bg-gray-800 dark:border-gray-700"
+                className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full  border-b border-gray-200 dark:border-gray-700 text-sm py-0 sm:py-0 bg-white dark:bg-gray-800 "
             >
                 <nav
                     className="relative max-w-[85rem] flex flex-wrap basis-full items-center w-full mx-auto sm:flex sm:items-center sm:justify-between px-4 py-1"
@@ -250,9 +250,9 @@ const Navbar = () => {
                             // onMouseUpCapture={handleCloseProfileAndMenu}
                             ref={menuRef}
                             id="docs-sidebar"
-                            className={`${isMenuOpen ? "translate-x-0" : "translate-x-[-3000px]"} transition-all duration-500 transform fixed top-0 left-0 bottom-0 z-[60] w-64 bg-white border-r p-1 md:p-4 border-gray-200 overflow-y-auto scrollbar-y dark:scrollbar-y  lg:block lg:translate-x-0 lg:right-auto lg:bottom-0  dark:bg-gray-800 dark:border-gray-700`}
+                            className={`${isMenuOpen ? "translate-x-0" : "translate-x-[-3000px]"} transition-all duration-500 transform fixed top-0 left-0 bottom-0 z-[60] w-64  border-r p-1 md:p-4 border-gray-200 overflow-y-auto scrollbar-y dark:scrollbar-y  lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 bg-white dark:bg-gray-800 dark:border-gray-700`}
                         >
-                            <div className="px-6">
+                            <div className="px-6 flex items-center justify-between">
                                 <Link className="flex-none text-xl font-semibold dark:text-white" href="/" aria-label="Brand">
                                     <Image
                                         src={logo}
@@ -260,6 +260,13 @@ const Navbar = () => {
                                         className='h-[2.904rem] md:h-[4.248rem] w-[10.164rem] sm:w-[14.868rem] rounded-md'
                                     />
                                 </Link>
+                                <button
+                                    className="shadow-lg bg-gray-100 dark:bg-gray-900 text-black dark:text-white border dark:border-gray-700 rounded-lg p-2"
+                                    title="closed-side-bar"
+                                    onClick={handleCloseProfileAndMenu}
+                                >
+                                    X
+                                </button>
                             </div>
                             <nav className="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
                                 <ul className="space-y-1.5">
