@@ -69,7 +69,7 @@ const SignUp = () => {
         <Image src={loginImage} className='h-full w-full' alt='Sign-Up-Image' />
       </div>
       <div className='w-full md:w-1/2 grid place-items-center'>
-        <div className='bg-[#FFFAF4] text-gray-800  grid place-items-center p-10 w-full rounded-2xl'>
+        <div className='bg-[#FFFAF4] text-gray-800  grid place-items-center p-10 w-full rounded-2xl border'>
           <h1 className='mb-10 font-medium text-2xl'>Sign up</h1>
 
           <div className='space-y-3'>
@@ -108,10 +108,8 @@ const SignUp = () => {
                   {...register("confirmPassword")}
                 />
               </div>
-              <div>
-                <p
-                  className="text-xs text-red-700 my-[-10px] mb-[-20px]"
-                >
+              <div className='flex flex-col items-start text-xs text-red-700'>
+                <p className='pt-2'                             >
                   {
                     reduxStore?.auth?.isError ?
                       <span>
