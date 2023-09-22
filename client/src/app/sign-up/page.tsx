@@ -58,25 +58,24 @@ const SignUp = () => {
     };
   }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.user?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, router]);
 
-
   if (reduxStore?.auth?.user?.email) {
     router.push("/");
     return null;
   };
 
   return (
-    <div className='flex h-[calc(100vh-2rem)] items-center pt-14'>
-      <div className='w-1/2'>
+    <div className='flex h-[calc(100vh-2rem)] items-center p-4'>
+      <div className='w-1/2 hidden md:block'>
         <Image src={loginImage} className='h-full w-full' alt='Sign-Up-Image' />
       </div>
-      <div className='w-1/2 grid place-items-center'>
-        <div className='bg-[#FFFAF4] rounded-lg grid place-items-center p-10'>
+      <div className='w-full md:w-1/2 grid place-items-center'>
+        <div className='bg-[#FFFAF4] text-gray-800  grid place-items-center p-10 w-full rounded-2xl'>
           <h1 className='mb-10 font-medium text-2xl'>Sign up</h1>
 
           <div className='space-y-3'>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className='flex flex-col items-start'>
-                <label htmlFor='email' className='ml-5'>
+                <label htmlFor='email' className='pt-2'>
                   Email
                 </label>
                 <input
@@ -88,7 +87,7 @@ const SignUp = () => {
               </div>
 
               <div className='flex flex-col items-start'>
-                <label htmlFor='password' className='ml-5'>
+                <label htmlFor='password' className='pt-2'>
                   Password
                 </label>
                 <input
@@ -99,7 +98,7 @@ const SignUp = () => {
                 />
               </div>
               <div className='flex flex-col items-start'>
-                <label htmlFor='confirm-password' className='ml-5'>
+                <label htmlFor='confirm-password' className='pt-2'>
                   Confirm Password
                 </label>
                 <input

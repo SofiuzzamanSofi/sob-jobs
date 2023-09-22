@@ -19,23 +19,19 @@ const Dashboard = ({ }) => {
     else {
         return (
             <div
-                className='mt-10'
+                className="flex justify-center items-center "
             >
-                <div
-                    className="flex justify-center items-center "
-                >
+                <div>
                     <div>
-                        <div>
-                            <h1 className="text-xl text-center py-1">Wellcome to Dashboard</h1>
-                            <h1 className="text-xl text-center py-1">You are a: {reduxStore?.auth?.user?.role}</h1>
-                        </div>
-                        <div
-                            className="pt-10"
-                        >
-                            <h6 className='text-center'>
-                                More Feature is comming soon...
-                            </h6>
-                        </div>
+                        <h1 className="font-bold text-7xl capitalize text-center py-1">Wellcome to Dashboard</h1>
+                        <h1 className="text-lg text-center py-1">You are a: {reduxStore?.auth?.user?.role}</h1>
+                    </div>
+                    <div
+                        className="pt-10"
+                    >
+                        <h6 className='text-center'>
+                            More Feature is comming soon...
+                        </h6>
                     </div>
                 </div>
             </div>
