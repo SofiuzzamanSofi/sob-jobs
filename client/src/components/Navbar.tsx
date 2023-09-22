@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useEffect, useState, useRef } from "react";
-import logo from "../assets/Sob-Jobs-Logo.png";
+import logo from "../assets/sob-jobs-logo.png";
 import avatar from "../assets/avatar.svg";
 import { BiSearchAlt } from "react-icons/bi";
 import { usePathname } from "next/navigation";

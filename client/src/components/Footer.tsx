@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { FC } from 'react'
-import logo from "../assets/Sob-Jobs-Logo.png";
+import logo from "../assets/sob-jobs-logo.png";
 import Link from "next/link";
 import Image from "next/image";
 
