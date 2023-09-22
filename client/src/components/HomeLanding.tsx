@@ -115,8 +115,10 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
     // }, [inputText]);
 
     return (
-        <div ref={el} className=''>
-            <div className='max-w-7xl h-[calc(100vh-18rem)] rounded-xl absolute top-[7.625rem] left-1/2 -translate-x-1/2 overflow-hidden z-0'>
+        <div ref={el} className='relative max-w-[85rem]'>
+            <div className=' h-[calc(100vh-18rem)]  overflow-hidden rounded-xl z-0
+            translate-x-0 transition-all duration-500 transform fixed top-0 bottom-0 right-0 left-0
+            '>
                 <Image
                     id='hero1'
                     src={hero1}
@@ -148,79 +150,77 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                     className='object-cover h-full w-full opacity-0'
                 />
             </div>
-            <div className='h-full w-full flex items-center z-10 relative'>
-                <div className='flex w-full'>
-                    <div className='w-1/2 flex flex-col items-start'>
-                        <h1 id='hero-title' className='heroElement font-bold text-7xl capitalize'>
-                            Find the perfect <br /> job for you
-                        </h1>
-                        <p id='hero-subtitle' className='mt-5 text-lg'>
-                            Search your career opportunity through 12,800 jobs
-                        </p>
-                        <div
-                            id='search-container'
-                            className='bg-white rounded-full p-3 flex w-full max-w-xl overflow-hidden mt-5  shadow-lg'
+            <div className='h-full w-full flex flex-col md:flex-row items-center z-10 relative'>
+                <div className='md:w-1/2 flex flex-col items-start'>
+                    <h1 id='hero-title' className='heroElement font-bold text-7xl capitalize'>
+                        Find the perfect <br /> job for you
+                    </h1>
+                    <p id='hero-subtitle' className='mt-5 text-lg'>
+                        Search your career opportunity through 12,800 jobs
+                    </p>
+                    <div
+                        id='search-container'
+                        className='bg-white rounded-full p-3 flex w-full max-w-xl overflow-hidden mt-5  shadow-lg '
+                    >
+                        <input
+                            className='flex-auto text-lg p-2 border-none outline-none focus:ring-0'
+                            type='text'
+                            name='search'
+                            id='search'
+                            placeholder='Job title or Keyword'
+                            // value={inputText}
+                            // onChange={(e) => setInputText(e.target.value)}
+                            // onKeyDown={(e) => functionCallOnPressInter(e)}
+                            onFocus={() => router.push("/dashboard/search-jobs")}
+                        />
+                        <Link
+                            href='/dashboard/search-jobs'
                         >
-                            <input
-                                className='flex-auto text-lg p-2 border-none outline-none focus:ring-0'
-                                type='text'
-                                name='search'
-                                id='search'
-                                placeholder='Job title or Keyword'
-                                // value={inputText}
-                                // onChange={(e) => setInputText(e.target.value)}
-                                // onKeyDown={(e) => functionCallOnPressInter(e)}
-                                onFocus={() => router.push("/dashboard/search-jobs")}
-                            />
-                            <Link
-                                href='/dashboard/search-jobs'
+                            <button
+                                id='search-button'
+                                className='p-2 rounded-full bg-primary  h-14 w-14 grid place-items-center'
+                            // onClick={submitInputMessage}
                             >
-                                <button
-                                    id='search-button'
-                                    className='p-2 rounded-full bg-primary  h-14 w-14 grid place-items-center'
-                                // onClick={submitInputMessage}
-                                >
-                                    <BiSearchAlt size='23' color='white' />
-                                </button>
-                            </Link>
-                        </div>
-                        <div className='mt-16'>
-                            <h2 className='badge-container'>Popular Search</h2>
-                            <div className='mt-3 max-w-xl flex flex-wrap  gap-3'>
-                                {keywords.map((item, index) => (
-                                    <Badge key={index} className='badge'>
-                                        {item}
-                                    </Badge>
-                                ))}
-                            </div>
+                                <BiSearchAlt size='23' color='white' />
+                            </button>
+                        </Link>
+                    </div>
+                    <div className='mt-16'>
+                        <h2 className='badge-container'>Popular Search</h2>
+                        <div className='mt-3 max-w-xl flex flex-wrap  gap-3'>
+                            {keywords.map((item, index) => (
+                                <Badge key={index} className='badge'>
+                                    {item}
+                                </Badge>
+                            ))}
                         </div>
                     </div>
-                    <div className='flex flex-col justify-between '>
-                        <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[80%]'>
-                            <p>
-                                <span className='text-2xl font-bold'>319 </span>
-                                <span>Job offers</span>
-                            </p>
-                            <p className='font-light'>
-                                In Business Development
-                            </p>
+                </div>
+                <div className='flex flex-col justify-between '>
+                    <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[80%]'>
+                        <p>
+                            <span className='text-2xl font-bold'>319 </span>
+                            <span>Job offers</span>
+                        </p>
+                        <p className='font-light'>
+                            In Business Development
+                        </p>
+                    </div>
+                    <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[60%]'>
+                        <div>
+                            <span className='text-2xl font-bold'>265 </span>
+                            <span>Job offers</span>
                         </div>
-                        <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[60%]'>
-                            <div>
-                                <span className='text-2xl font-bold'>265 </span>
-                                <span>Job offers</span>
-                            </div>
-                            <p className='font-light '>
-                                In Marketing & Communication
-                            </p>
+                        <p className='font-light '>
+                            In Marketing & Communication
+                        </p>
+                    </div>
+                    <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[40%]'>
+                        <div>
+                            <span className='text-2xl font-bold'>324 </span>
+                            <span>Job offers</span>
                         </div>
-                        <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[40%]'>
-                            <div>
-                                <span className='text-2xl font-bold'>324 </span>
-                                <span>Job offers</span>
-                            </div>
-                            <p className='font-light '>In Project Management</p>
-                        </div>
+                        <p className='font-light '>In Project Management</p>
                     </div>
                 </div>
             </div>
