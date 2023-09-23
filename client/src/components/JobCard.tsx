@@ -33,7 +33,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobData }) => {
       </div>
       <div className='flex justify-between items-center mt-5'>
         <p>{employmentType}</p>
-        <button className="border px-4 py-1 rounded-md">
+        <button className="border border-gray-300 dark:border-gray-700 shadow-xl py-3 px-4 rounded-md">
           <button className='btn'>
             Details
           </button>
