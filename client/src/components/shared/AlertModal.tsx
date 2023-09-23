@@ -20,7 +20,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
   return (
     <div
       className={`transition-all duration-300 ${isOpenModal ? "scale-100" : "scale-0"
-        } fixed top-0 left-0 right-0 bottom-0 w-full h-full bg-black/70 flex items-center justify-center z-50`}
+        } fixed top-0 left-0 right-0 bottom-0 w-full h-full bg-black/70 flex items-center justify-center z-[100]`}
       onClick={(e) => {
         if (e.target !== e.currentTarget) {
           return;
@@ -28,7 +28,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
         setIsOpenModal((prev) => !prev);
       }}
     >
-      <div className="bg-white w-[500px] py-10 px-4 rounded-xl">
+      <div className="bg-white w-[500px] py-10 px-4 rounded-xl dark:text-slate-700">
         <div className="flex items-center justify-center gap-3">
           <h2 className="text-3xl font-semibold">
             Almost Done!

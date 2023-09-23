@@ -3,6 +3,7 @@
 import { FC } from 'react'
 import JobDetails from '@/components/JobDetails';
 import { useJobByIdQuery } from '@/redux/features/job/jobApi';
+import Loading from '@/components/Loading';
 
 interface pageProps {
     params: {
@@ -17,9 +18,15 @@ const Page: FC<pageProps> = ({ params }) => {
     }
     );
 
+    console.log('params.id:', params.id);
+    console.log('data:', data);
+
     return <div>
         {
-            data?.data?.companyName && <JobDetails jobData={data?.data} />
+            !params.id ?
+                <Loading />
+                :
+                data?.data?._id && <JobDetails jobData={data?.data} />
         }
     </div>
 }

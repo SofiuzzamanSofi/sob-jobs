@@ -34,6 +34,11 @@ const AddJob = () => {
   } = useFieldArray({ control, name: "requirements" });
 
   const onSubmit: SubmitHandler<JobDataTypes> = (data) => {
+
+    if (reduxStore.auth.user?.role !== "Employer") {
+      toast.error("Only Employer can post the jobs");
+      return;
+    };
     // console.log("data on submit handler addJObs:", data);
     postJob({ ...data, email: reduxStore.auth.user?.email, isOpen: true });
   };
@@ -47,6 +52,11 @@ const AddJob = () => {
       router.push("/dashboard");
     }
   }, [isLoading, isSuccess, router]);
+
+  if (reduxStore.auth.user?.role !== "Employer") {
+    router.push("/");
+    return;
+  };
 
   return (
     <div className='flex justify-center items-center overflow-auto p-10'>

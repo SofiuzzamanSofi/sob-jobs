@@ -106,7 +106,7 @@ const Navbar = () => {
         return () => {
             document.removeEventListener('mouseup', handleClickOutside);
         };
-    }, [isProfileOpen, isMenuOpen]);
+    }, [isProfileOpen, isMenuOpen, handleClickOutside]);
 
     useEffect(() => {
         handleCloseProfileAndMenu();

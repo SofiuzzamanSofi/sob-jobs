@@ -29,7 +29,7 @@ const Jobs: FC<jobsProps> = ({ }) => {
                 {
                     data?.data?.length ?
                         JobDatas.map((jobData: JobDataTypes) => (
-                            <JobCard jobData={jobData} />
+                            <JobCard key={jobData._id} jobData={jobData} />
                         ))
                         :
                         <div>

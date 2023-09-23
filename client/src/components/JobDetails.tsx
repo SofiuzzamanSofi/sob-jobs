@@ -125,77 +125,82 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
   return (
     <div className='pt-14 grid grid-cols-12 gap-5'>
       <div className='col-span-9 mb-10'>
-        <div className='h-80 rounded-xl overflow-hidden'>
+        <div className='h-80 rounded-md overflow-hidden'>
           <Image className='h-full w-full object-cover' src={meetingImage} alt='' />
         </div>
         <div className='space-y-5'>
           <div className='flex justify-between items-center mt-5'>
-            <h1 className='text-md font-medium'>
-              {email === reduxStore.auth.user?.email ?
-                <span>
-                  Job Status: &nbsp;
-                  <span
-                    className="font-bold text-lg border rounded-md bg-primary/10 p-5 text-primary px-2 py-1 hover:cursor-pointer"
+            <div className='text-md font-medium'>
+              <div>
+                <span className="text-primary dark:text-darkPrimary">Job Status:</span> &nbsp;
+                {email === reduxStore.auth.user?.email ?
+                  <button
+                    className="border border-gray-300 dark:border-gray-700  px-2 py-1 rounded-md  hover:border-primary hover:text-white  hover:bg-primary hover:px-4 transition-all"
                     onClick={() => setIsOpenModal((prev) => !prev)}
                   >
                     {isOpen ? "Open" : "Closed"}
-                  </span>
-                </span>
-                :
-                <span>
-                  Job Status: &nbsp; <span className="border border-black px-2 py-1 rounded-md ">{isOpen ? "Open" : "Closed"}</span>
-                </span>
-              }
-            </h1>
+                  </button>
+                  :
+                  <button disabled className="border border-gray-300 dark:border-gray-700  px-2 py-1 rounded-md ">{isOpen ? "Open" : "Closed"}
+                  </button>
+                }
+              </div>
+            </div>
             {
               isOpen &&
-              <button
-                className={`border border-black px-2 py-1 rounded-md  ${isAppliedAlready ? "" : "hover:px-4 hover:border-primary hover:text-white  hover:bg-primary"} transition-all`}
-                onClick={handleApply}
-                disabled={isAppliedAlready ? true : false}
-              >
-                {isAppliedAlready ? "Already Applied" : "Apply"}
-              </button>
+              <div>
+                <button
+                  className={`border border-gray-300 dark:border-gray-700  px-2 py-1 rounded-md  ${isAppliedAlready ? "" : "hover:px-4 hover:border-primary hover:text-white  hover:bg-primary"} transition-all`}
+                  onClick={handleApply}
+                  disabled={isAppliedAlready ? true : false}
+                >
+                  {isAppliedAlready ? "Already Applied" : "Apply"}
+                </button>
+              </div>
             }
             {
               !isOpen && isAppliedAlready &&
-              <button
-                className={`border border-black px-2 py-1 rounded-md ${isAppliedAlready ? "" : "hover:px-4"} transition-all`}
-                disabled={isAppliedAlready ? true : false}
-              >
-                Already Applied
-              </button>
+              <div>
+                <button
+                  className={`border border-gray-300 dark:border-gray-700  px-2 py-1 rounded-md ${isAppliedAlready ? "" : "hover:px-4"} transition-all`}
+                  disabled={isAppliedAlready ? true : false}
+                >
+                  Already Applied
+                </button>
+              </div>
             }
           </div>
           <div className='flex justify-between items-center mt-5'>
-            <h1 className='text-primary text-md font-medium'>
-              Number of openings: {noOpening}
+            <h1 className=''>
+              <span className="text-primary text-md font-medium dark:text-darkPrimary">  Number of openings:</span> &nbsp;
+              <span>{noOpening}</span>
             </h1>
-            <div className='text-primary text-md font-medium flex items-center gap-2'>
+            <div className='text-primary dark:text-darkPrimary text-md font-medium flex items-center gap-2'>
               {
                 email === reduxStore.auth.user?.email && applicants?.length ?
                   <Link
                     href={{
                       pathname: `/dashboard/job-details/${_id}/applicants-details`,
                     }}
+                    className="flex items-center gap-2"
                   >
 
-                    <BsPeople /> {applicants?.length} applicants
+                    <><BsPeople /> <span className="text-slate-700 dark:text-slate-400">{applicants?.length}</span> applicants</>
                   </Link>
                   :
-                  <><BsPeople /> {applicants?.length} applicants</>
+                  <><BsPeople /> <span className="text-slate-700 dark:text-slate-400">{applicants?.length}</span> applicants</>
               }
             </div>
           </div>
           <div className='flex justify-between items-center mt-5'>
-            <h1 className='text-xl font-semibold text-primary'>{position}</h1>
+            <h1 className='text-xl font-semibold text-primary dark:text-darkPrimary'>{position}</h1>
           </div>
           <div>
-            <h1 className='text-primary text-lg font-medium mb-3'>Overview</h1>
+            <h1 className='text-primary dark:text-darkPrimary text-lg font-medium mb-3'>Overview</h1>
             <p>{overview}</p>
           </div>
           <div>
-            <h1 className='text-primary text-lg font-medium mb-3'>Skills</h1>
+            <h1 className='text-primary dark:text-darkPrimary text-lg font-medium mb-3'>Skills</h1>
             <ul>
               {
                 skills &&
@@ -208,7 +213,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
             </ul>
           </div>
           <div>
-            <h1 className='text-primary text-lg font-medium mb-3'>
+            <h1 className='text-primary dark:text-darkPrimary text-lg font-medium mb-3'>
               Requirements
             </h1>
             <ul>
@@ -223,7 +228,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
             </ul>
           </div>
           <div>
-            <h1 className='text-primary text-lg font-medium mb-3'>
+            <h1 className='text-primary dark:text-darkPrimary text-lg font-medium mb-3'>
               Responsibilities
             </h1>
             <ul>
@@ -241,10 +246,10 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
         <hr className='my-5' />
         <div>
           <div>
-            <h1 className='text-xl font-semibold text-primary mb-5'>
+            <h1 className='text-xl font-semibold text-primary dark:text-darkPrimary mb-5'>
               General Q&A
             </h1>
-            <div className='text-primary grid gap-3'>
+            <div className='text-primary dark:text-darkPrimary grid gap-3'>
               {
                 questionAns &&
                 questionAns?.map((question, index) => (
@@ -273,7 +278,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
                             className="w-full p-2 border-b-2 focus:outline-none focus:border-b-black"
                           />
                           <button
-                            className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white'
+                            className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary dark:text-darkPrimary hover:text-white'
                             type='submit'
                           >
                             <BsArrowRightShort size={30} />
@@ -300,7 +305,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
                     {...register("question")}
                   />
                   <button
-                    className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary hover:text-white'
+                    className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary dark:text-darkPrimary hover:text-white'
                     type="submit"
                   >
                     <BsArrowRightShort size={30} />
@@ -312,7 +317,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
         </div>
       </div>
       <div className='col-span-3'>
-        <div className='rounded-xl bg-primary/10 p-5 text-primary space-y-5'>
+        <div
+          className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary border border-gray-200 dark:border-gray-700 rounded-md p-5  space-y-5 mb-2.5'
+        >
           <div>
             <p>Experience</p>
             <h1 className='font-semibold text-lg'>{experience}</h1>
@@ -334,7 +341,9 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
             <h1 className='font-semibold text-lg'>{location}</h1>
           </div>
         </div>
-        <div className='mt-5 rounded-xl bg-primary/10 p-5 text-primary space-y-5'>
+        <div
+          className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary border border-gray-200 dark:border-gray-700 rounded-md p-5  space-y-5 mt-2.5'
+        >
           <div>
             <h1 className='font-semibold text-lg'>{companyName}</h1>
           </div>
