@@ -11,7 +11,7 @@ interface JobCardProps {
 
 const JobCard: React.FC<JobCardProps> = ({ jobData }) => {
 
-  const { _id, position, companyName, location, employmentType } = jobData || {};
+  const { _id, position, companyName, location, employmentType, isOpen } = jobData || {};
 
   return (
     <Link
@@ -32,7 +32,11 @@ const JobCard: React.FC<JobCardProps> = ({ jobData }) => {
         <p className="uppercase">{location}</p>
       </div>
       <div className='flex justify-between items-center mt-5'>
-        <p>{employmentType}</p>
+        <div>
+          <p>{isOpen ? "Open" : "Closed"}</p>
+          <p>{employmentType}</p>
+        </div>
+
         <button className="border border-gray-300 dark:border-gray-700 shadow-xl py-3 px-4 rounded-md">
           <button className='btn'>
             Details

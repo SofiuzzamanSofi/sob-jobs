@@ -37,6 +37,8 @@ const Page: FC<pageProps> = ({ }) => {
         jobBySearchData(searchData);
     }, [titleText, companyText, locationText, newOrOld, isOpenClosed, jobBySearchData]);
 
+    const searchBarInputClass = "p-2 w-full border border-gray-200  dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-slate-400"
+
     if (isLoading) {
         return <Loading />;
     }
@@ -50,17 +52,18 @@ const Page: FC<pageProps> = ({ }) => {
                         <h1 className='font-bold text-4xl pb-5 text-center dark:text-slate-300'>Search Jobs</h1>
                     </div>
                     <form
-                        className='rounded-lg grid place-items-center border px-5'
+                        className="border border-gray-200 dark:border-gray-700 rounded-md p-5"
                         onSubmit={handleFromSubmit}
                     >
-                        <div className='flex gap-2 flex-col lg:flex-row lg:justify-between w-full border'>
+                        <div
+                            className='flex flex-col lg:flex-row lg:justify-between lg:gap-4 w-full'>
 
-                            <div className='flex flex-col items-start border'>
-                                <label htmlFor='jobTitle' className='pt-2'>
+                            <div className='flex flex-col items-start w-full'>
+                                <label htmlFor='jobTitle' className='pt-2 dark:text-slate-300'>
                                     Job Title
                                 </label>
                                 <input
-                                    className="p-2"
+                                    className={searchBarInputClass}
                                     type='text'
                                     id='jobTitle'
                                     value={titleText}
@@ -68,24 +71,24 @@ const Page: FC<pageProps> = ({ }) => {
 
                                 />
                             </div>
-                            <div className='flex flex-col items-start border'>
-                                <label htmlFor='companyName' className='pt-2'>
+                            <div className='flex flex-col items-start w-full'>
+                                <label htmlFor='companyName' className='pt-2 dark:text-slate-300'>
                                     Company Name
                                 </label>
                                 <input
-                                    className="p-2"
+                                    className={searchBarInputClass}
                                     type='text'
                                     id='companyName'
                                     value={companyText}
                                     onChange={(e) => setCompanyText(e.target.value)}
                                 />
                             </div>
-                            <div className='flex flex-col items-start border'>
-                                <label htmlFor='location' className='pt-2'>
+                            <div className='flex flex-col items-start w-full'>
+                                <label htmlFor='location' className='pt-2 dark:text-slate-300'>
                                     Location
                                 </label>
                                 <input
-                                    className="p-2"
+                                    className={searchBarInputClass}
                                     type='text'
                                     id='location'
                                     value={locationText}
@@ -95,20 +98,11 @@ const Page: FC<pageProps> = ({ }) => {
 
                         </div>
 
-                        <div className="flex w-full justify-center lg:justify-end  items-center border pt-2 pb-1 gap-4 ">
+                        <div className="flex w-full justify-end  items-center pt-2 pb-1 gap-4 ">
                             <div className='flex gap-2  max-w-xs'>
                                 <div>
-                                    {/* <input
-                                        className='m-1'
-                                        type='checkbox'
-                                        id='newer'
-                                        checked={newOrOld}
-                                        onClick={() => setnewOrOld((prv) => !prv)}
-                                    />
-                                    <label htmlFor='newer'>New Jobs</label>
-                                    <label htmlFor="onldNew"></label> */}
                                     <select
-                                        name="onldNew" id="onldNew" className='border'
+                                        name="onldNew" id="onldNew" className={searchBarInputClass}
                                         value={newOrOld}
                                         onChange={(e) => setnewOrOld(e.target.value)}
                                     >
@@ -118,16 +112,8 @@ const Page: FC<pageProps> = ({ }) => {
                                     </select>
                                 </div>
                                 <div>
-                                    {/* <input
-                                        className='m-1'
-                                        type='checkbox'
-                                        id='older'
-                                        checked={!newOrOld}
-                                        onClick={() => setnewOrOld((prv) => !prv)}
-                                    />
-                                    <label htmlFor='older'>Old Jobs</label> */}
                                     <select
-                                        name="openClosed" id="openClosed" className='border'
+                                        name="openClosed" id="openClosed" className={searchBarInputClass}
                                         value={isOpenClosed}
                                         onChange={(e) => setIsOpenClosed(e.target.value)}
                                     >
@@ -138,12 +124,12 @@ const Page: FC<pageProps> = ({ }) => {
                                     </select>
                                 </div>
                             </div>
-                            <button
+                            {/* <button
                                 type='submit'
                                 className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
                             >
                                 Submit
-                            </button>
+                            </button> */}
                         </div>
                     </form>
                 </div>

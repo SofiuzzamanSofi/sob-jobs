@@ -69,7 +69,7 @@ const SignUp = () => {
         <Image src={loginImage} className='h-full w-full' alt='Sign-Up-Image' />
       </div>
       <div className='w-full md:w-1/2 grid place-items-center'>
-        <div className='bg-[#FFFAF4] text-gray-800  grid place-items-center p-10 w-full rounded-2xl border'>
+        <div className='bg-[#FFFAF4] text-gray-800 grid place-items-center p-10 w-full rounded-2xl border'>
           <h1 className='mb-10 font-bold text-4xl'>Sign up</h1>
 
           <div className='space-y-3'>
