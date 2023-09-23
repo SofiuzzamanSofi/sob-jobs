@@ -17,7 +17,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobData }) => {
     <Link
       href={`job-details/${_id}`}
       key={_id}
-      className='border border-gray-300 dark:border-gray-700 shadow-xl p-5 rounded-md'
+      className='border border-gray-300 dark:border-gray-700 shadow-xl p-5 rounded-md dark:hover:text-slate-300'
     >
       <div className='flex justify-between'>
         <div>

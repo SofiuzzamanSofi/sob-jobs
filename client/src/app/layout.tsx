@@ -31,7 +31,7 @@ export default function RootLayout({
           <ExtraPage />
           <Navbar />
           <div
-            className="min-h-[calc(100vh-17.4049375rem)] sm:min-h-[calc(100vh-18.775375rem)] md:min-h-[calc(100vh-14.6rem)] lg:min-h-[calc(100vh-14.2rem)]  text-black dark:text-white bg-gray-50 dark:bg-gray-800"
+            className="min-h-[calc(100vh-17.4049375rem)] sm:min-h-[calc(100vh-18.775375rem)] md:min-h-[calc(100vh-14.6rem)] lg:min-h-[calc(100vh-14.2rem)] bg-gray-50 dark:bg-gray-800 text-slate-700 dark:text-slate-400"
           >
             <div
               className="max-w-[85rem] w-full mx-auto p-4"

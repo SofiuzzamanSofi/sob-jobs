@@ -43,61 +43,62 @@ const Page: FC<pageProps> = ({ }) => {
     else {
         return (
             <div>
-                <div>
-                    <div
-                        className='p-5'
+                <div
+                    className='py-5'
+                >
+                    <div>
+                        <h1 className='font-bold text-4xl pb-5 text-center dark:text-slate-300'>Search Jobs</h1>
+                    </div>
+                    <form
+                        className='rounded-lg grid place-items-center border px-5'
+                        onSubmit={handleFromSubmit}
                     >
-                        <div>
-                            <h1 className='font-bold text-4xl py-5 text-center'>Search Jobs</h1>
-                        </div>
-                        <form
-                            className='rounded-lg grid place-items-center border px-5'
-                            onSubmit={handleFromSubmit}
-                        >
-                            <div className='gap-2 grid lg:flex lg:justify-between justify-center w-full border'>
+                        <div className='flex gap-2 flex-col lg:flex-row lg:justify-between w-full border'>
 
-                                <div className='flex flex-col items-start border'>
-                                    <label htmlFor='jobTitle' className='ml-5'>
-                                        Job Title
-                                    </label>
-                                    <input
-                                        className="p-2 border rounded-md"
-                                        type='text'
-                                        id='jobTitle'
-                                        value={titleText}
-                                        onChange={(e) => setTitleText(e.target.value)}
+                            <div className='flex flex-col items-start border'>
+                                <label htmlFor='jobTitle' className='pt-2'>
+                                    Job Title
+                                </label>
+                                <input
+                                    className="p-2"
+                                    type='text'
+                                    id='jobTitle'
+                                    value={titleText}
+                                    onChange={(e) => setTitleText(e.target.value)}
 
-                                    />
-                                </div>
-                                <div className='flex flex-col items-start border'>
-                                    <label htmlFor='companyName' className='ml-5'>
-                                        Company Name
-                                    </label>
-                                    <input
-                                        className="p-2 border rounded-md"
-                                        type='text'
-                                        id='companyName'
-                                        value={companyText}
-                                        onChange={(e) => setCompanyText(e.target.value)}
-                                    />
-                                </div>
-                                <div className='flex flex-col items-start border'>
-                                    <label htmlFor='location' className='ml-5'>
-                                        Location
-                                    </label>
-                                    <input
-                                        className="p-2 border rounded-md"
-                                        type='text'
-                                        id='location'
-                                        value={locationText}
-                                        onChange={(e) => setLocationText(e.target.value)}
-                                    />
-                                </div>
+                                />
                             </div>
-                            <div className="flex w-full justify-center lg:justify-end  items-center border pt-2 pb-1 gap-4 ">
-                                <div className='flex gap-2  max-w-xs'>
-                                    <div>
-                                        {/* <input
+                            <div className='flex flex-col items-start border'>
+                                <label htmlFor='companyName' className='pt-2'>
+                                    Company Name
+                                </label>
+                                <input
+                                    className="p-2"
+                                    type='text'
+                                    id='companyName'
+                                    value={companyText}
+                                    onChange={(e) => setCompanyText(e.target.value)}
+                                />
+                            </div>
+                            <div className='flex flex-col items-start border'>
+                                <label htmlFor='location' className='pt-2'>
+                                    Location
+                                </label>
+                                <input
+                                    className="p-2"
+                                    type='text'
+                                    id='location'
+                                    value={locationText}
+                                    onChange={(e) => setLocationText(e.target.value)}
+                                />
+                            </div>
+
+                        </div>
+
+                        <div className="flex w-full justify-center lg:justify-end  items-center border pt-2 pb-1 gap-4 ">
+                            <div className='flex gap-2  max-w-xs'>
+                                <div>
+                                    {/* <input
                                         className='m-1'
                                         type='checkbox'
                                         id='newer'
@@ -106,18 +107,18 @@ const Page: FC<pageProps> = ({ }) => {
                                     />
                                     <label htmlFor='newer'>New Jobs</label>
                                     <label htmlFor="onldNew"></label> */}
-                                        <select
-                                            name="onldNew" id="onldNew" className='border'
-                                            value={newOrOld}
-                                            onChange={(e) => setnewOrOld(e.target.value)}
-                                        >
-                                            <option disabled value="">Chose One</option>
-                                            <option value="new">New First</option>
-                                            <option value="old">Old First</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        {/* <input
+                                    <select
+                                        name="onldNew" id="onldNew" className='border'
+                                        value={newOrOld}
+                                        onChange={(e) => setnewOrOld(e.target.value)}
+                                    >
+                                        <option disabled value="">Chose One</option>
+                                        <option value="new">New First</option>
+                                        <option value="old">Old First</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    {/* <input
                                         className='m-1'
                                         type='checkbox'
                                         id='older'
@@ -125,27 +126,26 @@ const Page: FC<pageProps> = ({ }) => {
                                         onClick={() => setnewOrOld((prv) => !prv)}
                                     />
                                     <label htmlFor='older'>Old Jobs</label> */}
-                                        <select
-                                            name="openClosed" id="openClosed" className='border'
-                                            value={isOpenClosed}
-                                            onChange={(e) => setIsOpenClosed(e.target.value)}
-                                        >
-                                            <option disabled value="">Chose One</option>
-                                            <option value="all">All Jobs</option>
-                                            <option value="open">Opene Jobs</option>
-                                            <option value="closed">Closed Jobs</option>
-                                        </select>
-                                    </div>
+                                    <select
+                                        name="openClosed" id="openClosed" className='border'
+                                        value={isOpenClosed}
+                                        onChange={(e) => setIsOpenClosed(e.target.value)}
+                                    >
+                                        <option disabled value="">Chose One</option>
+                                        <option value="all">All Jobs</option>
+                                        <option value="open">Opene Jobs</option>
+                                        <option value="closed">Closed Jobs</option>
+                                    </select>
                                 </div>
-                                <button
-                                    type='submit'
-                                    className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
-                                >
-                                    Submit
-                                </button>
                             </div>
-                        </form>
-                    </div>
+                            <button
+                                type='submit'
+                                className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
+                            >
+                                Submit
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div
                     className='grid gap-4'

@@ -21,7 +21,7 @@ const Jobs: FC<jobsProps> = ({ }) => {
     else {
         return <div>
             <div>
-                <h1 className='font-bold text-4xl py-5 text-center'>All Jobs</h1>
+                <h1 className='font-bold text-4xl pb-5 text-center dark:text-slate-300'>All Jobs</h1>
             </div>
             <div
                 className='grid gap-4'
