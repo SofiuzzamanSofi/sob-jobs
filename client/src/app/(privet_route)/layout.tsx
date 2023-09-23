@@ -35,17 +35,15 @@ export default function PrivetLayout({ children }: Privetlayout) {
     else {
         // dashboard Layout 
         return (
-            <div className={dashboardComponents ? "grid grid-cols-12 gap-2" : ""} >
+            <div className={dashboardComponents ? "md:flex gap-4" : ""} >
                 {
                     dashboardComponents ?
                         <Sidebar />
                         :
                         ""
                 }
-                <div className={dashboardComponents ? "col-span-8" : ""} >
-                    <div className={dashboardComponents ? "h-full max-w-[85rem] mx-auto" : ""} >
-                        {children}
-                    </div>
+                <div className={dashboardComponents ? "md:flex-grow" : ""} >
+                    {children}
                 </div>
             </div>
         );
