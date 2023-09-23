@@ -18,23 +18,25 @@ const PostedJobs = () => {
     return <Loading />;
   }
   else {
-    return (
+    return <div>
       <div>
-        <h1 className='text-xl py-5 text-center'>Posted jobs</h1>
-        <div className='grid grid-cols-2 gap-5 pb-5'>
-          {
-            data?.data?.length ?
-              JobDatas?.map((job: JobDataTypes, index: React.Key) => (
-                <JobCard key={index} jobData={job} />
-              ))
-              :
-              <div>
-                <h1> You have not Posted any job yet. </h1>
-              </div>
-          }
-        </div>
+        <h1 className='font-bold text-4xl pb-5 text-center dark:text-slate-300'>Posted jobs</h1>
       </div>
-    );
+      <div
+        className='grid gap-4'
+      >
+        {
+          data?.data?.length ?
+            JobDatas?.map((job: JobDataTypes, index: React.Key) => (
+              <JobCard key={index} jobData={job} />
+            ))
+            :
+            <div>
+              <h1> You have not Posted any job yet. </h1>
+            </div>
+        }
+      </div>
+    </div>
   };
 };
 

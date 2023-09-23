@@ -130,7 +130,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
         </div>
         <div className='space-y-5'>
           <div className='flex justify-between items-center mt-5'>
-            <h1 className='text-primary text-md font-medium'>
+            <h1 className='text-md font-medium'>
               {email === reduxStore.auth.user?.email ?
                 <span>
                   Job Status: &nbsp;
@@ -143,14 +143,14 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
                 </span>
                 :
                 <span>
-                  Job Status: &nbsp; <span className="font-bold text-lg border rounded-md bg-primary/10 p-5 text-primary px-2 py-1">{isOpen ? "Open" : "Closed"}</span>
+                  Job Status: &nbsp; <span className="border border-black px-2 py-1 rounded-md ">{isOpen ? "Open" : "Closed"}</span>
                 </span>
               }
             </h1>
             {
               isOpen &&
               <button
-                className={`border border-black px-2 py-1 rounded-md  ${isAppliedAlready ? "" : "hover:px-4 hover:border-primary text-gray-600 hover:text-white  hover:bg-primary"} transition-all`}
+                className={`border border-black px-2 py-1 rounded-md  ${isAppliedAlready ? "" : "hover:px-4 hover:border-primary hover:text-white  hover:bg-primary"} transition-all`}
                 onClick={handleApply}
                 disabled={isAppliedAlready ? true : false}
               >

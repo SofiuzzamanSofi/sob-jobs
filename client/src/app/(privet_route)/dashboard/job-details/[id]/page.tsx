@@ -12,7 +12,10 @@ interface pageProps {
 
 const Page: FC<pageProps> = ({ params }) => {
 
-    const { data, isLoading, isError } = useJobByIdQuery(params.id, { pollingInterval: 2000 });
+    const { data, isLoading, isError } = useJobByIdQuery(params.id, {
+        //  pollingInterval: 2000 
+    }
+    );
 
     return <div>
         {
