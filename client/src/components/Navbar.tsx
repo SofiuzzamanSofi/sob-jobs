@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useState, useRef } from "react";
 import logo from "../assets/sob-jobs-logo.png";
+import toggleIcon from "../assets/toggle-icon.svg";
 import userIcon from "../assets/user.svg";
 import { BiSearchAlt } from "react-icons/bi";
 import { usePathname } from "next/navigation";
@@ -211,9 +212,7 @@ const Navbar = () => {
                                 className="p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-black shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:focus:ring-offset-gray-800"
                                 onClick={toggleMenu}
                             >
-                                <svg className="hs-overlay-open:hidden w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                    <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                                </svg>
+                                <Image className="hs-overlay-open:hidden w-4 h-4 dark:text-white" src={toggleIcon} alt='toggle-icon' />
                             </button>
                         </div>
                     </div>
@@ -222,14 +221,15 @@ const Navbar = () => {
                     <div
                         onMouseUpCapture={handleCloseProfileAndMenu}
                         ref={profileRef}
-                        className={`py-4 px-8 rounded-lg shadow-md bg-white dark:bg-gray-800 absolute top-[4.75rem] md:top-[5.25rem] right-0 z-30 ${isProfileOpen ? "translate-x-0" : "translate-x-[5000px]"} duration-1000 transition-all border`}
+                        className={`py-4 px-8 rounded-lg shadow-md bg-white dark:bg-gray-800 absolute
+                        top-[3.5rem] md:top-[5.25rem] right-[0.0625rem] z-30 ${isProfileOpen ? "translate-x-0" : "translate-x-[5000px]"} duration-1000 transition-all border`}
                     >
-                        <Link href="" className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 cursor-default">
+                        <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 cursor-auto">
                             <div>
                                 <p >{reduxStore.auth.user?.firstName ? `${reduxStore.auth.user?.firstName} ${reduxStore.auth.user?.lastName}` : "No Name found, Update your name pls"}</p>
                                 <p >{reduxStore.auth.user?.email}</p>
                             </div>
-                        </ Link>
+                        </ div>
                         <Link href="/dashboard" className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                             Dashboard
                         </ Link>
@@ -257,7 +257,7 @@ const Navbar = () => {
                                     <Image
                                         src={logo}
                                         alt=''
-                                        className='h-[2.904rem] md:h-[4.248rem] w-[10.164rem] sm:w-[14.868rem] rounded-md'
+                                        className='h-[2.904rem] sm:h-[4.248rem] w-[10.164rem] sm:w-[14.868rem] rounded-md'
                                     />
                                 </Link>
                                 <button
