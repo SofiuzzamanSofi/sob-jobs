@@ -21,19 +21,19 @@ const Jobs: FC<jobsProps> = ({ }) => {
     else {
         return <div>
             <div>
-                <h1 className='text-xl py-5 text-center'>All jobs</h1>
+                <h1 className='font-bold text-4xl py-5 text-center'>All Jobs</h1>
             </div>
             <div
-                className='grid md:grid-cols-2 gap-4'
+                className='grid gap-4 lg:pl-8'
             >
                 {
                     data?.data?.length ?
                         JobDatas.map((jobData: JobDataTypes) => (
-                            <JobCard key={jobData._id} jobData={jobData} />
+                            <JobCard jobData={jobData} />
                         ))
                         :
                         <div>
-                            <h1> No jobs yet on this website.</h1>
+                            <h1> No Jobs Yet On This Website.</h1>
                         </div>
                 }
             </div>

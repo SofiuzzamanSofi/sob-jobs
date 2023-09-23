@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useState, useRef } from "react";
 import logo from "../assets/sob-jobs-logo.png";
-import avatar from "../assets/avatar.svg";
+import userIcon from "../assets/user.svg";
 import { BiSearchAlt } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import { auth } from "../firebase/firebase.config";
@@ -199,7 +199,7 @@ const Navbar = () => {
                                         href=""
                                         onClick={toggleProfile}
                                     >
-                                        <Image className="bg-white rounded-full p-1 h-10 w-10 border" src={avatar} alt='' />
+                                        <Image className="bg-white rounded-full p-1 h-10 w-10 border" src={userIcon} alt='' />
                                     </Link>
                                 </div>
                             </>

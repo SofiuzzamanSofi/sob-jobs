@@ -41,62 +41,64 @@ const Page: FC<pageProps> = ({ }) => {
         return <Loading />;
     }
     else {
-        return <div>
+        return (
             <div>
-                <div
-                    className='bg-[#FFFAF4] p-5'
-                >
-                    <div>
-                        <h1 className='text-2xl pt-2 text-center'>Search Jobs</h1>
-                    </div>
-                    <form
-                        className='rounded-lg grid place-items-center border px-5'
-                        onSubmit={handleFromSubmit}
+                <div>
+                    <div
+                        className='p-5'
                     >
-                        <div className='gap-2 grid lg:flex lg:justify-between justify-center w-full border'>
-
-                            <div className='flex flex-col items-start border'>
-                                <label htmlFor='jobTitle' className='ml-5'>
-                                    Job Title
-                                </label>
-                                <input
-                                    className="p-2 border rounded-md"
-                                    type='text'
-                                    id='jobTitle'
-                                    value={titleText}
-                                    onChange={(e) => setTitleText(e.target.value)}
-
-                                />
-                            </div>
-                            <div className='flex flex-col items-start border'>
-                                <label htmlFor='companyName' className='ml-5'>
-                                    Company Name
-                                </label>
-                                <input
-                                    className="p-2 border rounded-md"
-                                    type='text'
-                                    id='companyName'
-                                    value={companyText}
-                                    onChange={(e) => setCompanyText(e.target.value)}
-                                />
-                            </div>
-                            <div className='flex flex-col items-start border'>
-                                <label htmlFor='location' className='ml-5'>
-                                    Location
-                                </label>
-                                <input
-                                    className="p-2 border rounded-md"
-                                    type='text'
-                                    id='location'
-                                    value={locationText}
-                                    onChange={(e) => setLocationText(e.target.value)}
-                                />
-                            </div>
+                        <div>
+                            <h1 className='font-bold text-4xl py-5 text-center'>Search Jobs</h1>
+                            {/* <h1 className='text-2xl pt-2 text-center'></h1> */}
                         </div>
-                        <div className="flex w-full justify-center lg:justify-end  items-center border pt-2 pb-1 gap-4 ">
-                            <div className='flex gap-2  max-w-xs'>
-                                <div>
-                                    {/* <input
+                        <form
+                            className='rounded-lg grid place-items-center border px-5'
+                            onSubmit={handleFromSubmit}
+                        >
+                            <div className='gap-2 grid lg:flex lg:justify-between justify-center w-full border'>
+
+                                <div className='flex flex-col items-start border'>
+                                    <label htmlFor='jobTitle' className='ml-5'>
+                                        Job Title
+                                    </label>
+                                    <input
+                                        className="p-2 border rounded-md"
+                                        type='text'
+                                        id='jobTitle'
+                                        value={titleText}
+                                        onChange={(e) => setTitleText(e.target.value)}
+
+                                    />
+                                </div>
+                                <div className='flex flex-col items-start border'>
+                                    <label htmlFor='companyName' className='ml-5'>
+                                        Company Name
+                                    </label>
+                                    <input
+                                        className="p-2 border rounded-md"
+                                        type='text'
+                                        id='companyName'
+                                        value={companyText}
+                                        onChange={(e) => setCompanyText(e.target.value)}
+                                    />
+                                </div>
+                                <div className='flex flex-col items-start border'>
+                                    <label htmlFor='location' className='ml-5'>
+                                        Location
+                                    </label>
+                                    <input
+                                        className="p-2 border rounded-md"
+                                        type='text'
+                                        id='location'
+                                        value={locationText}
+                                        onChange={(e) => setLocationText(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex w-full justify-center lg:justify-end  items-center border pt-2 pb-1 gap-4 ">
+                                <div className='flex gap-2  max-w-xs'>
+                                    <div>
+                                        {/* <input
                                         className='m-1'
                                         type='checkbox'
                                         id='newer'
@@ -105,18 +107,18 @@ const Page: FC<pageProps> = ({ }) => {
                                     />
                                     <label htmlFor='newer'>New Jobs</label>
                                     <label htmlFor="onldNew"></label> */}
-                                    <select
-                                        name="onldNew" id="onldNew" className='border'
-                                        value={newOrOld}
-                                        onChange={(e) => setnewOrOld(e.target.value)}
-                                    >
-                                        <option disabled value="">Chose One</option>
-                                        <option value="new">New First</option>
-                                        <option value="old">Old First</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    {/* <input
+                                        <select
+                                            name="onldNew" id="onldNew" className='border'
+                                            value={newOrOld}
+                                            onChange={(e) => setnewOrOld(e.target.value)}
+                                        >
+                                            <option disabled value="">Chose One</option>
+                                            <option value="new">New First</option>
+                                            <option value="old">Old First</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        {/* <input
                                         className='m-1'
                                         type='checkbox'
                                         id='older'
@@ -124,45 +126,46 @@ const Page: FC<pageProps> = ({ }) => {
                                         onClick={() => setnewOrOld((prv) => !prv)}
                                     />
                                     <label htmlFor='older'>Old Jobs</label> */}
-                                    <select
-                                        name="openClosed" id="openClosed" className='border'
-                                        value={isOpenClosed}
-                                        onChange={(e) => setIsOpenClosed(e.target.value)}
-                                    >
-                                        <option disabled value="">Chose One</option>
-                                        <option value="all">All Jobs</option>
-                                        <option value="open">Opene Jobs</option>
-                                        <option value="closed">Closed Jobs</option>
-                                    </select>
+                                        <select
+                                            name="openClosed" id="openClosed" className='border'
+                                            value={isOpenClosed}
+                                            onChange={(e) => setIsOpenClosed(e.target.value)}
+                                        >
+                                            <option disabled value="">Chose One</option>
+                                            <option value="all">All Jobs</option>
+                                            <option value="open">Opene Jobs</option>
+                                            <option value="closed">Closed Jobs</option>
+                                        </select>
+                                    </div>
                                 </div>
+                                <button
+                                    type='submit'
+                                    className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
+                                >
+                                    Submit
+                                </button>
                             </div>
-                            <button
-                                type='submit'
-                                className='border border-black px-2 py-1 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary hover:px-4 transition-all '
-                            >
-                                Submit
-                            </button>
-                        </div>
-                    </form>
+                        </form>
 
+                    </div>
+                </div>
+                <div
+                    className='grid md:grid-cols-2 gap-4'
+                >
+                    {
+                        data?.data?.length &&
+                            searchJobsData?.data ?
+                            searchJobsData?.data.map((jobData: JobDataTypes) => (
+                                <JobCard key={jobData._id} jobData={jobData} />
+                            ))
+                            :
+                            <div>
+                                <h1>NO Maches Or Pls Wait Or Error.</h1>
+                            </div>
+                    }
                 </div>
             </div>
-            <div
-                className='grid md:grid-cols-2 gap-4'
-            >
-                {
-                    data?.data?.length &&
-                        searchJobsData?.data ?
-                        searchJobsData?.data.map((jobData: JobDataTypes) => (
-                            <JobCard key={jobData._id} jobData={jobData} />
-                        ))
-                        :
-                        <div>
-                            <h1>NO Maches Or Pls Wait Or Error.</h1>
-                        </div>
-                }
-            </div>
-        </div>
+        )
     };
 };
 
