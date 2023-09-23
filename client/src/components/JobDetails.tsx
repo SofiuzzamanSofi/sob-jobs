@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import meeting from "../assets/meeting.jpg";
+import meetingImage from "../assets/meeting.jpg";
 import { BsArrowRightShort, BsArrowReturnRight, BsPeople } from "react-icons/bs";
 import { JobDataTypes } from "../interfaceTypes/interfaceTypes";
 import Image from "next/image";
@@ -126,7 +126,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
     <div className='pt-14 grid grid-cols-12 gap-5'>
       <div className='col-span-9 mb-10'>
         <div className='h-80 rounded-xl overflow-hidden'>
-          <Image className='h-full w-full object-cover' src={meeting} alt='' />
+          <Image className='h-full w-full object-cover' src={meetingImage} alt='' />
         </div>
         <div className='space-y-5'>
           <div className='flex justify-between items-center mt-5'>

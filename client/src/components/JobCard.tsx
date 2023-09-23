@@ -21,10 +21,10 @@ const JobCard: React.FC<JobCardProps> = ({ jobData }) => {
     >
       <div className='flex justify-between'>
         <div>
-          <p className='text-xl'>{position}</p>
+          <p className='text-xl hover:underline transition-all'>{position}</p>
           <small >
             {" "}
-            <span className='font-semibold cursor-pointer hover:underline transition-all'>
+            <span className='font-semibold'>
               {companyName}
             </span>
           </small>

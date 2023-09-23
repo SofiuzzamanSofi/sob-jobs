@@ -49,7 +49,6 @@ const Page: FC<pageProps> = ({ }) => {
                     >
                         <div>
                             <h1 className='font-bold text-4xl py-5 text-center'>Search Jobs</h1>
-                            {/* <h1 className='text-2xl pt-2 text-center'></h1> */}
                         </div>
                         <form
                             className='rounded-lg grid place-items-center border px-5'
@@ -146,11 +145,10 @@ const Page: FC<pageProps> = ({ }) => {
                                 </button>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <div
-                    className='grid md:grid-cols-2 gap-4'
+                    className='grid gap-4 lg:pl-8'
                 >
                     {
                         data?.data?.length &&
