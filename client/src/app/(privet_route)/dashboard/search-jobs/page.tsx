@@ -148,7 +148,7 @@ const Page: FC<pageProps> = ({ }) => {
                     </div>
                 </div>
                 <div
-                    className='grid gap-4 lg:pl-8'
+                    className='grid gap-4'
                 >
                     {
                         data?.data?.length &&

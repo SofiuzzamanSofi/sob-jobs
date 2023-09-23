@@ -24,7 +24,7 @@ const Jobs: FC<jobsProps> = ({ }) => {
                 <h1 className='font-bold text-4xl py-5 text-center'>All Jobs</h1>
             </div>
             <div
-                className='grid gap-4 lg:pl-8'
+                className='grid gap-4'
             >
                 {
                     data?.data?.length ?

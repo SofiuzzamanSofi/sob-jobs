@@ -42,7 +42,7 @@ export default function PrivetLayout({ children }: Privetlayout) {
                         :
                         ""
                 }
-                <div className={dashboardComponents ? "md:flex-grow" : ""} >
+                <div className={dashboardComponents ? "md:flex-grow lg:pl-8" : ""} >
                     {children}
                 </div>
             </div>
