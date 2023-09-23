@@ -123,8 +123,8 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
   // console.log("jobData", jobData);
 
   return (
-    <div className='pt-14 grid grid-cols-12 gap-5'>
-      <div className='col-span-9 mb-10'>
+    <div className='py-5 grid grid-cols-12 gap-5'>
+      <div className='col-span-9'>
         <div className='h-80 rounded-md overflow-hidden'>
           <Image className='h-full w-full object-cover' src={meetingImage} alt='' />
         </div>
@@ -249,18 +249,19 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
             <h1 className='text-xl font-semibold text-primary dark:text-darkPrimary mb-5'>
               General Q&A
             </h1>
-            <div className='text-primary dark:text-darkPrimary grid gap-3'>
+            <div className='grid gap-3'>
               {
                 questionAns &&
                 questionAns?.map((question, index) => (
-                  <div key={index}>
+                  <div key={index} className="hover:text-black dark:hover:text-white">
                     <small>{question?.userEmail}</small>
                     <p className='text-lg font-medium'>{question?.question?.questionString}</p>
                     {
                       question?.ans &&
                       question?.ans?.map((item, index) => (
                         <p key={index} className='flex items-center gap-2 relative left-5'>
-                          <BsArrowReturnRight /> {item?.ansString}
+                          <span className="text-primary dark:text-darkPrimary "><BsArrowReturnRight /></span>
+                          <span>{item?.ansString}</span>
                         </p>
                       ))
                     }
@@ -275,11 +276,11 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
                             placeholder='Reply'
                             type='text'
                             name="ans"
-                            className="w-full p-2 border-b-2 focus:outline-none focus:border-b-black"
+                            className='p-2 w-full border border-gray-200 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-slate-400'
                           />
                           <button
-                            className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary dark:text-darkPrimary hover:text-white'
-                            type='submit'
+                            className='shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all'
+                            type="submit"
                           >
                             <BsArrowRightShort size={30} />
                           </button>
@@ -301,11 +302,12 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
                     placeholder='Ask a question...'
                     type='text'
                     id='question'
-                    className='w-full border rounded-md p-2'
+                    className='p-2 w-full border border-gray-200 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-slate-400'
                     {...register("question")}
+                    required
                   />
                   <button
-                    className='shrink-0 h-14 w-14 bg-primary/10 border border-primary hover:bg-primary rounded-full transition-all  grid place-items-center text-primary dark:text-darkPrimary hover:text-white'
+                    className='shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all'
                     type="submit"
                   >
                     <BsArrowRightShort size={30} />

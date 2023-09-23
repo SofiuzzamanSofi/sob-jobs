@@ -37,7 +37,7 @@ const Page: FC<pageProps> = ({ }) => {
         jobBySearchData(searchData);
     }, [titleText, companyText, locationText, newOrOld, isOpenClosed, jobBySearchData]);
 
-    const searchBarInputClass = "p-2 w-full border border-gray-200  dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-slate-400"
+    const searchBarInputClass = "p-2 w-full border border-gray-200 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-slate-400"
 
     if (isLoading) {
         return <Loading />;
