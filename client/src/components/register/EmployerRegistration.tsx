@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
-import { FaChevronLeft } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import { RegisterTypes } from "@/interfaceTypes/interfaceTypes";
+import backIcon from "@/assets/back.svg";
 import Image from "next/image";
 import employerImage from "@/assets/employer.svg";
 
@@ -85,11 +85,7 @@ const EmployerRegistration = () => {
             event.stopPropagation(); // Stop event propagation
           }}
         >
-
-          <svg fill="#857e7e" className="w-2.5 h-auto text-black dark:text-white" height="17" width="16" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 476.213 476.213"
-          >
-            <polygon points="476.213,223.107 57.427,223.107 151.82,128.713 130.607,107.5 0,238.106 130.607,368.714 151.82,347.5 	57.427,253.107 476.213,253.107 " />
-          </svg>
+          <Image className="" src={backIcon} alt='back-icon' />
           back
         </button>
 
@@ -189,7 +185,6 @@ const EmployerRegistration = () => {
                   </div>
                 </div>
               </div>
-
 
               <hr className='w-full mt-2 bg-black' />
               <div className='flex flex-col w-full max-w-xs'>
@@ -296,6 +291,5 @@ const EmployerRegistration = () => {
     </div>
   )
 };
-
 
 export default EmployerRegistration;

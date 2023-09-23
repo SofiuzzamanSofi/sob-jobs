@@ -43,14 +43,6 @@ const Sidebar = () => {
                         <FaChevronLeft />
                         <h1>Back</h1>
                     </button>
-                    {/* <h1 className='text-xl'>
-                        <Link
-                            href='/dashboard'
-                            className='hover:bg-primary hover:text-white bg-primary/10 transition-all w-full block py-2 px-3 rounded-md'
-                        >
-                            Dashboard
-                        </Link>
-                    </h1> */}
                     <h6>{reduxStore.auth.user?.role}</h6>
                 </div>
                 <li>

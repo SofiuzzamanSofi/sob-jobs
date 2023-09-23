@@ -7,7 +7,6 @@ import Loading from '@/components/Loading';
 import { useRouter } from 'next/navigation';
 import Sidebar from '@/components/dashboard/Sidebar';
 
-
 interface Privetlayout {
     children: ReactNode;
 }

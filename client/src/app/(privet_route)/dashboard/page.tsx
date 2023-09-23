@@ -27,7 +27,7 @@ const Dashboard = ({ }) => {
                         <h1 className="text-lg text-center py-1">You are a: {reduxStore?.auth?.user?.role}</h1>
                     </div>
                     <div
-                        className="pt-10"
+                        className="pt-8"
                     >
                         <h6 className='text-center'>
                             More Feature is comming soon...
