@@ -27,19 +27,32 @@ const Page: FC<PageProps> = ({ }) => {
             {
                 data?.data &&
                 <div>
-                    <h1>
+                    <h1> FullName: &nbsp;
+                        {
+                            data?.data?.firstName
+                        }
+                        {
+                            data?.data?.lastName
+                        }
+                    </h1>
+                    <h1> Email: &nbsp;
                         {
                             data?.data?.email
                         }
                     </h1>
-                    <h1>
-                        {
-                            data?.data?.address
-                        }
-                    </h1>
-                    <h1>
+                    <h1> Role: &nbsp;
                         {
                             data?.data?.role
+                        }
+                    </h1>
+                    <h1> _id: &nbsp;
+                        {
+                            data?.data?._id
+                        }
+                    </h1>
+                    <h1> Address: &nbsp;
+                        {
+                            data?.data?.address
                         }
                     </h1>
                     <Link

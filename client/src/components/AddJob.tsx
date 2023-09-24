@@ -262,10 +262,12 @@ const AddJob = () => {
         </div>
 
         <div className='flex justify-end items-center w-full mt-3'>
-          <input
+          <button
             type="submit"
             className={"cursor-pointer py-3 px-4 rounded-md border border-primary dark:border-darkPrimary hover:bg-primary dark:hover:bg-darkPrimary text-primary  dark:text-darkPrimary  hover:text-white font-bold"}
-          />
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>

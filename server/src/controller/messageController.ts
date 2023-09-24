@@ -65,7 +65,7 @@ export const getMessageByIdController = async (
         );
         // const messageResponse1Employee = await MessageModel.findOne({
         //     chatId: id
-        // });
+        // }); 
         if (messageResponse1Employee) {
             return res.status(200).json({
                 success: true,
@@ -90,7 +90,8 @@ export const getMessageByIdController = async (
         };
 
         // if no message is found || FirstTime message
-        // get user by id
+        // get user by id 650f62765b9bfda2808a667c 64e0c8fabf719a5e82303845 64e0c8fabf719a5e82303845 user@gmail
+        console.log('id1, id2, id:', id1, id2, id);
         const user1 = await getUserByIdService(next, id1);
         const user2 = await getUserByIdService(next, id2);
         // console.log('user1, user2:', user1, user2);

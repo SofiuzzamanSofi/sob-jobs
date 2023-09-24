@@ -14,7 +14,9 @@ interface PageProps {
 const Page: FC<PageProps> = ({ }) => {
 
     const reduxStore = useSelector((state: RootState) => state);
-    const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetAllMessageByIdQuery(reduxStore.auth.user?._id, { pollingInterval: 5000 });
+    const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetAllMessageByIdQuery(reduxStore.auth.user?._id, {
+        // pollingInterval: 5000
+    });
 
     const otheParticipentNameEmail = (participants: Participant[]) => {
         return participants.filter((p) => p.userEmail !== reduxStore.auth.user?.email);

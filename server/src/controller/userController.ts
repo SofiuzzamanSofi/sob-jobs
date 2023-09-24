@@ -10,7 +10,7 @@ export const getMe = async (
     next: express.NextFunction,
 ) => {
     try {
-        //  console.log('get-me-user:')
+        console.log('get-me-user:')
         const email = req.user?.email; // Access the user object from req
         const user = await getUserByEmail(next, email);
         if (!user.email) {
@@ -166,7 +166,7 @@ export const signInWithSocial = async (
 ) => {
     try {
         const handleUserData = req.body;
-        //  console.log("hit- signInWithSocial:");
+        console.log("hit- signInWithSocial:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,

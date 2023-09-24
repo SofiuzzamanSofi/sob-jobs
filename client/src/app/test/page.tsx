@@ -8,32 +8,15 @@ interface PageProps {
 
 const Page: FC<PageProps> = ({ }) => {
     return (
-        <div>
 
+        <div>
             <button type="button" className="text-gray-500 hover:text-gray-600" data-hs-overlay="#docs-sidebar" aria-controls="docs-sidebar" aria-label="Toggle navigation">
                 <span className="sr-only">Toggle Navigation</span>
                 <svg className="w-5 h-5" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                 </svg>
-                <h1>helllllllllllfffffffft trh dfh dfddddd        at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:77:9)
-                    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:104:11)
-                    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:396:13)
-                    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:166:11)
-                    at RSCComponent               fsfjslfsfs fsaf</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
-                <h1>helllllllllll</h1>
+                sfsafh
+                <h1>hhhhhhhhhh</h1>
             </button>
 
 
@@ -70,72 +53,52 @@ const Page: FC<PageProps> = ({ }) => {
                             </a>
 
                             <div id="users-accordion" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
-                                <ul className="hs-accordion-group pl-3 pt-2" data-hs-accordion-always-open>
+                                <ul className="hs-accordion-group pl-3 pt-2 space-y-3" data-hs-accordion-always-open>
                                     <li className="hs-accordion" id="users-accordion-sub-1">
-                                        <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white" href="">
-                                            Sub Menu 1
+                                        <span className="py-2 px-2.5 text-sm text-slate-500">
+                                            Item 1
+                                        </span>
 
-                                            <svg className="hs-accordion-active:block ml-auto hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-                                            </svg>
-
-                                            <svg className="hs-accordion-active:hidden ml-auto block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-                                            </svg>
-                                        </a>
-
-                                        <div id="users-accordion-sub-1" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
-                                            <ul className="pt-2 pl-2">
-                                                <li>
-                                                    <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
-                                                        Link 1
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
-                                                        Link 2
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
-                                                        Link 3
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <ul className="pt-2 pl-2 space-y-2">
+                                            <li>
+                                                <a className="block py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
+                                                    Link 1
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a className="block py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
+                                                    Link 2
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a className="block py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
+                                                    Link 3
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li className="hs-accordion" id="users-accordion-sub-2">
-                                        <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white" href="">
-                                            Sub Menu 2
+                                    <li className="hs-accordion" id="users-accordion-sub-1">
+                                        <span className="py-2 px-2.5 text-sm text-slate-500">
+                                            Item 2
+                                        </span>
 
-                                            <svg className="hs-accordion-active:block ml-auto hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-                                            </svg>
-
-                                            <svg className="hs-accordion-active:hidden ml-auto block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-                                            </svg>
-                                        </a>
-
-                                        <div id="users-accordion-sub-2" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden pl-2">
-                                            <ul className="pt-2 pl-2">
-                                                <li>
-                                                    <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
-                                                        Link 1
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
-                                                        Link 2
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
-                                                        Link 3
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <ul className="pt-2 pl-2 space-y-2">
+                                            <li>
+                                                <a className="block py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
+                                                    Link 1
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a className="block py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
+                                                    Link 2
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a className="block py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300" href="">
+                                                    Link 3
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </div>
