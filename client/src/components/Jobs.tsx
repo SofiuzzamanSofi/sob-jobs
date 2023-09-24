@@ -19,25 +19,27 @@ const Jobs: FC<jobsProps> = ({ }) => {
         return <Loading />;
     }
     else {
-        return <div>
+        return (
             <div>
-                <h1 className='font-bold text-4xl pb-5 text-center dark:text-slate-300'>All Jobs</h1>
+                <div>
+                    <h1 className='font-bold text-4xl pb-5 text-center dark:text-slate-300'>All Jobs</h1>
+                </div>
+                <div
+                    className='grid gap-4'
+                >
+                    {
+                        data?.data?.length ?
+                            JobDatas.map((jobData: JobDataTypes) => (
+                                <JobCard key={jobData._id} jobData={jobData} />
+                            ))
+                            :
+                            <div>
+                                <h1> No Jobs Yet On This Website.</h1>
+                            </div>
+                    }
+                </div>
             </div>
-            <div
-                className='grid gap-4'
-            >
-                {
-                    data?.data?.length ?
-                        JobDatas.map((jobData: JobDataTypes) => (
-                            <JobCard key={jobData._id} jobData={jobData} />
-                        ))
-                        :
-                        <div>
-                            <h1> No Jobs Yet On This Website.</h1>
-                        </div>
-                }
-            </div>
-        </div>
+        )
     };
 };
 

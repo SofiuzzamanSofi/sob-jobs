@@ -279,7 +279,7 @@ const EmployerRegistration = () => {
                 <input
                   disabled={!term}
                   type="submit"
-                  className={`${!term ? "cursor-not-allowed" : "cursor-pointer"} border border-black py-3 px-4 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary transition-all `}
+                  className={`${!term ? "cursor-not-allowed" : "cursor-pointer"} border border-black py-3 px-4 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary transition-all`}
                 />
 
               </div>

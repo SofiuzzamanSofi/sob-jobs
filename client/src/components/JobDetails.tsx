@@ -122,6 +122,8 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
 
   // console.log("jobData", jobData);
 
+  const replyAnsButtonClass = "shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all"
+
   return (
     <div className='py-5 grid grid-cols-12 gap-5'>
       <div className='col-span-9'>
@@ -279,7 +281,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
                             className='p-2 w-full border border-gray-200 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-slate-400'
                           />
                           <button
-                            className='shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all'
+                            className={replyAnsButtonClass}
                             type="submit"
                           >
                             <BsArrowRightShort size={30} />
@@ -307,7 +309,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
                     required
                   />
                   <button
-                    className='shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all'
+                    className={replyAnsButtonClass}
                     type="submit"
                   >
                     <BsArrowRightShort size={30} />
@@ -320,7 +322,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
       </div>
       <div className='col-span-3'>
         <div
-          className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary border border-gray-200 dark:border-gray-700 rounded-md p-5  space-y-5 mb-2.5'
+          className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary border border-gray-200 dark:border-gray-700 rounded-md p-5 space-y-5 mb-2.5'
         >
           <div>
             <p>Experience</p>
@@ -344,7 +346,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
           </div>
         </div>
         <div
-          className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary border border-gray-200 dark:border-gray-700 rounded-md p-5  space-y-5 mt-2.5'
+          className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary border border-gray-200 dark:border-gray-700 rounded-md p-5 space-y-5 mt-2.5'
         >
           <div>
             <h1 className='font-semibold text-lg'>{companyName}</h1>
