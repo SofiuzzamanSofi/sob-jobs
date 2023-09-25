@@ -6,3 +6,28 @@ body {
     margin-top: 0;
     margin-bottom: 0;
 }
+
+/* Customize the scrollbar width */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Customize the scrollbar track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Change the background color of the track */
+}
+
+/* Customize the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Change the color of the thumb */
+    border-radius: 4px;
+    /* Add rounded corners to the thumb */
+}
+
+/* When hovering over the scrollbar */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Change the thumb color on hover */
+}

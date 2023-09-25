@@ -72,6 +72,11 @@ const Page: FC<PageProps> = ({ params, }) => {
     // other user not seen other chat 
     const matchUser = messageDetailsData?.data.participants.filter((userInfo) => userInfo.userEmail === reduxStore.auth.user?.email && userInfo.userId === reduxStore.auth.user?._id)
 
+    const timeShow = (data: string | number | Date) => {
+        const date = new Date(data)
+        return date.toLocaleString()
+    }
+
     // className 
     const imogiButtonClass = "p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
 
@@ -101,9 +106,11 @@ const Page: FC<PageProps> = ({ params, }) => {
         const participantsOthers = messageDetailsData.data.participants.filter((p) => p.userEmail !== reduxStore.auth.user?.email);
 
         return (
-            <div className='md:py-5'>
-                <div className="flex justify-between px-3 py-2 lg:p-5 rounded-md bg-gray-50 dark:bg-gray-700">
-                    <div className="flex  gap-2">
+            <div className='md:pt-5 flex flex-col h-[calc(100vh-5.4rem)] sm:h-[calc(100vh-6.75rem)] md:h-[calc(100vh-7.3rem)]'>
+
+                {/* // chat header  */}
+                <div className="flex justify-between px-3 py-2 lg:p-5 rounded-md bg-gray-200 dark:bg-gray-700">
+                    <div className="flex gap-2">
                         <div>
                             <Link
                                 className=""
@@ -126,26 +133,40 @@ const Page: FC<PageProps> = ({ params, }) => {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <h1>{participantsOthers[0]?.userName}</h1>
-                    <h1>{participantsOthers[0]?.userEmail}</h1>
-                </div>
-                <div
-                    className="border-2 border-black"
+
+                {/* // chat text  */}
+                <div className="flex-grow overflow-y-auto px-3 py-2 lg:p-5 my-2"
                 >
                     {
                         messageDetailsData.data.messages &&
-                        messageDetailsData.data.messages.map((message) => (
-                            <p
-                                key={message.messageId}
-                                className={`${message.senderEmail === reduxStore.auth.user?.email ? "text-right" : ""}`}
-                            >
-                                {message.content}
-                            </p>
+                        messageDetailsData.data.messages.map(({ messageId, senderEmail, content, timestamp }) => (
+                            <div
+                                key={messageId}
+                                className={`
+                                w-full flex
+                                ${senderEmail === reduxStore.auth.user?.email
+                                        ? 'items-end flex-col'
+                                        : 'items-start flex-col'
+                                    }
+                                `}                           >
+                                <div className={`
+                                mb-3 p-2 max-w-xs w-full border bg-gray-200 dark:bg-gray-700 text-black/90 dark:text-white/90 hover:text-black dark:hover:text-white 
+                                ${senderEmail === reduxStore.auth.user?.email
+                                        ? 'text-right rounded-xl rounded-tr-none'
+                                        : 'rounded-lg rounded-xl-none'
+                                    }
+                                `}>
+                                    <p className="text-xs text-black/50 dark:text-white/50">{timeShow(timestamp)}</p>
+                                    <p className="">{content}</p>
+                                </div>
+                            </div>
                         ))
                     }
+
                 </div>
-                <div className="flex items-center px-3 py-2 lg:p-5 rounded-md bg-gray-50 dark:bg-gray-700">
+
+                {/* // chat input box  */}
+                <div className="flex items-center px-3 py-2 lg:p-5 rounded-md bg-gray-200 dark:bg-gray-700">
                     <button type="button" className={imogiButtonClass}>
                         <Image className="" src={uploadImageIcon} alt='upload-image-icon' />
                         <span className="sr-only">Upload image</span>
@@ -158,6 +179,7 @@ const Page: FC<PageProps> = ({ params, }) => {
                     <textarea
                         id="chat" rows={1} className={textAreaClass} placeholder="Your message..."
                         ref={textAreaRef}
+                        autoFocus // Add this attribute
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                         onKeyDown={(e) => functionCallOnPressInter(e)}

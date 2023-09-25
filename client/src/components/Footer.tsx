@@ -13,10 +13,8 @@ interface FooterProps {
 const Footer: FC<FooterProps> = ({ }) => {
 
     const pathname = usePathname() ?? "";
-    const pathNameTotalArray = pathname.split("/")
-    const pathNameArray = pathNameTotalArray.filter((path) => path !== "")
 
-    if (pathNameArray.includes("sign-up") || pathNameArray.includes("sign-in")) {
+    if (pathname.includes("sign-up") || pathname.includes("sign-in") || pathname.includes("/dashboard/chat/")) {
         return null;
     }
     else {
