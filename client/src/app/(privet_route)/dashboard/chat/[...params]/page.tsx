@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import toast from 'react-hot-toast';
 import { RootState } from '@/redux/store';
 import { useSelector } from 'react-redux';
@@ -8,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import React, { FC, useRef, useState, useEffect } from 'react';
 import { useGetMessageByIdQuery, usePostMessageByIdMutation } from '@/redux/features/message/messageApi';
 import uploadImageIcon from "@/assets/upload-image.svg";
+import userIcon from "@/assets/user.svg";
+import threeDotsIcon from "@/assets/three-dots.svg";
 import chatImojiIcon from "@/assets/chat-imoji.svg";
 import { BsArrowRightShort } from "react-icons/bs";
 import Image from "next/image";
@@ -72,9 +75,9 @@ const Page: FC<PageProps> = ({ params, }) => {
     // className 
     const imogiButtonClass = "p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-200 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
 
-    const replyAnsButtonClass = "shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all"
+    const replyAnsButtonClass = "shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary dark:hover:bg-darkPrimary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all"
 
-    const textAreaClass = "lg:mx-4 p-2 w-full border border-gray-200 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-slate-400"
+    const textAreaClass = "mx-1 lg:mx-4 p-2 w-full border border-gray-200 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-slate-400"
 
 
     if (messageDetailsIsLoading) {
@@ -98,7 +101,31 @@ const Page: FC<PageProps> = ({ params, }) => {
         const participantsOthers = messageDetailsData.data.participants.filter((p) => p.userEmail !== reduxStore.auth.user?.email);
 
         return (
-            <div className='py-5'>
+            <div className='md:py-5'>
+                <div className="flex justify-between px-3 py-2 lg:p-5 rounded-md bg-gray-50 dark:bg-gray-700">
+                    <div className="flex  gap-2">
+                        <div>
+                            <Link
+                                className=""
+                                href=""
+                            >
+                                <Image className="bg-white rounded-full p-1 h-18 w-10" src={userIcon} alt='user-icon' />
+                            </Link>
+                        </div>
+                        <div className="text-sm">
+                            <h1>{participantsOthers[0]?.userName}</h1>
+                            <h1>{participantsOthers[0]?.userEmail}</h1>
+                        </div>
+                    </div>
+                    <div className="text-sm" >
+                        <div className="flex justify-end">
+                            <Image className="w-6 h-6 text-current text-gray-600 cursor-pointer" src={threeDotsIcon} alt='three-dots-icon' />
+                        </div>
+                        <div>
+                            <p >Last Seen</p>
+                        </div>
+                    </div>
+                </div>
                 <div>
                     <h1>{participantsOthers[0]?.userName}</h1>
                     <h1>{participantsOthers[0]?.userEmail}</h1>
@@ -118,47 +145,30 @@ const Page: FC<PageProps> = ({ params, }) => {
                         ))
                     }
                 </div>
-                {/* <div>
+                <div className="flex items-center px-3 py-2 lg:p-5 rounded-md bg-gray-50 dark:bg-gray-700">
+                    <button type="button" className={imogiButtonClass}>
+                        <Image className="" src={uploadImageIcon} alt='upload-image-icon' />
+                        <span className="sr-only">Upload image</span>
+                    </button>
+                    <button type="button" className={imogiButtonClass}>
+                        <Image className="" src={chatImojiIcon} alt='chat-imoji-icon' />
+                        <span className="sr-only">Add emoji</span>
+                    </button>
+                    <label htmlFor="chat" className="sr-only">Your message</label>
                     <textarea
-                        className='border p-2'
-                        placeholder='Write a message'
+                        id="chat" rows={1} className={textAreaClass} placeholder="Your message..."
                         ref={textAreaRef}
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                         onKeyDown={(e) => functionCallOnPressInter(e)}
-                    />
-                    <button onClick={submitMessage}>Submit</button>
-                </div> */}
-                <div>
-
-                    <div>
-                        <label htmlFor="chat" className="sr-only">Your message</label>
-                        <div className="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
-                            <button type="button" className={imogiButtonClass}>
-                                <Image className="" src={uploadImageIcon} alt='upload-image-icon' />
-                                <span className="sr-only">Upload image</span>
-                            </button>
-                            <button type="button" className={imogiButtonClass}>
-                                <Image className="" src={chatImojiIcon} alt='chat-imoji-icon' />
-                                <span className="sr-only">Add emoji</span>
-                            </button>
-                            <textarea
-                                id="chat" rows={1} className={textAreaClass} placeholder="Your message..."
-                                ref={textAreaRef}
-                                value={text}
-                                onChange={(e) => setText(e.target.value)}
-                                onKeyDown={(e) => functionCallOnPressInter(e)}
-                            ></textarea>
-                            <button
-                                className={replyAnsButtonClass}
-                                type="submit"
-                                onClick={submitMessage}
-                            >
-                                <BsArrowRightShort size={30} />
-                            </button>
-                        </div>
-                    </div>
-
+                    ></textarea>
+                    <button
+                        className={replyAnsButtonClass}
+                        type="submit"
+                        onClick={submitMessage}
+                    >
+                        <BsArrowRightShort size={30} />
+                    </button>
                 </div>
             </div>
         );

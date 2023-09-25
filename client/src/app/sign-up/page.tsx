@@ -83,6 +83,7 @@ const SignUp = () => {
                   type='email'
                   id='email'
                   {...register("email")}
+                  required
                 />
               </div>
 
@@ -95,6 +96,7 @@ const SignUp = () => {
                   type='password'
                   id='password'
                   {...register("password")}
+                  required
                 />
               </div>
               <div className='flex flex-col items-start'>
@@ -106,6 +108,7 @@ const SignUp = () => {
                   type='password'
                   id='confirm-password'
                   {...register("confirmPassword")}
+                  required
                 />
               </div>
               <div className='flex flex-col items-start text-xs text-red-700'>

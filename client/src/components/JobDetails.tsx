@@ -122,7 +122,7 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
 
   // console.log("jobData", jobData);
 
-  const replyAnsButtonClass = "shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all"
+  const replyAnsButtonClass = "shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary dark:hover:bg-darkPrimary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all"
 
   return (
     <div className='py-5 grid grid-cols-12 gap-5'>

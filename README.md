@@ -31,6 +31,17 @@ pnpm
 ```
 ## Getting Started
 
+Email & Passwork:
+
+```bash
+Employer:
+        email: employer11@gmail.com
+        password: 123456
+Candidate:
+        email:user@gmail.com
+        password: 123456
+```
+
 First, run the development server:
 
 ```bash

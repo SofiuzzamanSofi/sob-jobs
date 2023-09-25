@@ -157,7 +157,7 @@ const Navbar = () => {
                         >
                             <Image
                                 src={logo}
-                                alt=''
+                                alt='logo-image'
                                 className='h-[2.904rem] sm:h-[4.248rem] w-[10.164rem] sm:w-[14.868rem] rounded-md'
                             />
                         </Link>
@@ -200,7 +200,7 @@ const Navbar = () => {
                                         href=""
                                         onClick={toggleProfile}
                                     >
-                                        <Image className="bg-white rounded-full p-1 h-10 w-10 border" src={userIcon} alt='' />
+                                        <Image className="bg-white rounded-full p-1 h-10 w-10 border" src={userIcon} alt='user-icon' />
                                     </Link>
                                 </div>
                             </>
@@ -256,7 +256,7 @@ const Navbar = () => {
                                 <Link className="flex-none text-xl font-semibold dark:text-white" href="/" aria-label="Brand">
                                     <Image
                                         src={logo}
-                                        alt=''
+                                        alt='logo-image'
                                         className='h-[2.904rem] sm:h-[4.248rem] w-[10.164rem] sm:w-[14.868rem] rounded-md'
                                     />
                                 </Link>
