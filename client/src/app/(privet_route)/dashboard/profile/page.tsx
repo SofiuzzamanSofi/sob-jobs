@@ -26,7 +26,7 @@ const Page: FC<PageProps> = ({ }) => {
         <div>
             {
                 data?.data &&
-                <div>
+                <div className='py-5'>
                     <h1> FullName: &nbsp;
                         {
                             data?.data?.firstName
@@ -45,14 +45,24 @@ const Page: FC<PageProps> = ({ }) => {
                             data?.data?.role
                         }
                     </h1>
-                    <h1> _id: &nbsp;
+                    <h1> Gender: &nbsp;
+                        {
+                            data?.data?.gender
+                        }
+                    </h1>
+                    {/* <h1> _id: &nbsp;
                         {
                             data?.data?._id
                         }
-                    </h1>
+                    </h1> */}
                     <h1> Address: &nbsp;
                         {
                             data?.data?.address
+                        }
+                    </h1>
+                    <h1> Country: &nbsp;
+                        {
+                            data?.data?.country
                         }
                     </h1>
                     <Link
@@ -61,7 +71,7 @@ const Page: FC<PageProps> = ({ }) => {
                             query: { messageEmail: `${reduxStore.auth.user?.email}-${data?.data?.email}` },
                         }}
                     >
-                        <button>
+                        <button type="button" className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
                             Message
                         </button>
                     </Link>

@@ -1,11 +1,14 @@
 "use client";
 
+import { FC } from 'react'
+import Link from 'next/link';
+import Image from "next/image";
+import userIcon from "@/assets/user.svg";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import threeDotsIcon from "@/assets/three-dots.svg";
 import { Participant } from '@/interfaceTypes/interfaceTypes';
 import { useGetAllMessageByIdQuery } from '@/redux/features/message/messageApi';
-import { RootState } from '@/redux/store';
-import Link from 'next/link';
-import { FC } from 'react'
-import { useSelector } from 'react-redux';
 
 interface PageProps {
 
@@ -27,12 +30,10 @@ const Page: FC<PageProps> = ({ }) => {
     return (
         <div>
             <div>
-                <h1>
-                    message home page
-                </h1>
+                <h1 className='font-bold text-4xl pb-5 text-center dark:text-slate-300'>All Messages</h1>
             </div>
             <div
-                className='border-2 border-black'
+                className='grid gap-4'
             >
                 {
                     messageDetailsData?.data?.length ?
@@ -43,14 +44,36 @@ const Page: FC<PageProps> = ({ }) => {
                                     query: { messageEmail: `${reduxStore.auth.user?.email}-${otheParticipentNameEmail(message.participants)[0].userEmail}` },
                                 }}
                                 key={message._id}
-                                className="border-2 border-red-500 block"
+                                className="flex justify-between px-3 py-2 lg:p-5 rounded-md bg-gray-200 dark:bg-gray-700"
                             >
-                                <div
+                                {/* <div
                                 // className="border-2 border-red-500"
                                 >
                                     <h1>Name: {otheParticipentNameEmail(message.participants)[0].userName}</h1>
                                     <h1> Email: {otheParticipentNameEmail(message.participants)[0].userEmail}</h1>
                                     <p>Last Message.</p>
+                                </div> */}
+                                <div className="flex gap-2">
+                                    <div>
+                                        <Link
+                                            className=""
+                                            href={`/dashboard/profile?email=${otheParticipentNameEmail(message.participants)[0].userEmail}`}
+                                        >
+                                            <Image className="bg-white rounded-full p-1 h-18 w-10" src={userIcon} alt='user-icon' />
+                                        </Link>
+                                    </div>
+                                    <div className="text-sm">
+                                        <h1>{otheParticipentNameEmail(message.participants)[0].userName}</h1>
+                                        <h1>{otheParticipentNameEmail(message.participants)[0].userEmail}</h1>
+                                    </div>
+                                </div>
+                                <div className="text-sm" >
+                                    <div className="flex justify-end">
+                                        <Image className="w-6 h-6 text-current text-gray-600 cursor-pointer" src={threeDotsIcon} alt='three-dots-icon' />
+                                    </div>
+                                    <div>
+                                        <p >Last Seen</p>
+                                    </div>
                                 </div>
                             </Link>
                         ))

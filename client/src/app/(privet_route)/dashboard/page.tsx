@@ -12,6 +12,8 @@ const Dashboard = ({ }) => {
 
     const reduxStore = useSelector((state: RootState) => state);
     const router = useRouter();
+    const user = reduxStore.auth?.user;
+    // console.log('reduxStore.:', reduxStore.auth.user);
 
     if ((!reduxStore?.auth?.isLoading && reduxStore?.auth?.user?.email) && !reduxStore?.auth?.user?.role) {
         return router.push('/dashboard/register');
@@ -29,6 +31,39 @@ const Dashboard = ({ }) => {
                     <div
                         className="pt-8"
                     >
+                        <h1> FullName: &nbsp;
+                            {
+                                user?.firstName
+                            }
+                            {
+                                user?.lastName
+                            }
+                        </h1>
+                        <h1> Email: &nbsp;
+                            {
+                                user?.email
+                            }
+                        </h1>
+                        <h1> Role: &nbsp;
+                            {
+                                user?.role
+                            }
+                        </h1>
+                        <h1> Gender: &nbsp;
+                            {
+                                user?.gender
+                            }
+                        </h1>
+                        <h1> Address: &nbsp;
+                            {
+                                user?.address
+                            }
+                        </h1>
+                        <h1> Country: &nbsp;
+                            {
+                                user?.country
+                            }
+                        </h1>
                         <h6 className='text-center'>
                             More Feature is comming soon...
                         </h6>

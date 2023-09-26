@@ -26,12 +26,13 @@ const Page: FC<PageProps> = ({ params, }) => {
     const router = useRouter();
     const [text, setText] = useState<string>("");
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+    const chatContainerRef = useRef<HTMLDivElement | null>(null);
     const [id1, id2] = params?.params[0]?.split("-");
 
     const reduxStore = useSelector((state: RootState) => state);
     // get Message Detail By Id1 - Id2
     const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetMessageByIdQuery(`${id1}-${id2}`, {
-        // pollingInterval: 1000
+        // pollingInterval: 2000    // call every two second after
     });
     const [postMessage, { isLoading: postMessageIsLoading, isError: postMessageIsError, isSuccess: postMessageIsSuccess }] = usePostMessageByIdMutation();
 
@@ -69,6 +70,21 @@ const Page: FC<PageProps> = ({ params, }) => {
         }
     }, []);
 
+    useEffect(() => {
+        // Get the chat container element using the ref
+        const chatContainer = chatContainerRef.current!;
+
+        // Scroll to the bottom of the chat container
+        if (messageDetailsData?.data?.messages?.length) {
+            console.log("'use effect callde:',use effect callde");
+            chatContainer.scrollTo({
+                top: chatContainer.scrollHeight,
+                behavior: 'auto', // You can use 'smoth' instead of 'auto' for an animation scroll
+            });
+        }
+        // }, []);
+    }, [messageDetailsData?.data?.messages]);
+
     // other user not seen other chat 
     const matchUser = messageDetailsData?.data.participants.filter((userInfo) => userInfo.userEmail === reduxStore.auth.user?.email && userInfo.userId === reduxStore.auth.user?._id)
 
@@ -83,7 +99,6 @@ const Page: FC<PageProps> = ({ params, }) => {
     const replyAnsButtonClass = "shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary dark:hover:bg-darkPrimary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all"
 
     const textAreaClass = "mx-1 lg:mx-4 p-2 w-full border border-gray-200 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-slate-400"
-
 
     if (messageDetailsIsLoading) {
         return <Loading />
@@ -109,12 +124,14 @@ const Page: FC<PageProps> = ({ params, }) => {
             <div className='md:pt-5 flex flex-col h-[calc(100vh-5.4rem)] sm:h-[calc(100vh-6.75rem)] md:h-[calc(100vh-7.3rem)]'>
 
                 {/* // chat header  */}
-                <div className="flex justify-between px-3 py-2 lg:p-5 rounded-md bg-gray-200 dark:bg-gray-700">
+                <div
+                    className="flex justify-between px-3 py-2 lg:p-5 rounded-md bg-gray-200 dark:bg-gray-700"
+                >
                     <div className="flex gap-2">
                         <div>
                             <Link
                                 className=""
-                                href=""
+                                href={`/dashboard/profile?email=${participantsOthers[0]?.userEmail}`}
                             >
                                 <Image className="bg-white rounded-full p-1 h-18 w-10" src={userIcon} alt='user-icon' />
                             </Link>
@@ -135,7 +152,9 @@ const Page: FC<PageProps> = ({ params, }) => {
                 </div>
 
                 {/* // chat text  */}
-                <div className="flex-grow overflow-y-auto px-3 py-2 lg:p-5 my-2"
+                <div
+                    ref={chatContainerRef}
+                    className="flex-grow overflow-y-auto px-3 py-2 lg:p-5"
                 >
                     {
                         messageDetailsData.data.messages &&
@@ -150,10 +169,10 @@ const Page: FC<PageProps> = ({ params, }) => {
                                     }
                                 `}                           >
                                 <div className={`
-                                mb-3 p-2 max-w-xs w-full border bg-gray-200 dark:bg-gray-700 text-black/90 dark:text-white/90 hover:text-black dark:hover:text-white 
+                                mb-3 p-2 max-w-xs w-full bg-gray-200 dark:bg-gray-700 text-black/90 dark:text-white/90 hover:text-black dark:hover:text-white 
                                 ${senderEmail === reduxStore.auth.user?.email
                                         ? 'text-right rounded-xl rounded-tr-none'
-                                        : 'rounded-lg rounded-xl-none'
+                                        : 'rounded-xl rounded-tl-none'
                                     }
                                 `}>
                                     <p className="text-xs text-black/50 dark:text-white/50">{timeShow(timestamp)}</p>

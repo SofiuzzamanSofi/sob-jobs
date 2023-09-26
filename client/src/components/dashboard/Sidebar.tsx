@@ -140,6 +140,12 @@ const Sidebar = () => {
 
 
                         <li className="cursor-not-allowed">
+                            <div className={linkClassNameWithCurrent("/profile")}>
+                                <Image className="" src={avatarIcon} alt='avatar-icon' />
+                                Others Profile
+                            </div>
+                        </li>
+                        <li className="cursor-not-allowed">
                             <div className={linkClassNameWithCurrent("nothingfromthe worls")}>
                                 <Image className="" src={avatarIcon} alt='avatar-icon' />
                                 Upcoming...
