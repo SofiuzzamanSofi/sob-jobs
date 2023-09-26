@@ -117,7 +117,7 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
     return (
         <div ref={el} className='relative max-w-[85rem]'>
             <div className=' h-[calc(100vh-18rem)]  overflow-hidden rounded-xl z-0
-            translate-x-0 transition-all duration-500 transform fixed top-0 bottom-0 right-0 left-0
+            translate-x-0 transition-all duration-500 transform fixed top-0 bottom-0 right-0 left-0 border border-red-800
             '>
                 <Image
                     id='hero1'
