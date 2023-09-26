@@ -200,21 +200,20 @@ const Navbar = () => {
                                         href=""
                                         onClick={toggleProfile}
                                     >
-                                        <Image className="bg-white rounded-full p-1 h-10 w-10 border" src={userIcon} alt='user-icon' />
+                                        <Image className="bg-white rounded-full p-1 h-9 w-9 border" src={userIcon} alt='user-icon' />
                                     </Link>
+                                </div>
+                                {/* mobile menu toggle */}
+                                <div className="md:hidden flex flex-col items-center justify-center gap-x-0 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0">
+                                    <button
+                                        className="p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-black shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:focus:ring-offset-gray-800"
+                                        onClick={toggleMenu}
+                                    >
+                                        <Image className="hs-overlay-open:hidden w-4 h-4 dark:text-white" src={toggleIcon} alt='toggle-icon' />
+                                    </button>
                                 </div>
                             </>
                         )}
-
-                        {/* mobile menu toggle */}
-                        <div className="md:hidden flex flex-col items-center justify-center gap-x-0 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0">
-                            <button
-                                className="p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-black shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:focus:ring-offset-gray-800"
-                                onClick={toggleMenu}
-                            >
-                                <Image className="hs-overlay-open:hidden w-4 h-4 dark:text-white" src={toggleIcon} alt='toggle-icon' />
-                            </button>
-                        </div>
                     </div>
 
                     {/* avater show all time */}

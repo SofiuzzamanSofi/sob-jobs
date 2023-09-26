@@ -50,11 +50,6 @@ const Page: FC<PageProps> = ({ }) => {
                             data?.data?.gender
                         }
                     </h1>
-                    {/* <h1> _id: &nbsp;
-                        {
-                            data?.data?._id
-                        }
-                    </h1> */}
                     <h1> Address: &nbsp;
                         {
                             data?.data?.address
