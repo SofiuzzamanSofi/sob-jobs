@@ -25,7 +25,7 @@ export default function PrivetLayout({ children }: Privetlayout) {
         if (!isLoading && !user?.email) {
             return router.push("/sign-in")
         }
-    }, [user?.email])
+    }, [user?.email, isLoading])
 
     // if (isLoading) {
     //     return <Loading />

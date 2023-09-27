@@ -20,7 +20,7 @@ const Page: FC<PageProps> = ({ }) => {
         if (!isLoading && user?.role) {
             router.push("/dashboard");
         };
-    }, [user?.role]);
+    }, [user?.role, isLoading]);
 
     if (isLoading) {
         return <Loading />;

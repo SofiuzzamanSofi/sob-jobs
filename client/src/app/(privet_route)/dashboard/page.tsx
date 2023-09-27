@@ -20,7 +20,7 @@ const Dashboard = ({ }) => {
         if (!isLoading && !user?.role) {
             router.push("/dashboard/register");
         };
-    }, [user?.role]);
+    }, [user?.role, isLoading]);
 
     if (isLoading) {
         return <Loading />;
