@@ -35,7 +35,7 @@ Email & Passwork:
 
 ```bash
 Employer:
-        email: employer11@gmail.com
+        email: employer@gmail.com
         password: 123456
 Candidate:
         email:user@gmail.com

@@ -33,11 +33,12 @@ const SignIn = () => {
 
   const onSubmit = ({ email, password }: SignUpFormValueTypes) => {
     dispatch(signInUser({ email, password }));
-    // Rest of the form submission logic
+    console.log('clicked onsubmit:SignIN');
   };
 
   const handleGoogleLogin = () => {
     dispatch(googleLogin());
+    console.log('googlelogin:');
   };
 
   useEffect(() => {
@@ -58,6 +59,8 @@ const SignIn = () => {
     router.push("/");
     return null;
   };
+
+  console.log('pageClicked:');
 
   return (
     <div className='min-h-[calc(100vh-2rem)] flex items-center gap-4'>

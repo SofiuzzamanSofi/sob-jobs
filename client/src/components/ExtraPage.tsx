@@ -16,9 +16,10 @@ const ExtraPage: FC<ExtraPageProps> = ({ }) => {
 
     useEffect(() => {
         dispatch(getMe());
+        require("preline");
     }, [dispatch]);
 
-    useEffect(() => require("preline"), []);
+    // useEffect(() => require("preline"), []);
 
     return (
         <div

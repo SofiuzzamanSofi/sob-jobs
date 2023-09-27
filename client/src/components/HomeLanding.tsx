@@ -116,9 +116,9 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
 
     return (
         <div ref={el} className='relative max-w-[85rem]'>
-            <div className=' h-[calc(100vh-18rem)]  overflow-hidden rounded-xl z-0
-            translate-x-0 transition-all duration-500 transform fixed top-0 bottom-0 right-0 left-0 border border-red-800
-            '>
+            <div
+                className="h-[calc(100vh-18rem)] overflow-hidden z-0 translate-x-0 transition-all duration-500 transform fixed top-0 bottom-0 right-0 left-0"
+            >
                 <Image
                     id='hero1'
                     src={hero1}
@@ -160,7 +160,7 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                     </p>
                     <div
                         id='search-container'
-                        className='bg-white rounded-full p-3 flex w-full max-w-xl overflow-hidden mt-5  shadow-lg '
+                        className='bg-white rounded-full p-3 flex w-full max-w-xl overflow-hidden mt-5 shadow-lg '
                     >
                         <input
                             className='flex-auto text-lg p-2 border-none outline-none focus:ring-0'
@@ -196,7 +196,7 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                         </div>
                     </div>
                 </div>
-                <div className='flex flex-col justify-between '>
+                <div className='flex flex-col justify-between gap-4'>
                     <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[80%]'>
                         <p>
                             <span className='text-2xl font-bold'>319 </span>

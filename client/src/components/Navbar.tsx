@@ -161,7 +161,7 @@ const Navbar = () => {
                             <Image
                                 src={logo}
                                 alt='logo-image'
-                                className='h-[2.904rem] sm:h-[4.248rem] w-[10.164rem] sm:w-[14.868rem] rounded-md'
+                                className='h-[2.904rem] sm:h-[4.248rem] w-[10.164rem] sm:w-[14.05rem] rounded-md'
                             />
                         </Link>
                     </div>
