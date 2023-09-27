@@ -210,8 +210,8 @@ export const updateUserWithRole = async (
 ) => {
     try {
         const handleUserData = req.body;
-        // console.log("hit- updateUserWithRole:", handleUserData); 
-        //  console.log("hit- updateUserWithRole:");
+
+        console.log("hit- updateUserWithRole:");
 
         if (!handleUserData) {
             return res.status(400).json({

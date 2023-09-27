@@ -4,9 +4,13 @@ import { getMe } from "./authSlice";
 // import { cookies } from "next/dist/client/components/headers";
 // import Cookies from 'js-cookie';
 
+interface regResponseTypes {
+    success: boolean;
+}
+
 const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        register: builder.mutation<void, RegisterTypes>({
+        register: builder.mutation<regResponseTypes, RegisterTypes>({
             query: (data) => ({
                 method: "PUT",
                 url: "/user/registration",
@@ -15,9 +19,13 @@ const authApi = apiSlice.injectEndpoints({
             }),
             async onQueryStarted(data, { dispatch, queryFulfilled }) {
                 try {
-                    // const res = await queryFulfilled;
+                    const res = await queryFulfilled;
+                    if (res.data.success) {
+                        dispatch(getMe());
+                    }
+
+                    // console.log('res:', res);
                     // dispatch(getMe(data?.email || ""));
-                    dispatch(getMe());
 
                     // console.log('authApi-register.',);
                     // (res.meta?.response?.headers.getSetCookie.name)

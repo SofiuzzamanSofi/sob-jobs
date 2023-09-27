@@ -17,13 +17,10 @@ const Page: FC<PageProps> = ({ }) => {
     const { isLoading, user } = useSelector((state: RootState) => state.auth);
 
     useEffect(() => {
-        if (!user?.email) {
-            router.push("/sign-in");
-        };
-        if (user?.role) {
+        if (!isLoading && user?.role) {
             router.push("/dashboard");
         };
-    }, [isLoading, user?.role, router]);
+    }, [user?.role]);
 
     if (isLoading) {
         return <Loading />;

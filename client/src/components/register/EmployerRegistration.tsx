@@ -51,9 +51,9 @@ const EmployerRegistration = () => {
   }, []);
 
   const handleRegister: SubmitHandler<RegisterTypes> = (data) => {
-    const regData = { ...data, role: "Employer", email: user?.email || "", country: data.country || "Bangladesh" }
+    const regData = { ...data, role: "Employer", email: user?.email || "", country: data.country || "Afghanistan" }
     postUser(regData);
-    console.log("clicked handleRegister",);
+    // console.log("clicked handleRegister",);
   };
 
   useEffect(() => {
@@ -68,16 +68,12 @@ const EmployerRegistration = () => {
       toast.error("Error ", { id: "post-user-on-db" })
     };
 
-    console.log("clieck useEffect",);
-    if (!user?.email) {
-      router.push("/sign-in");
-    };
     if (user?.role) {
       router.push("/dashboard");
     };
-  }, [isLoading, isSuccess, isError, router]);
+  }, [isLoading, isSuccess, isError, user]);
 
-  console.log("clicked outside");
+  // console.log("clicked outside");
 
   return (
     <div className='min-h-[calc(100vh-20rem)] md:flex items-center gap-4'>
@@ -209,7 +205,7 @@ const EmployerRegistration = () => {
                 <select
                   className="p-2 w-full bg-[#FFFFFF] "
                   {...register("country")} id='country'
-                  defaultValue="Bangladesh"
+                // defaultValue="Bangladesh"
                 >
                   {countries
                     .sort((a, b) => a?.name?.common?.localeCompare(b?.name?.common))
@@ -217,6 +213,7 @@ const EmployerRegistration = () => {
                       <option
                         key={index}
                         value={name.common}
+                      // selected={name.common === "Bangladesh"}
                       >
                         {name.common}
                       </option>

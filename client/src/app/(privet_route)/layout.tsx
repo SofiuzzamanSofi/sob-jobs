@@ -27,23 +27,21 @@ export default function PrivetLayout({ children }: Privetlayout) {
         }
     }, [user?.email])
 
-    if (isLoading) {
-        return <Loading />
-    }
-    else {
-        // dashboard Layout 
-        return (
-            <div className={dashboardComponents ? "md:flex gap-4" : ""} >
-                {
-                    dashboardComponents ?
-                        <Sidebar />
-                        :
-                        ""
-                }
-                <div className={dashboardComponents ? "md:flex-grow lg:pl-8" : ""} >
-                    {children}
-                </div>
+    // if (isLoading) {
+    //     return <Loading />
+    // }
+
+    return (
+        <div className={dashboardComponents ? "md:flex gap-4" : ""} >
+            {
+                dashboardComponents ?
+                    <Sidebar />
+                    :
+                    ""
+            }
+            <div className={dashboardComponents ? "md:flex-grow lg:pl-8" : ""} >
+                {children}
             </div>
-        );
-    };
+        </div>
+    );
 };
