@@ -71,7 +71,7 @@ const EmployerRegistration = () => {
     if (user?.role) {
       router.push("/dashboard");
     };
-  }, [isLoading, isSuccess, isError, user]);
+  }, [isLoading, isSuccess, isError, user?.role]);
 
   // console.log("clicked outside");
 
@@ -83,7 +83,6 @@ const EmployerRegistration = () => {
 
         <button type="button" className="w-3/4 max-w-[16rem] mx-auto py-3 px-4 flex justify-center items-center gap-4 rounded-md  font-medium  shadow-sm align-middle  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:border-gray-700 hover-text- dark:focus:ring-offset-gray-800  cursor-pointer  border border-black  hover:border-primary bg-[#FFFAF4] text-gray-800  hover:text-white hover:bg-primary"
           onClick={(event) => {
-            console.log("click on back function")
             router.back()
             event.stopPropagation(); // Stop event propagation
           }}
@@ -98,197 +97,195 @@ const EmployerRegistration = () => {
 
       {/* functionality*/}
       <div className='w-full md:w-1/2 grid place-items-center'>
-        <div className='bg-[#FFFAF4] text-gray-800  grid place-items-center py-10 sm:p-10 w-full rounded-md border'>
+        <div className='bg-[#FFFAF4] text-gray-800 grid place-items-center py-10 sm:p-10 w-full rounded-md border'>
           <h1 className='mb-10 font-bold text-4xl'>Employer</h1>
 
-          <div className='space-y-3 p-4'>
-            <form
-              onSubmit={handleSubmit(handleRegister)}
-            >
+          <form
+            onSubmit={handleSubmit(handleRegister)}
+            className='space-y-3 p-4'
+          >
 
-              <div className='flex flex-col w-full max-w-xs'>
-                <label htmlFor='firstName' className='pt-2'>
-                  First Name
-                </label>
-                <input
-                  className="p-2"
-                  type='text'
-                  id='firstName'
-                  {...register("firstName")}
-                  required
-                />
-              </div>
-              <div className='flex flex-col w-full max-w-xs'>
-                <label htmlFor='lastName' className='pt-2'>
-                  Last Name
-                </label>
-                <input
-                  className="p-2" type='text' id='lastName'
-                  {...register("lastName")} required
-                />
-              </div>
-              <div className='flex flex-col w-full max-w-xs'>
-                <label htmlFor='email' className='pt-2'>
-                  Email
-                </label>
-                <input
-                  className="p-2 bg-[#ffffff]"
-                  type="email"
-                  id="email"
-                  disabled
-                  {...register("email")}
-                  defaultValue={user?.email || ""}
-                />
-              </div>
+            <div className='flex flex-col w-full max-w-xs'>
+              <label htmlFor='firstName' className='pt-2'>
+                First Name
+              </label>
+              <input
+                className="p-2"
+                type='text'
+                id='firstName'
+                {...register("firstName")}
+                required
+              />
+            </div>
+            <div className='flex flex-col w-full max-w-xs'>
+              <label htmlFor='lastName' className='pt-2'>
+                Last Name
+              </label>
+              <input
+                className="p-2" type='text' id='lastName'
+                {...register("lastName")} required
+              />
+            </div>
+            <div className='flex flex-col w-full max-w-xs'>
+              <label htmlFor='email' className='pt-2'>
+                Email
+              </label>
+              <input
+                className="p-2 bg-[#ffffff]"
+                type="email"
+                id="email"
+                disabled
+                {...register("email")}
+                defaultValue={user?.email || ""}
+              />
+            </div>
 
-              <div className='flex flex-col w-full max-w-xs'>
-                <label htmlFor='gender' className='pt-2'>
-                  Gender
-                </label>
-                <div className='flex gap-3'>
-                  <div>
-                    <input
-                      type='radio'
-                      id='male'
-                      {...register("gender")}
-                      value='male'
-                      required
-                    />
-                    <label htmlFor='male' className='p-2'>
-                      Male
-                    </label>
-                  </div>
-                  <div>
-                    <input
-                      type='radio'
-                      id='female'
-                      {...register("gender")}
-                      value='female'
-                      required
-                    />
-                    <label htmlFor='female' className='p-2'>
-                      Female
-                    </label>
-                  </div>
-                  <div>
-                    <input
-                      type='radio'
-                      id='other'
-                      {...register("gender")}
-                      value='other'
-                      required
-                    />
-                    <label htmlFor='other' className='p-2'>
-                      Other
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <hr className='w-full mt-2 bg-black' />
-              <div className='flex flex-col w-full max-w-xs'>
-                <label htmlFor='companyName' className='pt-2'>
-                  Company&apos;s name
-                </label>
-                <input
-                  className="p-2"
-                  type='text'
-                  id='companyName'
-                  {...register("companyName")}
-                  required
-                />
-              </div>
-              <div className='flex flex-col w-full max-w-xs'>
-                <label htmlFor='country' className='pt-2'>
-                  Country
-                </label>
-                <select
-                  className="p-2 w-full bg-[#FFFFFF] "
-                  {...register("country")} id='country'
-                // defaultValue="Bangladesh"
-                >
-                  {countries
-                    .sort((a, b) => a?.name?.common?.localeCompare(b?.name?.common))
-                    .map(({ name }, index) => (
-                      <option
-                        key={index}
-                        value={name.common}
-                      // selected={name.common === "Bangladesh"}
-                      >
-                        {name.common}
-                      </option>
-                    ))}
-                </select>
-              </div>
-              <div className='flex flex-col w-full max-w-xs'>
-                <label htmlFor='employeeRange' className='pt-2'>
-                  Number of employee
-                </label>
-                <select
-                  className="p-2 w-full bg-[#FFFFFF] "
-                  id='employeeRange'
-                  {...register("employeeRange")}
-                >
-                  {employeeRange
-                    .sort((a, b) => a.localeCompare(b))
-                    .map((category, index) => (
-                      <option key={index} className="border p-2" value={category}>{category}</option>
-                    ))}
-                </select>
-              </div>
-
-              <div className='flex flex-col w-full max-w-xs'>
-                <label htmlFor='companyCategory' className='pt-2'>
-                  Company&apos;s Category
-                </label>
-                <select
-                  className="p-2 w-full bg-[#FFFFFF] "
-                  id='companyCategory'
-                  {...register("companyCategory")}
-                >
-                  {businessCategory
-                    .sort((a, b) => a.localeCompare(b))
-                    .map((category, index) => (
-                      <option key={index} className="border p-2" value={category}>{category}</option>
-                    ))}
-                </select>
-              </div>
-              <div className='flex flex-col w-full max-w-xs'>
-                <label htmlFor='roleInCompany' className='pt-2'>
-                  Your role in company
-                </label>
-                <input
-                  className="p-2"
-                  type='text'
-                  id='roleInCompany'
-                  {...register("roleInCompany")}
-                  required
-                />
-              </div>
-
-              <div className='flex justify-between items-center w-full mt-3'>
-                <div className='flex  w-full max-w-xs'>
+            <div className='flex flex-col w-full max-w-xs'>
+              <label htmlFor='gender' className='pt-2'>
+                Gender
+              </label>
+              <div className='flex gap-3'>
+                <div>
                   <input
-                    className='mr-3'
-                    type='checkbox'
-                    {...register("term")}
-                    id='terms'
+                    type='radio'
+                    id='male'
+                    {...register("gender")}
+                    value='male'
+                    required
                   />
-                  <label htmlFor='terms' className="text-xs">I agree to terms and conditions</label>
+                  <label htmlFor='male' className='p-2'>
+                    Male
+                  </label>
                 </div>
-
-                <button
-                  disabled={!term}
-                  type="submit"
-                  className={`${!term ? "cursor-not-allowed" : "cursor-pointer"} border border-black py-3 px-4 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary transition-all`}
-                >
-                  Submit
-                </button>
-
+                <div>
+                  <input
+                    type='radio'
+                    id='female'
+                    {...register("gender")}
+                    value='female'
+                    required
+                  />
+                  <label htmlFor='female' className='p-2'>
+                    Female
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type='radio'
+                    id='other'
+                    {...register("gender")}
+                    value='other'
+                    required
+                  />
+                  <label htmlFor='other' className='p-2'>
+                    Other
+                  </label>
+                </div>
               </div>
-            </form>
-          </div>
+            </div>
 
+            <hr className='w-full mt-2 bg-black' />
+            <div className='flex flex-col w-full max-w-xs'>
+              <label htmlFor='companyName' className='pt-2'>
+                Company&apos;s name
+              </label>
+              <input
+                className="p-2"
+                type='text'
+                id='companyName'
+                {...register("companyName")}
+                required
+              />
+            </div>
+            <div className='flex flex-col w-full max-w-xs'>
+              <label htmlFor='country' className='pt-2'>
+                Country
+              </label>
+              <select
+                className="p-2 w-full bg-[#FFFFFF] "
+                {...register("country")} id='country'
+              // defaultValue="Bangladesh"
+              >
+                {countries
+                  .sort((a, b) => a?.name?.common?.localeCompare(b?.name?.common))
+                  .map(({ name }, index) => (
+                    <option
+                      key={index}
+                      value={name.common}
+                    // selected={name.common === "Bangladesh"}
+                    >
+                      {name.common}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div className='flex flex-col w-full max-w-xs'>
+              <label htmlFor='employeeRange' className='pt-2'>
+                Number of employee
+              </label>
+              <select
+                className="p-2 w-full bg-[#FFFFFF] "
+                id='employeeRange'
+                {...register("employeeRange")}
+              >
+                {employeeRange
+                  .sort((a, b) => a.localeCompare(b))
+                  .map((category, index) => (
+                    <option key={index} className="border p-2" value={category}>{category}</option>
+                  ))}
+              </select>
+            </div>
+
+            <div className='flex flex-col w-full max-w-xs'>
+              <label htmlFor='companyCategory' className='pt-2'>
+                Company&apos;s Category
+              </label>
+              <select
+                className="p-2 w-full bg-[#FFFFFF] "
+                id='companyCategory'
+                {...register("companyCategory")}
+              >
+                {businessCategory
+                  .sort((a, b) => a.localeCompare(b))
+                  .map((category, index) => (
+                    <option key={index} className="border p-2" value={category}>{category}</option>
+                  ))}
+              </select>
+            </div>
+            <div className='flex flex-col w-full max-w-xs'>
+              <label htmlFor='roleInCompany' className='pt-2'>
+                Your role in company
+              </label>
+              <input
+                className="p-2"
+                type='text'
+                id='roleInCompany'
+                {...register("roleInCompany")}
+                required
+              />
+            </div>
+
+            <div className='flex justify-between items-center w-full mt-3'>
+              <div className='flex  w-full max-w-xs'>
+                <input
+                  className='mr-3'
+                  type='checkbox'
+                  {...register("term")}
+                  id='terms'
+                />
+                <label htmlFor='terms' className="text-xs">I agree to terms and conditions</label>
+              </div>
+
+              <button
+                disabled={!term}
+                type="submit"
+                className={`${!term ? "cursor-not-allowed" : "cursor-pointer"} border border-black py-3 px-4 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary transition-all`}
+              >
+                Submit
+              </button>
+
+            </div>
+          </form>
         </div>
       </div>
     </div>
