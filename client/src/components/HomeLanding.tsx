@@ -152,7 +152,7 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
             </div>
             <div className='h-full w-full flex flex-col md:flex-row items-center z-10 relative overflow-hidden'>
                 <div className='md:w-1/2 flex flex-col items-start'>
-                    <h1 id='hero-title' className='heroElement font-bold text-4xl md:text-7xl capitalize'>
+                    <h1 id='hero-title' className='heroElement font-bold text-4xl md:text-7xl capitalize  dark:text-white'>
                         Find the perfect <br /> job for you
                     </h1>
                     <p id='hero-subtitle' className='mt-5 text-lg'>

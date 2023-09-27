@@ -24,7 +24,7 @@ const Navbar = () => {
     const pathname = usePathname() ?? "";
     const pathNameTotalArray = pathname.split("/");
     const pathNameArray = pathNameTotalArray.filter((path) => path !== "");
-    const reduxStore = useSelector((state: RootState) => state);
+    const user = useSelector((state: RootState) => state.auth.user);
     const dispatch: AppDispatch = useDispatch();
     const router = useRouter();
 
@@ -168,7 +168,7 @@ const Navbar = () => {
 
                     {/* login || out */}
                     <div className="flex justify-center items-center my-auto h-full gap-x-3.5 ml-auto sm:ml-0 sm:order-3">
-                        {!reduxStore.auth?.user?.email ? (
+                        {!user?.email ? (
                             <>
                                 <div className="flex flex-col gap-x-0 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:pl-7">
                                     <Link
@@ -218,14 +218,14 @@ const Navbar = () => {
                     </div>
 
                     {
-                        reduxStore.auth.user &&
+                        user &&
                         <AvatarMenu
                             handleCloseProfileAndMenu={handleCloseProfileAndMenu}
                             profileRef={profileRef}
                             isProfileOpen={isProfileOpen}
-                            firstName={reduxStore.auth.user.firstName || null}
-                            lastName={reduxStore.auth.user.lastName || null}
-                            email={reduxStore.auth.user.email!}
+                            firstName={user.firstName || null}
+                            lastName={user.lastName || null}
+                            email={user.email!}
                             handleSignOut={handleSignOut}
                         />
                     }

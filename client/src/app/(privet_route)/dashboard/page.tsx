@@ -15,7 +15,7 @@ const Dashboard = ({ }) => {
     const user = reduxStore.auth?.user;
     // console.log('reduxStore.:', reduxStore.auth.user);
 
-    if ((!reduxStore?.auth?.isLoading && reduxStore?.auth?.user?.email) && !reduxStore?.auth?.user?.role) {
+    if ((!reduxStore?.auth?.isLoading && user?.email) && !user?.role) {
         return router.push('/dashboard/register');
     }
     else {

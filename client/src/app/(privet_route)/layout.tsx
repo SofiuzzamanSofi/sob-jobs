@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import Loading from '@/components/Loading';
@@ -14,24 +14,22 @@ interface Privetlayout {
 // const PrivetLayout = ({ children }: Props): JSX.Element => {
 export default function PrivetLayout({ children }: Privetlayout) {
 
-    const reduxStore = useSelector((state: RootState) => state);
+    const { isLoading, user } = useSelector((state: RootState) => state.auth);
     const router = useRouter();
 
-    const dashboardComponents = !reduxStore?.auth?.isLoading && reduxStore?.auth?.user?.email && reduxStore?.auth?.user?.role ? true : false;
+    const dashboardComponents = !isLoading
+        && user?.email
+        && user?.role ? true : false;
 
-    if (reduxStore?.auth?.isLoading) {
+    useEffect(() => {
+        if (!isLoading && !user?.email) {
+            return router.push("/sign-in")
+        }
+    }, [user?.email])
+
+    if (isLoading) {
         return <Loading />
     }
-    else if (!reduxStore?.auth?.isLoading && !reduxStore?.auth?.user?.email) {
-        return router.push("/sign-in")
-    }
-    // else if ((!reduxStore?.auth?.isLoading && reduxStore?.auth?.user?.email) && !reduxStore?.auth?.user?.role) {
-    //     return (
-    //         <div>
-    //             {children}
-    //         </div>
-    //     );
-    // }
     else {
         // dashboard Layout 
         return (

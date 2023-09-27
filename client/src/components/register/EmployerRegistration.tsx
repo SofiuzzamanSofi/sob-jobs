@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { SubmitHandler, useForm, useWatch } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { toast } from "react-hot-toast";
+import backIcon from "@/assets/back.svg";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
-import { toast } from "react-hot-toast";
-import { useRegisterMutation } from "@/redux/features/auth/authApi";
-import { RegisterTypes } from "@/interfaceTypes/interfaceTypes";
-import backIcon from "@/assets/back.svg";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import employerImage from "@/assets/employer.svg";
+import React, { useEffect, useState } from "react";
+import { RegisterTypes } from "@/interfaceTypes/interfaceTypes";
+import { SubmitHandler, useForm, useWatch } from "react-hook-form";
+import { useRegisterMutation } from "@/redux/features/auth/authApi";
 
 const EmployerRegistration = () => {
 
@@ -18,7 +18,7 @@ const EmployerRegistration = () => {
   const { handleSubmit, register, control } = useForm<RegisterTypes>();
   const term = useWatch({ control, name: "term" });
   const router = useRouter();
-  const reduxStore = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.auth.user);
   const [postUser, { isLoading, isError, isSuccess }] = useRegisterMutation();
 
   const businessCategory = [
@@ -50,9 +50,10 @@ const EmployerRegistration = () => {
       .then((data) => setCountries(data));
   }, []);
 
-  const onSubmit: SubmitHandler<RegisterTypes> = (data) => {
-    postUser({ ...data, role: "Employer", email: reduxStore?.auth?.user?.email || "", country: data.country || "Bangladesh" });
-    // console.log("EmployerRegistration clicked", data);
+  const handleRegister: SubmitHandler<RegisterTypes> = (data) => {
+    const regData = { ...data, role: "Employer", email: user?.email || "", country: data.country || "Bangladesh" }
+    postUser(regData);
+    console.log("clicked handleRegister",);
   };
 
   useEffect(() => {
@@ -61,26 +62,32 @@ const EmployerRegistration = () => {
     };
     if (!isLoading && isSuccess) {
       toast.success("Register Success.", { id: "post-user-on-db" });
-      router.push("/dashboard");
+      // router.push("/dashboard");
     };
     if (isError) {
       toast.error("Error ", { id: "post-user-on-db" })
     };
+
+    console.log("clieck useEffect",);
+    if (!user?.email) {
+      router.push("/sign-in");
+    };
+    if (user?.role) {
+      router.push("/dashboard");
+    };
   }, [isLoading, isSuccess, isError, router]);
 
-  if (reduxStore?.auth?.user?.role) {
-    router.push("/dashboard");
-    return null;
-  };
+  console.log("clicked outside");
 
   return (
-    <div className='min-h-[calc(100vh-16rem)] flex items-center gap-4'>
+    <div className='min-h-[calc(100vh-20rem)] md:flex items-center gap-4'>
 
-      {/* this div is  */}
+      {/* back button */}
       <div className='w-1/2 hidden md:flex flex-col justify-between min-h-[53.93rem] p-10'>
 
         <button type="button" className="w-3/4 max-w-[16rem] mx-auto py-3 px-4 flex justify-center items-center gap-4 rounded-md  font-medium  shadow-sm align-middle  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:border-gray-700 hover-text- dark:focus:ring-offset-gray-800  cursor-pointer  border border-black  hover:border-primary bg-[#FFFAF4] text-gray-800  hover:text-white hover:bg-primary"
           onClick={(event) => {
+            console.log("click on back function")
             router.back()
             event.stopPropagation(); // Stop event propagation
           }}
@@ -93,18 +100,15 @@ const EmployerRegistration = () => {
 
       </div>
 
-      {/* this div big */}
+      {/* functionality*/}
       <div className='w-full md:w-1/2 grid place-items-center'>
-        <div className='bg-[#FFFAF4] text-gray-800  grid place-items-center p-10 w-full rounded-2xl border'>
+        <div className='bg-[#FFFAF4] text-gray-800  grid place-items-center py-10 sm:p-10 w-full rounded-md border'>
           <h1 className='mb-10 font-bold text-4xl'>Employer</h1>
 
-          <div className='space-y-3'>
+          <div className='space-y-3 p-4'>
             <form
-              onSubmit={(event) => {
-                event.preventDefault();
-                handleSubmit(onSubmit)();
-                event.stopPropagation(); // Stop event propagation
-              }}>
+              onSubmit={handleSubmit(handleRegister)}
+            >
 
               <div className='flex flex-col w-full max-w-xs'>
                 <label htmlFor='firstName' className='pt-2'>
@@ -137,7 +141,7 @@ const EmployerRegistration = () => {
                   id="email"
                   disabled
                   {...register("email")}
-                  defaultValue={reduxStore?.auth?.user?.email || ""}
+                  defaultValue={user?.email || ""}
                 />
               </div>
 
@@ -145,7 +149,6 @@ const EmployerRegistration = () => {
                 <label htmlFor='gender' className='pt-2'>
                   Gender
                 </label>
-                {/* <h1 className='mb-3'>Gender</h1> */}
                 <div className='flex gap-3'>
                   <div>
                     <input
@@ -204,15 +207,16 @@ const EmployerRegistration = () => {
                   Country
                 </label>
                 <select
-                  className="p-2"
-                  {...register("country")} id='country'>
+                  className="p-2 w-full bg-[#FFFFFF] "
+                  {...register("country")} id='country'
+                  defaultValue="Bangladesh"
+                >
                   {countries
                     .sort((a, b) => a?.name?.common?.localeCompare(b?.name?.common))
                     .map(({ name }, index) => (
                       <option
                         key={index}
                         value={name.common}
-                        selected={name.common === "Bangladesh"}
                       >
                         {name.common}
                       </option>
@@ -224,7 +228,7 @@ const EmployerRegistration = () => {
                   Number of employee
                 </label>
                 <select
-                  className="p-2"
+                  className="p-2 w-full bg-[#FFFFFF] "
                   id='employeeRange'
                   {...register("employeeRange")}
                 >
@@ -241,7 +245,7 @@ const EmployerRegistration = () => {
                   Company&apos;s Category
                 </label>
                 <select
-                  className="p-2"
+                  className="p-2 w-full bg-[#FFFFFF] "
                   id='companyCategory'
                   {...register("companyCategory")}
                 >
@@ -276,11 +280,13 @@ const EmployerRegistration = () => {
                   <label htmlFor='terms' className="text-xs">I agree to terms and conditions</label>
                 </div>
 
-                <input
+                <button
                   disabled={!term}
                   type="submit"
                   className={`${!term ? "cursor-not-allowed" : "cursor-pointer"} border border-black py-3 px-4 rounded-md hover:border-primary text-gray-600 hover:text-white hover:bg-primary transition-all`}
-                />
+                >
+                  Submit
+                </button>
 
               </div>
             </form>

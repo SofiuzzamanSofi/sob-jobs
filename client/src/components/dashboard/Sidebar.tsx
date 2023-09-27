@@ -10,7 +10,7 @@ import NavLinks from "../navBarSidebar/NavLinks";
 
 const Sidebar = () => {
 
-    const reduxStore = useSelector((state: RootState) => state);
+    const role = useSelector((state: RootState) => state.auth.user?.role);
     const router = useRouter();
 
     return (
@@ -31,7 +31,7 @@ const Sidebar = () => {
                         back
                     </button>
                     <span>
-                        {reduxStore.auth.user?.role}
+                        {role}
                     </span>
                 </div>
                 <NavLinks />

@@ -18,7 +18,7 @@ const SignIn = () => {
   const password = useWatch({ control, name: "password" });
   const router = useRouter();
   const [disabled, setDisabled] = useState(true);
-  const reduxStore = useSelector((state: RootState) => state);
+  const { error, isError, isLoading, user } = useSelector((state: RootState) => state.auth);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
@@ -42,23 +42,21 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    if (reduxStore?.auth?.isLoading) {
+    if (isLoading) {
       toast.loading("Please wait...", { id: "user-creating" });
     };
-    if (!reduxStore?.auth?.isLoading && reduxStore?.auth?.user?.email) {
+    if (!isLoading && user?.email) {
       toast.success("Sign-In Success.", { id: "user-creating" });
-      router.back();
-      // router.push("/");
     };
-    if (reduxStore?.auth?.isError && reduxStore?.auth?.error) {
+    if (isError && error) {
       toast.error("Error ", { id: "user-creating" })
     };
-  }, [reduxStore?.auth?.isLoading, reduxStore?.auth?.user?.email, reduxStore?.auth?.error, reduxStore?.auth?.isError, router]);
 
-  if (reduxStore?.auth?.user?.email) {
-    router.push("/");
-    return null;
-  };
+    if (user?.email) {
+      router.push("/");
+    };
+  }, [isLoading, user?.email, error, isError, router]);
+
 
   console.log('pageClicked:');
 
@@ -99,9 +97,9 @@ const SignIn = () => {
               <div className='flex flex-col items-start text-xs text-red-700'>
                 <p className='pt-2'                             >
                   {
-                    reduxStore?.auth?.isError ?
+                    isError ?
                       <span>
-                        {reduxStore?.auth?.error}
+                        {error}
                       </span>
                       :
                       <span
