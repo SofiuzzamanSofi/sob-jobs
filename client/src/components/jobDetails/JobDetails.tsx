@@ -1,18 +1,20 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import meetingImage from "../assets/meeting.jpg";
+import meetingImage from "@/assets/meeting.jpg";
 import { BsArrowRightShort, BsArrowReturnRight, BsPeople } from "react-icons/bs";
-import { JobDataTypes } from "../interfaceTypes/interfaceTypes";
+import { JobDataTypes } from "../../interfaceTypes/interfaceTypes";
 import Image from "next/image";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
-import { useJobApplyMutation, useJobIsOpenMutation, useJobQuestionMutation, useJobAnsMutation } from "../redux/features/job/jobApi";
+import { useJobApplyMutation, useJobIsOpenMutation, useJobQuestionMutation, useJobAnsMutation } from "../../redux/features/job/jobApi";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form";
-import AlertModal from "./shared/AlertModal";
+import AlertModal from "../shared/AlertModal";
 import Link from "next/link";
+import CompanyInfoFirstPara from "./CompanyInfoFirstPara";
+import CompanyInfoSecondPara from "./CompanyInfoSecondPara";
 
 interface JobDataProps {
   jobData: JobDataTypes
@@ -125,11 +127,41 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
   const replyAnsButtonClass = "shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary dark:hover:bg-darkPrimary rounded-full grid place-items-center text-primary dark:text-darkPrimary hover:text-white hover:px-2 transition-all"
 
   return (
-    <div className='py-5 grid grid-cols-12 gap-5'>
-      <div className='col-span-9'>
+    <div className='py-5 lg:grid grid-cols-12 gap-5'>
+
+      {/* image  */}
+      <div className='lg:col-span-8'>
         <div className='h-80 rounded-md overflow-hidden'>
           <Image className='h-full w-full object-cover' src={meetingImage} alt='' />
         </div>
+
+        {/* mobile show lg:[1024px]hidden  */}  {/* company info */}
+        <div className="mt-5 lg:hidden ">
+          <div className='flex justify-between'>
+            <div
+              className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary dark:border-gray-700 rounded-md space-y-5'
+            >
+              <CompanyInfoSecondPara
+                companyName={companyName || ""}
+                email={email || ""}
+              />
+            </div>
+            <div
+              className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary dark:border-gray-700 rounded-md space-y-5'
+            >
+              <CompanyInfoFirstPara
+                experience={experience || ""}
+                workLevel={workLevel || ""}
+                employmentType={employmentType || ""}
+                salaryRange={salaryRange || ""}
+                location={location || ""}
+              />
+            </div>
+          </div>
+          <hr className='mb-5 mt-2' />
+        </div>
+
+        {/* job info  */}
         <div className='space-y-5'>
           <div className='flex justify-between items-center mt-5'>
             <div className='text-md font-medium'>
@@ -246,6 +278,8 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
           </div>
         </div>
         <hr className='my-5' />
+
+        {/* question ans  */}
         <div>
           <div>
             <h1 className='text-xl font-semibold text-primary dark:text-darkPrimary mb-5'>
@@ -319,64 +353,35 @@ const JobDetails: React.FC<JobDataProps> = ({ jobData }) => {
             }
           </div>
         </div>
+
       </div>
-      <div className='col-span-3'>
+
+
+      {/* right side bar  */} {/* hidden lg:[1024px]show*/}   {/* company info */}
+      <div className='hidden lg:block lg:col-span-4'>
+        {/* first para  */}
         <div
           className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary border border-gray-200 dark:border-gray-700 rounded-md p-5 space-y-5 mb-2.5'
         >
-          <div>
-            <p>Experience</p>
-            <h1 className='font-semibold text-lg'>{experience}</h1>
-          </div>
-          <div>
-            <p>Work Level</p>
-            <h1 className='font-semibold text-lg'>{workLevel}</h1>
-          </div>
-          <div>
-            <p>Employment Type</p>
-            <h1 className='font-semibold text-lg'>{employmentType}</h1>
-          </div>
-          <div>
-            <p>Salary Range</p>
-            <h1 className='font-semibold text-lg'>{salaryRange}</h1>
-          </div>
-          <div>
-            <p>Location</p>
-            <h1 className='font-semibold text-lg'>{location}</h1>
-          </div>
+          <CompanyInfoSecondPara
+            companyName={companyName || ""}
+            email={email || ""}
+          />
         </div>
+        {/* second para  */}
         <div
           className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary border border-gray-200 dark:border-gray-700 rounded-md p-5 space-y-5 mt-2.5'
         >
-          <div>
-            <h1 className='font-semibold text-lg'>{companyName}</h1>
-          </div>
-          <div>
-            <p>Company Size</p>
-            <h1 className='font-semibold text-lg'>Above 100</h1>
-          </div>
-          <div>
-            <p>Founded</p>
-            <h1 className='font-semibold text-lg'>2001</h1>
-          </div>
-          <div>
-            <p>Email</p>
-            <h1 className='font-semibold text-lg'>
-              {email ? email : "company@mail.com"}
-            </h1>
-          </div>
-          <div>
-            <p>Company Location</p>
-            <h1 className='font-semibold text-lg'>Los Angeles</h1>
-          </div>
-          <div>
-            <p>Website</p>
-            <a className='font-semibold text-lg' href='#'>
-              https://website.com
-            </a>
-          </div>
+          <CompanyInfoFirstPara
+            experience={experience || ""}
+            workLevel={workLevel || ""}
+            employmentType={employmentType || ""}
+            salaryRange={salaryRange || ""}
+            location={location || ""}
+          />
         </div>
       </div>
+
       <AlertModal
         isOpenModal={isOpenModal}
         setIsOpenModal={setIsOpenModal}

@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from 'react'
-import JobDetails from '@/components/JobDetails';
+import JobDetails from '@/components/jobDetails/JobDetails';
 import { useJobByIdQuery } from '@/redux/features/job/jobApi';
 import Loading from '@/components/Loading';
 

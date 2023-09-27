@@ -11,6 +11,8 @@ import React, { FC, useState } from "react";
 import AlertModal from "@/components/shared/AlertModal";
 import { JobDataTypes } from '@/interfaceTypes/interfaceTypes';
 import { useJobByIdQuery, useJobIsOpenMutation } from '@/redux/features/job/jobApi';
+import CompanyInfoSecondPara from "@/components/jobDetails/CompanyInfoSecondPara";
+import CompanyInfoFirstPara from "@/components/jobDetails/CompanyInfoFirstPara";
 
 
 interface pageProps {
@@ -71,11 +73,39 @@ const Page: FC<pageProps> = ({ params }) => {
 
 
     return (
-        <div className='py-5 grid grid-cols-12 gap-5'>
-            <div className='col-span-9 mb-10'>
+        <div className='py-5 lg:grid grid-cols-12 gap-5'>
+            <div className='lg:col-span-8'>
                 <div className='h-80 rounded-xl overflow-hidden'>
                     <Image className='h-full w-full object-cover' src={meeting} alt='' />
                 </div>
+
+                {/* mobile show lg:[1024px]hidden  */}  {/* company info */}
+                <div className="mt-5 lg:hidden ">
+                    <div className='flex justify-between'>
+                        <div
+                            className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary dark:border-gray-700 rounded-md space-y-5'
+                        >
+                            <CompanyInfoSecondPara
+                                companyName={companyName || ""}
+                                email={email || ""}
+                            />
+                        </div>
+                        <div
+                            className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary dark:border-gray-700 rounded-md space-y-5'
+                        >
+                            <CompanyInfoFirstPara
+                                experience={experience || ""}
+                                workLevel={workLevel || ""}
+                                employmentType={employmentType || ""}
+                                salaryRange={salaryRange || ""}
+                                location={location || ""}
+                            />
+                        </div>
+                    </div>
+                    <hr className='mb-5 mt-2' />
+                </div>
+
+                {/* jbo title  open closed  */}
                 <div className='space-y-5'>
                     <div className='flex justify-between items-center mt-5'>
                         <div className='text-md font-medium'>
@@ -103,6 +133,8 @@ const Page: FC<pageProps> = ({ params }) => {
                         <h1 className='text-xl font-semibold text-primary dark:text-darkPrimary'>{position}</h1>
                     </div>
                 </div>
+
+                {/* table of application list  */}
                 <div>
                     <div className="flex flex-col">
                         <div className="-m-1.5 overflow-x-auto">
@@ -157,61 +189,30 @@ const Page: FC<pageProps> = ({ params }) => {
                     </div>
                 </div>
             </div>
-            <div className='col-span-3'>
+
+
+            {/* right side bar  */} {/* hidden lg:[1024px]show*/}   {/* company info */}
+            <div className='hidden lg:block lg:col-span-4'>
+                {/* first para  */}
                 <div
                     className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary border border-gray-200 dark:border-gray-700 rounded-md p-5 space-y-5 mb-2.5'
                 >
-                    <div>
-                        <p>Experience</p>
-                        <h1 className='font-semibold text-lg'>{experience}</h1>
-                    </div>
-                    <div>
-                        <p>Work Level</p>
-                        <h1 className='font-semibold text-lg'>{workLevel}</h1>
-                    </div>
-                    <div>
-                        <p>Employment Type</p>
-                        <h1 className='font-semibold text-lg'>{employmentType}</h1>
-                    </div>
-                    <div>
-                        <p>Salary Range</p>
-                        <h1 className='font-semibold text-lg'>{salaryRange}</h1>
-                    </div>
-                    <div>
-                        <p>Location</p>
-                        <h1 className='font-semibold text-lg'>{location}</h1>
-                    </div>
+                    <CompanyInfoSecondPara
+                        companyName={companyName || ""}
+                        email={email || ""}
+                    />
                 </div>
+                {/* second para  */}
                 <div
                     className='bg-white dark:bg-gray-800 text-primary dark:text-darkPrimary border border-gray-200 dark:border-gray-700 rounded-md p-5 space-y-5 mt-2.5'
                 >
-                    <div>
-                        <h1 className='font-semibold text-lg'>{companyName}</h1>
-                    </div>
-                    <div>
-                        <p>Company Size</p>
-                        <h1 className='font-semibold text-lg'>Above 100</h1>
-                    </div>
-                    <div>
-                        <p>Founded</p>
-                        <h1 className='font-semibold text-lg'>2001</h1>
-                    </div>
-                    <div>
-                        <p>Email</p>
-                        <h1 className='font-semibold text-lg'>
-                            {email ? email : "company@mail.com"}
-                        </h1>
-                    </div>
-                    <div>
-                        <p>Company Location</p>
-                        <h1 className='font-semibold text-lg'>Los Angeles</h1>
-                    </div>
-                    <div>
-                        <p>Website</p>
-                        <a className='font-semibold text-lg' href='#'>
-                            https://website.com
-                        </a>
-                    </div>
+                    <CompanyInfoFirstPara
+                        experience={experience || ""}
+                        workLevel={workLevel || ""}
+                        employmentType={employmentType || ""}
+                        salaryRange={salaryRange || ""}
+                        location={location || ""}
+                    />
                 </div>
             </div>
             <AlertModal
