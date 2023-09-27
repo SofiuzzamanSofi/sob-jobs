@@ -150,7 +150,7 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                     className='object-cover h-full w-full opacity-0'
                 />
             </div>
-            <div className='h-full w-full flex flex-col md:flex-row items-center z-10 relative'>
+            <div className='h-full w-full flex flex-col md:flex-row items-center z-10 relative overflow-hidden'>
                 <div className='md:w-1/2 flex flex-col items-start'>
                     <h1 id='hero-title' className='heroElement font-bold text-4xl md:text-7xl capitalize'>
                         Find the perfect <br /> job for you
@@ -196,28 +196,29 @@ const HomeLanding: React.FC<HomeLandingProps> = () => {
                         </div>
                     </div>
                 </div>
-                <div className='flex flex-col justify-between gap-4'>
-                    <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[80%]'>
+                <div className='flex flex-col justify-between gap-4 py-4'>
+                    <div className='statCard rounded-3xl shadow-2xl p-4 md:p-7 text-gray-500 dark:text-gray-300
+                     bg-white dark:bg-gray-900 relative right-[0%] md:left-[60%] lg:left-[80%]'>
                         <p>
-                            <span className='text-2xl font-bold'>319 </span>
+                            <span className='text-lg md:text-2xl font-bold'>319 </span>
                             <span>Job offers</span>
                         </p>
                         <p className='font-light'>
                             In Business Development
                         </p>
                     </div>
-                    <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[60%]'>
+                    <div className='statCard rounded-3xl shadow-2xl p-4 md:p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[20%] md:left-[40%] lg:left-[60%]'>
                         <div>
-                            <span className='text-2xl font-bold'>265 </span>
+                            <span className='text-lg md:text-2xl font-bold'>265 </span>
                             <span>Job offers</span>
                         </div>
                         <p className='font-light '>
                             In Marketing & Communication
                         </p>
                     </div>
-                    <div className='statCard rounded-3xl shadow-2xl p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[40%]'>
+                    <div className='statCard rounded-3xl shadow-2xl p-4 md:p-7 text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-900 relative left-[0%] md:left-[20%] lg:left-[40%]'>
                         <div>
-                            <span className='text-2xl font-bold'>324 </span>
+                            <span className='text-lg md:text-2xl font-bold'>324 </span>
                             <span>Job offers</span>
                         </div>
                         <p className='font-light '>In Project Management</p>

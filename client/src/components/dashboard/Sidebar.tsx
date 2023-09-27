@@ -21,7 +21,7 @@ const Sidebar = () => {
             >
                 <div className="px-6 flex items-center justify-between">
                     <button
-                        className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300"
+                        className="flex items-center gap-x-1 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300"
                         onClick={(event) => {
                             router.back()
                             event.stopPropagation(); // Stop event propagation
