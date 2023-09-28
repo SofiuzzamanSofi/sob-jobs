@@ -17,9 +17,10 @@ const port = process.env.PORT || 5000;
 const corsOptions = {
     credentials: true,
     origin: [
-        process.env.CLIENT_SITE_URL_ONLINE,
-        process.env.CLIENT_SITE_URL_LOCAL,
-        process.env.CLIENT_SITE_URL_VERCEL_APP,
+        "https://sob-jobs.vercel.app",
+        "http://localhost:3000",
+        "https://vercel.app",
+        "https://sob-jobs-server-via-cli.vercel.app",
     ],
 };
 app.use(cors(corsOptions));

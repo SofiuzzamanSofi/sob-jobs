@@ -10,11 +10,10 @@ import { toast } from "react-hot-toast";
 import { usePostJobMutation } from "@/redux/features/job/jobApi";
 import { JobDataTypes } from "@/interfaceTypes/interfaceTypes";
 
-
 const AddJob = () => {
 
   const router = useRouter();
-  const reduxStore = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.auth.user);
   const [postJob, { isLoading, isSuccess, isError }] = usePostJobMutation();
   const { handleSubmit, register, control } = useForm();
   const {
@@ -35,12 +34,12 @@ const AddJob = () => {
 
   const onSubmit: SubmitHandler<JobDataTypes> = (data) => {
 
-    if (reduxStore.auth.user?.role !== "Employer") {
+    if (user?.role !== "Employer") {
       toast.error("Only Employer can post the jobs");
       return;
     };
     // console.log("data on submit handler addJObs:", data);
-    postJob({ ...data, email: reduxStore.auth.user?.email, isOpen: true });
+    postJob({ ...data, email: user?.email, isOpen: true });
   };
 
   useEffect(() => {
@@ -53,13 +52,13 @@ const AddJob = () => {
     }
   }, [isLoading, isSuccess, router]);
 
-  if (reduxStore.auth.user?.role !== "Employer") {
-    router.push("/");
-    return;
-  };
+  useEffect(() => {
+    if (user?.role !== "Employer") {
+      router.push("/");
+    };
+  }, []);
 
   const searchBarInputClass = "p-2 w-full border border-gray-200 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-slate-400"
-
   const addButtonClass = "shrink-0 h-10 w-10 bg-primary/10 border border-primary dark:border-darkPrimary hover:bg-primary dark:hover:bg-darkPrimary hover:text-white rounded-full grid place-items-center text-primary dark:text-darkPrimary transition-all duration-500 hover:scale-100 scale-90"
   const removeButtonClass = "shrink-0 h-10 w-10 bg-primary/10 border border-red-600 hover:bg-red-600 text-red-600 hover:text-white rounded-full grid place-items-center transition-all duration-500 hover:scale-100 scale-90"
 
@@ -90,7 +89,7 @@ const AddJob = () => {
             type='text'
             id='companyName'
             {...register("companyName", {
-              value: reduxStore?.auth?.user?.companyName || ""
+              value: user?.companyName || ""
             })}
           // defaultValue={ }
           />

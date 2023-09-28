@@ -14,12 +14,12 @@ interface pageProps {
 const Page: FC<pageProps> = ({ params }) => {
 
     const { data, isLoading, isError } = useJobByIdQuery(params.id, {
-        //  pollingInterval: 2000 
+        pollingInterval: 2000
     }
     );
 
-    console.log('params.id:', params.id);
-    console.log('data:', data);
+    // console.log('params.id:', params.id);
+    // console.log('data:', data);
 
     return <div>
         {

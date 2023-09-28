@@ -17,7 +17,7 @@ export default async (
         const { userAccessToken } = req.cookies
 
         if (!userAccessToken) {
-            return res.status(401).send({ status: false, message: "You are not LogIn.", });
+            return res.status(401).send({ status: false, message: "You are not LogIN.", });
         };
 
         // jwt verify ()

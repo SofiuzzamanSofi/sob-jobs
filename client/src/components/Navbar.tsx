@@ -76,30 +76,31 @@ const Navbar = () => {
         console.log('toggleMenu:', isMenuOpen);
     };
 
-    // Handle clicks outside the profile
-    const handleClickOutside = (event: MouseEvent) => {
 
-        if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
-            if (isProfileOpen) {
-                console.log('isProfileOPen:');
-                setTimeout(() => {
-                    handleCloseProfileAndMenu();
-                }, 300);
-            }
-        };
-
-        if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-            if (isMenuOpen) {
-                console.log('isMenuOpen:');
-                setTimeout(() => {
-                    handleCloseProfileAndMenu();
-                }, 300);
-            }
-        };
-    };
-
-    // Add click event listener when the profile is open
+    // Add click event listener when the profile or mobile menu is open and closed this with click outside
     useEffect(() => {
+
+        // Handle clicks outside the profile function
+        const handleClickOutside = (event: MouseEvent) => {
+            if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+                if (isProfileOpen) {
+                    console.log('isProfileOPen:');
+                    setTimeout(() => {
+                        handleCloseProfileAndMenu();
+                    }, 300);
+                }
+            };
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                if (isMenuOpen) {
+                    console.log('isMenuOpen:');
+                    setTimeout(() => {
+                        handleCloseProfileAndMenu();
+                    }, 300);
+                }
+            };
+        };
+
+        // 
         if (isProfileOpen || isMenuOpen) {
             document.addEventListener('mouseup', handleClickOutside);
         } else {
@@ -109,7 +110,7 @@ const Navbar = () => {
         return () => {
             document.removeEventListener('mouseup', handleClickOutside);
         };
-    }, [isProfileOpen, isMenuOpen, handleClickOutside]);
+    }, [isProfileOpen, isMenuOpen]);
 
     useEffect(() => {
         handleCloseProfileAndMenu();

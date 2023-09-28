@@ -32,7 +32,7 @@ const Page: FC<PageProps> = ({ params, }) => {
     const reduxStore = useSelector((state: RootState) => state);
     // get Message Detail By Id1 - Id2
     const { isLoading: messageDetailsIsLoading, isError: messageDetailsIsError, data: messageDetailsData } = useGetMessageByIdQuery(`${id1}-${id2}`, {
-        // pollingInterval: 2000    // call every two second after
+        pollingInterval: 2000    // call every two second after
     });
     const [postMessage, { isLoading: postMessageIsLoading, isError: postMessageIsError, isSuccess: postMessageIsSuccess }] = usePostMessageByIdMutation();
 

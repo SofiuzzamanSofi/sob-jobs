@@ -1,7 +1,6 @@
 import express from "express";
 import { createUserService, getUserByEmail, updateUserByEmail } from "../service/userService";
 import { generateToken } from "../utils/token/generateToken";
-import { UserDataTypes } from "interfaceServer/interfaceServer.ts";
 
 // get user first time open on browser
 export const getMe = async (
@@ -81,9 +80,9 @@ export const signUp = async (
                     "userAccessToken",
                     token,
                     {
-                        httpOnly: true,
-                        secure: true,
-                        sameSite: "strict",
+                        //  httpOnly: true,
+                        // secure: true,
+                        // sameSite: "strict",
                         // domain: domailUrl,
                     }
                 ).json({
@@ -122,9 +121,9 @@ export const signIn = async (
                     "userAccessToken",
                     token,
                     {
-                        httpOnly: true,
-                        secure: true,
-                        sameSite: "strict",
+                        //  httpOnly: true,
+                        // secure: true,
+                        // sameSite: "strict",
                         // domain: domailUrl,
                     }
                 ).json({
@@ -135,16 +134,16 @@ export const signIn = async (
         else {
             // first time on DB
             const user = await createUserService(next, handleUserData);
-            const token = generateToken({ email: user.email, role: user?.role });
+            const token = generateToken({ email: user.email });
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(201)
                 .cookie(
                     "userAccessToken",
                     token,
                     {
-                        httpOnly: true,
-                        secure: true,
-                        sameSite: "strict",
+                        //  httpOnly: true,
+                        // secure: true,
+                        // sameSite: "strict",
                         // domain: domailUrl,
                     }
                 ).json({
@@ -187,9 +186,9 @@ export const signInWithSocial = async (
                     "userAccessToken",
                     token,
                     {
-                        httpOnly: true,
+                        //  httpOnly: true,
                         secure: true,
-                        sameSite: "strict",
+                        // sameSite: "strict",
                         // domain: domailUrl,
                     }
                 ).json({
@@ -233,9 +232,9 @@ export const updateUserWithRole = async (
                     "userAccessToken",
                     token,
                     {
-                        httpOnly: true,
+                        //  httpOnly: true,
                         secure: true,
-                        sameSite: "strict",
+                        // sameSite: "strict",
                         // domain: domailUrl,
                     }
                 ).json({

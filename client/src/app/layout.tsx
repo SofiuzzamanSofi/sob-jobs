@@ -25,6 +25,13 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
+
+        {/* for: Cross-Origin-Opener-Policy policy would block the window.close call.  */}
+        <meta
+          http-equiv="Cross-Origin-Opener-Policy"
+          content="allow-popups"
+        />
+
         <body
           className="flex flex-col justify-between min-h-screen"
         >
