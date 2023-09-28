@@ -29,7 +29,7 @@ export default function RootLayout({
         {/* for: Cross-Origin-Opener-Policy policy would block the window.close call.  */}
         <meta
           http-equiv="Cross-Origin-Opener-Policy"
-          content="allow-popups"
+          content="same-origin"
         />
 
         <body
