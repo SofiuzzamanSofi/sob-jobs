@@ -27,10 +27,10 @@ export default function RootLayout({
       <html lang="en">
 
         {/* for: Cross-Origin-Opener-Policy policy would block the window.close call.  */}
-        <meta
+        {/* <meta
           http-equiv="Cross-Origin-Opener-Policy"
           content="same-origin"
-        />
+        /> */}
 
         <body
           className="flex flex-col justify-between min-h-screen"
