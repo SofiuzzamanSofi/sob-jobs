@@ -37,9 +37,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobData }) => {
         </div>
 
         <button className="border border-gray-300 dark:border-gray-700 shadow-xl py-3 px-4 rounded-md">
-          <button className='btn'>
-            Details
-          </button>
+          Details
         </button>
       </div>
     </Link>

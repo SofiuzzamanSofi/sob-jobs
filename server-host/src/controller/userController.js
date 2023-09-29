@@ -74,14 +74,14 @@ const signUp = async (req, res, next) => {
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(201)
                 .cookie("userAccessToken", token, {
-            //  httpOnly: true,
-            // secure: true,
-            // sameSite: "strict",
-            // domain: domailUrl,
-            }).json({
-                success: true,
-                data: others,
-            });
+                    //  httpOnly: true,
+                    // secure: true,
+                    // sameSite: "strict",
+                    // domain: domailUrl,
+                }).json({
+                    success: true,
+                    data: others,
+                });
         }
     }
     catch (error) {
@@ -110,14 +110,14 @@ const signIn = async (req, res, next) => {
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(201)
                 .cookie("userAccessToken", token, {
-            //  httpOnly: true,
-            // secure: true,
-            // sameSite: "strict",
-            // domain: domailUrl,
-            }).json({
-                success: true,
-                data: others,
-            });
+                    //  httpOnly: true,
+                    // secure: true,
+                    // sameSite: "strict",
+                    // domain: domailUrl,
+                }).json({
+                    success: true,
+                    data: others,
+                });
         }
         else {
             // first time on DB
@@ -126,14 +126,14 @@ const signIn = async (req, res, next) => {
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(201)
                 .cookie("userAccessToken", token, {
-            //  httpOnly: true,
-            // secure: true,
-            // sameSite: "strict",
-            // domain: domailUrl,
-            }).json({
-                success: true,
-                data: others,
-            });
+                    //  httpOnly: true,
+                    // secure: true,
+                    // sameSite: "strict",
+                    // domain: domailUrl,
+                }).json({
+                    success: true,
+                    data: others,
+                });
         }
         ;
     }
@@ -167,14 +167,14 @@ const signInWithSocial = async (req, res, next) => {
             const token = (0, generateToken_1.generateToken)({ email: user.email, role: user?.role });
             return res.status(201)
                 .cookie("userAccessToken", token, {
-                //  httpOnly: true,
-                secure: true,
-                // sameSite: "strict",
-                // domain: domailUrl,
-            }).json({
-                success: true,
-                data: user,
-            });
+                    //  httpOnly: true,
+                    secure: true,
+                    sameSite: "strict",
+                    // domain: domailUrl,
+                }).json({
+                    success: true,
+                    data: user,
+                });
         }
     }
     catch (error) {
@@ -207,14 +207,14 @@ const updateUserWithRole = async (req, res, next) => {
             const token = (0, generateToken_1.generateToken)({ email: user.email, role: user.role });
             return res.status(201)
                 .cookie("userAccessToken", token, {
-                //  httpOnly: true,
-                secure: true,
-                // sameSite: "strict",
-                // domain: domailUrl,
-            }).json({
-                success: true,
-                data: user,
-            });
+                    //  httpOnly: true,
+                    secure: true,
+                    // sameSite: "strict",
+                    // domain: domailUrl,
+                }).json({
+                    success: true,
+                    data: user,
+                });
         }
     }
     catch (error) {
