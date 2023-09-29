@@ -167,9 +167,9 @@ const signInWithSocial = async (req, res, next) => {
             const token = (0, generateToken_1.generateToken)({ email: user.email, role: user?.role });
             return res.status(201)
                 .cookie("userAccessToken", token, {
-                    //  httpOnly: true,
+                    httpOnly: true,
                     secure: true,
-                    sameSite: "strict",
+                    // sameSite: "strict",
                     // domain: domailUrl,
                 }).json({
                     success: true,
