@@ -14,16 +14,17 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
-const corsOptions = {
-    credentials: true,
-    origin: [
-        "https://sob-jobs.vercel.app",
-        "http://localhost:3000",
-        "https://vercel.app",
-        "https://sob-jobs-server-via-cli.vercel.app",
-    ],
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     credentials: true,
+//     origin: [
+//         "https://sob-jobs.vercel.app",
+//         "http://localhost:3000",
+//         "https://vercel.app",
+//         "https://sob-jobs-server-via-cli.vercel.app",
+//     ],
+// };
+// app.use(cors(corsOptions));
+app.use(cors({ credentials: true }))
 
 app.use(express.json());
 app.use(cookieParser())   // cookie send receive package is more easi via this

@@ -12,6 +12,7 @@ const initialState: AuthTypes = {
     user: { email: "", role: "", },
 };
 
+//SIGN-UP
 // signup on firebase and save data on db
 export const signUpUser = createAsyncThunk(
     "auth/signUpUser",
@@ -39,6 +40,7 @@ export const signUpUser = createAsyncThunk(
     },
 );
 
+// SIGN-IN 
 // signin on firebase and get data from db
 export const signInUser = createAsyncThunk(
     "auth/signInUser",
@@ -67,6 +69,7 @@ export const signInUser = createAsyncThunk(
     },
 );
 
+// SIGN-IN-UP-SOCIAL 
 // signup or signin on firebase and set or get data from db
 export const googleLogin = createAsyncThunk(
     "auth/googleLogin",
@@ -92,7 +95,7 @@ export const googleLogin = createAsyncThunk(
     },
 );
 
-//
+//GET-ME
 export const getMe = createAsyncThunk(
     "auth/getMe",
     async () => {
