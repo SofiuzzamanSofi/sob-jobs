@@ -1,0 +1,43 @@
+{
+  "name": "sofi-jobs-client-side",
+  "description": "sofi-jobs-client-side-description",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "https://sob-job-server.onrender.com",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@tailwindcss/custom-forms": "^0.2.1",
+    "autoprefixer": "10.4.14",
+    "axios": "^1.5.0",
+    "eslint": "8.46.0",
+    "eslint-config-next": "13.4.12",
+    "firebase": "^10.1.0",
+    "gsap": "^3.12.2",
+    "next": "13.4.12",
+    "node-fetch": "^3.3.2",
+    "postcss": "8.4.27",
+    "preline": "^1.9.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-gsap": "^3.2.1",
+    "react-hook-form": "^7.45.2",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.10.1",
+    "react-redux": "^8.1.2",
+    "sharp": "^0.32.5",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/node": "^20.4.5",
+    "@types/react": "^18.2.17",
+    "@types/react-dom": "^18.2.7",
+    "daisyui": "^3.7.4"
+  }
+}
