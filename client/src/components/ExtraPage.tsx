@@ -1,6 +1,6 @@
 "use client";
 
-import { getMe } from '@/redux/features/auth/authSlice';
+import { getMe, getMeWithOutCookies } from '@/redux/features/auth/authSlice';
 import { AppDispatch } from '@/redux/store';
 import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -15,9 +15,18 @@ const ExtraPage: FC<ExtraPageProps> = ({ }) => {
     const dispatch: AppDispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getMe());
         require("preline");
+    }, []);
+
+    // useEffect(() => {
+    //     dispatch(getMe());
+    // }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(getMeWithOutCookies());
     }, [dispatch]);
+
+
 
     // useEffect(() => require("preline"), []);
 

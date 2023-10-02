@@ -95,10 +95,10 @@ export const googleLogin = createAsyncThunk(
     },
 );
 
-//GET-ME
+//GET-ME with cookes
 export const getMe = createAsyncThunk(
     "auth/getMe",
-    async () => {
+    async (email: string) => {
         // const getMeFunction = async () => {
         // console.log('userData-from-get-Me:upper.',);
         const resDataFromDb = await fetch(
@@ -108,7 +108,7 @@ export const getMe = createAsyncThunk(
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({}),
+                body: JSON.stringify({ email }),
                 credentials: "include"
             }
         );
@@ -117,6 +117,19 @@ export const getMe = createAsyncThunk(
         return userData?.data
         // };
         // return  getMeFunction();        
+    }
+);
+
+// get me with auth-firebase user email ( without-cookies)
+export const getMeWithOutCookies = createAsyncThunk(
+    "auth/getMe",
+    async () => {
+        const unsubscribe = onAuthStateChanged(auth, (runningUser) => {
+            if (runningUser?.email) {
+                getMe(runningUser.email);
+            }
+        })
+        return () => unsubscribe();
     }
 );
 
