@@ -24,7 +24,7 @@ const port = process.env.PORT || 5000;
 //     ],
 // };
 // app.use(cors(corsOptions));
-app.use(cors({ credentials: true }));
+app.use(cors());
 
 app.use(express.json());
 app.use(cookieParser())   // cookie send receive package is more easi via this

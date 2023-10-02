@@ -5,7 +5,7 @@ import { getAllMessageByIdController, getMessageByIdController, postMessageByIdC
 export default (router: express.Router) => {
 
     // Middleware that applies to all routes below this point
-    router.use(verifyToken);
+    // router.use(verifyToken);
 
     router.get('/message/:id', getAllMessageByIdController) // get all message by messageId 
     router.get('/message/details/:id', getMessageByIdController) // get 1 message by message id

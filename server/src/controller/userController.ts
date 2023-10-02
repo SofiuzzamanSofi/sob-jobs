@@ -40,7 +40,7 @@ export const signOut = async (
 ) => {
     try {
         //  console.log('HITTED log out controller:');
-        res.clearCookie('userAccessToken');
+        // res.clearCookie('userAccessToken');
         return res.status(201).json({
             success: true,
             message: "Log out success."
@@ -76,16 +76,17 @@ export const signUp = async (
             const token = generateToken({ email: user.email });
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(201)
-                .cookie(
-                    "userAccessToken",
-                    token,
-                    {
-                        //  httpOnly: true,
-                        // secure: true,
-                        // sameSite: "strict",
-                        // domain: domailUrl,
-                    }
-                ).json({
+                // .cookie(
+                //     "userAccessToken",
+                //     token,
+                //     {
+                //         //  httpOnly: true,
+                //         // secure: true,
+                //         // sameSite: "strict",
+                //         // domain: domailUrl,
+                //     }
+                // )
+                .json({
                     success: true,
                     data: others,
                 });
@@ -117,16 +118,17 @@ export const signIn = async (
             const token = generateToken({ email: user.email, role: user?.role });
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(201)
-                .cookie(
-                    "userAccessToken",
-                    token,
-                    {
-                        //  httpOnly: true,
-                        // secure: true,
-                        // sameSite: "strict",
-                        // domain: domailUrl,
-                    }
-                ).json({
+                // .cookie(
+                //     "userAccessToken",
+                //     token,
+                //     {
+                //         // httpOnly: true,
+                //         // secure: true,
+                //         // sameSite: "strict",
+                //         // domain: domailUrl,
+                //     }
+                // )
+                .json({
                     success: true,
                     data: others,
                 });
@@ -137,16 +139,17 @@ export const signIn = async (
             const token = generateToken({ email: user.email });
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
             return res.status(201)
-                .cookie(
-                    "userAccessToken",
-                    token,
-                    {
-                        //  httpOnly: true,
-                        // secure: true,
-                        // sameSite: "strict",
-                        // domain: domailUrl,
-                    }
-                ).json({
+                // .cookie(
+                //     "userAccessToken",
+                //     token,
+                //     {
+                //         //  httpOnly: true,
+                //         // secure: true,
+                //         // sameSite: "strict",
+                //         // domain: domailUrl,
+                //     }
+                // )
+                .json({
                     success: true,
                     data: others,
                 });
@@ -182,16 +185,17 @@ export const signInWithSocial = async (
             // generate token
             const token = generateToken({ email: user.email, role: user?.role });
             return res.status(201)
-                .cookie(
-                    "userAccessToken",
-                    token,
-                    {
-                        //  httpOnly: true,
-                        secure: true,
-                        // sameSite: "strict",
-                        // domain: domailUrl,
-                    }
-                ).json({
+                // .cookie(
+                //     "userAccessToken",
+                //     token,
+                //     {
+                //         // httpOnly: true,
+                //         // secure: true,
+                //         // sameSite: "strict",
+                //         // domain: domailUrl,
+                //     }
+                // )
+                .json({
                     success: true,
                     data: user,
                 });
@@ -228,16 +232,17 @@ export const updateUserWithRole = async (
             // generate token
             const token = generateToken({ email: user.email, role: user.role });
             return res.status(201)
-                .cookie(
-                    "userAccessToken",
-                    token,
-                    {
-                        //  httpOnly: true,
-                        secure: true,
-                        // sameSite: "strict",
-                        // domain: domailUrl,
-                    }
-                ).json({
+                // .cookie(
+                //     "userAccessToken",
+                //     token,
+                //     {
+                //         //  httpOnly: true,
+                //         // secure: true,
+                //         // sameSite: "strict",
+                //         // domain: domailUrl,
+                //     }
+                // )
+                .json({
                     success: true,
                     data: user,
                 });
