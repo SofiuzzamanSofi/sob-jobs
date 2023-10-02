@@ -21,7 +21,8 @@ const authApi = apiSlice.injectEndpoints({
                 try {
                     const res = await queryFulfilled;
                     if (res.data.success) {
-                        dispatch(getMe());
+                        // dispatch(getMe());
+                        dispatch(getMe(data?.email || ""));
                     }
 
                     // console.log('res:', res);

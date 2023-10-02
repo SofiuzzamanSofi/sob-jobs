@@ -98,7 +98,7 @@ export const googleLogin = createAsyncThunk(
 //GET-ME with cookes
 export const getMe = createAsyncThunk(
     "auth/getMe",
-    async (email: string) => {
+    async (email?: string) => {
         // const getMeFunction = async () => {
         // console.log('userData-from-get-Me:upper.',);
         const resDataFromDb = await fetch(
