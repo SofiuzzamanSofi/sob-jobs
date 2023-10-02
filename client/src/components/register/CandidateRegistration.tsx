@@ -196,7 +196,7 @@ const CandidateRegistration = () => {
 
             <div className='flex flex-col w-full max-w-xs'>
               <label htmlFor='address' className='pt-2'>
-                Street Address
+                Address
               </label>
               <input
                 className="p-2" type='text'

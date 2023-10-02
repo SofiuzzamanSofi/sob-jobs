@@ -6,20 +6,20 @@ const messageApi = apiSlice.injectEndpoints({
         getAllMessageById: builder.query<AllMessageObjectResponseType, string | undefined>({
             query: (userId) => ({
                 url: `/message/${userId}`,
-                credentials: 'include', // *** Include cookies with the request ***
+                //    credentials: 'include', // *** Include cookies with the request ***
             }),
         }),
         getMessageById: builder.query<MessageObjectResponseType, string>({
             query: (id) => ({
                 url: `/message/details/${id}`,
-                credentials: 'include',
+                //    credentials: 'include',
             }),
         }),
         postMessageById: builder.mutation({
             query: (messageData) => ({
                 method: "POST",
                 url: "/message/post-message",
-                credentials: 'include',
+                //    credentials: 'include',
                 body: messageData,
             }),
         }),

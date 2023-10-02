@@ -76,7 +76,7 @@ const Page: FC<PageProps> = ({ params, }) => {
 
         // Scroll to the bottom of the chat container
         if (messageDetailsData?.data?.messages?.length) {
-            console.log("'use effect callde:',use effect callde");
+            // console.log("'use effect callde:',use effect callde");
             chatContainer.scrollTo({
                 top: chatContainer.scrollHeight,
                 behavior: 'auto', // You can use 'smoth' instead of 'auto' for an animation scroll

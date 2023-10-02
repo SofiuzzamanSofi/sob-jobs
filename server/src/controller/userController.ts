@@ -10,7 +10,8 @@ export const getMe = async (
 ) => {
     try {
         console.log('get-me-user:')
-        const email = req.user?.email; // Access the user object from req
+        // const email = req.user?.email; // Access the user object from req
+        const email = req.body?.email; // Access the user object from req
         const user = await getUserByEmail(next, email);
         if (!user.email) {
             return res.status(201).json({
@@ -58,7 +59,7 @@ export const signUp = async (
 ) => {
     try {
         const handleUserData = req.body;
-        console.log("hit- signUp:");
+        // console.log("hit- signUp:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -104,7 +105,7 @@ export const signIn = async (
 ) => {
     try {
         const handleUserData = req.body;
-        console.log("hit- signIn:");
+        // console.log("hit- signIn:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -168,7 +169,7 @@ export const signInWithSocial = async (
 ) => {
     try {
         const handleUserData = req.body;
-        console.log("hit- signInWithSocial:");
+        // console.log("hit- signInWithSocial:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -214,7 +215,7 @@ export const updateUserWithRole = async (
     try {
         const handleUserData = req.body;
 
-        console.log("hit- updateUserWithRole:");
+        // console.log("hit- updateUserWithRole:");
 
         if (!handleUserData) {
             return res.status(400).json({

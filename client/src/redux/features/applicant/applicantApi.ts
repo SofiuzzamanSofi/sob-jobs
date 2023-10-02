@@ -6,7 +6,7 @@ const applicantApi = apiSlice.injectEndpoints({
         getApplicant: builder.query<applicantResponseTypes, string>({
             query: (email) => ({
                 url: `/user/applicant/${email}`,
-                credentials: 'include',  // ***SET THE COOKIE ***
+                // credentials: 'include',  // ***SET THE COOKIE ***
             }),
         }),
     }),

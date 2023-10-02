@@ -31,7 +31,7 @@ export const signUpUser = createAsyncThunk(
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ email: responseData?.user?.email }),
-                    credentials: "include"
+                    // credentials: "include"
                 }
             );
             const userData = await resDataFromDb.json();
@@ -60,7 +60,7 @@ export const signInUser = createAsyncThunk(
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ email: responseData?.user?.email }),
-                    credentials: "include"
+                    // credentials: "include"
                 }
             );
             const userData = await resDataFromDb.json();
@@ -86,7 +86,7 @@ export const googleLogin = createAsyncThunk(
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ email: responseData?.user?.email }),
-                    credentials: "include"
+                    // credentials: "include"
                 }
             );
             const userData = await resDataFromDb.json();
@@ -100,7 +100,7 @@ export const getMe = createAsyncThunk(
     "auth/getMe",
     async (email?: string) => {
         // const getMeFunction = async () => {
-        // console.log('userData-from-get-Me:upper.',);
+        console.log('get me:.', email);
         const resDataFromDb = await fetch(
             `${process.env.NEXT_PUBLIC_SERVER}/user/me`,
             {
@@ -109,7 +109,7 @@ export const getMe = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ email }),
-                credentials: "include"
+                // credentials: "include"
             }
         );
         const userData = await resDataFromDb.json();
@@ -120,18 +120,6 @@ export const getMe = createAsyncThunk(
     }
 );
 
-// get me with auth-firebase user email ( without-cookies)
-export const getMeWithOutCookies = createAsyncThunk(
-    "auth/getMe",
-    async () => {
-        const unsubscribe = onAuthStateChanged(auth, (runningUser) => {
-            if (runningUser?.email) {
-                getMe(runningUser.email);
-            }
-        })
-        return () => unsubscribe();
-    }
-);
 
 // //
 // export const onAuthFirebase = createAsyncThunk(
@@ -166,7 +154,7 @@ export const signOutUser = createAsyncThunk(
         // clear cookie 
         const resData = await fetch(
             `${process.env.NEXT_PUBLIC_SERVER}/user/signout`,
-            { credentials: "include", }
+            // { credentials: "include", }
         );
 
         if (resData?.ok) {

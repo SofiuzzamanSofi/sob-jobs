@@ -1,7 +1,9 @@
 "use client";
 
-import { getMe, getMeWithOutCookies } from '@/redux/features/auth/authSlice';
+import { auth } from '@/firebase/firebase.config';
+import { getMe } from '@/redux/features/auth/authSlice';
 import { AppDispatch } from '@/redux/store';
+import { onAuthStateChanged } from 'firebase/auth';
 import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -23,12 +25,14 @@ const ExtraPage: FC<ExtraPageProps> = ({ }) => {
     // }, [dispatch]);
 
     useEffect(() => {
-        dispatch(getMeWithOutCookies());
+        const unsubscribe = onAuthStateChanged(auth, (runningUser) => {
+            if (runningUser?.email) {
+                dispatch(getMe(runningUser.email));
+                console.log('runningUser.email:', runningUser.email);
+            }
+        })
+        return () => unsubscribe();
     }, [dispatch]);
-
-
-
-    // useEffect(() => require("preline"), []);
 
     return (
         <div

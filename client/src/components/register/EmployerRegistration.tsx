@@ -198,6 +198,16 @@ const EmployerRegistration = () => {
               />
             </div>
             <div className='flex flex-col w-full max-w-xs'>
+              <label htmlFor='address' className='pt-2'>
+                Address
+              </label>
+              <input
+                className="p-2" type='text'
+                {...register("address")} id='address'
+                required
+              />
+            </div>
+            <div className='flex flex-col w-full max-w-xs'>
               <label htmlFor='country' className='pt-2'>
                 Country
               </label>
@@ -219,6 +229,7 @@ const EmployerRegistration = () => {
                   ))}
               </select>
             </div>
+
             <div className='flex flex-col w-full max-w-xs'>
               <label htmlFor='employeeRange' className='pt-2'>
                 Number of employee

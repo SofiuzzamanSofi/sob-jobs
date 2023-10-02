@@ -33,12 +33,12 @@ const SignIn = () => {
 
   const onSubmit = ({ email, password }: SignUpFormValueTypes) => {
     dispatch(signInUser({ email, password }));
-    console.log('clicked onsubmit:SignIN');
+    // console.log('clicked onsubmit:SignIN');
   };
 
   const handleGoogleLogin = () => {
     dispatch(googleLogin());
-    console.log('googlelogin:');
+    // console.log('googlelogin:');
   };
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const SignIn = () => {
   }, [isLoading, user?.email, error, isError, router]);
 
 
-  console.log('pageClicked:');
+  // console.log('pageClicked:');
 
   return (
     <div className='min-h-[calc(100vh-2rem)] flex items-center gap-4'>

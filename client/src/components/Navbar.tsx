@@ -67,13 +67,13 @@ const Navbar = () => {
     const toggleProfile = () => {
         setIsProfileOpen((prev) => !prev);
         setIsMenuOpen(false);
-        console.log('toggleProfile:', isProfileOpen);
+        // console.log('toggleProfile:', isProfileOpen);
     };
     // Define a function to toggle the profile
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
         setIsProfileOpen(false);
-        console.log('toggleMenu:', isMenuOpen);
+        // console.log('toggleMenu:', isMenuOpen);
     };
 
 
@@ -84,7 +84,7 @@ const Navbar = () => {
         const handleClickOutside = (event: MouseEvent) => {
             if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
                 if (isProfileOpen) {
-                    console.log('isProfileOPen:');
+                    // console.log('isProfileOPen:');
                     setTimeout(() => {
                         handleCloseProfileAndMenu();
                     }, 300);
@@ -92,7 +92,7 @@ const Navbar = () => {
             };
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
                 if (isMenuOpen) {
-                    console.log('isMenuOpen:');
+                    // console.log('isMenuOpen:');
                     setTimeout(() => {
                         handleCloseProfileAndMenu();
                     }, 300);
