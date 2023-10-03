@@ -31,7 +31,6 @@ export const signUpUser = createAsyncThunk(
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ email: responseData?.user?.email }),
-                    // credentials: "include"
                 }
             );
             const userData = await resDataFromDb.json();
@@ -60,7 +59,6 @@ export const signInUser = createAsyncThunk(
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ email: responseData?.user?.email }),
-                    // credentials: "include"
                 }
             );
             const userData = await resDataFromDb.json();
@@ -86,7 +84,6 @@ export const googleLogin = createAsyncThunk(
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ email: responseData?.user?.email }),
-                    // credentials: "include"
                 }
             );
             const userData = await resDataFromDb.json();
@@ -109,7 +106,6 @@ export const getMe = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ email }),
-                // credentials: "include"
             }
         );
         const userData = await resDataFromDb.json();
@@ -119,29 +115,6 @@ export const getMe = createAsyncThunk(
         // return  getMeFunction();        
     }
 );
-
-
-// //
-// export const onAuthFirebase = createAsyncThunk(
-//     "auth/onAuthFirebase",
-//     async () => {
-//         onAuthStateChanged(auth, (user) => {
-//             if (user?.email) {
-//                 getMe();
-//                 // dispatch(getMe(user?.email));
-//                 // dispatch(setUser(user?.email));
-
-
-//          //  console.log("From-Navbar-onAuthStateChanged:", user?.email);
-//             }
-//             else {
-//                 // console.log("user?.email: Email nai");
-//                 // dispatch(toggleLoading());
-//                 toggleLoading();
-//             }
-//         });
-//     }
-// );
 
 // logOut from firebase and remove cookei and clear redux state
 export const signOutUser = createAsyncThunk(
@@ -154,7 +127,6 @@ export const signOutUser = createAsyncThunk(
         // clear cookie 
         const resData = await fetch(
             `${process.env.NEXT_PUBLIC_SERVER}/user/signout`,
-            // { credentials: "include", }
         );
 
         if (resData?.ok) {

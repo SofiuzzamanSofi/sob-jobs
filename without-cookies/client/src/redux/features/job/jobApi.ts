@@ -7,7 +7,7 @@ const jobApi = apiSlice.injectEndpoints({
             query: (data) => ({
                 method: 'POST',
                 url: "/job",
-                //    credentials: 'include', // *** Include cookies with the request ***
+                // *** Include cookies with the request ***
                 body: data,
             }),
             invalidatesTags: ["JobAll", "PostedJobs"],
@@ -23,7 +23,6 @@ const jobApi = apiSlice.injectEndpoints({
         getJobs: builder.query<GetJobsResTypes, void>({
             query: () => ({
                 url: "/job",
-                //    credentials: 'include',
             }),
             providesTags: ["JobAll"],
         }),
@@ -31,7 +30,6 @@ const jobApi = apiSlice.injectEndpoints({
             query: (searchData) => ({
                 method: 'POST',
                 url: "/job/search",
-                //    credentials: 'include',
                 body: searchData
             }),
             // providesTags: ["JobAll"],
@@ -39,7 +37,6 @@ const jobApi = apiSlice.injectEndpoints({
         jobById: builder.query<JobByIdResTypes, string>({
             query: (id) => ({
                 url: `/job/${id}`,
-                //    credentials: 'include',
             }),
             providesTags: ["JobById"]
         }),
@@ -47,7 +44,6 @@ const jobApi = apiSlice.injectEndpoints({
             query: (jobApplyData) => ({
                 method: "PATCH",
                 url: "/job/applied-job",
-                //    credentials: 'include',
                 body: jobApplyData,
             }),
             invalidatesTags: ["JobById", "AppliedJobs"],
@@ -55,7 +51,6 @@ const jobApi = apiSlice.injectEndpoints({
         jobIsOpen: builder.mutation<void, JobIsOpenDataTypes>({
             query: (jobIsOpenData) => ({
                 method: "PATCH",
-                //    credentials: 'include',
                 url: "/job/isopen-job",
                 body: jobIsOpenData,
             }),
@@ -64,14 +59,12 @@ const jobApi = apiSlice.injectEndpoints({
         getAppliedJobs: builder.query<GetJobsResTypes, string>({
             query: (email) => ({
                 url: `/applied-jobs/${email}`,
-                //    credentials: 'include',
             }),
             providesTags: ["AppliedJobs"],
         }),
         getPostedJobs: builder.query<GetJobsResTypes, string>({
             query: (email) => ({
                 url: `/posted-jobs/${email}`,
-                //    credentials: 'include',
             }),
             providesTags: ["PostedJobs"],
         }),
@@ -79,7 +72,6 @@ const jobApi = apiSlice.injectEndpoints({
             query: (questionData) => ({
                 method: "PATCH",
                 url: "/job/query",
-                //    credentials: 'include',
                 body: questionData,
             }),
             invalidatesTags: ["JobById"],
@@ -88,7 +80,6 @@ const jobApi = apiSlice.injectEndpoints({
             query: (questionData) => ({
                 method: "PATCH",
                 url: "/job/riplay",
-                //    credentials: 'include',
                 body: questionData,
             }),
             invalidatesTags: ["JobById"],

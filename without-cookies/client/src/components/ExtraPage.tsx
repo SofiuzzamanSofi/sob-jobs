@@ -20,15 +20,10 @@ const ExtraPage: FC<ExtraPageProps> = ({ }) => {
         require("preline");
     }, []);
 
-    // useEffect(() => {
-    //     dispatch(getMe());
-    // }, [dispatch]);
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (runningUser) => {
             if (runningUser?.email) {
                 dispatch(getMe(runningUser.email));
-                console.log('runningUser.email:', runningUser.email);
             }
         })
         return () => unsubscribe();

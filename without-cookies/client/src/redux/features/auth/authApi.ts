@@ -14,24 +14,14 @@ const authApi = apiSlice.injectEndpoints({
             query: (data) => ({
                 method: "PUT",
                 url: "/user/registration",
-                // credentials: 'include',  // ***SET THE COOKIE ***
                 body: data,
             }),
             async onQueryStarted(data, { dispatch, queryFulfilled }) {
                 try {
                     const res = await queryFulfilled;
                     if (res.data.success) {
-                        // dispatch(getMe());
                         dispatch(getMe(data?.email || ""));
                     }
-
-                    // console.log('res:', res);
-                    // dispatch(getMe(data?.email || ""));
-
-                    // console.log('authApi-register.',);
-                    // (res.meta?.response?.headers.getSetCookie.name)
-                    // Cookies.set(res.meta?.response?.headers.getSetCookie.name || "", res.meta?.response?.headers.getSetCookie. || "");
-                    // console.log('res.meta?.response?.headers:', res.meta?.response?.headers);
                 } catch (error) {
                     // console.log("error on query onQueryStarted user: ", error);
                 }
