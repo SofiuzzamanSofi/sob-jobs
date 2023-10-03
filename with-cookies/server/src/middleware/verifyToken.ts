@@ -15,6 +15,7 @@ export default async (
 
         // const token = req.headers?.cookie.split("=")[1] as string;
         const { userAccessToken } = req.cookies
+        console.log('userAccessToken:', userAccessToken);
 
         if (!userAccessToken) {
             return res.status(401).send({ status: false, message: "You are not LogIN.", });

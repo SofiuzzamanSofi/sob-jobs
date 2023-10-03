@@ -74,6 +74,16 @@ const SignIn = () => {
 
     console.log('hitted getCookies end:',);
   }
+  const deleteCookies = async () => {
+    console.log('hitted deleteCookies start:',);
+
+    const resData = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER}/user/signout`,
+      { credentials: "include", }
+    );
+
+    console.log('hitted deleteCookies end:',);
+  }
 
 
   // console.log('pageClicked:');
@@ -166,7 +176,10 @@ const SignIn = () => {
       </div>
       <div>
         <button onClick={getCookies}>
-          get me cookies
+          Get cookies
+        </button>
+        <button onClick={deleteCookies}>
+          Delete cookies
         </button>
       </div>
     </div>
