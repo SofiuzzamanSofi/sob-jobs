@@ -11,13 +11,11 @@ This is a [NextJS](https://nextjs.org/) project create with [`create-next-app`](
 ### server-site: [sob-jobs-server](https://sob-jobs-server-via-cli.vercel.app)
 ### server-Demo: [sob-jobs-live-demo](https://drive.google.com/file/d/1eS-0KH2XoqCemHbG1hLxM0N-nQvMOkjE/view?usp=sharing)
 
-<br/>
-<br/>
 
 ## Live Demo
 
 [
-![Alt text](image.png))](https://drive.google.com/file/d/1eS-0KH2XoqCemHbG1hLxM0N-nQvMOkjE/view?usp=sharing)
+![Alt text](image.png)](https://drive.google.com/file/d/1eS-0KH2XoqCemHbG1hLxM0N-nQvMOkjE/view?usp=sharing)
 
 <br/>
 <br/>
