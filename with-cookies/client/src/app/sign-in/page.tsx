@@ -57,6 +57,7 @@ const SignIn = () => {
     };
   }, [isLoading, user?.email, error, isError, router]);
 
+  // extra 
   const getCookies = async () => {
     console.log('hitted getCookies start:',);
     const resDataFromDb = await fetch(
@@ -71,20 +72,18 @@ const SignIn = () => {
       }
     );
     await resDataFromDb.json();
-
     console.log('hitted getCookies end:',);
-  }
+  };
+
   const deleteCookies = async () => {
     console.log('hitted deleteCookies start:',);
-
     const resData = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER}/user/signout`,
       { credentials: "include", }
     );
-
+    await resData.json();
     console.log('hitted deleteCookies end:',);
   }
-
 
   // console.log('pageClicked:');
 

@@ -11,6 +11,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { SignUpFormValueTypes } from "@/interfaceTypes/interfaceTypes";
 import { googleLogin, signInUser } from "@/redux/features/auth/authSlice";
+import Loading from "@/components/Loading";
 
 const SignIn = () => {
 
@@ -18,7 +19,7 @@ const SignIn = () => {
   const password = useWatch({ control, name: "password" });
   const router = useRouter();
   const [disabled, setDisabled] = useState(true);
-  const { error, isError, isLoading, user } = useSelector((state: RootState) => state.auth);
+  const { error, isError, isLoading, user, state } = useSelector((state: RootState) => state.auth);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
@@ -42,13 +43,13 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    if (isLoading && !user?.email) {
+    if (state && isLoading) {
       toast.loading("Please wait...", { id: "user-creating" });
     };
-    if (!isLoading && user?.email) {
+    if (state && !isLoading && user?.email) {
       toast.success("Sign-In Success.", { id: "user-creating" });
     };
-    if (isError && error) {
+    if (state && isError && error) {
       toast.error("Error ", { id: "user-creating" })
     };
 
@@ -56,7 +57,6 @@ const SignIn = () => {
       router.push("/");
     };
   }, [isLoading, user?.email, error, isError, router]);
-
 
   // console.log('pageClicked:');
 

@@ -6,6 +6,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 
 //
 const initialState: AuthTypes = {
+    state: false,
     isLoading: true,
     isError: false,
     error: "",
@@ -149,6 +150,7 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(signUpUser.pending, (state) => {
+                state.state = true;
                 state.isLoading = true;
                 state.isError = false;
                 state.error = "";
@@ -165,6 +167,7 @@ const authSlice = createSlice({
                 state.user = payload;
             })
             .addCase(signInUser.pending, (state) => {
+                state.state = true;
                 state.isLoading = true;
                 state.isError = false;
                 state.error = "";
@@ -181,6 +184,7 @@ const authSlice = createSlice({
                 state.user = payload;
             })
             .addCase(googleLogin.pending, (state) => {
+                state.state = true;
                 state.isLoading = true;
                 state.isError = false;
                 state.error = "";
@@ -247,6 +251,8 @@ const authSlice = createSlice({
         // },
     },
 });
+
+console.log('isLoading:', initialState.isLoading);
 
 // export const { signOutReducer, setUser, toggleLoading } = authSlice.actions;
 export const { } = authSlice.actions;

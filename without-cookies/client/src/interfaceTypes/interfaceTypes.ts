@@ -1,5 +1,6 @@
 // UserSchema / Data Types 
 export interface AuthTypes {
+    state: boolean;
     isLoading: boolean;
     isError: boolean;
     error: string;

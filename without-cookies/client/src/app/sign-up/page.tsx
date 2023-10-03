@@ -19,7 +19,7 @@ const SignUp = () => {
   const confirmPassword = useWatch({ control, name: "confirmPassword" });
   const router = useRouter();
   const [disabled, setDisabled] = useState(true);
-  const { error, isError, isLoading, user } = useSelector((state: RootState) => state.auth);
+  const { error, isError, isLoading, user, state } = useSelector((state: RootState) => state.auth);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
@@ -47,14 +47,14 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (isLoading) {
+    if (state && isLoading) {
       toast.loading("Please wait...", { id: "user-creating" });
     };
-    if (!isLoading && user?.email) {
+    if (state && !isLoading && user?.email) {
       toast.success("Sign-Up Success.", { id: "user-creating" });
       // router.push("/");
     };
-    if (isError && error) {
+    if (state && isError && error) {
       toast.error("Error ", { id: "user-creating" })
     };
 
@@ -62,7 +62,6 @@ const SignUp = () => {
       router.push("/");
     };
   }, [isLoading, user?.email, error, isError, router]);
-
 
   // console.log('pageClicked:');
 
