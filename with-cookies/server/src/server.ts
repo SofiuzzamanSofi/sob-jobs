@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
     res.send({
         success: true,
         message: "Welcome to the sob-jobs server",
-        data: " dummy data for home page of the sob-jobs server",
+        data: " dummy data for home page of the sob-jobs server With-Cookies",
     });
 });
 

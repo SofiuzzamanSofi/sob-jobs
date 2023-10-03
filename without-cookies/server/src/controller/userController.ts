@@ -41,7 +41,6 @@ export const signOut = async (
 ) => {
     try {
         //  console.log('HITTED log out controller:');
-        // res.clearCookie('userAccessToken');
         return res.status(201).json({
             success: true,
             message: "Log out success."
@@ -73,24 +72,11 @@ export const signUp = async (
                 message: `Function called but User not set on Db `,
             });
         } else {
-            //TOKEN
-            const token = generateToken({ email: user.email });
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
-            return res.status(201)
-                // .cookie(
-                //     "userAccessToken",
-                //     token,
-                //     {
-                //         //  httpOnly: true,
-                //         // secure: true,
-                //         // sameSite: "strict",
-                //         // domain: domailUrl,
-                //     }
-                // )
-                .json({
-                    success: true,
-                    data: others,
-                });
+            return res.status(201).json({
+                success: true,
+                data: others,
+            });
         }
     } catch (error) {
         next(error);
@@ -109,51 +95,26 @@ export const signIn = async (
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
-                message: "Body is empty line 12",
+                message: "Body is empty",
             });
         };
         // get user form DB
         const user = await getUserByEmail(next, handleUserData.email);
         if (user.email) {
-            // generate token
-            const token = generateToken({ email: user.email, role: user?.role });
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
-            return res.status(201)
-                // .cookie(
-                //     "userAccessToken",
-                //     token,
-                //     {
-                //         // httpOnly: true,
-                //         // secure: true,
-                //         // sameSite: "strict",
-                //         // domain: domailUrl,
-                //     }
-                // )
-                .json({
-                    success: true,
-                    data: others,
-                });
+            return res.status(201).json({
+                success: true,
+                data: others,
+            });
         }
         else {
             // first time on DB
             const user = await createUserService(next, handleUserData);
-            const token = generateToken({ email: user.email });
             const { createdAt, updatedAt, __v, ...others } = user.toObject();
-            return res.status(201)
-                // .cookie(
-                //     "userAccessToken",
-                //     token,
-                //     {
-                //         //  httpOnly: true,
-                //         // secure: true,
-                //         // sameSite: "strict",
-                //         // domain: domailUrl,
-                //     }
-                // )
-                .json({
-                    success: true,
-                    data: others,
-                });
+            return res.status(201).json({
+                success: true,
+                data: others,
+            });
         };
 
     } catch (error) {
@@ -183,23 +144,10 @@ export const signInWithSocial = async (
                 message: `Function called but User not set on Db `,
             });
         } else {
-            // generate token
-            const token = generateToken({ email: user.email, role: user?.role });
-            return res.status(201)
-                // .cookie(
-                //     "userAccessToken",
-                //     token,
-                //     {
-                //         // httpOnly: true,
-                //         // secure: true,
-                //         // sameSite: "strict",
-                //         // domain: domailUrl,
-                //     }
-                // )
-                .json({
-                    success: true,
-                    data: user,
-                });
+            return res.status(201).json({
+                success: true,
+                data: user,
+            });
         }
     } catch (error) {
         next(error);
@@ -214,9 +162,7 @@ export const updateUserWithRole = async (
 ) => {
     try {
         const handleUserData = req.body;
-
         // console.log("hit- updateUserWithRole:");
-
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -230,23 +176,10 @@ export const updateUserWithRole = async (
                 message: `Function called but User not set on Db `,
             });
         } else {
-            // generate token
-            const token = generateToken({ email: user.email, role: user.role });
-            return res.status(201)
-                // .cookie(
-                //     "userAccessToken",
-                //     token,
-                //     {
-                //         //  httpOnly: true,
-                //         // secure: true,
-                //         // sameSite: "strict",
-                //         // domain: domailUrl,
-                //     }
-                // )
-                .json({
-                    success: true,
-                    data: user,
-                });
+            return res.status(201).json({
+                success: true,
+                data: user,
+            });
         }
     } catch (error) {
         next(error);

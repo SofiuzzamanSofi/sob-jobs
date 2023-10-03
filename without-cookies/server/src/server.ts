@@ -1,7 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config();
 import express from 'express'
-import cookieParser from 'cookie-parser'
 import cors from 'cors';
 import compression from 'compression';
 import colors from 'colors';
@@ -14,20 +13,9 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
-// const corsOptions = {
-//     credentials: true,
-//     origin: [
-//         "https://sob-jobs.vercel.app",
-//         "http://localhost:3000",
-//         "https://vercel.app",
-//         "https://sob-jobs-server-via-cli.vercel.app",
-//     ],
-// };
-// app.use(cors(corsOptions));
 app.use(cors());
 
 app.use(express.json());
-app.use(cookieParser())   // cookie send receive package is more easi via this
 app.use(compression());  //reduce size for production levele fast working
 
 // mongodb connect 
@@ -45,7 +33,7 @@ app.get("/", (req, res) => {
     res.send({
         success: true,
         message: "Welcome to the sob-jobs server",
-        data: " dummy data for home page of the sob-jobs server",
+        data: " dummy data for home page of the sob-jobs server Without-Cookies",
     });
 });
 
