@@ -3,7 +3,6 @@ dotenv.config();
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors';
-import compression from 'compression';
 import colors from 'colors';
 import conncetDb from './utils/lib/mongodb';
 import routers from './route/v1/index';
@@ -14,6 +13,11 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://sob-job.vercel.app');
+    // Add other CORS headers as needed
+    next();
+});
 const corsOptions = {
     credentials: true,
     origin: [
@@ -25,7 +29,9 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser())   // cookie send receive package is more easi via this
-app.use(compression());  //reduce size for production levele fast working
+
+//
+
 
 // mongodb connect 
 try {
@@ -42,7 +48,7 @@ app.get("/", (req, res) => {
     res.send({
         success: true,
         message: "Welcome to the sob-jobs server",
-        data: " dummy data for home page of the sob-jobs server With-Cookies",
+        data: " Dummy data for home page of the sob-jobs server With-Cookies",
     });
 });
 

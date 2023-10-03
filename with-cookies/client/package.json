@@ -3,7 +3,6 @@
   "description": "sofi-jobs-client-side-description",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://sob-job-server.onrender.com",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -16,7 +15,7 @@
     "axios": "^1.5.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
-    "firebase": "^10.1.0",
+    "firebase": "^10.4.0",
     "gsap": "^3.12.2",
     "next": "13.4.12",
     "node-fetch": "^3.3.2",

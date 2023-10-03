@@ -103,8 +103,8 @@ export const signIn = async (
     next: express.NextFunction,
 ) => {
     try {
+        console.log("hit- signIn:");
         const handleUserData = req.body;
-        // console.log("hit- signIn:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,
@@ -166,7 +166,7 @@ export const signInWithSocial = async (
 ) => {
     try {
         const handleUserData = req.body;
-        // console.log("hit- signInWithSocial:");
+        console.log("hit- signInWithSocial:");
         if (!handleUserData) {
             return res.status(400).json({
                 success: false,

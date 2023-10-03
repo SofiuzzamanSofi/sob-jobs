@@ -10,6 +10,11 @@ This is a [NextJS](https://nextjs.org/) project made with [`create-next-app`](ht
 
 ### server-site: [sob-jobs-server](https://sob-jobs-server-via-cli.vercel.app)
 
+```bash
+With-Cookies    : https://sob-job.vercel.app
+Without-Cookies : https://sob-jobs.vercel.app
+```
+
 ## Cloning and Installing dependencies
 
 First clone this project:
