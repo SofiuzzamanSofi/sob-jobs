@@ -42,7 +42,7 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading && !user?.email) {
       toast.loading("Please wait...", { id: "user-creating" });
     };
     if (!isLoading && user?.email) {
