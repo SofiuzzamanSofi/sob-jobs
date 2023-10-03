@@ -40,7 +40,7 @@ export const signOut = async (
     next: express.NextFunction,
 ) => {
     try {
-        //  console.log('HITTED log out controller:');
+        console.log('hit- signOut:');
         res.clearCookie('userAccessToken');
         return res.status(201).json({
             success: true,

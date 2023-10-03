@@ -57,6 +57,24 @@ const SignIn = () => {
     };
   }, [isLoading, user?.email, error, isError, router]);
 
+  const getCookies = async () => {
+    console.log('hitted getCookies start:',);
+    const resDataFromDb = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER}/user/signin`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: "employer@gmail.com" }),
+        credentials: "include",
+      }
+    );
+    await resDataFromDb.json();
+
+    console.log('hitted getCookies end:',);
+  }
+
 
   // console.log('pageClicked:');
 
@@ -145,6 +163,11 @@ const SignIn = () => {
           </div>
 
         </div>
+      </div>
+      <div>
+        <button onClick={getCookies}>
+          get me cookies
+        </button>
       </div>
     </div>
   );
