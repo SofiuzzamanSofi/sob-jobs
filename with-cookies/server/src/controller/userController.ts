@@ -10,8 +10,8 @@ export const getMe = async (
 ) => {
     try {
         console.log('get-me-user:')
-        // const email = req.user?.email; // Access the user object from req
-        const email = req.body?.email; // Access the user object from req
+        const email = req.user?.email; // Access the user object from req
+        // const email = req.body?.email; // Access the user object from req
         const user = await getUserByEmail(next, email);
         if (!user.email) {
             return res.status(201).json({
@@ -236,6 +236,7 @@ export const updateUserWithRole = async (
                         httpOnly: true,
                         secure: true,
                         sameSite: "strict",
+                        // domain: url 
                     }
                 )
                 .json({
