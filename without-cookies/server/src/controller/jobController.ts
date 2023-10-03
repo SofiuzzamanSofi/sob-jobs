@@ -11,10 +11,7 @@ export const getAllJobController = async (
     next: express.NextFunction,
 ) => {
     try {
-        const { userAccessToken } = req.cookies
-        // console.log("hitted. all jobs")
-        // console.log('Cookies: ', req.cookies)
-        // console.log('userAccessToken: ', userAccessToken)
+        // console.log("hitted. all jobs");
         const getJobData = await getAllJobService(next)
         if (!getJobData) {
             return res.status(200).json({
@@ -30,11 +27,6 @@ export const getAllJobController = async (
         };
     } catch (error) {
         next(error);
-        // console.error("Error fetching job data:", error);
-        // return res.status(500).json({
-        //     success: false,
-        //     message: "Failed to fetch job data",
-        // });
     };
 };
 
@@ -129,11 +121,6 @@ export const getAllJobBySearchTextController = async (
         });
     } catch (error) {
         next(error);
-        // console.error("Error fetching job data:", error);
-        // return res.status(500).json({
-        //     success: false,
-        //     message: "Failed to fetch job data",
-        // });
     };
 };
 
@@ -184,7 +171,7 @@ export const postJobController = async (
 ) => {
     try {
         const handleJobData = req.body;
-        // console.log("handleJobData line 32:", handleJobData);
+        // console.log("handleJobData", handleJobData);
         if (!handleJobData) {
             return res.status(400).json({
                 success: false,
@@ -207,11 +194,6 @@ export const postJobController = async (
         };
     } catch (error) {
         next(error);
-        // console.error("Error creating job:", error);
-        // return res.status(500).json({
-        //     success: false,
-        //     message: "Failed to create job",
-        // });
     };
 };
 
@@ -333,11 +315,6 @@ export const patchIsOpenJobController = async (
         }
     } catch (error) {
         next(error);
-        // console.error("Error fetching job data:", error);
-        // return res.status(500).json({
-        //     success: false,
-        //     message: "Failed to PATCH job data",
-        // });
     };
 };
 
@@ -374,11 +351,6 @@ export const getAppliedJobController = async (
         };
     } catch (error) {
         next(error);
-        // console.error("Error fetching job data:", error);
-        // return res.status(500).json({
-        //     success: false,
-        //     message: "Failed to fetch job data",
-        // });
     };
 };
 
@@ -415,11 +387,6 @@ export const getPostedJobController = async (
         };
     } catch (error) {
         next(error);
-        // console.error("Error fetching job data:", error);
-        // return res.status(500).json({
-        //     success: false,
-        //     message: "Failed to fetch job data",
-        // });
     };
 };
 
@@ -476,11 +443,6 @@ export const patchQuestionJobController = async (
         };
     } catch (error) {
         next(error);
-        // console.error("Error updating job data for Question:", error);
-        // return res.status(404).json({
-        //     success: false,
-        //     message: "Failed to update job data for Question: catch block",
-        // });
     };
 };
 
@@ -536,10 +498,5 @@ export const patchAnsJobController = async (
         };
     } catch (error) {
         next(error);
-        // console.error("Error fetching job data:", error);
-        // return res.status(500).json({
-        //     success: false,
-        //     message: "Failed to PATCH ANS job data",
-        // });
     };
 };

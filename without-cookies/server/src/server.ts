@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config();
-import express from 'express'
 import cors from 'cors';
+import express from 'express'
 import compression from 'compression';
 import colors from 'colors';
 import conncetDb from './utils/lib/mongodb';
